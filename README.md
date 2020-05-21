@@ -45,7 +45,7 @@ Microservices architecture made of multiple components, where each of them is re
 ## Web Application
 - Frontend application which uses backend functionality via REST communication.
 
-## Monolith
+## Agent Application
 - External business which uses backend functionality via SOAP communication.
 - Has its own database with business specific data.
 
