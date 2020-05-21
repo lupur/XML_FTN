@@ -13,13 +13,17 @@ Microservices architecture made of multiple components, where each of them is re
 - API managament tool that sits between clients and a collection of backend services.
 - Responsible for request routing, composition and protocol translation.
 
-#### User Managament Service
+#### User Management Service
 - Microservice responsible for managing users, their roles and performing authorization and authentication.
 - Has a SQL database, where user related data is stored.
+
+![](documentation/UserManagementService.png)
 
 #### Order Processing Service
 - Microservice responsible for managing vehicle rent requests. This means creating new requests, calculating price, managing order reports, keeping track and updating of current rent status, etc.
 - Has a SQL database which stores order related data.
+
+![](documentation/OrderProcessingService.png)
 
 #### Customer Experience Service
 - Service in charge of:
@@ -27,14 +31,20 @@ Microservices architecture made of multiple components, where each of them is re
   - Car review and rating functionality
 - Has a SQL database where communication and ratings are stored.
 
-#### Vehicle Managament Service
+![](documentation/CustomerExperienceService.png)
+
+#### Vehicle Management Service
 - Acts like CRUD service. Manages vehicle related entities such as vechile, vehicle model, brand, prices, images...
 - Has a SQL database where it keeps its data.
+
+![](documentation/VehicleManagementService.png)
 
 #### SOAP Service
 - Enables external businesses to consume backend functionallity using SOAP protocol.
 - Listens for SOAP requests and consumes other microservicess accordingly.
 - Keeps track of registred businesss using SQL database.
+
+![](documentation/SOAPService.png)
 
 #### Vehicle Location Service
 - Listens for location messages comming from vehicles and provides that messages to the users.
