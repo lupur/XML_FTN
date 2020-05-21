@@ -49,8 +49,7 @@ Microservices architecture made of multiple components, where each of them is re
 - External business which uses backend functionality via SOAP communication.
 - Has its own database with business specific data, which consists of the following schemas:
 
-![](documentation/ApplicationManagementDb.png)
-![](documentation/UserManagementDb.png)
+![](documentation/AgentAppDbSchema.png)
 
 ## Android application
 - Application located in the vehicles which sends location data to Vehicle Location Service.
