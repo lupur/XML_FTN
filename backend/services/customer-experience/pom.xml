@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ftn-xml</groupId>
 	<artifactId>customer-experience</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>customer-experience</name>
 	<description>Demo project for Spring Boot</description>
 

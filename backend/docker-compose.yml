@@ -1,0 +1,88 @@
+version: '3'
+services:
+
+  consul-server:
+    image: consul-server
+    build:
+      context: ./consul-server
+      dockerfile: Dockerfile
+    tty: true
+    ports: 
+      - "8500:8500"
+    networks:
+      static-network:
+        ipv4_address: 172.20.0.2
+
+  gateway:
+    image: gateway
+    build:
+      context: ./services/gateway
+      dockerfile: Dockerfile
+    tty: true
+    ports: 
+      - "8080:8080"
+    networks:
+      - static-network
+    depends_on:
+      - consul-server
+
+  customer-experience:
+    image: customer-experience
+    build:
+      context: ./services/customer-experience
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    depends_on:
+      - consul-server
+  
+  order-processing:
+    image: order-processing
+    build:
+      context: ./services/order-processing
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    depends_on:
+      - consul-server
+      
+  soap-service:
+    image: soap-service
+    build:
+      context: ./services/soap-service
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    depends_on:
+      - consul-server
+      
+  user-management:
+    image: user-management
+    build:
+      context: ./services/user-management
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    depends_on:
+      - consul-server
+      
+  vehicle-managament:
+    image: vehicle-managament
+    build:
+      context: ./services/vehicle-managament
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    depends_on:
+      - consul-server
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

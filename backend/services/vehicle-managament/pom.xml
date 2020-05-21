@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ftn-xml</groupId>
-	<artifactId>vehicle-managament</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>vehicle-managament</name>
+	<artifactId>vehicle-management</artifactId>
+	<version>1.0.0</version>
+	<name>vehicle-management</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
