@@ -11,7 +11,7 @@ Microservices architecture made of multiple components, where each of them is re
 
 #### API Gateway
 - API managament tool that sits between clients and a collection of backend services.
-- Responsible for request routing, composition and protocol translation
+- Responsible for request routing, composition and protocol translation.
 
 #### User Managament Service
 - Microservice responsible for managing users, their roles and performing authorization and authentication.
