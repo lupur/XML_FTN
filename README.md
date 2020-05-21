@@ -11,7 +11,7 @@ Microservices architecture made of multiple components, where each of them is re
 
 #### API Gateway
 - API managament tool that sits between clients and a collection of backend services.
-- Responsible for request routing, composition and protocol translation
+- Responsible for request routing, composition and protocol translation.
 
 #### User Managament Service
 - Microservice responsible for managing users, their roles and performing authorization and authentication.
@@ -45,9 +45,12 @@ Microservices architecture made of multiple components, where each of them is re
 ## Web Application
 - Frontend application which uses backend functionality via REST communication.
 
-## Monolith
+## Agent Application
 - External business which uses backend functionality via SOAP communication.
-- Has its own database with business specific data.
+- Has its own database with business specific data, which consists of the following schemas:
+
+![](documentation/ApplicationManagementDb.png)
+![](documentation/UserManagementDb.png)
 
 ## Android application
 - Application located in the vehicles which sends location data to Vehicle Location Service.
