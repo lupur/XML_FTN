@@ -70,10 +70,10 @@ services:
     depends_on:
       - consul-server
       
-  vehicle-managament:
-    image: vehicle-managament
+  vehicle-management:
+    image: vehicle-management
     build:
-      context: ./services/vehicle-managament
+      context: ./services/vehicle-management
       dockerfile: Dockerfile
     tty: true
     networks:

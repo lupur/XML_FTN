@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 COPY entrypoint.sh /entrypoint.sh
-COPY target/vehicle-managament-1.0.0.jar vehicle-managament-1.0.0.jar
+COPY target/vehicle-management-1.0.0.jar vehicle-management-1.0.0.jar
 COPY consul-client.json /consul-config/consul-client.json
 RUN apk --no-cache add \
     curl \
@@ -15,3 +15,4 @@ RUN apk --no-cache add \
     curl \
     unzip
 CMD ["/entrypoint.sh"]
+

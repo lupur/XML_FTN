@@ -1,10 +1,10 @@
-package com.ftnxml.vehiclemanagament;
+package com.ftnxml.vehiclemanagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VehicleManagamentApplicationTests {
+class VehicleManagementApplicationTests {
 
 	@Test
 	void contextLoads() {

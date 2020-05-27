@@ -28,15 +28,15 @@ spring:
             - Path=/soap-service/**
           filters:
             - RewritePath=/soap-service/(?<path>.*), /$\{path}
-        - id: user-managament
-          uri: lb://user-managament
+        - id: user-management
+          uri: lb://user-management
           predicates:
-            - Path=/user-managament/**
+            - Path=/user-management/**
           filters:
-            - RewritePath=/user-managament/(?<path>.*), /$\{path}
-        - id: vehicle-managament
-          uri: lb://vehicle-managament
+            - RewritePath=/user-management/(?<path>.*), /$\{path}
+        - id: vehicle-management
+          uri: lb://vehicle-management
           predicates:
-            - Path=/vehicle-managament/**
+            - Path=/vehicle-management/**
           filters:
-            - RewritePath=/vehicle-managament/(?<path>.*), /$\{path}
+            - RewritePath=/vehicle-management/(?<path>.*), /$\{path}
