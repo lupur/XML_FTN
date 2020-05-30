@@ -1,6 +1,20 @@
 version: '3'
 services:
 
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'something'
+      MYSQL_ROOT_PASSWORD: 'something'
+    ports:
+      - '3307:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
   consul-server:
     image: consul-server
     build:
@@ -80,6 +94,9 @@ services:
       - static-network
     depends_on:
       - consul-server
+
+volumes:
+  my-db:
 
 networks:
   static-network:
