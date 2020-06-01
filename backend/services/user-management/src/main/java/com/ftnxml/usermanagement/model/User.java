@@ -1,13 +1,20 @@
 package com.ftnxml.usermanagement.model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.ftnxml.usermanagement.enums.AccountStatus;
 
+@Entity
+@Table(name = "users")
 public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String username;
 	private String password;
@@ -16,13 +23,13 @@ public class User {
 	private Role role;
 	private Date registerDate;
 	private AccountStatus accountStatus;
-	
+
 	public User() {
 		super();
 	}
 
-	public User(Long id, String username, String password, String email, String accessToken, Role role, Date registerDate,
-	        AccountStatus accountStatus) {
+	public User(Long id, String username, String password, String email, String accessToken, Role role,
+	        Date registerDate, AccountStatus accountStatus) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -73,7 +80,7 @@ public class User {
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
-	
+
 	public Role getRole() {
 		return role;
 	}

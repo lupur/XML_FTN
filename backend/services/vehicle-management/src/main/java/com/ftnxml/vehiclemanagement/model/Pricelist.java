@@ -1,6 +1,16 @@
 package com.ftnxml.vehiclemanagement.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "pricelists")
 public class Pricelist {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private float dailyPrice;
 	private float mileagePenaltyPrice;
