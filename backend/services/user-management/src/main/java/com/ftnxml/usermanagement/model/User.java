@@ -13,95 +13,95 @@ import com.ftnxml.usermanagement.enums.AccountStatus;
 @Entity
 @Table(name = "users")
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String username;
-	private String password;
-	private String email;
-	private String accessToken;
-	private Role role;
-	private Date registerDate;
-	private AccountStatus accountStatus;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String username;
+    private String password;
+    private String email;
+    private String accessToken;
+    private Role role;
+    private Date registerDate;
+    private AccountStatus accountStatus;
 
-	public User() {
-		super();
-	}
+    public User() {
+        super();
+    }
 
-	public User(Long id, String username, String password, String email, String accessToken, Role role,
-	        Date registerDate, AccountStatus accountStatus) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.accessToken = accessToken;
-		this.role = role;
-		this.registerDate = registerDate;
-		this.accountStatus = accountStatus;
-	}
+    public User(Long id, String username, String password, String email, String accessToken, Role role,
+            Date registerDate, AccountStatus accountStatus) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.accessToken = accessToken;
+        this.role = role;
+        this.registerDate = registerDate;
+        this.accountStatus = accountStatus;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getAccessToken() {
-		return accessToken;
-	}
+    public String getAccessToken() {
+        return accessToken;
+    }
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	public Date getRegisterDate() {
-		return registerDate;
-	}
+    public Date getRegisterDate() {
+        return registerDate;
+    }
 
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
-	}
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
 
-	public AccountStatus getAccountStatus() {
-		return accountStatus;
-	}
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
 
-	public void setAccountStatus(AccountStatus accountStatus) {
-		this.accountStatus = accountStatus;
-	}
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 }

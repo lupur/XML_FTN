@@ -27,14 +27,14 @@ public class JwtUsernameAndPasswordAuthFilter extends UsernamePasswordAuthentica
 
     private AuthenticationManager authManager;
 
-    private final String header = "Authorization";
     private final String prefix = "Bearer ";
     private final int expiration = 24 * 60 * 60;
     private final String secret = "JwtSecretKey";
+    private final String loginPath = "/user/login";
 
     public JwtUsernameAndPasswordAuthFilter(AuthenticationManager authManager) {
         this.authManager = authManager;
-        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/user/login", "POST"));
+        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher(loginPath, "POST"));
     }
 
     @Override
