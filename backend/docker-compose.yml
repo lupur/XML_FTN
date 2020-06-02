@@ -15,64 +15,34 @@ services:
     volumes:
       - my-db:/var/lib/mysql
 
-  consul-server:
-    image: consul-server
+  eureka-server:
+    image: eureka-server
     build:
-      context: ./consul-server
+      context: ./eureka-server
       dockerfile: Dockerfile
     tty: true
     ports: 
-      - "8500:8500"
+      - "8761:8761"
     networks:
-      static-network:
-        ipv4_address: 172.20.0.2
-
-  gateway:
-    image: gateway
+      - static-network
+      
+  eureka-zuul:
+    image: eureka-zuul
     build:
-      context: ./services/gateway
+      context: ./services/eureka-zuul
       dockerfile: Dockerfile
     tty: true
     ports: 
       - "8080:8080"
+    links:
+      - eureka-server
+    depends_on:
+      - eureka-server
+    environment:
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
     networks:
       - static-network
-    depends_on:
-      - consul-server
 
-  customer-experience:
-    image: customer-experience
-    build:
-      context: ./services/customer-experience
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
-    depends_on:
-      - consul-server
-  
-  order-processing:
-    image: order-processing
-    build:
-      context: ./services/order-processing
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
-    depends_on:
-      - consul-server
-      
-  soap-service:
-    image: soap-service
-    build:
-      context: ./services/soap-service
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
-    depends_on:
-      - consul-server
-      
   user-management:
     image: user-management
     build:
@@ -81,8 +51,12 @@ services:
     tty: true
     networks:
       - static-network
+    links:
+      - eureka-server
     depends_on:
-      - consul-server
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
       
   vehicle-management:
     image: vehicle-management
@@ -92,8 +66,12 @@ services:
     tty: true
     networks:
       - static-network
+    links:
+      - eureka-server
     depends_on:
-      - consul-server
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
 
 volumes:
   my-db:
