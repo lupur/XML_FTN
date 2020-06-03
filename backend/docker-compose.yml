@@ -14,6 +14,9 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
+    networks:
+        static-network:
+            ipv4_address: 172.20.0.8
 
   flyway:
     image: flyway/flyway
@@ -25,9 +28,9 @@ services:
 
   flyway2:
     image: flyway/flyway
-    command: -url=jdbc:mysql://db -schemas=test2 -user=root -password=something -connectRetries=60 migrate
+    command: -url=jdbc:mysql://db -schemas=user_service -user=root -password=something -connectRetries=60 migrate
     volumes:
-        - .:/flyway/sql2
+        - .:/flyway/user_service
     depends_on:
         - db
 
