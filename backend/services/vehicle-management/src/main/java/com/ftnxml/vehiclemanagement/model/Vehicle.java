@@ -15,7 +15,7 @@ public class Vehicle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Model model;
-	private Pricelist priceList;
+	private PriceList priceList;
 	private CollisionDamageWaiver colDamageWaiver;
 	private List<Image> images;
 	private Long userId;
@@ -34,7 +34,7 @@ public class Vehicle {
 		super();
 	}
 
-	public Vehicle(Long id, Model model, Pricelist priceList, CollisionDamageWaiver colDamageWaiver, List<Image> images,
+	public Vehicle(Long id, Model model, PriceList priceList, CollisionDamageWaiver colDamageWaiver, List<Image> images,
 	        Long userId, FuelType fuelType, TransmissionType transmissionType, ClassType classType, int mileage,
 	        int mileageConstraint, boolean insurance, int numberOfSeats, float rating, Discount discount,
 	        String location) {
@@ -73,11 +73,11 @@ public class Vehicle {
 		this.model = model;
 	}
 
-	public Pricelist getPriceList() {
+	public PriceList getPriceList() {
 		return priceList;
 	}
 
-	public void setPriceList(Pricelist priceList) {
+	public void setPriceList(PriceList priceList) {
 		this.priceList = priceList;
 	}
 

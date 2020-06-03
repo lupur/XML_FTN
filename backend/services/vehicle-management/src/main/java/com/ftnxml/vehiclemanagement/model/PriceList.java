@@ -8,18 +8,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pricelists")
-public class Pricelist {
+public class PriceList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private float dailyPrice;
 	private float mileagePenaltyPrice;
 
-	public Pricelist() {
+	public PriceList() {
 		super();
 	}
 
-	public Pricelist(Long id, float dailyPrice, float mileagePenaltyPrice) {
+	public PriceList(Long id, float dailyPrice, float mileagePenaltyPrice) {
 		super();
 		this.id = id;
 		this.dailyPrice = dailyPrice;

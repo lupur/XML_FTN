@@ -9,44 +9,44 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "models")
 public class Model {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String name;
-	private Brand brand;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private Brand brand;
 
-	public Model() {
-		super();
-	}
+    public Model() {
+        super();
+    }
 
-	public Model(Long id, String name, Brand brand) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.brand = brand;
-	}
+    public Model(Long id, String name, Brand brand) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Brand getBrand() {
-		return brand;
-	}
+    public Brand getBrand() {
+        return brand;
+    }
 
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
 }
