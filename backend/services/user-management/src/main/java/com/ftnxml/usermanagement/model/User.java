@@ -1,42 +1,56 @@
 package com.ftnxml.usermanagement.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.ftnxml.usermanagement.enums.AccountStatus;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "user_name")
     private String username;
+    @Column(name = "password")
     private String password;
+    @Column(name = "email")
     private String email;
-    private String accessToken;
-    private Role role;
-    private Date registerDate;
+    @Column(name = "register_date")
+    private Date registerDate; 
+    @ManyToMany
+    @JoinTable(
+      name = "user_role", 
+      joinColumns = @JoinColumn(name = "user_id"), 
+      inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Set<Role> roles;
+    @Column(name = "account_status")
     private AccountStatus accountStatus;
 
     public User() {
         super();
     }
 
-    public User(Long id, String username, String password, String email, String accessToken, Role role,
+    public User(Long id, String username, String password, String email, Set<Role> roles,
             Date registerDate, AccountStatus accountStatus) {
         super();
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.accessToken = accessToken;
-        this.role = role;
+        this.roles = roles;
         this.registerDate = registerDate;
         this.accountStatus = accountStatus;
     }
@@ -73,20 +87,12 @@ public class User {
         this.email = email;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Date getRegisterDate() {

@@ -15,8 +15,7 @@ services:
     volumes:
       - my-db:/var/lib/mysql
     networks:
-        static-network:
-            ipv4_address: 172.20.0.8
+     - static-network
 
   flyway:
     image: flyway/flyway
@@ -82,6 +81,7 @@ services:
       - eureka-server
     depends_on:
       - eureka-server
+      - db
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
       

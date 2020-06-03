@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.ftnxml.usermanagement.model.Role;
 import com.ftnxml.usermanagement.model.User;
 import com.ftnxml.usermanagement.repository.UserRepository;
 
@@ -27,9 +28,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             // If user not found. Throw this exception.
             throw new UsernameNotFoundException("Username: " + username + " not found");
         }
+        
+        String authorityParam = "";
 
+        for(Role role : user.getRoles()) {
+        	authorityParam += "ROLE_" + role.getName() + ",";	
+        }
+        authorityParam = authorityParam.substring(0, authorityParam.length() - 1);
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList("ROLE_" + user.getRole());
+                .commaSeparatedStringToAuthorityList(authorityParam);
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 grantedAuthorities);

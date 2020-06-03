@@ -76,21 +76,29 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    @Override
+    // FIXME: User can now have multiple roles
+//    @Override
+//    public boolean ChangeRole(Long userId, String roleName) {
+//        Role newRole = roleRepository.findByName(roleName);
+//        if (newRole == null) {
+//            return false;
+//        }
+//
+//        User u = getUser(userId);
+//        if (u == null) {
+//            return false;
+//        }
+//
+//        u.setRole(newRole);
+//        userRepository.save(u);
+//        return true;
+//    }
+    
+    // TODO: REMOVE
     public boolean ChangeRole(Long userId, String roleName) {
-        Role newRole = roleRepository.findByName(roleName);
-        if (newRole == null) {
-            return false;
-        }
-
-        User u = getUser(userId);
-        if (u == null) {
-            return false;
-        }
-
-        u.setRole(newRole);
-        userRepository.save(u);
-        return true;
+    	return true;
     }
+    
+
 
 }
