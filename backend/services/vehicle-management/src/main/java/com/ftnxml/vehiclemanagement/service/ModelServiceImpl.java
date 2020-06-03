@@ -49,4 +49,9 @@ public class ModelServiceImpl implements ModelService {
         modelRepository.save(newModel);
         return true;
     }
+
+    @Override
+    public List<Model> getModelsOfBrand(Long brandId) {
+        return modelRepository.findByBrand_Id(brandId);
+    }
 }

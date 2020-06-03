@@ -50,4 +50,9 @@ public class VehicleServiceImpl implements VehicleService {
         return true;
     }
 
+    @Override
+    public List<Vehicle> getVehiclesOfModel(Long modelId) {
+        return vehicleRepository.findByModel_Id(modelId);
+    }
+
 }

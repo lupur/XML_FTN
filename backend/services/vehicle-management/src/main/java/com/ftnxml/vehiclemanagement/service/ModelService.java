@@ -12,4 +12,6 @@ public interface ModelService {
     boolean removeModel(Long id);
 
     boolean addModel(Model newModel);
+
+    List<Model> getModelsOfBrand(Long brandId);
 }

@@ -13,4 +13,6 @@ public interface VehicleService {
     boolean removeVehicle(Long id);
 
     boolean addVehicle(Vehicle newVehicle);
+
+    List<Vehicle> getVehiclesOfModel(Long modelId);
 }
