@@ -15,91 +15,30 @@ services:
     volumes:
       - my-db:/var/lib/mysql
 
-  consul-server:
-    image: consul-server
-    build:
-      context: ./consul-server
-      dockerfile: Dockerfile
-    tty: true
-    ports: 
-      - "8500:8500"
-    networks:
-      static-network:
-        ipv4_address: 172.20.0.2
+  flyway:
+    image: flyway/flyway
+    command: -url=jdbc:mysql://db -schemas=vehicle_service -user=root -password=something -connectRetries=60 migrate
+    volumes:
+        - .:/flyway/sql
+    depends_on:
+        - db
 
-  gateway:
-    image: gateway
-    build:
-      context: ./services/gateway
-      dockerfile: Dockerfile
-    tty: true
-    ports: 
-      - "8080:8080"
-    networks:
-      - static-network
+  flyway2:
+    image: flyway/flyway
+    command: -url=jdbc:mysql://db -schemas=test2 -user=root -password=something -connectRetries=60 migrate
+    volumes:
+        - .:/flyway/sql2
     depends_on:
-      - consul-server
+        - db
 
-  customer-experience:
-    image: customer-experience
-    build:
-      context: ./services/customer-experience
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
+  flyway3:
+    image: flyway/flyway
+    command: -url=jdbc:mysql://db -schemas=test3 -user=root -password=something -connectRetries=60 migrate
+    volumes:
+        - .:/flyway/sql3
     depends_on:
-      - consul-server
-  
-  order-processing:
-    image: order-processing
-    build:
-      context: ./services/order-processing
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
-    depends_on:
-      - consul-server
-      
-  soap-service:
-    image: soap-service
-    build:
-      context: ./services/soap-service
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
-    depends_on:
-      - consul-server
-      
-  user-management:
-    image: user-management
-    build:
-      context: ./services/user-management
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
-    depends_on:
-      - consul-server
-      
-  vehicle-management:
-    image: vehicle-management
-    build:
-      context: ./services/vehicle-management
-      dockerfile: Dockerfile
-    tty: true
-    networks:
-      - static-network
-    depends_on:
-      - consul-server
+        - db
+
 
 volumes:
   my-db:
-
-networks:
-  static-network:
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16
