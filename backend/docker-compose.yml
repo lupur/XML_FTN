@@ -38,7 +38,70 @@ services:
         - .:/flyway/sql3
     depends_on:
         - db
+        
+  eureka-server:
+    image: eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    tty: true
+    ports: 
+      - "8761:8761"
+    networks:
+      - static-network
+      
+  eureka-zuul:
+    image: eureka-zuul
+    build:
+      context: ./services/eureka-zuul
+      dockerfile: Dockerfile
+    tty: true
+    ports: 
+      - "8080:8080"
+    links:
+      - eureka-server
+    depends_on:
+      - eureka-server
+    environment:
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    networks:
+      - static-network
 
+  user-management:
+    image: user-management
+    build:
+      context: ./services/user-management
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    links:
+      - eureka-server
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+      
+  vehicle-management:
+    image: vehicle-management
+    build:
+      context: ./services/vehicle-management
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    links:
+      - eureka-server
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
 
 volumes:
   my-db:
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
