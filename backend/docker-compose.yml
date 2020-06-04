@@ -24,6 +24,8 @@ services:
         - .:/flyway/vehicle_service
     depends_on:
         - db
+    networks:
+     - static-network
 
   flyway2:
     image: flyway/flyway
@@ -32,6 +34,8 @@ services:
         - .:/flyway/user_service
     depends_on:
         - db
+    networks:
+     - static-network
         
   eureka-server:
     image: eureka-server
