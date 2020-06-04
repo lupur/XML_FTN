@@ -67,14 +67,15 @@ CREATE TABLE vehicle_service.vehicle (
   `number_of_seats` int(2),
   `raiting` float,
   `location` varchar(128),
-  `end_date` date NOT NULL,
+  `discount_id` bigint(20),
   PRIMARY KEY (`vehicle_id`),
   CONSTRAINT fk_model FOREIGN KEY (model_id) REFERENCES vehicle_service.model(model_id),
   CONSTRAINT fk_pricelist FOREIGN KEY (pricelist_id) REFERENCES vehicle_service.pricelist(pricelist_id),
   CONSTRAINT fk_collision_damage FOREIGN KEY (collision_damage_id) REFERENCES vehicle_service.collision_damage(collision_damage_id),
   CONSTRAINT fk_fuel_type FOREIGN KEY (fuel_type_id) REFERENCES vehicle_service.fuel_type(fuel_type_id),
   CONSTRAINT fk_transmission_type FOREIGN KEY (transmission_type_id) REFERENCES vehicle_service.transmission_type(transmission_type_id),
-  CONSTRAINT fk_class_type FOREIGN KEY (class_type_id) REFERENCES vehicle_service.class_type(class_type_id)
+  CONSTRAINT fk_class_type FOREIGN KEY (class_type_id) REFERENCES vehicle_service.class_type(class_type_id),
+  CONSTRAINT fk_discount FOREIGN KEY (discount_id) REFERENCES vehicle_service.discount(discount_id)
 );
 
 CREATE TABLE vehicle_service.image (

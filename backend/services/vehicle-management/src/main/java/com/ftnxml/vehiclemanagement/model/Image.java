@@ -1,9 +1,12 @@
 package com.ftnxml.vehiclemanagement.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,19 +14,22 @@ import javax.persistence.Table;
 public class Image {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name= "image_id")
 	private Long id;
+	@Column(name ="image_uri")
 	private String uri;
+    @ManyToOne
+    @JoinColumn(name="vehicle_id")
 	private Vehicle vehicle;
 
 	public Image() {
 		super();
 	}
 
-	public Image(Long id, String uri, Vehicle vehicle) {
+	public Image(Long id, String uri) {
 		super();
 		this.id = id;
 		this.uri = uri;
-		this.vehicle = vehicle;
 	}
 
 	public Long getId() {

@@ -93,6 +93,7 @@ services:
       - eureka-server
     depends_on:
       - eureka-server
+      - db
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
 

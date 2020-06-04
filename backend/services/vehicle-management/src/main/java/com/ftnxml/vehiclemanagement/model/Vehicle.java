@@ -1,40 +1,67 @@
 package com.ftnxml.vehiclemanagement.model;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "vehicles")
+@Table(name = "vehicle")
 public class Vehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="vehicle_id")
 	private Long id;
+    @ManyToOne
+    @JoinColumn(name="model_id")
 	private Model model;
+    @ManyToOne
+    @JoinColumn(name="pricelist_id")
 	private PriceList priceList;
+    @ManyToOne
+    @JoinColumn(name="collision_damage_id")
 	private CollisionDamageWaiver colDamageWaiver;
-	private List<Image> images;
+    @ManyToOne
+    @JoinColumn(name="discount")
+    private Discount discount;
+	@OneToMany(mappedBy="vehicle")
+	private Set<Image> images;
+	@Column(name= "user_id")
 	private Long userId;
+    @ManyToOne
+    @JoinColumn(name="fuel_type_id")
 	private FuelType fuelType;
+    @ManyToOne
+    @JoinColumn(name="transmission_type_id")
 	private TransmissionType transmissionType;
+    @ManyToOne
+    @JoinColumn(name="class_type_id")
 	private ClassType classType;
+    @Column(name= "mileage")
 	private int mileage;
+    @Column(name= "milleage_constraint")
 	private int mileageConstraint;
+    @Column(name= "insurance")
 	private boolean insurance;
+    @Column(name ="number_of_seats")
 	private int numberOfSeats;
+    @Column(name ="rating")
 	private float rating;
-	private Discount discount;
+    @Column(name= "location")
 	private String location;
 
 	public Vehicle() {
 		super();
 	}
 
-	public Vehicle(Long id, Model model, PriceList priceList, CollisionDamageWaiver colDamageWaiver, List<Image> images,
+	public Vehicle(Long id, Model model, PriceList priceList, CollisionDamageWaiver colDamageWaiver, Set<Image> images,
 	        Long userId, FuelType fuelType, TransmissionType transmissionType, ClassType classType, int mileage,
 	        int mileageConstraint, boolean insurance, int numberOfSeats, float rating, Discount discount,
 	        String location) {
@@ -53,8 +80,8 @@ public class Vehicle {
 		this.insurance = insurance;
 		this.numberOfSeats = numberOfSeats;
 		this.rating = rating;
-		this.discount = discount;
 		this.location = location;
+		this.discount = discount;
 	}
 
 	public Long getId() {
@@ -89,11 +116,11 @@ public class Vehicle {
 		this.colDamageWaiver = colDamageWaiver;
 	}
 
-	public List<Image> getImages() {
+	public Set<Image> getImages() {
 		return images;
 	}
 
-	public void setImages(List<Image> images) {
+	public void setImages(Set<Image> images) {
 		this.images = images;
 	}
 
@@ -169,20 +196,20 @@ public class Vehicle {
 		this.rating = rating;
 	}
 
-	public Discount getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(Discount discount) {
-		this.discount = discount;
-	}
-
 	public String getLocation() {
 		return location;
 	}
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public Discount getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
 	}
 
 }
