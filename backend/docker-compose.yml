@@ -21,11 +21,9 @@ services:
     image: flyway/flyway
     command: -url=jdbc:mysql://db -schemas=vehicle_service -user=root -password=something -connectRetries=60 migrate
     volumes:
-        - .:/flyway/sql
+        - .:/flyway/vehicle_service
     depends_on:
         - db
-    networks:
-        - static-network
 
   flyway2:
     image: flyway/flyway
@@ -34,18 +32,6 @@ services:
         - .:/flyway/user_service
     depends_on:
         - db
-    networks:
-     - static-network
-
-  flyway3:
-    image: flyway/flyway
-    command: -url=jdbc:mysql://db -schemas=test3 -user=root -password=something -connectRetries=60 migrate
-    volumes:
-        - .:/flyway/sql3
-    depends_on:
-        - db
-    networks:
-     - static-network
         
   eureka-server:
     image: eureka-server
