@@ -2,6 +2,7 @@ package com.ftnxml.usermanagement.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,9 @@ import com.ftnxml.usermanagement.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final String USER_ROLE_NAME = "USER";
+    private final String AGENT_ROLE_NAME = "AGENT";
+
     @Autowired
     UserRepository userRepository;
 
@@ -26,12 +30,16 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder encoder;
 
     @Override
-    public boolean RegisterNewUser(User newUser) {
+    public boolean registerNewUser(User newUser) {
         if (userRepository.findByUsername(newUser.getUsername()) != null) {
             return false;
         }
+        Role role = roleRepository.findByName(USER_ROLE_NAME);
+        if (role == null)
+            return false;
+        newUser.addRole(role);
         newUser.setPassword(encoder.encode(newUser.getPassword()));
-        // TODO Add role
+
         userRepository.save(newUser);
         return true;
     }
@@ -54,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean RemoveUser(Long userId) {
+    public boolean removeUser(Long userId) {
         User u = getUser(userId);
         if (u == null) {
             return false;
@@ -65,7 +73,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean ChangeAccountStatus(Long userId, AccountStatus newStatus) {
+    public boolean changeAccountStatus(Long userId, AccountStatus newStatus) {
         User u = getUser(userId);
         if (u == null) {
             return false;
@@ -76,29 +84,40 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    // FIXME: User can now have multiple roles
-//    @Override
-//    public boolean ChangeRole(Long userId, String roleName) {
-//        Role newRole = roleRepository.findByName(roleName);
-//        if (newRole == null) {
-//            return false;
-//        }
-//
-//        User u = getUser(userId);
-//        if (u == null) {
-//            return false;
-//        }
-//
-//        u.setRole(newRole);
-//        userRepository.save(u);
-//        return true;
-//    }
-    
-    // TODO: REMOVE
-    public boolean ChangeRole(Long userId, String roleName) {
-    	return true;
+    @Override
+    public boolean addRole(Long userId, Long roleId) {
+        try {
+            Role role = roleRepository.findById(roleId).get();
+            User user = userRepository.findById(userId).get();
+            user.addRole(role);
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-    
 
+    @Override
+    public boolean removeRole(Long userId, Long roleId) {
+        try {
+            Role role = roleRepository.findById(roleId).get();
+            User user = userRepository.findById(userId).get();
+            user.removeRole(role);
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public Set<Role> getUserRoles(Long userId) {
+        try {
+            User user = userRepository.findById(userId).get();
+            return user.getRoles();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }

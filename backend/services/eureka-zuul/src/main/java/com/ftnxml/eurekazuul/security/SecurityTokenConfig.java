@@ -21,7 +21,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JwtTokenAuthFilter(), UsernamePasswordAuthenticationFilter.class)
                 // authorization requests config
                 .authorizeRequests()
-                // allow all who are accessing "auth" service
+                // allow all who are accessing "user" service
                 .antMatchers("/user/**").permitAll()
                 // Any other request must be authenticated
                 .anyRequest().authenticated();

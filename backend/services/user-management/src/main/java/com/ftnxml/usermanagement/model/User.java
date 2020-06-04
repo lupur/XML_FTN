@@ -1,6 +1,7 @@
 package com.ftnxml.usermanagement.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.ftnxml.usermanagement.enums.AccountStatus;
 
@@ -29,12 +33,10 @@ public class User {
     @Column(name = "email")
     private String email;
     @Column(name = "register_date")
-    private Date registerDate; 
+    private Date registerDate;
     @ManyToMany
-    @JoinTable(
-      name = "user_role", 
-      joinColumns = @JoinColumn(name = "user_id"), 
-      inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Fetch(FetchMode.JOIN)
     Set<Role> roles;
     @Column(name = "account_status")
     private AccountStatus accountStatus;
@@ -43,8 +45,8 @@ public class User {
         super();
     }
 
-    public User(Long id, String username, String password, String email, Set<Role> roles,
-            Date registerDate, AccountStatus accountStatus) {
+    public User(Long id, String username, String password, String email, Set<Role> roles, Date registerDate,
+            AccountStatus accountStatus) {
         super();
         this.id = id;
         this.username = username;
@@ -109,5 +111,19 @@ public class User {
 
     public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public void addRole(Role r) {
+        if (roles == null) {
+            roles = new HashSet<>();
+        }
+        roles.add(r);
+    }
+
+    public void removeRole(Role r) {
+        if (roles == null) {
+            return;
+        }
+        roles.remove(r);
     }
 }
