@@ -1,5 +1,5 @@
 CREATE TABLE user_service.role (
-  `role_id` bigint(20) NOT NULL AUTO_INCREMENT,,
+  `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(48) NOT NULL,
   PRIMARY KEY (`role_id`)
 );
