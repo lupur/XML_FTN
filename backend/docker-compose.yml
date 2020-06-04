@@ -21,7 +21,7 @@ services:
     image: flyway/flyway
     command: -url=jdbc:mysql://db -schemas=vehicle_service -user=root -password=something -connectRetries=60 migrate
     volumes:
-        - .:/flyway/vehicle_service
+        - .:/flyway/sql
     depends_on:
         - db
     networks:
