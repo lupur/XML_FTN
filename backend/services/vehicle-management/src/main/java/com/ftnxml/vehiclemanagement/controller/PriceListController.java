@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftnxml.vehiclemanagement.service.VehicleService;
+import com.ftnxml.vehiclemanagement.service.PriceListService;
 
 @RestController
-@RequestMapping("/")
-public class VehicleController {
+@RequestMapping("/priceLists")
+public class PriceListController {
 
     @Autowired
-    VehicleService vehicleService;
+    PriceListService priceListService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicles() {
-        return ResponseEntity.ok(vehicleService.getAllVehicles());
+    public ResponseEntity getPriceLists() {
+        return ResponseEntity.ok(priceListService.getAllPriceLists());
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicle(@PathVariable Long id) {
-        return ResponseEntity.ok(vehicleService.getVehicle(id));
+    public ResponseEntity getPriceList(@PathVariable Long id) {
+        return ResponseEntity.ok(priceListService.getPriceList(id));
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeVehicle(@PathVariable Long id) {
-        if (vehicleService.removeVehicle(id))
+    public ResponseEntity removePriceList(@PathVariable Long id) {
+        if (priceListService.removePriceList(id))
             return ResponseEntity.ok().build();
         else
             return ResponseEntity.notFound().build();

@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftnxml.vehiclemanagement.service.VehicleService;
+import com.ftnxml.vehiclemanagement.service.CollisionDamageService;
 
 @RestController
-@RequestMapping("/")
-public class VehicleController {
+@RequestMapping("/collisionDW")
+public class CollisionDamageWaiverController {
 
     @Autowired
-    VehicleService vehicleService;
+    CollisionDamageService collisionDamageService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicles() {
-        return ResponseEntity.ok(vehicleService.getAllVehicles());
+    public ResponseEntity getCollisionDamageWaivers() {
+        return ResponseEntity.ok(collisionDamageService.getAllCollisionDW());
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicle(@PathVariable Long id) {
-        return ResponseEntity.ok(vehicleService.getVehicle(id));
+    public ResponseEntity getCollisionDamageWaiver(@PathVariable Long id) {
+        return ResponseEntity.ok(collisionDamageService.getCollisionDW(id));
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeVehicle(@PathVariable Long id) {
-        if (vehicleService.removeVehicle(id))
+    public ResponseEntity removeCollisionDamageWaiver(@PathVariable Long id) {
+        if (collisionDamageService.removeCollisionDW(id))
             return ResponseEntity.ok().build();
         else
             return ResponseEntity.notFound().build();

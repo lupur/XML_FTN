@@ -24,7 +24,8 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 // allow all who are accessing "user" service
                 .antMatchers("/user/**").permitAll()
                 // Any other request must be authenticated
-                .anyRequest().authenticated();
+                .antMatchers("/**").permitAll();
+//                .anyRequest().authenticated();
 
     }
 }

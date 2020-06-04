@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftnxml.vehiclemanagement.service.VehicleService;
+import com.ftnxml.vehiclemanagement.service.DiscountService;
 
 @RestController
-@RequestMapping("/")
-public class VehicleController {
+@RequestMapping("/discounts/")
+public class DiscountController {
 
     @Autowired
-    VehicleService vehicleService;
+    DiscountService discountService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicles() {
-        return ResponseEntity.ok(vehicleService.getAllVehicles());
+    public ResponseEntity getDiscounts() {
+        return ResponseEntity.ok(discountService.getAllDiscounts());
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicle(@PathVariable Long id) {
-        return ResponseEntity.ok(vehicleService.getVehicle(id));
+    public ResponseEntity getDiscount(@PathVariable Long id) {
+        return ResponseEntity.ok(discountService.getDiscount(id));
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeVehicle(@PathVariable Long id) {
-        if (vehicleService.removeVehicle(id))
+    public ResponseEntity removeDiscount(@PathVariable Long id) {
+        if (discountService.removeDiscount(id))
             return ResponseEntity.ok().build();
         else
             return ResponseEntity.notFound().build();
