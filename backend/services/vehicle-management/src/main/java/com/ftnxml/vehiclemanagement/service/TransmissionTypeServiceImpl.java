@@ -3,10 +3,12 @@ package com.ftnxml.vehiclemanagement.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ftnxml.vehiclemanagement.model.TransmissionType;
 import com.ftnxml.vehiclemanagement.repository.TransmissionTypeRepository;
 
+@Service
 public class TransmissionTypeServiceImpl implements TransmissionTypeService {
 
     @Autowired
