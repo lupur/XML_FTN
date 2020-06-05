@@ -26,102 +26,121 @@ import com.ftnxml.vehiclemanagement.repository.VehicleRepository;
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-	@Autowired
-	VehicleRepository vehicleRepository;
+    @Autowired
+    VehicleRepository vehicleRepository;
 
-	@Autowired
-	ModelRepository modelRepostiory;
+    @Autowired
+    ModelRepository modelRepostiory;
 
-	@Autowired
-	PriceListRepository priceListRepository;
+    @Autowired
+    PriceListRepository priceListRepository;
 
-	@Autowired
-	CollisionDamageWaiverRepository colDamageWaiverRepository;
+    @Autowired
+    CollisionDamageWaiverRepository colDamageWaiverRepository;
 
-	@Autowired
-	DiscountRepository discountRepository;
+    @Autowired
+    DiscountRepository discountRepository;
 
-	@Autowired
-	FuelTypeRepository fuelTypeRepository;
+    @Autowired
+    FuelTypeRepository fuelTypeRepository;
 
-	@Autowired
-	TransmissionTypeRepository transmissionTypeRepository;
+    @Autowired
+    TransmissionTypeRepository transmissionTypeRepository;
 
-	@Autowired
-	ClassTypeRepository classTypeRepository;
+    @Autowired
+    ClassTypeRepository classTypeRepository;
 
-	@Override
-	public List<Vehicle> getAllVehicles() {
-		return vehicleRepository.findAll();
-	}
-	
-	@Override
-	public List<Vehicle> getVehiclesByLocation(String location) {
-		return vehicleRepository.findByLocation(location);
-	}
+    @Override
+    public List<Vehicle> getAllVehicles() {
+        return vehicleRepository.findAll();
+    }
 
-	@Override
-	public Vehicle getVehicle(Long id) {
-		try {
-			Vehicle b = vehicleRepository.findById(id).get();
-			return b;
-		} catch (Exception e) {
-			return null;
-		}
-	}
+    @Override
+    public List<Vehicle> getVehiclesByLocation(String location) {
+        return vehicleRepository.findByLocation(location);
+    }
 
-	@Override
-	public boolean removeVehicle(Long id) {
-		try {
-			Vehicle b = vehicleRepository.findById(id).get();
-			vehicleRepository.delete(b);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    @Override
+    public Vehicle getVehicle(Long id) {
+        try {
+            Vehicle b = vehicleRepository.findById(id).get();
+            return b;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-	@Override
-	public boolean addVehicle(VehicleDto newVehicle) {
-		if (newVehicle == null)
-			return false;
-		
-		try{
-			Model model = modelRepostiory.findById(newVehicle.getModelId()).get();
-			PriceList priceList = priceListRepository.findById(newVehicle.getPricelistId()).get();
-    		CollisionDamageWaiver colDamageWaiver = colDamageWaiverRepository.findById(newVehicle.getColDamageWaiverId()).get();
-    		Discount discount = discountRepository.findById(newVehicle.getDiscountId()).get();
-    		FuelType fuelType = fuelTypeRepository.findById(newVehicle.getFuelTypeId()).get();
-    		TransmissionType transmissionType = transmissionTypeRepository.findById(newVehicle.getTransmissionTypeId()).get();
-    		ClassType classType = classTypeRepository.findById(newVehicle.getClassTypeId()).get();
-			Vehicle vehicle = new Vehicle();
-			
-			vehicle.setModel(model);
-			vehicle.setPriceList(priceList);
-			vehicle.setColDamageWaiver(colDamageWaiver);
-			vehicle.setDiscount(discount);
-			// Images?
-			vehicle.setUserId(newVehicle.getUserId());
-			vehicle.setFuelType(fuelType);
-			vehicle.setTransmissionType(transmissionType);
-			vehicle.setClassType(classType);
-			vehicle.setMileage(newVehicle.getMileage());
-			vehicle.setMileageConstraint(newVehicle.getMileageConstraint());
-			vehicle.setInsurance(newVehicle.isInsurance());
-			vehicle.setNumberOfSeats(newVehicle.getNumberOfSeats());
-			vehicle.setRating(newVehicle.getRating()); // Or set to 1?
-			vehicle.setLocation(newVehicle.getLocation());
-			
-			vehicleRepository.save(vehicle);
-			return true;
-    	} catch (Exception e) {
+    @Override
+    public boolean removeVehicle(Long id) {
+        try {
+            Vehicle b = vehicleRepository.findById(id).get();
+            vehicleRepository.delete(b);
+            return true;
+        } catch (Exception e) {
             return false;
         }
-	}
+    }
 
-	@Override
-	public List<Vehicle> getVehiclesOfModel(Long modelId) {
-		return vehicleRepository.findByModel_Id(modelId);
-	}
+    @Override
+    public boolean addVehicle(VehicleDto newVehicle) {
+        if (newVehicle == null)
+            return false;
+
+        try {
+            Vehicle vehicle = new Vehicle();
+            if (newVehicle.getModelId() != null) {
+                Model model = modelRepostiory.findById(newVehicle.getModelId()).get();
+                vehicle.setModel(model);
+            }
+            if (newVehicle.getPricelistId() != null) {
+                PriceList priceList = priceListRepository.findById(newVehicle.getPricelistId()).get();
+                vehicle.setPriceList(priceList);
+            }
+            if (newVehicle.getColDamageWaiverId() != null) {
+                CollisionDamageWaiver colDamageWaiver = colDamageWaiverRepository
+                        .findById(newVehicle.getColDamageWaiverId()).get();
+                vehicle.setColDamageWaiver(colDamageWaiver);
+            }
+            if (newVehicle.getDiscountId() != null) {
+                Discount discount = discountRepository.findById(newVehicle.getDiscountId()).get();
+                vehicle.setDiscount(discount);
+            }
+            if (newVehicle.getFuelTypeId() != null) {
+                FuelType fuelType = fuelTypeRepository.findById(newVehicle.getFuelTypeId()).get();
+                vehicle.setFuelType(fuelType);
+            }
+            if (newVehicle.getTransmissionTypeId() != null) {
+                TransmissionType transmissionType = transmissionTypeRepository
+                        .findById(newVehicle.getTransmissionTypeId()).get();
+                vehicle.setTransmissionType(transmissionType);
+            }
+            if (newVehicle.getClassTypeId() != null) {
+                ClassType classType = classTypeRepository.findById(newVehicle.getClassTypeId()).get();
+                vehicle.setClassType(classType);
+            }
+
+            vehicle.setUserId(newVehicle.getUserId());
+
+            // Images?
+
+            vehicle.setMileage(newVehicle.getMileage());
+            vehicle.setMileageConstraint(newVehicle.getMileageConstraint());
+            vehicle.setInsurance(newVehicle.isInsurance());
+            vehicle.setNumberOfSeats(newVehicle.getNumberOfSeats());
+            vehicle.setRating(newVehicle.getRating()); // Or set to 1?
+            vehicle.setLocation(newVehicle.getLocation());
+
+            vehicleRepository.save(vehicle);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<Vehicle> getVehiclesOfModel(Long modelId) {
+        return vehicleRepository.findByModel_Id(modelId);
+    }
 
 }
