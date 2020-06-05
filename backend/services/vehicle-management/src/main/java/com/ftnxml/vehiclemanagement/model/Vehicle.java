@@ -29,7 +29,7 @@ public class Vehicle {
     @JoinColumn(name="collision_damage_id")
 	private CollisionDamageWaiver colDamageWaiver;
     @ManyToOne
-    @JoinColumn(name="discount")
+    @JoinColumn(name="discount_id")
     private Discount discount;
 	@OneToMany(mappedBy="vehicle")
 	private Set<Image> images;

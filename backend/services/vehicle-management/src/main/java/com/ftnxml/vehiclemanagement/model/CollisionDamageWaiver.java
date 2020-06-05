@@ -18,7 +18,7 @@ public class CollisionDamageWaiver {
 	@Column(name= "collision_damage_id")
 	private Long id;
 	@Column(name= "collision_dagame_price")
-	private double price;
+	private float price;
 	@OneToMany(mappedBy="colDamageWaiver")
     private Set<Vehicle> vehicles;
 
@@ -26,7 +26,7 @@ public class CollisionDamageWaiver {
 		super();
 	}
 
-	public CollisionDamageWaiver(Long id, double price) {
+	public CollisionDamageWaiver(Long id, float price) {
 		super();
 		this.id = id;
 		this.price = price;
@@ -40,11 +40,11 @@ public class CollisionDamageWaiver {
 		this.id = id;
 	}
 
-	public double getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
