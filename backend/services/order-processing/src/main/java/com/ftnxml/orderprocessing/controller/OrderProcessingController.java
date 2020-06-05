@@ -5,15 +5,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/")
 public class OrderProcessingController {
-	
-	public class VehicleController {
 
-	    @GetMapping("/")
-	    public String home() {
-	        return "Hello from Order-Processing Service";
-	    }
-	}
+    public class VehicleController {
+
+        @GetMapping("/")
+        public String home() {
+            return "Hello from Order-Processing Service";
+        }
+
+        @GetMapping(value = "/test")
+        public String test() {
+            return "Hello from Order-Processing Service";
+        }
+    }
 
 }
