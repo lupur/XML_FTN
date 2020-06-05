@@ -2,6 +2,7 @@ package com.ftnxml.orderprocessing.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,14 +12,19 @@ import javax.persistence.Table;
 import com.ftnxml.orderprocessing.enums.OrderRequestStatus;
 
 @Entity
-@Table(name = "order_requests")
+@Table(name = "order_request")
 public class OrderRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name ="request_id")
 	private Long id;
+	@Column(name ="request_status")
 	private OrderRequestStatus status;
+	@Column(name ="user_id")
 	private Long userId;
+	@Column(name= "owner_id")
 	private Long ownerId;
+	@Column(name= "created_on")
 	private Date createdOn;
 
 	public OrderRequest() {

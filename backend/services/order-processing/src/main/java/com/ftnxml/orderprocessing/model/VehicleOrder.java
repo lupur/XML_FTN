@@ -2,22 +2,32 @@ package com.ftnxml.orderprocessing.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "vehicle_orders")
+@Table(name = "vehicle_order")
 public class VehicleOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name= "order_id")
 	private Long id;
+	@Column(name ="vehicle_id")
 	private Long vehicleId;
+	@ManyToOne
+	@JoinColumn(name= "request_id")
 	private OrderRequest orderRequest;
+	@Column(name ="total_price")
 	private float totalPrice;
+	@Column(name ="pickup_date")
 	private Date pickupDate;
+	@Column(name ="return_date")
 	private Date returnDate;
 
 	public VehicleOrder() {

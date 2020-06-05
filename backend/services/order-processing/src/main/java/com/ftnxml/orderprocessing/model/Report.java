@@ -1,18 +1,25 @@
 package com.ftnxml.orderprocessing.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "reports")
+@Table(name = "order_report")
 public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name= "report_id")
 	private Long id;
+	@OneToOne
+	@JoinColumn(name ="order_id")
 	private OrderRequest vehicleOrder;
+	@Column(name= "distance_traveled")
 	private int distanceTraveled;
 
 	public Report() {

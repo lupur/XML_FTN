@@ -36,6 +36,16 @@ services:
         - db
     networks:
      - static-network
+     
+  flyway3:
+    image: flyway/flyway
+    command: -url=jdbc:mysql://db -schemas=order_service -user=root -password=something -connectRetries=60 migrate
+    volumes:
+        - .:/flyway/order_service
+    depends_on:
+        - db
+    networks:
+     - static-network
         
   eureka-server:
     image: eureka-server
@@ -85,6 +95,22 @@ services:
     image: vehicle-management
     build:
       context: ./services/vehicle-management
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    links:
+      - eureka-server
+    depends_on:
+      - eureka-server
+      - db
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+      
+  order-processing:
+    image: order-processing
+    build:
+      context: ./services/order-processing
       dockerfile: Dockerfile
     tty: true
     networks:
