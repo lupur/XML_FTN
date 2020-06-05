@@ -174,6 +174,10 @@ public class VehicleController {
 
     public VehicleDto convertToDto(Vehicle vehicle) {
         VehicleDto vDto = new VehicleDto();
+        if (vehicle.getModel() != null)
+        	vDto.setModelId(vehicle.getModel().getId());
+        if (vehicle.getPriceList() != null)
+        	vDto.setPricelistId(vehicle.getPriceList().getId());
         if (vehicle.getClassType() != null)
             vDto.setClassTypeId(vehicle.getClassType().getId());
         if (vehicle.getColDamageWaiver() != null)

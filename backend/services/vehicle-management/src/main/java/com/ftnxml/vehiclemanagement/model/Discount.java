@@ -19,9 +19,9 @@ public class Discount {
 	@Column(name= "discount_id")
 	private Long id;
 	@Column(name= "number_of_days")
-	private int numberOfDays;
+	private Integer numberOfDays;
 	@Column(name= "percentage")
-	private int percentage;
+	private Integer percentage;
 	@Column(name= "start_date")
 	private Date startDate;
 	@Column(name= "end_date")
@@ -50,19 +50,19 @@ public class Discount {
 		this.id = id;
 	}
 
-	public int getNumberOfDays() {
+	public Integer getNumberOfDays() {
 		return numberOfDays;
 	}
 
-	public void setNumberOfDays(int numberOfDays) {
+	public void setNumberOfDays(Integer numberOfDays) {
 		this.numberOfDays = numberOfDays;
 	}
 
-	public int getPercentage() {
+	public Integer getPercentage() {
 		return percentage;
 	}
 
-	public void setPercentage(int percentage) {
+	public void setPercentage(Integer percentage) {
 		this.percentage = percentage;
 	}
 

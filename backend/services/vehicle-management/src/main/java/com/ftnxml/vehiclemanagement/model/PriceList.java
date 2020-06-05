@@ -18,9 +18,9 @@ public class PriceList {
 	@Column(name ="pricelist_id")
 	private Long id;
 	@Column(name ="daily_price")
-	private float dailyPrice;
+	private Double dailyPrice;
 	@Column(name= "mileage_penalty")
-	private float mileagePenaltyPrice;
+	private Double mileagePenaltyPrice;
 	@OneToMany(mappedBy="priceList")
     private Set<Vehicle> vehicles;
 
@@ -28,7 +28,7 @@ public class PriceList {
 		super();
 	}
 
-	public PriceList(Long id, float dailyPrice, float mileagePenaltyPrice) {
+	public PriceList(Long id, Double dailyPrice, Double mileagePenaltyPrice) {
 		super();
 		this.id = id;
 		this.dailyPrice = dailyPrice;
@@ -43,19 +43,19 @@ public class PriceList {
 		this.id = id;
 	}
 
-	public float getDailyPrice() {
+	public Double getDailyPrice() {
 		return dailyPrice;
 	}
 
-	public void setDailyPrice(float dailyPrice) {
+	public void setDailyPrice(Double dailyPrice) {
 		this.dailyPrice = dailyPrice;
 	}
 
-	public float getMileagePenaltyPrice() {
+	public Double getMileagePenaltyPrice() {
 		return mileagePenaltyPrice;
 	}
 
-	public void setMileagePenaltyPrice(float mileagePenaltyPrice) {
+	public void setMileagePenaltyPrice(Double mileagePenaltyPrice) {
 		this.mileagePenaltyPrice = mileagePenaltyPrice;
 	}
 

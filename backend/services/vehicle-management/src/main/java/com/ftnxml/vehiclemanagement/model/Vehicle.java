@@ -45,16 +45,16 @@ public class Vehicle {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "class_type_id")
     private ClassType classType;
-    @Column(name = "mileage")
-    private int mileage;
+    @Column(name = "milleage")
+    private Double mileage;
     @Column(name = "milleage_constraint")
-    private int mileageConstraint;
+    private Double mileageConstraint;
     @Column(name = "insurance")
-    private boolean insurance;
+    private Boolean insurance;
     @Column(name = "number_of_seats")
-    private int numberOfSeats;
+    private Integer numberOfSeats;
     @Column(name = "rating")
-    private float rating;
+    private Float rating;
     @Column(name = "location")
     private String location;
 
@@ -63,8 +63,8 @@ public class Vehicle {
     }
 
     public Vehicle(Long id, Model model, PriceList priceList, CollisionDamageWaiver colDamageWaiver, Set<Image> images,
-            Long userId, FuelType fuelType, TransmissionType transmissionType, ClassType classType, int mileage,
-            int mileageConstraint, boolean insurance, int numberOfSeats, float rating, Discount discount,
+            Long userId, FuelType fuelType, TransmissionType transmissionType, ClassType classType, Double mileage,
+            Double mileageConstraint, Boolean insurance, Integer numberOfSeats, Float rating, Discount discount,
             String location) {
         super();
         this.id = id;
@@ -157,19 +157,19 @@ public class Vehicle {
         this.classType = classType;
     }
 
-    public int getMileage() {
+    public Double getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public void setMileage(Double mileage) {
         this.mileage = mileage;
     }
 
-    public int getMileageConstraint() {
+    public Double getMileageConstraint() {
         return mileageConstraint;
     }
 
-    public void setMileageConstraint(int mileageConstraint) {
+    public void setMileageConstraint(Double mileageConstraint) {
         this.mileageConstraint = mileageConstraint;
     }
 
@@ -181,19 +181,19 @@ public class Vehicle {
         this.insurance = insurance;
     }
 
-    public int getNumberOfSeats() {
+    public Integer getNumberOfSeats() {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
+    public void setNumberOfSeats(Integer numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 

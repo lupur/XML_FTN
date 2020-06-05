@@ -9,11 +9,11 @@ public class VehicleDto {
     private Long fuelTypeId;
     private Long transmissionTypeId;
     private Long classTypeId;
-    private int mileage;
-    private int mileageConstraint;
-    private boolean insurance;
-    private int numberOfSeats;
-    private float rating;
+    private Double mileage;
+    private Double mileageConstraint;
+    private Boolean insurance;
+    private Integer numberOfSeats;
+    private Float rating;
     private String location;
 
     public Long getModelId() {
@@ -80,43 +80,43 @@ public class VehicleDto {
         this.classTypeId = classTypeId;
     }
 
-    public int getMileage() {
+    public Double getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public void setMileage(Double mileage) {
         this.mileage = mileage;
     }
 
-    public int getMileageConstraint() {
+    public Double getMileageConstraint() {
         return mileageConstraint;
     }
 
-    public void setMileageConstraint(int mileageConstraint) {
+    public void setMileageConstraint(Double mileageConstraint) {
         this.mileageConstraint = mileageConstraint;
     }
 
-    public boolean isInsurance() {
+    public Boolean isInsurance() {
         return insurance;
     }
 
-    public void setInsurance(boolean insurance) {
+    public void setInsurance(Boolean insurance) {
         this.insurance = insurance;
     }
 
-    public int getNumberOfSeats() {
+    public Integer getNumberOfSeats() {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
+    public void setNumberOfSeats(Integer numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 

@@ -30,7 +30,7 @@ CREATE TABLE vehicle_service.transmission_type (
 );
 
 CREATE TABLE vehicle_service.class_type (
-	`class_type_id` bigint(20) NOT NULL,
+	`class_type_id` bigint(20) NOT NULL AUTO_INCREMENT,
     `class_type_name` varchar(48) NOT NULL,
     PRIMARY KEY (`class_type_id`)
 );
@@ -65,7 +65,7 @@ CREATE TABLE vehicle_service.vehicle (
   `milleage_constraint` double,
   `insurance` boolean,
   `number_of_seats` int(2),
-  `raiting` float,
+  `rating` float,
   `location` varchar(128),
   `discount_id` bigint(20),
   PRIMARY KEY (`vehicle_id`),

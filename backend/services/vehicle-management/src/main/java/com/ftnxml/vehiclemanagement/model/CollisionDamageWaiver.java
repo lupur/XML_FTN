@@ -17,8 +17,8 @@ public class CollisionDamageWaiver {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "collision_damage_id")
 	private Long id;
-	@Column(name= "collision_dagame_price")
-	private float price;
+	@Column(name= "collision_damage_price")
+	private Double price;
 	@OneToMany(mappedBy="colDamageWaiver")
     private Set<Vehicle> vehicles;
 
@@ -26,7 +26,7 @@ public class CollisionDamageWaiver {
 		super();
 	}
 
-	public CollisionDamageWaiver(Long id, float price) {
+	public CollisionDamageWaiver(Long id, Double price) {
 		super();
 		this.id = id;
 		this.price = price;
@@ -40,11 +40,11 @@ public class CollisionDamageWaiver {
 		this.id = id;
 	}
 
-	public float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
