@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class OrderProcessingController {
-	
-	public class VehicleController {
 
-	    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity getBrands() {
-	        return ResponseEntity.ok(new ArrayList<>());
-	    }
-	}
-
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getBrands() {
+        return ResponseEntity.ok(new ArrayList<>());
+    }
 }
+
+
