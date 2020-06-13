@@ -9,6 +9,7 @@ namespace CarRentalPortal.Application.Common.Interfaces
     {
         DbSet<User> Users { get; set; }
         DbSet<Role> Roles { get; set; }
+        DbSet<UserRole> UserRoles { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
