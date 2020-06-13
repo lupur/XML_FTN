@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CarRentalPortal.Application\CarRentalPortal.Application.csproj" />
-    <ProjectReference Include="..\CarRentalPortal.Core\CarRentalPortal.Core.csproj" />
+    <ProjectReference Include="..\CarRentalPortal.Infrastructure\CarRentalPortal.Infrastructure.csproj" />
   </ItemGroup>
 
 

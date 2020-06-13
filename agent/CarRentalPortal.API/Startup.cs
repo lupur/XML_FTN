@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CarRentalPortal.Infrastructure;
 
 namespace CarRentalPortal.API
 {
@@ -21,6 +22,7 @@ namespace CarRentalPortal.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
+            services.AddInfrastructure(Configuration);
 
             services.ConfigureJwtAuthentication();
 

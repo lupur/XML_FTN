@@ -2,8 +2,6 @@
 using CarRentalPortal.Core.Entities;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,7 +18,7 @@ namespace CarRentalPortal.Application.Users.Commands
             _dataProtection = dataProtection;
         }
 
-        public Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var salt = _dataProtection.GenerateSalt(128);
             var hashedPassword = _dataProtection.HashPassword(request.Password, Convert.FromBase64String(salt));
@@ -35,7 +33,7 @@ namespace CarRentalPortal.Application.Users.Commands
             };
 
             _context.Users.Add(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
         }
