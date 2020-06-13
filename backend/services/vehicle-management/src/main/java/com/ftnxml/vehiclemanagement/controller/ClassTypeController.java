@@ -1,5 +1,9 @@
 package com.ftnxml.vehiclemanagement.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +26,23 @@ public class ClassTypeController {
     @Autowired
     ClassTypeService classTypeService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getClassTypes() {
-        return ResponseEntity.ok(classTypeService.getAllClassTypes());
+        List<ClassTypeDto> classes = classTypeService.getAllClassTypes().stream()
+                .map(cls -> modelMapper.map(cls, ClassTypeDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok(classes);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getClassType(@PathVariable Long id) {
-        return ResponseEntity.ok(classTypeService.getClassType(id));
+        ClassType ct = classTypeService.getClassType(id);
+        if (ct == null)
+            return ResponseEntity.notFound().build();
+        ClassTypeDto ctd = modelMapper.map(ct, ClassTypeDto.class);
+        return ResponseEntity.ok(ctd);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,6 +66,4 @@ public class ClassTypeController {
         else
             return ResponseEntity.badRequest().build();
     }
-
-    // TODO: Create update endpoint
 }

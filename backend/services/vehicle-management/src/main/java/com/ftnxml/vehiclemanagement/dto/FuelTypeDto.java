@@ -1,6 +1,7 @@
 package com.ftnxml.vehiclemanagement.dto;
 
 public class FuelTypeDto {
+    private Long id;
     private String name;
 
     public String getName() {
@@ -10,4 +11,13 @@ public class FuelTypeDto {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

@@ -1,14 +1,15 @@
 package com.ftnxml.vehiclemanagement.dto;
 
 public class VehicleDto {
-    private Long modelId;
-    private Long pricelistId;
-    private Long colDamageWaiverId;
-    private Long discountId;
+    private Long id;
+    private ModelDto model;
+    private PriceListDto pricelist;
+    private CollisionDamageWaiverDto colDamageWaiver;
+    private DiscountDto discount;
     private Long userId;
-    private Long fuelTypeId;
-    private Long transmissionTypeId;
-    private Long classTypeId;
+    private FuelTypeDto fuelType;
+    private TransmissionTypeDto transmissionType;
+    private ClassTypeDto classType;
     private Double mileage;
     private Double mileageConstraint;
     private Boolean insurance;
@@ -16,36 +17,44 @@ public class VehicleDto {
     private Float rating;
     private String location;
 
-    public Long getModelId() {
-        return modelId;
+    public Long getId() {
+        return id;
     }
 
-    public void setModelId(Long modelId) {
-        this.modelId = modelId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getPricelistId() {
-        return pricelistId;
+    public ModelDto getModel() {
+        return model;
     }
 
-    public void setPricelistId(Long pricelistId) {
-        this.pricelistId = pricelistId;
+    public void setModel(ModelDto model) {
+        this.model = model;
     }
 
-    public Long getColDamageWaiverId() {
-        return colDamageWaiverId;
+    public PriceListDto getPricelist() {
+        return pricelist;
     }
 
-    public void setColDamageWaiverId(Long colDamageWaiverId) {
-        this.colDamageWaiverId = colDamageWaiverId;
+    public void setPricelist(PriceListDto pricelist) {
+        this.pricelist = pricelist;
     }
 
-    public Long getDiscountId() {
-        return discountId;
+    public CollisionDamageWaiverDto getColDamageWaiver() {
+        return colDamageWaiver;
     }
 
-    public void setDiscountId(Long discountId) {
-        this.discountId = discountId;
+    public void setColDamageWaiver(CollisionDamageWaiverDto colDamageWaiver) {
+        this.colDamageWaiver = colDamageWaiver;
+    }
+
+    public DiscountDto getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(DiscountDto discount) {
+        this.discount = discount;
     }
 
     public Long getUserId() {
@@ -56,28 +65,28 @@ public class VehicleDto {
         this.userId = userId;
     }
 
-    public Long getFuelTypeId() {
-        return fuelTypeId;
+    public FuelTypeDto getFuelType() {
+        return fuelType;
     }
 
-    public void setFuelTypeId(Long fuelTypeId) {
-        this.fuelTypeId = fuelTypeId;
+    public void setFuelType(FuelTypeDto fuelType) {
+        this.fuelType = fuelType;
     }
 
-    public Long getTransmissionTypeId() {
-        return transmissionTypeId;
+    public TransmissionTypeDto getTransmissionType() {
+        return transmissionType;
     }
 
-    public void setTransmissionTypeId(Long transmissionTypeId) {
-        this.transmissionTypeId = transmissionTypeId;
+    public void setTransmissionType(TransmissionTypeDto transmissionType) {
+        this.transmissionType = transmissionType;
     }
 
-    public Long getClassTypeId() {
-        return classTypeId;
+    public ClassTypeDto getClassType() {
+        return classType;
     }
 
-    public void setClassTypeId(Long classTypeId) {
-        this.classTypeId = classTypeId;
+    public void setClassType(ClassTypeDto classType) {
+        this.classType = classType;
     }
 
     public Double getMileage() {
@@ -96,7 +105,7 @@ public class VehicleDto {
         this.mileageConstraint = mileageConstraint;
     }
 
-    public Boolean isInsurance() {
+    public Boolean getInsurance() {
         return insurance;
     }
 
@@ -130,9 +139,9 @@ public class VehicleDto {
 
     @Override
     public String toString() {
-        return "VehicleDto [modelId=" + modelId + ", pricelistId=" + pricelistId + ", colDamageWaiverId="
-                + colDamageWaiverId + ", discountId=" + discountId + ", userId=" + userId + ", fuelTypeId=" + fuelTypeId
-                + ", transmissionTypeId=" + transmissionTypeId + ", classTypeId=" + classTypeId + ", mileage=" + mileage
+        return "VehicleDto [id=" + id + ", model=" + model + ", pricelist=" + pricelist + ", colDamageWaiver="
+                + colDamageWaiver + ", discount=" + discount + ", userId=" + userId + ", fuelType=" + fuelType
+                + ", transmissionType=" + transmissionType + ", classType=" + classType + ", mileage=" + mileage
                 + ", mileageConstraint=" + mileageConstraint + ", insurance=" + insurance + ", numberOfSeats="
                 + numberOfSeats + ", rating=" + rating + ", location=" + location + "]";
     }

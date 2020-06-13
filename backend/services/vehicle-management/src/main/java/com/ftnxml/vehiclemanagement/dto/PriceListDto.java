@@ -1,23 +1,32 @@
 package com.ftnxml.vehiclemanagement.dto;
 
 public class PriceListDto {
-	private float dailyPrice;
-	private float mileagePenaltyPrice;
+    private Long id;
+    private double dailyPrice;
+    private double mileagePenaltyPrice;
 
-	public float getDailyPrice() {
-		return dailyPrice;
-	}
+    public double getDailyPrice() {
+        return dailyPrice;
+    }
 
-	public void setDailyPrice(float dailyPrice) {
-		this.dailyPrice = dailyPrice;
-	}
+    public void setDailyPrice(double dailyPrice) {
+        this.dailyPrice = dailyPrice;
+    }
 
-	public float getMileagePenaltyPrice() {
-		return mileagePenaltyPrice;
-	}
+    public double getMileagePenaltyPrice() {
+        return mileagePenaltyPrice;
+    }
 
-	public void setMileagePenaltyPrice(float mileagePenaltyPrice) {
-		this.mileagePenaltyPrice = mileagePenaltyPrice;
-	}
+    public void setMileagePenaltyPrice(double mileagePenaltyPrice) {
+        this.mileagePenaltyPrice = mileagePenaltyPrice;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }
