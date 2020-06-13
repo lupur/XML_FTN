@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using System.Collections.Generic;
 
-namespace CarRentalPortal.Application.Users.Commands
+namespace CarRentalPortal.Application.Users.Commands.CreateUser
 {
     public class CreateUserCommand : IRequest<int>
     {

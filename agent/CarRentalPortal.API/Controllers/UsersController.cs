@@ -1,4 +1,5 @@
 ﻿using CarRentalPortal.Application.Users.Commands;
+using CarRentalPortal.Application.Users.Commands.CreateUser;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

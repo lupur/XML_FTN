@@ -6,13 +6,14 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalPortal.Application.Auth.Commands
+namespace CarRentalPortal.Application.Auth.Commands.Login
 {
     public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
     {
@@ -27,7 +28,10 @@ namespace CarRentalPortal.Application.Auth.Commands
 
         public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var entity = await _context.Users
+                .Include(u => u.Roles)
+                .ThenInclude(ur => ur.Role)
+                .FirstOrDefaultAsync(u => u.Email == request.Email);
             if (entity == null)
             {
                 throw new NotFoundException(nameof(User), request.Email);
@@ -51,16 +55,29 @@ namespace CarRentalPortal.Application.Auth.Commands
             {
                 Issuer = AppConstants.Issuer,
                 Audience = AppConstants.Audience,
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
+                Subject = new ClaimsIdentity(GetValidClaims(user)),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = signingCredentials
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+
+        private List<Claim> GetValidClaims(User user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+            };
+
+            foreach (var role in user.Roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.Role.Name));
+            }
+
+            return claims;
         }
     }
 }
