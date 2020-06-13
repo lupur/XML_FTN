@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using CarRentalPortal.Application.Common.Constants;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -17,7 +18,8 @@ namespace CarRentalPortal.API.Common.Extensions
             })
             .AddJwtBearer(options =>
             {
-                var secretKey = Environment.GetEnvironmentVariable("SecretKey", EnvironmentVariableTarget.User) ?? throw new Exception("Application secret key not configured.");
+                var secretKey = Environment.GetEnvironmentVariable(AppConstants.SecretKeyString, EnvironmentVariableTarget.User) ??
+                    throw new Exception("Application secret key not configured.");
 
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -26,8 +28,8 @@ namespace CarRentalPortal.API.Common.Extensions
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = "http://localhost:5000",
-                    ValidAudience = "http://localhost:5000",
+                    ValidIssuer = AppConstants.Issuer,
+                    ValidAudience = AppConstants.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });

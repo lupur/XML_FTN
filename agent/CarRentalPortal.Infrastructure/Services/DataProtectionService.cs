@@ -28,5 +28,10 @@ namespace CarRentalPortal.Infrastructure.Services
 
             return hashedPassword;
         }
+
+        public bool ValidatePassword(string password, string hashedPassword, string salt)
+        {
+            return hashedPassword == HashPassword(password, Convert.FromBase64String(salt));
+        }
     }
 }
