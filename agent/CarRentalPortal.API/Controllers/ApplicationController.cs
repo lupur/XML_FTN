@@ -10,7 +10,7 @@ namespace CarRentalPortal.API.Controllers
         [HttpGet("healthcheck"), Authorize]
         public async Task<string> GetApplicationHealth()
         {
-            return await Mediator.Send(new ApplicationHealthQuery());
+            return await Mediator.Send(new GetApplicationHealthQuery());
         }
     }
 }

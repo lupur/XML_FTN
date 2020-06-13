@@ -2,7 +2,7 @@
 
 namespace CarRentalPortal.Application.Application.Queries
 {
-    public class ApplicationHealthQuery : IRequest<string>
+    public class GetApplicationHealthQuery : IRequest<string>
     {
     }
 }

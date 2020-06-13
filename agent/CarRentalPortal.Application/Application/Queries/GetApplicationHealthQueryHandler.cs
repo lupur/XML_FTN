@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace CarRentalPortal.Application.Application.Queries
 {
-    public class ApplicationHealthQueryHandler : IRequestHandler<ApplicationHealthQuery, string>
+    public class GetApplicationHealthQueryHandler : IRequestHandler<GetApplicationHealthQuery, string>
     {
-        public Task<string> Handle(ApplicationHealthQuery request, CancellationToken cancellationToken)
+        public Task<string> Handle(GetApplicationHealthQuery request, CancellationToken cancellationToken)
         {
             return Task.FromResult("Beep-boop. Application running.");
         }
