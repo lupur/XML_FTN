@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 
-namespace CarRentalPortal.API.Extensions
+namespace CarRentalPortal.API.Common.Extensions
 {
     public static class ServiceExtensions
     {
