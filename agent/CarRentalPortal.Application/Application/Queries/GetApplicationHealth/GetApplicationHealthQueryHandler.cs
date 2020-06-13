@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalPortal.Application.Application.Queries
+namespace CarRentalPortal.Application.Application.Queries.GetApplicationHealth
 {
     public class GetApplicationHealthQueryHandler : IRequestHandler<GetApplicationHealthQuery, string>
     {

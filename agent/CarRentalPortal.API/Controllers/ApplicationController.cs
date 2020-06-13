@@ -1,5 +1,5 @@
 ﻿using CarRentalPortal.API.Constants;
-using CarRentalPortal.Application.Application.Queries;
+using CarRentalPortal.Application.Application.Queries.GetApplicationHealth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
