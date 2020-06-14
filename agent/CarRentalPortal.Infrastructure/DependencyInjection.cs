@@ -17,6 +17,12 @@ namespace CarRentalPortal.Infrastructure
                     opt => opt.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName)));
             services.AddScoped<IIdentityDbContext>(provider => provider.GetService<IdentityDbContext>());
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseMySQL(
+                    configuration.GetConnectionString("ApplicationConnection"),
+                    opt => opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
             services.AddTransient<IDataProtectionService, DataProtectionService>();
 
             return services;

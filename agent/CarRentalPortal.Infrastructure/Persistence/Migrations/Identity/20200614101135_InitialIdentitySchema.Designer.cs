@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CarRentalPortal.Infrastructure.Persistence.Migrations
+namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Identity
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20200614092846_InitialIdentitySchema")]
+    [Migration("20200614101135_InitialIdentitySchema")]
     partial class InitialIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

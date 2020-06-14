@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.Data.EntityFrameworkCore.Metadata;
 
-namespace CarRentalPortal.Infrastructure.Persistence.Migrations
+namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Identity
 {
     public partial class InitialIdentitySchema : Migration
     {
