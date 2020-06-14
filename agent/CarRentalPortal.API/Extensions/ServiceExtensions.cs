@@ -1,5 +1,6 @@
 ﻿using CarRentalPortal.Application.Common.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -32,6 +33,16 @@ namespace CarRentalPortal.API.Common.Extensions
                     ValidAudience = AppConstants.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
+            });
+        }
+
+        public static void ConfigureFormOptions(this IServiceCollection services)
+        {
+            services.Configure<FormOptions>(opt =>
+            {
+                opt.ValueLengthLimit = int.MaxValue;
+                opt.MultipartBodyLengthLimit = int.MaxValue;
+                opt.MemoryBufferThreshold = int.MaxValue;
             });
         }
     }

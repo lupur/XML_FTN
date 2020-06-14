@@ -33,7 +33,6 @@ namespace CarRentalPortal.API.Controllers
             try
             {
                 var resourcePath = Path.Combine("Resources", "Images", "Cars", $"{carAdId}");
-
                 var imagePath = CopyImage(Request.Form.Files[0], resourcePath);
 
                 var command = new UploadCarImageCommand
