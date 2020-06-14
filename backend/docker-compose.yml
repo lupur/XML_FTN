@@ -122,6 +122,21 @@ services:
       - db
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+      
+  soap-service:
+    image: soap-service
+    build:
+      context: ./services/soap-service
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    links:
+      - eureka-server
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
 
 volumes:
   my-db:
