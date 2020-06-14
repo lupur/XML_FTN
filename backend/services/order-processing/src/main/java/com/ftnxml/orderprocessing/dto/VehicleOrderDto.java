@@ -1,42 +1,25 @@
-package com.ftnxml.orderprocessing.model;
+package com.ftnxml.orderprocessing.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.ftnxml.orderprocessing.model.OrderRequest;
 
-@Entity
-@Table(name = "vehicle_order")
-public class VehicleOrder {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name= "order_id")
+public class VehicleOrderDto {
+	
 	private Long id;
-	@Column(name ="vehicle_id")
 	private Long vehicleId;
-	@ManyToOne
-	@JoinColumn(name= "request_id")
 	private OrderRequest orderRequest;
-	@Column(name ="total_price")
 	private Double totalPrice;
-	@Column(name ="pickup_date")
 	private Date pickupDate;
-	@Column(name ="return_date")
 	private Date returnDate;
-
-	public VehicleOrder() {
-		super();
+	private ReportDto report;
+	
+	public VehicleOrderDto() {
+		
 	}
 
-	public VehicleOrder(Long id, Long vehicleId, OrderRequest orderRequest, Double totalPrice, Date pickupDate,
-	        Date returnDate) {
-		super();
+	public VehicleOrderDto(Long id, Long vehicleId, OrderRequest orderRequest, Double totalPrice, Date pickupDate,
+			Date returnDate) {
 		this.id = id;
 		this.vehicleId = vehicleId;
 		this.orderRequest = orderRequest;
@@ -91,6 +74,14 @@ public class VehicleOrder {
 
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
+	}
+
+	public ReportDto getReport() {
+		return report;
+	}
+
+	public void setReport(ReportDto report) {
+		this.report = report;
 	}
 
 }
