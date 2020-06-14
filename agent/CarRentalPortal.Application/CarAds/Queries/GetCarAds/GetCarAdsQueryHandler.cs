@@ -24,6 +24,7 @@ namespace CarRentalPortal.Application.CarAds.Queries.GetCarAds
             return new CarAdVm
             {
                 CarAds = await _appContext.CarAds
+                    .Include(ca => ca.Images)
                     .ProjectTo<CarAdDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken)
             };

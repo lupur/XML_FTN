@@ -1,5 +1,6 @@
 ﻿using CarRentalPortal.Application.Common.Mappings;
 using CarRentalPortal.Core.Entities;
+using System.Collections.Generic;
 
 namespace CarRentalPortal.Application.CarAds.Queries.GetCarAds
 {
@@ -9,7 +10,7 @@ namespace CarRentalPortal.Application.CarAds.Queries.GetCarAds
         public string AgentContactInfo { get; set; }
         public string Brand { get; set; }
         public string CarModel { get; set; }
-        public byte ProductionYear { get; set; }
+        public short ProductionYear { get; set; }
         public string Segment { get; set; }
         public string FuelType { get; set; }
         public string TransmissionType { get; set; }
@@ -19,5 +20,6 @@ namespace CarRentalPortal.Application.CarAds.Queries.GetCarAds
         public long? MileageConstraint { get; set; }
         public byte NumberOfSeats { get; set; }
         public float AverageRating { get; set; }
+        public ICollection<CarImageDto> Images { get; set; }
     }
 }
