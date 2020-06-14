@@ -1,14 +1,10 @@
 ﻿using CarRentalPortal.Core.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using MediatR;
 
-namespace CarRentalPortal.Core.Entities
+namespace CarRentalPortal.Application.CarAds.Commands.CreateCarAd
 {
-    public class CarAd
+    public class CreateCarAdCommand : IRequest<int>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public int AgentId { get; set; }
         public string AgentContactInfo { get; set; }
         public string Brand { get; set; }

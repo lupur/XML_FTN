@@ -1,22 +1,18 @@
-﻿using CarRentalPortal.Core.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using CarRentalPortal.Application.Common.Mappings;
+using CarRentalPortal.Core.Entities;
 
-namespace CarRentalPortal.Core.Entities
+namespace CarRentalPortal.Application.CarAds.Queries.GetCarAds
 {
-    public class CarAd
+    public class CarAdDto : IMapFrom<CarAd>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public int AgentId { get; set; }
         public string AgentContactInfo { get; set; }
         public string Brand { get; set; }
         public string CarModel { get; set; }
         public byte ProductionYear { get; set; }
-        public SegmentType SegmentType { get; set; }
-        public FuelType FuelType { get; set; }
-        public TransmissionType TransmissionType { get; set; }
+        public string Segment { get; set; }
+        public string FuelType { get; set; }
+        public string TransmissionType { get; set; }
         public string Color { get; set; }
         public string Location { get; set; }
         public long Mileage { get; set; }
