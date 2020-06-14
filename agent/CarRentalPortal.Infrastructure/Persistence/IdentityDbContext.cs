@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace CarRentalPortal.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public class IdentityDbContext : DbContext, IIdentityDbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
 
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        public IdentityDbContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -24,6 +24,7 @@ namespace CarRentalPortal.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.HasDefaultSchema("carrentalportal.identity");
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);

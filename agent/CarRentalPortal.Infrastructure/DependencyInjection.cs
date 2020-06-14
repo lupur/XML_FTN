@@ -11,11 +11,11 @@ namespace CarRentalPortal.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<IdentityDbContext>(options =>
                 options.UseMySQL(
-                    configuration.GetConnectionString("DefaultConnection"),
-                    opt => opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+                    configuration.GetConnectionString("IdentityConnection"),
+                    opt => opt.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName)));
+            services.AddScoped<IIdentityDbContext>(provider => provider.GetService<IdentityDbContext>());
 
             services.AddTransient<IDataProtectionService, DataProtectionService>();
 

@@ -8,9 +8,9 @@ namespace CarRentalPortal.Application.Roles.Commands.CreateRole
 {
     public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IIdentityDbContext _context;
 
-        public CreateRoleCommandHandler(IApplicationDbContext context)
+        public CreateRoleCommandHandler(IIdentityDbContext context)
         {
             _context = context;
         }

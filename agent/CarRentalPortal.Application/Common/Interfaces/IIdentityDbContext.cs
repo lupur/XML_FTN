@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalPortal.Application.Common.Interfaces
 {
-    public interface IApplicationDbContext
+    public interface IIdentityDbContext
     {
         DbSet<User> Users { get; set; }
         DbSet<Role> Roles { get; set; }

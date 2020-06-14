@@ -9,10 +9,10 @@ namespace CarRentalPortal.Application.Users.Commands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IIdentityDbContext _context;
         private readonly IDataProtectionService _dataProtection;
 
-        public CreateUserCommandHandler(IApplicationDbContext context, IDataProtectionService dataProtection)
+        public CreateUserCommandHandler(IIdentityDbContext context, IDataProtectionService dataProtection)
         {
             _context = context;
             _dataProtection = dataProtection;

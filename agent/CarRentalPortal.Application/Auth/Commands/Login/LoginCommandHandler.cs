@@ -17,10 +17,10 @@ namespace CarRentalPortal.Application.Auth.Commands.Login
 {
     public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IIdentityDbContext _context;
         private readonly IDataProtectionService _dataProtection;
 
-        public LoginCommandHandler(IApplicationDbContext context, IDataProtectionService dataProtection)
+        public LoginCommandHandler(IIdentityDbContext context, IDataProtectionService dataProtection)
         {
             _context = context;
             _dataProtection = dataProtection;
