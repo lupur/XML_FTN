@@ -1,4 +1,5 @@
 ﻿using CarRentalPortal.Core.Enums;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +14,7 @@ namespace CarRentalPortal.Core.Entities
         public string AgentContactInfo { get; set; }
         public string Brand { get; set; }
         public string CarModel { get; set; }
-        public byte ProductionYear { get; set; }
+        public short ProductionYear { get; set; }
         public SegmentType SegmentType { get; set; }
         public FuelType FuelType { get; set; }
         public TransmissionType TransmissionType { get; set; }
@@ -23,5 +24,6 @@ namespace CarRentalPortal.Core.Entities
         public long? MileageConstraint { get; set; }
         public byte NumberOfSeats { get; set; }
         public float AverageRating { get; set; }
+        public ICollection<CarImage> Images { get; set; }
     }
 }

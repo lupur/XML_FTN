@@ -8,6 +8,7 @@ namespace CarRentalPortal.Application.Common.Interfaces
     public interface IApplicationDbContext
     {
         DbSet<CarAd> CarAds { get; set; }
+        DbSet<CarImage> CarImages { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

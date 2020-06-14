@@ -3,14 +3,16 @@ using System;
 using CarRentalPortal.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200614114622_UpdateProductionYearDataType")]
+    partial class UpdateProductionYearDataType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,37 +71,6 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.HasKey("Id");
 
                     b.ToTable("CarAds");
-                });
-
-            modelBuilder.Entity("CarRentalPortal.Core.Entities.CarImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarAdId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Uri")
-                        .HasColumnType("varchar(767)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarAdId");
-
-                    b.HasIndex("Uri")
-                        .IsUnique();
-
-                    b.ToTable("CarImages");
-                });
-
-            modelBuilder.Entity("CarRentalPortal.Core.Entities.CarImage", b =>
-                {
-                    b.HasOne("CarRentalPortal.Core.Entities.CarAd", "CarAd")
-                        .WithMany("Images")
-                        .HasForeignKey("CarAdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

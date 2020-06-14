@@ -13,5 +13,12 @@ namespace CarRentalPortal.Infrastructure.Persistence.Extensions
 
             return builder;
         }
+
+        public static ModelBuilder ApplyApplicationConfigurations(this ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new CarImagesConfiguration());
+
+            return builder;
+        }
     }
 }
