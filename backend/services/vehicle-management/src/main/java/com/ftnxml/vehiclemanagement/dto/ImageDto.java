@@ -4,13 +4,13 @@ import java.util.Set;
 
 public class ImageDto {
 	private String uri;
-	private Set<VehicleDto> vehicles;
+	private Set<NewVehicleDto> vehicles;
 
-	public Set<VehicleDto> getVehicles() {
+	public Set<NewVehicleDto> getVehicles() {
 		return vehicles;
 	}
 
-	public void setVehicles(Set<VehicleDto> vehicles) {
+	public void setVehicles(Set<NewVehicleDto> vehicles) {
 		this.vehicles = vehicles;
 	}
 

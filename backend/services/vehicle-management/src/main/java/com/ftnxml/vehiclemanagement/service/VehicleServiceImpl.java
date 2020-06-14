@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ftnxml.vehiclemanagement.dto.VehicleDto;
+import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
 import com.ftnxml.vehiclemanagement.model.ClassType;
 import com.ftnxml.vehiclemanagement.model.CollisionDamageWaiver;
 import com.ftnxml.vehiclemanagement.model.Discount;
@@ -82,7 +82,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public boolean addVehicle(VehicleDto newVehicle) {
+    public boolean addVehicle(NewVehicleDto newVehicle) {
         if (newVehicle == null)
             return false;
 

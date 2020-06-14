@@ -1,5 +1,9 @@
 package com.ftnxml.vehiclemanagement.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +26,23 @@ public class BrandController {
     @Autowired
     BrandService brandService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getBrands() {
-        return ResponseEntity.ok(brandService.getAllBrands());
+        List<BrandDto> brands = brandService.getAllBrands().stream()
+                .map(brand -> modelMapper.map(brand, BrandDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok(brands);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getBrand(@PathVariable Long id) {
-        return ResponseEntity.ok(brandService.getBrand(id));
+        Brand b = brandService.getBrand(id);
+        if (b == null)
+            return ResponseEntity.notFound().build();
+        BrandDto brand = modelMapper.map(b, BrandDto.class);
+        return ResponseEntity.ok(brand);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,6 +66,4 @@ public class BrandController {
         else
             return ResponseEntity.badRequest().build();
     }
-
-    // TODO: Create update endpoint
 }

@@ -1,53 +1,84 @@
 package com.ftnxml.vehiclemanagement.service;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.stream.Stream;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-
-import com.ftnxml.vehiclemanagement.model.Image;
-import com.ftnxml.vehiclemanagement.repository.ImageRepository;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ImageServiceImpl implements ImageService {
 
-    @Autowired
-    ImageRepository imageRepository;
+    private final String rootLocation = "/images/";
 
     @Override
-    public List<Image> getAllImages() {
-        return imageRepository.findAll();
+    public boolean store(MultipartFile image, Long vehicleId) {
+        Path location = Paths.get(rootLocation + vehicleId);
+        if (!Files.isDirectory(location)) {
+            try {
+                Files.createDirectories(Paths.get(rootLocation + vehicleId));
+            } catch (IOException e) {
+                return false;
+            }
+        }
+
+        String filename = StringUtils.cleanPath(image.getOriginalFilename());
+        try {
+            if (image.isEmpty()) {
+                return false;
+            }
+            if (filename.contains("..")) {
+                // This is a security check
+                return false;
+            }
+            try (InputStream inputStream = image.getInputStream()) {
+                Files.copy(inputStream, location.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public Image getImage(Long id) {
+    public Resource loadResource(String imageName, Long vehicleId) {
+        Path location = Paths.get(rootLocation + vehicleId);
+        if (!Files.isDirectory(location)) {
+            return null;
+        }
+
+        Path file = location.resolve(imageName);
         try {
-            Image b = imageRepository.findById(id).get();
-            return b;
-        } catch (Exception e) {
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                return null;
+            }
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
             return null;
         }
     }
 
     @Override
-    public boolean removeImage(Long id) {
+    public Stream<Path> loadPaths(Long vehicleId) {
+        Path location = Paths.get(rootLocation + vehicleId);
         try {
-            Image b = imageRepository.findById(id).get();
-            imageRepository.delete(b);
-            return true;
-        } catch (Exception e) {
-            return false;
+            return Files.walk(location, 1).filter(path -> !path.equals(location)).map(location::relativize);
+        } catch (IOException e) {
+            return null;
         }
-    }
-
-    @Override
-    public boolean addImage(Image newImage) {
-        if (getImage(newImage.getId()) != null) {
-            return false;
-        }
-
-        imageRepository.save(newImage);
-        return true;
     }
 
 }
