@@ -10,6 +10,7 @@ namespace CarRentalPortal.Core.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+        public double RentalValue { get; set; }
         public ICollection<Car> Cars { get; set; }
     }
 }
