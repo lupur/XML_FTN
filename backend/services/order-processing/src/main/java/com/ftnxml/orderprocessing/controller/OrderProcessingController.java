@@ -1,9 +1,8 @@
 package com.ftnxml.orderprocessing.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.server.PathParam;
+import javax.ws.rs.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,16 +23,13 @@ import com.ftnxml.orderprocessing.service.OrderRequestService;
 @RequestMapping("/")
 public class OrderProcessingController {
 	
-	@Autowired 
-	OrderRequestMapper orderRequestMapper;
-	
 	@Autowired
 	OrderRequestService orderRequestService;
 	
 	// GET ALL
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequests() {
-    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
+    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
     			orderRequestService.getAllOrderRequests());
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
@@ -44,7 +40,7 @@ public class OrderProcessingController {
 	// GET BY REQUEST
     @GetMapping(value = "/{requestId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequestsByRequestId(@PathParam("requestId") Long requestId) {
-    	OrderRequestDto orderRequest = orderRequestMapper.toOrderRequestDTO(
+    	OrderRequestDto orderRequest = OrderRequestMapper.INSTANCE.toOrderRequestDTO(
     			orderRequestService.getOrderRequest(requestId));
     	if(orderRequest != null) {
     		return ResponseEntity.ok(orderRequest);
@@ -55,7 +51,7 @@ public class OrderProcessingController {
 	// GET BY VEHICLE
     @GetMapping(value = "/vehicles/{vehicleId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequestsByVehicleId(@PathParam("vehicleId") Long vehicleId) {
-    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
+    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
     			orderRequestService.getOrderRequestByVehicleId(vehicleId));
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
@@ -66,7 +62,7 @@ public class OrderProcessingController {
 	// GET BY USER
     @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequestsByUserId(Long vehicleId) {
-    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
+    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
     			orderRequestService.getOrderRequestByUserId(vehicleId));
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
@@ -77,7 +73,7 @@ public class OrderProcessingController {
 	// GET BY OWNER
     @GetMapping(value = "/owners/{ownerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequestsByOwnerId(@PathParam ("ownerId") Long vehicleId) {
-    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
+    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
     			orderRequestService.getOrderRequestByOwnerId(vehicleId));
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
@@ -93,7 +89,7 @@ public class OrderProcessingController {
             return ResponseEntity.badRequest().build();
         }
         try {
-               if (orderRequestService.addOrderRequest(OrderRequestMapper.INSTANCE.toOrderRequest(orderRequestDto)))
+               if (orderRequestService.addOrderRequest(OrderRequestMapper.INSTANCE.INSTANCE.toOrderRequest(orderRequestDto)))
                    return ResponseEntity.ok().build();
                else
                    return ResponseEntity.badRequest().build();
