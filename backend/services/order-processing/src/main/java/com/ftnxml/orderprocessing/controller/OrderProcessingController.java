@@ -13,23 +13,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftnxml.orderprocessing.dto.OrderRequestDto;
 import com.ftnxml.orderprocessing.dto.OrderRequestMapper;
 import com.ftnxml.orderprocessing.service.OrderRequestService;
 
-@RestController("/")
+@RestController
+@RequestMapping("/")
 public class OrderProcessingController {
 	
 	@Autowired 
-	OrderRequestService orderRequestService;
+	OrderRequestMapper orderRequestMapper;
 	
+	@Autowired
+	OrderRequestService orderRequestService;
 	
 	// GET ALL
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequests() {
-    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
+    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
     			orderRequestService.getAllOrderRequests());
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
@@ -40,7 +44,7 @@ public class OrderProcessingController {
 	// GET BY REQUEST
     @GetMapping(value = "/{requestId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequestsByRequestId(@PathParam("requestId") Long requestId) {
-    	OrderRequestDto orderRequest = OrderRequestMapper.INSTANCE.toOrderRequestDTO(
+    	OrderRequestDto orderRequest = orderRequestMapper.toOrderRequestDTO(
     			orderRequestService.getOrderRequest(requestId));
     	if(orderRequest != null) {
     		return ResponseEntity.ok(orderRequest);
@@ -51,7 +55,7 @@ public class OrderProcessingController {
 	// GET BY VEHICLE
     @GetMapping(value = "/vehicles/{vehicleId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getRequestsByVehicleId(@PathParam("vehicleId") Long vehicleId) {
-    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
+    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
     			orderRequestService.getOrderRequestByVehicleId(vehicleId));
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
@@ -61,9 +65,9 @@ public class OrderProcessingController {
 	
 	// GET BY USER
     @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRequestsByUserId(@PathParam("userId") Long userId) {
-    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
-    			orderRequestService.getOrderRequestByUserId(userId));
+    public ResponseEntity getRequestsByUserId(Long vehicleId) {
+    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
+    			orderRequestService.getOrderRequestByUserId(vehicleId));
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
     	}
@@ -72,16 +76,16 @@ public class OrderProcessingController {
 	
 	// GET BY OWNER
     @GetMapping(value = "/owners/{ownerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRequestsByOwnerId(@PathParam ("ownerId") Long ownerId) {
-    	List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE.toOrderRequestDTOs(
-    			orderRequestService.getOrderRequestByOwnerId(ownerId));
+    public ResponseEntity getRequestsByOwnerId(@PathParam ("ownerId") Long vehicleId) {
+    	List<OrderRequestDto> orderRequests = orderRequestMapper.toOrderRequestDTOs(
+    			orderRequestService.getOrderRequestByOwnerId(vehicleId));
     	if(orderRequests != null) {
     		return ResponseEntity.ok(orderRequests);
     	}
     	return ResponseEntity.badRequest().build();
     }
 	
-	// CRETE NEW REQUEST
+    // CRETE NEW REQUEST
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addOrderRequest(@RequestBody OrderRequestDto orderRequestDto) {
         if (orderRequestDto == null) {
@@ -89,15 +93,16 @@ public class OrderProcessingController {
             return ResponseEntity.badRequest().build();
         }
         try {
-	        if (orderRequestService.addOrderRequest(OrderRequestMapper.INSTANCE.toOrderRequest(orderRequestDto)))
-	            return ResponseEntity.ok().build();
-	        else
-	            return ResponseEntity.badRequest().build();
+               if (orderRequestService.addOrderRequest(OrderRequestMapper.INSTANCE.toOrderRequest(orderRequestDto)))
+                   return ResponseEntity.ok().build();
+               else
+                   return ResponseEntity.badRequest().build();
         } catch(Exception e) {
-        	e.printStackTrace();
-        	return ResponseEntity.badRequest().build();
+               e.printStackTrace();
+               return ResponseEntity.badRequest().build();
         }
     }
+
 	
 	// DELETE REQUEST
     @DeleteMapping(value = "/{requestId}", produces = MediaType.APPLICATION_JSON_VALUE)

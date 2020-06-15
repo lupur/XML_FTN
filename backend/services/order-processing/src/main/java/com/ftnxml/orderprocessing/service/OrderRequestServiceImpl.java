@@ -54,11 +54,12 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 
 	@Override
 	public List<OrderRequest> getOrderRequestByVehicleId(Long vehicleId) {
-		try {
-			return orderRequestRepository.findByVehicleId(vehicleId);
-		} catch(Exception e) { 
-			return null;
-		}
+//		try {
+//			return orderRequestRepository.findByVehicleId(vehicleId);
+//		} catch(Exception e) { 
+//			return null;
+//		}
+		return null;
 	}
 
 	@Override
