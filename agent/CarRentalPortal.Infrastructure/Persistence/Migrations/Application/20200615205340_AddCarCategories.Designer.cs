@@ -3,14 +3,16 @@ using System;
 using CarRentalPortal.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200615205340_AddCarCategories")]
+    partial class AddCarCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,15 +82,12 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("text");
 
                     b.Property<double>("RentalValue")
                         .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("CarCategories");
                 });
@@ -134,7 +133,6 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RequestedOn")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime");
 
                     b.Property<DateTime>("StartDate")
