@@ -14,6 +14,10 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
             builder
                 .Property(r => r.Id)
                 .ValueGeneratedOnAdd();
+
+            builder
+                .Property(r => r.RequestedOn)
+                .ValueGeneratedOnAdd();
                 
             builder
                 .HasOne(r => r.RentalBundle)
