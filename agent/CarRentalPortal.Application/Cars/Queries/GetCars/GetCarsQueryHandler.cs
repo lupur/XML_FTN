@@ -6,26 +6,26 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalPortal.Application.CarAds.Queries.GetCarAds
+namespace CarRentalPortal.Application.Cars.Queries.GetCars
 {
-    public class GetCarAdsQueryHandler : IRequestHandler<GetCarAdsQuery, CarAdVm>
+    public class GetCarsQueryHandler : IRequestHandler<GetCarsQuery, CarVm>
     {
         private readonly IApplicationDbContext _appContext;
         private readonly IMapper _mapper;
 
-        public GetCarAdsQueryHandler(IApplicationDbContext appContext, IMapper mapper)
+        public GetCarsQueryHandler(IApplicationDbContext appContext, IMapper mapper)
         {
             _appContext = appContext;
             _mapper = mapper;
         }
 
-        public async Task<CarAdVm> Handle(GetCarAdsQuery request, CancellationToken cancellationToken)
+        public async Task<CarVm> Handle(GetCarsQuery request, CancellationToken cancellationToken)
         {
-            return new CarAdVm
+            return new CarVm
             {
-                CarAds = await _appContext.CarAds
+                CarAds = await _appContext.Cars
                     .Include(ca => ca.Images)
-                    .ProjectTo<CarAdDto>(_mapper.ConfigurationProvider)
+                    .ProjectTo<CarDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken)
             };
         }

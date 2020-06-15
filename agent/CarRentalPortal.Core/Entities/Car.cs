@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarRentalPortal.Core.Entities
 {
-    public class CarAd
+    public class Car
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,7 +19,6 @@ namespace CarRentalPortal.Core.Entities
         public string Brand { get; set; }
         public string CarModel { get; set; }
         public short ProductionYear { get; set; }
-        public SegmentType SegmentType { get; set; }
         public FuelType FuelType { get; set; }
         public TransmissionType TransmissionType { get; set; }
         public string Color { get; set; }

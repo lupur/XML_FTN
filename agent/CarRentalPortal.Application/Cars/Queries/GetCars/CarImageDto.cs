@@ -1,7 +1,7 @@
 ﻿using CarRentalPortal.Application.Common.Mappings;
 using CarRentalPortal.Core.Entities;
 
-namespace CarRentalPortal.Application.CarAds.Queries.GetCarAds
+namespace CarRentalPortal.Application.Cars.Queries.GetCars
 {
     public class CarImageDto : IMapFrom<CarImage>
     {

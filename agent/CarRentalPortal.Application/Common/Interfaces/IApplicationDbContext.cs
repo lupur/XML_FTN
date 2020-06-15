@@ -7,7 +7,7 @@ namespace CarRentalPortal.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
-        DbSet<CarAd> CarAds { get; set; }
+        DbSet<Car> Cars { get; set; }
         DbSet<CarImage> CarImages { get; set; }
         DbSet<Pricelist> Pricelists { get; set; }
 

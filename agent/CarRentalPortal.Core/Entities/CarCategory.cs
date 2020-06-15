@@ -10,6 +10,6 @@ namespace CarRentalPortal.Core.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<CarAd> Cars { get; set; }
+        public ICollection<Car> Cars { get; set; }
     }
 }

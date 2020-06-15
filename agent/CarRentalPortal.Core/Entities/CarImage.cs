@@ -10,6 +10,6 @@ namespace CarRentalPortal.Core.Entities
         public int Id { get; set; }
         public string Uri { get; set; }
         public int CarAdId { get; set; }
-        public CarAd CarAd { get; set; }
+        public Car CarAd { get; set; }
     }
 }

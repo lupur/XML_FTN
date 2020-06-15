@@ -11,6 +11,6 @@ namespace CarRentalPortal.Core.Entities
         public int Id { get; set; }
         public double BasePrice { get; set; }
         public double MileagePenaltyPrice { get; set; }
-        public ICollection<CarAd> CarAds { get; set; }
+        public ICollection<Car> CarAds { get; set; }
     }
 }

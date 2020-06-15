@@ -1,7 +1,7 @@
 ﻿using CarRentalPortal.API.Constants;
-using CarRentalPortal.Application.CarAds.Commands.CreateCarAd;
-using CarRentalPortal.Application.CarAds.Queries.GetCarAds;
 using CarRentalPortal.Application.CarImages.Commands.UploadCarImage;
+using CarRentalPortal.Application.Cars.Commands.CreateCar;
+using CarRentalPortal.Application.Cars.Queries.GetCars;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +13,16 @@ using System.Threading.Tasks;
 namespace CarRentalPortal.API.Controllers
 {
     [Authorize(Roles = Roles.Administrator + "," + Roles.Agent)]
-    public class CarAdsController : ApiController
+    public class CarsController : ApiController
     {
         [HttpGet]
-        public async Task<CarAdVm> Get()
+        public async Task<CarVm> Get()
         {
-            return await Mediator.Send(new GetCarAdsQuery());
+            return await Mediator.Send(new GetCarsQuery());
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create(CreateCarAdCommand command)
+        public async Task<ActionResult<int>> Create(CreateCarCommand command)
         {
             return await Mediator.Send(command);
         }

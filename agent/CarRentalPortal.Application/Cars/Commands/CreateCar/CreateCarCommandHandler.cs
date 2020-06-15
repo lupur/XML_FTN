@@ -4,20 +4,20 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalPortal.Application.CarAds.Commands.CreateCarAd
+namespace CarRentalPortal.Application.Cars.Commands.CreateCar
 {
-    public class CreateCarAdCommandHandler : IRequestHandler<CreateCarAdCommand, int>
+    public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, int>
     {
         private readonly IApplicationDbContext _appContext;
 
-        public CreateCarAdCommandHandler(IApplicationDbContext appContext)
+        public CreateCarCommandHandler(IApplicationDbContext appContext)
         {
             _appContext = appContext;
         }
 
-        public async Task<int> Handle(CreateCarAdCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateCarCommand request, CancellationToken cancellationToken)
         {
-            var entity = new CarAd
+            var entity = new Car
             {
                 AgentId = request.AgentId,
                 AgentContactInfo = request.AgentContactInfo,
@@ -33,7 +33,7 @@ namespace CarRentalPortal.Application.CarAds.Commands.CreateCarAd
                 NumberOfSeats = request.NumberOfSeats
             };
 
-            _appContext.CarAds.Add(entity);
+            _appContext.Cars.Add(entity);
             await _appContext.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
