@@ -12,6 +12,8 @@ namespace CarRentalPortal.Core.Entities
         public int Id { get; set; }
         public int PricelistId { get; set; }
         public Pricelist Pricelist { get; set; }
+        public int CarCategoryId { get; set; }
+        public CarCategory CarCategory { get; set; }
         public int AgentId { get; set; }
         public string AgentContactInfo { get; set; }
         public string Brand { get; set; }
