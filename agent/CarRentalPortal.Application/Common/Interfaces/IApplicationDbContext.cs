@@ -9,7 +9,8 @@ namespace CarRentalPortal.Application.Common.Interfaces
     {
         DbSet<Car> Cars { get; set; }
         DbSet<CarImage> CarImages { get; set; }
-        DbSet<Pricelist> Pricelists { get; set; }
+        DbSet<Rental> Rentals { get; set; }
+        DbSet<RentalBundle> RentalBundles { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

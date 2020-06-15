@@ -1,17 +1,11 @@
 ﻿using CarRentalPortal.Core.Enums;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarRentalPortal.Core.Entities
 {
     public class Car
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int PricelistId { get; set; }
-        public Pricelist Pricelist { get; set; }
         public int CarCategoryId { get; set; }
         public CarCategory CarCategory { get; set; }
         public int AgentId { get; set; }

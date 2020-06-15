@@ -9,6 +9,13 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder
+                .HasKey(u => u.Id);
+
+            builder
+                .Property(u => u.Id)
+                .ValueGeneratedOnAdd();
+
+            builder
                 .HasIndex(u => u.Email)
                 .IsUnique(true);
         }

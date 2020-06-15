@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Identity
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20200614101135_InitialIdentitySchema")]
+    [Migration("20200615203028_InitialIdentitySchema")]
     partial class InitialIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

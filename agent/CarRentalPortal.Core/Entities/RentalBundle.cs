@@ -2,10 +2,9 @@
 
 namespace CarRentalPortal.Core.Entities
 {
-    public class Role
+    public class RentalBundle
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<UserRole> Users { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
     }
 }

@@ -4,20 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Configurations
 {
-    public class RolesConfiguration : IEntityTypeConfiguration<Role>
+    public class RentalBundlesConfiguration : IEntityTypeConfiguration<RentalBundle>
     {
-        public void Configure(EntityTypeBuilder<Role> builder)
+        public void Configure(EntityTypeBuilder<RentalBundle> builder)
         {
             builder
-                .HasKey(r => r.Id);
+                .HasKey(rb => rb.Id);
 
             builder
-                .Property(r => r.Id)
+                .Property(rb => rb.Id)
                 .ValueGeneratedOnAdd();
-
-            builder
-                .HasIndex(r => r.Name)
-                .IsUnique(true);
         }
     }
 }

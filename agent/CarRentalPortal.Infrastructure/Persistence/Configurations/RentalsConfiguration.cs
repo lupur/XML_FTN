@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Configurations
 {
-    public class RolesConfiguration : IEntityTypeConfiguration<Role>
+    public class RentalsConfiguration : IEntityTypeConfiguration<Rental>
     {
-        public void Configure(EntityTypeBuilder<Role> builder)
+        public void Configure(EntityTypeBuilder<Rental> builder)
         {
             builder
                 .HasKey(r => r.Id);
@@ -14,10 +14,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
             builder
                 .Property(r => r.Id)
                 .ValueGeneratedOnAdd();
-
+                
             builder
-                .HasIndex(r => r.Name)
-                .IsUnique(true);
+                .HasOne(r => r.RentalBundle)
+                .WithMany(rb => rb.Rentals)
+                .HasForeignKey(r => r.RentalBundleId);
         }
     }
 }

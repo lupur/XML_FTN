@@ -60,9 +60,6 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.Property<byte>("NumberOfSeats")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("PricelistId")
-                        .HasColumnType("int");
-
                     b.Property<short>("ProductionYear")
                         .HasColumnType("smallint");
 
@@ -72,8 +69,6 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.HasKey("Id");
 
                     b.HasIndex("CarCategoryId");
-
-                    b.HasIndex("PricelistId");
 
                     b.ToTable("Cars");
                 });
@@ -117,21 +112,51 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.ToTable("CarImages");
                 });
 
-            modelBuilder.Entity("CarRentalPortal.Core.Entities.Pricelist", b =>
+            modelBuilder.Entity("CarRentalPortal.Core.Entities.Rental", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("BasePrice")
-                        .HasColumnType("double");
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
-                    b.Property<double>("MileagePenaltyPrice")
-                        .HasColumnType("double");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RentalBundleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestedOn")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pricelists");
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("RentalBundleId");
+
+                    b.ToTable("Rentals");
+                });
+
+            modelBuilder.Entity("CarRentalPortal.Core.Entities.RentalBundle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RentalBundles");
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.Car", b =>
@@ -141,12 +166,6 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .HasForeignKey("CarCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CarRentalPortal.Core.Entities.Pricelist", "Pricelist")
-                        .WithMany("CarAds")
-                        .HasForeignKey("PricelistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.CarImage", b =>
@@ -154,6 +173,21 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.HasOne("CarRentalPortal.Core.Entities.Car", "CarAd")
                         .WithMany("Images")
                         .HasForeignKey("CarAdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CarRentalPortal.Core.Entities.Rental", b =>
+                {
+                    b.HasOne("CarRentalPortal.Core.Entities.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarRentalPortal.Core.Entities.RentalBundle", "RentalBundle")
+                        .WithMany("Rentals")
+                        .HasForeignKey("RentalBundleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

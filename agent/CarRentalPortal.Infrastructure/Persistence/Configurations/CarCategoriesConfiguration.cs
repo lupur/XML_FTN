@@ -9,6 +9,13 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<CarCategory> builder)
         {
             builder
+                .HasKey(cc => cc.Id);
+
+            builder
+                .Property(cc => cc.Id)
+                .ValueGeneratedOnAdd();
+
+            builder
                 .HasMany(cc => cc.Cars)
                 .WithOne(c => c.CarCategory)
                 .HasForeignKey(cc => cc.CarCategoryId);
