@@ -24,7 +24,6 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
                 Brand = request.Brand,
                 CarModel = request.CarModel,
                 ProductionYear = request.ProductionYear,
-                SegmentType = request.SegmentType,
                 FuelType = request.FuelType,
                 TransmissionType = request.TransmissionType,
                 Color = request.Color,

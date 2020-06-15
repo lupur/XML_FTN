@@ -10,7 +10,6 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
         public string Brand { get; set; }
         public string CarModel { get; set; }
         public byte ProductionYear { get; set; }
-        public SegmentType SegmentType { get; set; }
         public FuelType FuelType { get; set; }
         public TransmissionType TransmissionType { get; set; }
         public string Color { get; set; }
