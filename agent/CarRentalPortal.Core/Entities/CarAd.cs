@@ -10,6 +10,8 @@ namespace CarRentalPortal.Core.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public int PricelistId { get; set; }
+        public Pricelist Pricelist { get; set; }
         public int AgentId { get; set; }
         public string AgentContactInfo { get; set; }
         public string Brand { get; set; }

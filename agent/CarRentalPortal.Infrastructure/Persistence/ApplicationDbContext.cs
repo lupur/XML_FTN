@@ -16,6 +16,7 @@ namespace CarRentalPortal.Infrastructure.Persistence
 
         public DbSet<CarAd> CarAds { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<Pricelist> Pricelists { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
