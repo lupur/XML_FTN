@@ -37,6 +37,13 @@ public class ReviewController {
 		return ResponseEntity.ok(reviews);
 	}
 	
+	@GetMapping(value = "/authors/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity getReviewsByAuthorId(@PathVariable Long id){
+		List<ReviewDto> reviews = reviewService.getReviewsByAuthor(id).stream()
+				.map(review -> modelMapper.map(review, ReviewDto.class)).collect(Collectors.toList());
+		return ResponseEntity.ok(reviews);
+	}
+	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getReview(@PathVariable Long id) {
         Review review = reviewService.getReview(id);

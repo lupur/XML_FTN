@@ -35,6 +35,20 @@ public class MessageController {
 		return ResponseEntity.ok(messages);
 	}
 	
+	@GetMapping(value = "/authors/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMessageByAuthorId(@PathVariable Long id) {
+		List<MessageDto> messages = messageService.getMessagesByAuthor(id).stream()
+				.map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok(messages);
+    }
+	
+	@GetMapping(value = "/orders/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMessageByOrderId(@PathVariable Long id) {
+		List<MessageDto> messages = messageService.getMessagesByOrderId(id).stream()
+				.map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok(messages);
+    }
+	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMessage(@PathVariable Long id) {
         Message message = messageService.getMessage(id);
