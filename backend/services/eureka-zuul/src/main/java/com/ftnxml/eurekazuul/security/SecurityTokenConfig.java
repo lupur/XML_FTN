@@ -2,6 +2,7 @@ package com.ftnxml.eurekazuul.security;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,10 +23,11 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 // authorization requests config
                 .authorizeRequests()
                 // allow all who are accessing "user" service
-                .antMatchers("/user/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/**").permitAll().antMatchers("/soap/**").permitAll()
                 // Any other request must be authenticated
-                .antMatchers("/**").permitAll();
-//                .anyRequest().authenticated();
+//                .antMatchers("/**").permitAll();
+                .antMatchers(HttpMethod.PUT, "/user/**").hasRole("ADMIN").antMatchers(HttpMethod.DELETE, "/user/**")
+                .hasRole("ADMIN").anyRequest().authenticated();
 
     }
 }

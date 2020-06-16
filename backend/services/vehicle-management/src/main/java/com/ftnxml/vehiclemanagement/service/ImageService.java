@@ -1,15 +1,17 @@
 package com.ftnxml.vehiclemanagement.service;
 
-import java.util.List;
+import java.nio.file.Path;
+import java.util.stream.Stream;
 
-import com.ftnxml.vehiclemanagement.model.Image;
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
-    List<Image> getAllImages();
 
-    Image getImage(Long id);
+    boolean store(MultipartFile image, Long vehicleId);
 
-    boolean removeImage(Long id);
+    Resource loadResource(String imageName, Long vehicleId);
 
-    boolean addImage(Image image);
+    Stream<Path> loadPaths(Long vehicleId);
+
 }

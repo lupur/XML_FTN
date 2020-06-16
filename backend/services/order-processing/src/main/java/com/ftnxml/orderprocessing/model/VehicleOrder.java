@@ -24,7 +24,7 @@ public class VehicleOrder {
 	@JoinColumn(name= "request_id")
 	private OrderRequest orderRequest;
 	@Column(name ="total_price")
-	private float totalPrice;
+	private Double totalPrice;
 	@Column(name ="pickup_date")
 	private Date pickupDate;
 	@Column(name ="return_date")
@@ -34,7 +34,7 @@ public class VehicleOrder {
 		super();
 	}
 
-	public VehicleOrder(Long id, Long vehicleId, OrderRequest orderRequest, float totalPrice, Date pickupDate,
+	public VehicleOrder(Long id, Long vehicleId, OrderRequest orderRequest, Double totalPrice, Date pickupDate,
 	        Date returnDate) {
 		super();
 		this.id = id;
@@ -69,11 +69,11 @@ public class VehicleOrder {
 		this.orderRequest = orderRequest;
 	}
 
-	public float getTotalPrice() {
+	public Double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(float totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 

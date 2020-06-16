@@ -2,7 +2,7 @@ package com.ftnxml.vehiclemanagement.service;
 
 import java.util.List;
 
-import com.ftnxml.vehiclemanagement.dto.VehicleDto;
+import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
 import com.ftnxml.vehiclemanagement.model.Vehicle;
 
 public interface VehicleService {
@@ -15,7 +15,7 @@ public interface VehicleService {
 
     boolean removeVehicle(Long id);
 
-    boolean addVehicle(VehicleDto newVehicle);
+    boolean addVehicle(NewVehicleDto newVehicle);
 
     List<Vehicle> getVehiclesOfModel(Long modelId);
 }

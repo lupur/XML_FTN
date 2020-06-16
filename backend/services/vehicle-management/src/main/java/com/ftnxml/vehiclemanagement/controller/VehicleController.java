@@ -1,9 +1,10 @@
 package com.ftnxml.vehiclemanagement.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
 import com.ftnxml.vehiclemanagement.dto.VehicleDto;
 import com.ftnxml.vehiclemanagement.model.Vehicle;
 import com.ftnxml.vehiclemanagement.service.VehicleService;
@@ -28,16 +30,24 @@ public class VehicleController {
     @Autowired
     VehicleService vehicleService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getVehicles() {
-        List<Vehicle> vehicles = vehicleService.getAllVehicles();
+        List<VehicleDto> vehicles = vehicleService.getAllVehicles().stream()
+                .map(vehicle -> modelMapper.map(vehicle, VehicleDto.class)).collect(Collectors.toList());
 
-        return ResponseEntity.ok(convertToDtoList(vehicles));
+        return ResponseEntity.ok(vehicles);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getVehicle(@PathVariable Long id) {
-        return ResponseEntity.ok(convertToDto(vehicleService.getVehicle(id)));
+        Vehicle v = vehicleService.getVehicle(id);
+        if (v == null)
+            return ResponseEntity.notFound().build();
+        VehicleDto vdto = modelMapper.map(v, VehicleDto.class);
+        return ResponseEntity.ok(vdto);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,7 +59,7 @@ public class VehicleController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addVehicle(@RequestBody VehicleDto newVehicle) {
+    public ResponseEntity addVehicle(@RequestBody NewVehicleDto newVehicle) {
         System.out.println("Vehicle: " + newVehicle.toString());
 
         if (newVehicle == null) {
@@ -169,42 +179,9 @@ public class VehicleController {
             }
         }
 
-        return ResponseEntity.ok(convertToDtoList(filteredVehicles));
-    }
+        List<VehicleDto> vehicles = filteredVehicles.stream().map(vehicle -> modelMapper.map(vehicle, VehicleDto.class))
+                .collect(Collectors.toList());
 
-    public VehicleDto convertToDto(Vehicle vehicle) {
-        VehicleDto vDto = new VehicleDto();
-        if (vehicle.getModel() != null)
-        	vDto.setModelId(vehicle.getModel().getId());
-        if (vehicle.getPriceList() != null)
-        	vDto.setPricelistId(vehicle.getPriceList().getId());
-        if (vehicle.getClassType() != null)
-            vDto.setClassTypeId(vehicle.getClassType().getId());
-        if (vehicle.getColDamageWaiver() != null)
-            vDto.setColDamageWaiverId(vehicle.getColDamageWaiver().getId());
-        if (vehicle.getDiscount() != null)
-            vDto.setDiscountId(vehicle.getDiscount().getId());
-        if (vehicle.getFuelType() != null)
-            vDto.setFuelTypeId(vehicle.getFuelType().getId());
-        vDto.setInsurance(vehicle.isInsurance());
-        if (vehicle.getLocation() != null)
-            vDto.setLocation(vehicle.getLocation());
-        vDto.setMileage(vehicle.getMileage());
-        vDto.setMileageConstraint(vehicle.getMileageConstraint());
-        vDto.setRating(vehicle.getRating());
-        if (vehicle.getTransmissionType() != null)
-            vDto.setTransmissionTypeId(vehicle.getTransmissionType().getId());
-        vDto.setUserId(vehicle.getUserId());
-        return vDto;
+        return ResponseEntity.ok(vehicles);
     }
-
-    public List<VehicleDto> convertToDtoList(List<Vehicle> vehicleList) {
-        List<VehicleDto> vehiclesDto = new ArrayList<>();
-        for (Vehicle v : vehicleList) {
-            vehiclesDto.add(convertToDto(v));
-        }
-        return vehiclesDto;
-    }
-    // TODO: Create update endpoint
-
 }

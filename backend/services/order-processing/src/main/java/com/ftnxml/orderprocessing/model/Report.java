@@ -18,15 +18,15 @@ public class Report {
 	private Long id;
 	@OneToOne
 	@JoinColumn(name ="order_id")
-	private OrderRequest vehicleOrder;
+	private VehicleOrder vehicleOrder;
 	@Column(name= "distance_traveled")
-	private int distanceTraveled;
+	private Double distanceTraveled;
 
 	public Report() {
 		super();
 	}
 
-	public Report(Long id, OrderRequest vehicleOrder, int distanceTraveled) {
+	public Report(Long id, VehicleOrder vehicleOrder, Double distanceTraveled) {
 		super();
 		this.id = id;
 		this.vehicleOrder = vehicleOrder;
@@ -41,19 +41,19 @@ public class Report {
 		this.id = id;
 	}
 
-	public OrderRequest getVehicleOrder() {
+	public VehicleOrder getVehicleOrder() {
 		return vehicleOrder;
 	}
 
-	public void setVehicleOrder(OrderRequest vehicleOrder) {
+	public void setVehicleOrder(VehicleOrder vehicleOrder) {
 		this.vehicleOrder = vehicleOrder;
 	}
 
-	public int getDistanceTraveled() {
+	public Double getDistanceTraveled() {
 		return distanceTraveled;
 	}
 
-	public void setDistanceTraveled(int distanceTraveled) {
+	public void setDistanceTraveled(Double distanceTraveled) {
 		this.distanceTraveled = distanceTraveled;
 	}
 

@@ -1,5 +1,9 @@
 package com.ftnxml.vehiclemanagement.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +26,23 @@ public class FuelTypeController {
     @Autowired
     FuelTypeService fuelTypeService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getFuelTypes() {
-        return ResponseEntity.ok(fuelTypeService.getAllFuelTypes());
+        List<FuelTypeDto> fuels = fuelTypeService.getAllFuelTypes().stream()
+                .map(fuel -> modelMapper.map(fuel, FuelTypeDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok(fuels);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getFuelType(@PathVariable Long id) {
-        return ResponseEntity.ok(fuelTypeService.getFuelType(id));
+        FuelType fuel = fuelTypeService.getFuelType(id);
+        if (fuel == null)
+            ResponseEntity.notFound().build();
+        FuelTypeDto ftd = modelMapper.map(fuel, FuelTypeDto.class);
+        return ResponseEntity.ok(ftd);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
