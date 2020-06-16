@@ -1,8 +1,14 @@
+using CarRentalPortal.API.Common.Extensions;
+using CarRentalPortal.Application;
+using CarRentalPortal.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace CarRentalPortal.API
 {
@@ -18,6 +24,12 @@ namespace CarRentalPortal.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
+            services.AddInfrastructure(Configuration);
+
+            services.ConfigureJwtAuthentication();
+            services.ConfigureFormOptions();
+
             services.AddControllers();
         }
 
@@ -31,8 +43,16 @@ namespace CarRentalPortal.API
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

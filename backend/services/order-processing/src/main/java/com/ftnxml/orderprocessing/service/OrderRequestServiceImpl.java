@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftnxml.orderprocessing.model.OrderRequest;
+import com.ftnxml.orderprocessing.model.VehicleOrder;
 import com.ftnxml.orderprocessing.repository.OrderRequestRepository;
 
 @Service
@@ -47,19 +48,20 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 		if(getOrderRequest(newOrderRequest.getId()) != null) {
 			return false;
 		}
-		
+		for(VehicleOrder vo : newOrderRequest.getVehicleOrders()) {
+			vo.setOrderRequest(newOrderRequest);
+		}
 		orderRequestRepository.save(newOrderRequest);
 		return true;
 	}
 
 	@Override
 	public List<OrderRequest> getOrderRequestByVehicleId(Long vehicleId) {
-//		try {
-//			return orderRequestRepository.findByVehicleId(vehicleId);
-//		} catch(Exception e) { 
-//			return null;
-//		}
-		return null;
+		try {
+			return orderRequestRepository.findByVehicleId(vehicleId);
+		} catch(Exception e) { 
+			return null;
+		}
 	}
 
 	@Override
