@@ -3,6 +3,7 @@ package com.ftnxml.orderprocessing.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,22 +29,22 @@ public class OrderRequest {
 	private Long ownerId;
 	@Column(name= "created_on")
 	private Date createdOn;
-	@OneToMany(mappedBy="orderRequest")
-	private Set<VehicleOrder> orderRequest;
+	@OneToMany(mappedBy="orderRequest", cascade = CascadeType.ALL)
+	private Set<VehicleOrder> vehicleOrders;
 
 	public OrderRequest() {
 		super();
 	}
 
 	public OrderRequest(Long id, OrderRequestStatus status, Long userId, Long ownerId, Date createdOn,
-			Set<VehicleOrder> orderRequest) {
+			Set<VehicleOrder> vehicleOrders) {
 		super();
 		this.id = id;
 		this.status = status;
 		this.userId = userId;
 		this.ownerId = ownerId;
 		this.createdOn = createdOn;
-		this.orderRequest = orderRequest;
+		this.vehicleOrders = vehicleOrders;
 	}
 
 
@@ -88,12 +89,12 @@ public class OrderRequest {
 		this.createdOn = createdOn;
 	}
 
-	public Set<VehicleOrder> getOrderRequest() {
-		return orderRequest;
+	public Set<VehicleOrder> getVehicleOrders() {
+		return vehicleOrders;
 	}
 
-	public void setOrderRequest(Set<VehicleOrder> orderRequest) {
-		this.orderRequest = orderRequest;
+	public void setVehicleOrders(Set<VehicleOrder> vehicleOrders) {
+		this.vehicleOrders = vehicleOrders;
 	}
 	
 }
