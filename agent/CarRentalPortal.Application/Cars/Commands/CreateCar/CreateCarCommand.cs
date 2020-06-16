@@ -7,9 +7,10 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
     {
         public int AgentId { get; set; }
         public string AgentContactInfo { get; set; }
+        public int CarCategoryId { get; set; }
         public string Brand { get; set; }
         public string CarModel { get; set; }
-        public byte ProductionYear { get; set; }
+        public short ProductionYear { get; set; }
         public FuelType FuelType { get; set; }
         public TransmissionType TransmissionType { get; set; }
         public string Color { get; set; }

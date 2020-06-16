@@ -23,7 +23,7 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
         {
             return new CarVm
             {
-                CarAds = await _appContext.Cars
+                Cars = await _appContext.Cars
                     .Include(ca => ca.Images)
                     .ProjectTo<CarDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken)

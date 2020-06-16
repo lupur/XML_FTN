@@ -4,6 +4,6 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
 {
     public class CarVm
     {
-        public IList<CarDto> CarAds { get; set; }
+        public IList<CarDto> Cars { get; set; }
     }
 }
