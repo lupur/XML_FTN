@@ -30,6 +30,8 @@ namespace CarRentalPortal.API
             services.ConfigureJwtAuthentication();
             services.ConfigureFormOptions();
 
+            services.AddConfigSections(Configuration);
+
             services.AddControllers();
         }
 

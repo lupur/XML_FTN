@@ -1,10 +1,14 @@
-﻿using CarRentalPortal.API.Constants;
+﻿using CarRentalPortal.API.Configurations;
+using CarRentalPortal.API.Constants;
+using CarRentalPortal.Application.CarImages.Commands.DeleteCarImages;
 using CarRentalPortal.Application.CarImages.Commands.UploadCarImage;
 using CarRentalPortal.Application.Cars.Commands.CreateCar;
+using CarRentalPortal.Application.Cars.Commands.DeleteCar;
 using CarRentalPortal.Application.Cars.Queries.GetCars;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.IO;
 using System.Net.Http.Headers;
@@ -15,6 +19,13 @@ namespace CarRentalPortal.API.Controllers
     [Authorize(Roles = Roles.Administrator + "," + Roles.Agent)]
     public class CarsController : ApiController
     {
+        private IOptions<ResourcesConfigSection> _configuration;
+
+        public CarsController(IOptions<ResourcesConfigSection> configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpGet]
         public async Task<CarVm> Get()
         {
@@ -27,12 +38,23 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpPost("{carAdId}/images"), DisableRequestSizeLimit]
-        public async Task<ActionResult<string>> Upload([FromRoute] int carAdId)
+        [HttpDelete("{carId}")]
+        public async Task<ActionResult> Delete(int carId)
+        {
+            await Mediator.Send(new DeleteCarCommand { CarId = carId });
+
+            var imagesPath = Path.Combine(_configuration.Value?.CarImagesPath, $"{carId}");
+            await Mediator.Send(new DeleteCarImagesCommand { Path = imagesPath });
+
+            return NoContent();
+        }
+
+        [HttpPost("{carId}/images"), DisableRequestSizeLimit]
+        public async Task<ActionResult<string>> Upload([FromRoute] int carId)
         {
             try
             {
-                var resourcePath = Path.Combine("Resources", "Images", "Cars", $"{carAdId}");
+                var resourcePath = Path.Combine(_configuration.Value?.CarImagesPath, $"{carId}");
                 var imagePath = CopyImage(Request.Form.Files[0], resourcePath);
                 if (imagePath == null)
                 {
@@ -41,7 +63,7 @@ namespace CarRentalPortal.API.Controllers
 
                 var command = new UploadCarImageCommand
                 {
-                    CarAdId = carAdId,
+                    CarId = carId,
                     ImagePath = imagePath
                 };
                 return await Mediator.Send(command);

@@ -19,7 +19,7 @@ namespace CarRentalPortal.Application.CarImages.Commands.UploadCarImage
         {
             var entity = new CarImage
             {
-                CarAdId = request.CarAdId,
+                CarAdId = request.CarId,
                 Uri = request.ImagePath
             };
 

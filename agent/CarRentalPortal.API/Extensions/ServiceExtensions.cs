@@ -1,6 +1,8 @@
-﻿using CarRentalPortal.Application.Common.Constants;
+﻿using CarRentalPortal.API.Configurations;
+using CarRentalPortal.Application.Common.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -44,6 +46,12 @@ namespace CarRentalPortal.API.Common.Extensions
                 opt.MultipartBodyLengthLimit = int.MaxValue;
                 opt.MemoryBufferThreshold = int.MaxValue;
             });
+        }
+
+        public static void AddConfigSections(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<ResourcesConfigSection>
+                (configuration.GetSection("ResourceSettings"));
         }
     }
 }
