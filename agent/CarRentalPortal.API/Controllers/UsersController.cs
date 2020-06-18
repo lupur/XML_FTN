@@ -13,8 +13,10 @@ namespace CarRentalPortal.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand command)
         {
-            var token = await Mediator.Send(command);
-            return Ok(new { Token = token });
+            return Ok(new
+            {
+                Token = await Mediator.Send(command)
+            });
         }
 
         [HttpPost("register")]
