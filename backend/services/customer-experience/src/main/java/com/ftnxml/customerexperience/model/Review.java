@@ -2,6 +2,7 @@ package com.ftnxml.customerexperience.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,13 +16,21 @@ import com.ftnxml.customerexperience.enums.ReviewStatus;
 public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "review_id")
 	private Long id;
+	@Column(name = "author_id")
 	private Long authorId;
+	@Column(name = "author_name")
 	private String authorName;
+	@Column(name = "vehicle_order_id")
 	private Long vehicleOrderId;
+	@Column(name = "comment")
 	private String comment;
+	@Column(name = "rating")
 	private int rating;
+	@Column(name = "creation_date")
 	private Date creationDate;
+	@Column(name = "status")
 	private ReviewStatus status;
 
 	public Review() {

@@ -2,6 +2,7 @@ package com.ftnxml.customerexperience.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,11 +14,17 @@ import javax.persistence.Table;
 public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "message_id")
 	private Long id;
+	@Column(name = "author_id")
 	private Long authorId;
+	@Column(name = "author_name")
 	private String authorName;
+	@Column(name = "order_request_id")
 	private Long orderRequestId;
+	@Column(name = "content")
 	private String content;
+	@Column(name = "creation_date")
 	private Date creationDate;
 
 	public Message() {

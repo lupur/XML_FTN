@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftnxml.orderprocessing.enums.OrderRequestStatus;
 import com.ftnxml.orderprocessing.model.OrderRequest;
 import com.ftnxml.orderprocessing.model.VehicleOrder;
 import com.ftnxml.orderprocessing.repository.OrderRequestRepository;
 
 @Service
 public class OrderRequestServiceImpl implements OrderRequestService {
-	
+
 	@Autowired
 	OrderRequestRepository orderRequestRepository;
 
@@ -19,7 +20,7 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 	public List<OrderRequest> getAllOrderRequests() {
 		try {
 			return orderRequestRepository.findAll();
-		} catch(Exception e) { 
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -28,7 +29,7 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 	public OrderRequest getOrderRequest(Long id) {
 		try {
 			return orderRequestRepository.findById(id).get();
-		} catch(Exception e) { 
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -38,17 +39,17 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 		try {
 			orderRequestRepository.deleteById(id);
 			return true;
-		} catch(Exception e) { 
+		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	@Override
 	public boolean addOrderRequest(OrderRequest newOrderRequest) {
-		if(getOrderRequest(newOrderRequest.getId()) != null) {
+		if (getOrderRequest(newOrderRequest.getId()) != null) {
 			return false;
 		}
-		for(VehicleOrder vo : newOrderRequest.getVehicleOrders()) {
+		for (VehicleOrder vo : newOrderRequest.getVehicleOrders()) {
 			vo.setOrderRequest(newOrderRequest);
 		}
 		orderRequestRepository.save(newOrderRequest);
@@ -59,7 +60,7 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 	public List<OrderRequest> getOrderRequestByVehicleId(Long vehicleId) {
 		try {
 			return orderRequestRepository.findByVehicleId(vehicleId);
-		} catch(Exception e) { 
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -68,7 +69,7 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 	public List<OrderRequest> getOrderRequestByUserId(Long userId) {
 		try {
 			return orderRequestRepository.findByUserId(userId);
-		} catch(Exception e) { 
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -77,9 +78,21 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 	public List<OrderRequest> getOrderRequestByOwnerId(Long ownerId) {
 		try {
 			return orderRequestRepository.findByOwnerId(ownerId);
-		} catch(Exception e) { 
+		} catch (Exception e) {
 			return null;
 		}
 	}
 
+	@Override
+	public boolean changeOrderRequestStatus(Long orderId, OrderRequestStatus newStatus) {
+		OrderRequest or = getOrderRequest(orderId);
+
+		if (or == null) {
+			return false;
+		}
+
+		or.setStatus(newStatus);
+		orderRequestRepository.save(or);
+		return true;
+	}
 }
