@@ -1,44 +1,14 @@
-package com.ftnxml.customerexperience.model;
+package com.ftnxml.customerexperience.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "user_messages")
-public class Message {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "message_id")
+public class MessageDto {
 	private Long id;
-	@Column(name = "author_id")
 	private Long authorId;
-	@Column(name = "author_name")
 	private String authorName;
-	@Column(name = "order_request_id")
 	private Long orderRequestId;
-	@Column(name = "content")
 	private String content;
-	@Column(name = "creation_date")
 	private Date creationDate;
-
-	public Message() {
-		super();
-	}
-
-	public Message(Long id, Long authorId, String authorName, Long orderRequestId, String content, Date creationDate) {
-		this.id = id;
-		this.authorId = authorId;
-		this.authorName = authorName;
-		this.orderRequestId = orderRequestId;
-		this.content = content;
-		this.creationDate = creationDate;
-	}
 
 	public Long getId() {
 		return id;
@@ -87,5 +57,4 @@ public class Message {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-
 }
