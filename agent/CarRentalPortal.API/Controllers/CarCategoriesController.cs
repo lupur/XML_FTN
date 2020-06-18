@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CarRentalPortal.API.Controllers
 {
     [Authorize(Roles = Roles.Administrator)]
-    public class CarCategoriesController : ApiController
+    public class CarCategoriesController : AbstractApiController
     {
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreateCarCategoryCommand command)

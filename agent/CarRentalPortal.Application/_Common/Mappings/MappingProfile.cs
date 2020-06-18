@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace CarRentalPortal.Application.Common.Mappings
+namespace CarRentalPortal.Application._Common.Mappings
 {
     public class MappingProfile : Profile
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CarRentalPortal.Application.Common.Exceptions
+namespace CarRentalPortal.Application._Common.Exceptions
 {
     public class LoginException : Exception
     {

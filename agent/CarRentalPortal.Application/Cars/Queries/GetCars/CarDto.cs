@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CarRentalPortal.Application.Common.Mappings;
+using CarRentalPortal.Application._Common.Mappings;
 using CarRentalPortal.Core.Entities;
 using System.Collections.Generic;
 

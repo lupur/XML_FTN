@@ -1,5 +1,5 @@
 ﻿using CarRentalPortal.API.Configurations;
-using CarRentalPortal.Application.Common.Constants;
+using CarRentalPortal.Application._Common.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http.Features;

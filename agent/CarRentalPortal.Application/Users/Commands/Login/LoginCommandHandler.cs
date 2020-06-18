@@ -1,6 +1,6 @@
-﻿using CarRentalPortal.Application.Common.Constants;
-using CarRentalPortal.Application.Common.Exceptions;
-using CarRentalPortal.Application.Common.Interfaces;
+﻿using CarRentalPortal.Application._Common.Constants;
+using CarRentalPortal.Application._Common.Exceptions;
+using CarRentalPortal.Application._Common.Interfaces;
 using CarRentalPortal.Core.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalPortal.Application.Auth.Commands.Login
+namespace CarRentalPortal.Application.Users.Commands.Login
 {
     public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
     {

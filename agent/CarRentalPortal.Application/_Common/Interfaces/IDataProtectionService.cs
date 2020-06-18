@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
-namespace CarRentalPortal.Application.Common.Interfaces
+namespace CarRentalPortal.Application._Common.Interfaces
 {
     public interface IDataProtectionService
     {

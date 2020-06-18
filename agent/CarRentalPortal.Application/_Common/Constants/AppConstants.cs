@@ -1,4 +1,4 @@
-﻿namespace CarRentalPortal.Application.Common.Constants
+﻿namespace CarRentalPortal.Application._Common.Constants
 {
     public class AppConstants
     {

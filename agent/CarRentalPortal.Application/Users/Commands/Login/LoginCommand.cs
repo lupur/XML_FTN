@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CarRentalPortal.Application.Auth.Commands.Login
+namespace CarRentalPortal.Application.Users.Commands.Login
 {
     public class LoginCommand : IRequest<string>
     {

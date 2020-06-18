@@ -1,4 +1,4 @@
-﻿using CarRentalPortal.Application.Common.Interfaces;
+﻿using CarRentalPortal.Application._Common.Interfaces;
 using CarRentalPortal.Core.Entities;
 using CarRentalPortal.Infrastructure.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;

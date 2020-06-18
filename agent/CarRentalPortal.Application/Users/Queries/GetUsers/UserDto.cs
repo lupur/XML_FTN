@@ -1,4 +1,4 @@
-﻿using CarRentalPortal.Application.Common.Mappings;
+﻿using CarRentalPortal.Application._Common.Mappings;
 using CarRentalPortal.Core.Entities;
 
 namespace CarRentalPortal.Application.Users.Queries.GetUsers

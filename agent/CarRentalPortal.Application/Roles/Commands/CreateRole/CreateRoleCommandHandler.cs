@@ -1,4 +1,4 @@
-﻿using CarRentalPortal.Application.Common.Interfaces;
+﻿using CarRentalPortal.Application._Common.Interfaces;
 using CarRentalPortal.Core.Entities;
 using MediatR;
 using System.Threading;

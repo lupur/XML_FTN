@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace CarRentalPortal.Application.Common.Mappings
+namespace CarRentalPortal.Application._Common.Mappings
 {
     public interface IMapFrom<TSource>
     {

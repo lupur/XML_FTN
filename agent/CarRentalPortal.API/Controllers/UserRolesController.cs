@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
 {
-    public class UserRolesController : ApiController
+    public class UserRolesController : AbstractApiController
     {
         [HttpPost, Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult<(int, int)>> Create(CreateUserRoleCommand command)

@@ -6,7 +6,7 @@ namespace CarRentalPortal.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ApiController : ControllerBase
+    public class AbstractApiController : ControllerBase
     {
         private IMediator _mediator;
 

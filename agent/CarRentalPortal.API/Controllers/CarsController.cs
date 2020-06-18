@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace CarRentalPortal.API.Controllers
 {
     [Authorize(Roles = Roles.Administrator + "," + Roles.Agent)]
-    public class CarsController : ApiController
+    public class CarsController : AbstractApiController
     {
         private IOptions<ResourcesConfigSection> _configuration;
 

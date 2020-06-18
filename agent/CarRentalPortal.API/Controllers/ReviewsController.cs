@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace CarRentalPortal.API.Controllers
 {
     [Authorize]
-    public class ReviewsController : ApiController
+    public class ReviewsController : AbstractApiController
     {
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreateReviewCommand command)
