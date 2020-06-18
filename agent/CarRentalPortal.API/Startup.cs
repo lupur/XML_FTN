@@ -29,6 +29,7 @@ namespace CarRentalPortal.API
 
             services.ConfigureJwtAuthentication();
             services.ConfigureFormOptions();
+            services.ConfigureCors();
 
             services.AddConfigSections(Configuration);
 
@@ -52,6 +53,7 @@ namespace CarRentalPortal.API
                 RequestPath = new PathString("/Resources")
             });
 
+            app.UseCors("CorsPolicy");
             app.UseRouting();
 
             app.UseAuthentication();

@@ -1,6 +1,7 @@
 ﻿using CarRentalPortal.API.Configurations;
 using CarRentalPortal.Application.Common.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +46,17 @@ namespace CarRentalPortal.API.Common.Extensions
                 opt.ValueLengthLimit = int.MaxValue;
                 opt.MultipartBodyLengthLimit = int.MaxValue;
                 opt.MemoryBufferThreshold = int.MaxValue;
+            });
+        }
+
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             });
         }
 
