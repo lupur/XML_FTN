@@ -152,10 +152,13 @@ services:
         - "9092:9092"
     networks:
       - static-network
+    depends_on:
+      - zookeeper
     environment:
-        KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+        KAFKA_ADVERTISED_HOST_NAME: kafka
         KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-        KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+        KAFKA_ADVERTISED_PORT: 9092
+        
 
 volumes:
   my-db:
