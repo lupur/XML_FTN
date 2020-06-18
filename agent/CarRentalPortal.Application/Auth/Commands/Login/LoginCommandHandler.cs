@@ -31,10 +31,10 @@ namespace CarRentalPortal.Application.Auth.Commands.Login
             var entity = await _context.Users
                 .Include(u => u.Roles)
                 .ThenInclude(ur => ur.Role)
-                .FirstOrDefaultAsync(u => u.Email == request.Email);
+                .FirstOrDefaultAsync(u => u.Username == request.UsernameOrEmail || u.Email == request.UsernameOrEmail);
             if (entity == null)
             {
-                throw new NotFoundException(nameof(User), request.Email);
+                throw new NotFoundException(nameof(User), request.UsernameOrEmail);
             }
 
             if (!_dataProtection.ValidatePassword(request.Password, entity.Password, entity.Salt))
@@ -68,7 +68,7 @@ namespace CarRentalPortal.Application.Auth.Commands.Login
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 

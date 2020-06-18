@@ -16,6 +16,10 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
                 .ValueGeneratedOnAdd();
 
             builder
+                .HasIndex(u => u.Username)
+                .IsUnique(true);
+
+            builder
                 .HasIndex(u => u.Email)
                 .IsUnique(true);
         }

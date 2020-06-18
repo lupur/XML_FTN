@@ -27,8 +27,9 @@ namespace CarRentalPortal.Application.Users.Commands.CreateUser
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Email = request.Email,
+                Username = request.Username,
                 Password = hashedPassword,
+                Email = request.Email,
                 Salt = salt
             };
 
