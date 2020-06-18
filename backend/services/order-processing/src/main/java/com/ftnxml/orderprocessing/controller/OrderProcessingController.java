@@ -1,5 +1,6 @@
 package com.ftnxml.orderprocessing.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.PathParam;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftnxml.orderprocessing.dto.OrderRequestDto;
 import com.ftnxml.orderprocessing.dto.OrderRequestMapper;
+import com.ftnxml.orderprocessing.messaging.OrderRequestPublish;
 import com.ftnxml.orderprocessing.service.OrderRequestService;
 
 @RestController
@@ -25,6 +27,16 @@ public class OrderProcessingController {
 	
 	@Autowired
 	OrderRequestService orderRequestService;
+	
+	@Autowired
+	OrderRequestPublish orderRequestPublish;
+	
+	@PostMapping(value = "/publish")
+	public ResponseEntity publish() {
+		List<Long> publishContent = Arrays.asList(1l, 2l, 3l);
+		orderRequestPublish.sendOrderRequest(publishContent);
+		return ResponseEntity.ok().build();
+	}
 	
 	// GET ALL
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
