@@ -6,13 +6,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AppComponent } from './app.component';
+import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
-import { AdminComponent } from './admin';
-import { LoginComponent } from './login';
 
 @NgModule({
     imports: [
@@ -23,9 +21,8 @@ import { LoginComponent } from './login';
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
-        AdminComponent,
-        LoginComponent
+        AlertComponent,
+        HomeComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -36,5 +33,4 @@ import { LoginComponent } from './login';
     ],
     bootstrap: [AppComponent]
 })
-
-export class AppModule { }
+export class AppModule { };
