@@ -1,10 +1,14 @@
 package com.ftnxml.vehiclemanagement.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftnxml.vehiclemanagement.dto.CreateRequestDto;
+import com.ftnxml.vehiclemanagement.dto.CreateRequestDto.CreateRequestVehicleDto;
+import com.ftnxml.vehiclemanagement.dto.CreateRequestDto.CreateRequestVehicleDto.CreateRequestDiscountDto;
 import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
 import com.ftnxml.vehiclemanagement.model.ClassType;
 import com.ftnxml.vehiclemanagement.model.CollisionDamageWaiver;
@@ -142,5 +146,31 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> getVehiclesOfModel(Long modelId) {
         return vehicleRepository.findByModel_Id(modelId);
     }
+
+	@Override
+	public CreateRequestDto proceedOrderRequest(CreateRequestDto request) {
+		for(CreateRequestVehicleDto vehicleDto : request.getVehicles()) {
+			try {
+				Vehicle vehicle = getVehicle(vehicleDto.getVehicleId());
+				vehicleDto.setPrice(vehicle.getPriceList().getDailyPrice());
+				Discount discount = vehicle.getDiscount();
+				System.out.println("Discount: " + discount);
+				if(discount != null) {
+					Date currentDate = new Date();
+					System.out.println("Grater: " + currentDate.compareTo(discount.getStartDate()));
+					System.out.println("Less: " + currentDate.compareTo(discount.getEndDate()));
+					if(currentDate.compareTo(discount.getStartDate()) >= 0 && currentDate.compareTo(discount.getEndDate()) <=0) {
+						CreateRequestDiscountDto discountDto = new CreateRequestDiscountDto(discount.getNumberOfDays(), discount.getPercentage());
+						vehicleDto.setDiscount(discountDto);
+					}
+				}
+			} catch(Exception e) {
+				request.setRejected(true);
+				request.setRejectionMessage("Vehicle info could not be found");
+				return request;
+			} 	
+		}
+		return request;
+	}
 
 }
