@@ -1,4 +1,5 @@
 using CarRentalPortal.API.Common.Extensions;
+using CarRentalPortal.API.Filters;
 using CarRentalPortal.Application;
 using CarRentalPortal.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -33,7 +34,8 @@ namespace CarRentalPortal.API
 
             services.AddConfigSections(Configuration);
 
-            services.AddControllers();
+            services.AddControllers(options =>
+                options.Filters.Add(new ApiExceptionFilter()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
