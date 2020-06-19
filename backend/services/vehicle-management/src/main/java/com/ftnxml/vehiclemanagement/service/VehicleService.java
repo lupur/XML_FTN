@@ -2,6 +2,7 @@ package com.ftnxml.vehiclemanagement.service;
 
 import java.util.List;
 
+import com.ftnxml.vehiclemanagement.dto.CreateRequestDto;
 import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
 import com.ftnxml.vehiclemanagement.model.Vehicle;
 
@@ -18,4 +19,6 @@ public interface VehicleService {
     boolean addVehicle(NewVehicleDto newVehicle);
 
     List<Vehicle> getVehiclesOfModel(Long modelId);
+    
+    CreateRequestDto proceedOrderRequest(CreateRequestDto request);
 }

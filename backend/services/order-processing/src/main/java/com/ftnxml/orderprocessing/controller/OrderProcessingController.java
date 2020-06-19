@@ -2,9 +2,11 @@ package com.ftnxml.orderprocessing.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.PathParam;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +38,9 @@ public class OrderProcessingController {
     @PostMapping(value = "/publish")
     public ResponseEntity publish() {
         List<Long> publishContent = Arrays.asList(1l, 2l, 3l);
-        orderRequestPublish.sendOrderRequest(publishContent);
+        Map<Long, List<Long>> map = new HashedMap<>();
+        map.put(13l, publishContent);
+        orderRequestPublish.sendOrderRequest(map);
         return ResponseEntity.ok().build();
     }
 

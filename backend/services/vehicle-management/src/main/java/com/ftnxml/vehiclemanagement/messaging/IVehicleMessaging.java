@@ -4,8 +4,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 
 public interface IVehicleMessaging {
 
-    String ORDER_REQUEST_TOPIC = "orderrequest";
+    String NEW_ORDER_REQUEST_TOPIC = "new-order-request";
 
-    @KafkaListener(topics = ORDER_REQUEST_TOPIC)
+    @KafkaListener(topics = NEW_ORDER_REQUEST_TOPIC)
     void consumeOrderRequest(String content);
 }
