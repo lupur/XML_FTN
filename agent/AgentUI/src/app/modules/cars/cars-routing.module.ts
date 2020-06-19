@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home.component';
-import { AuthGuard } from '../auth/auth.guard';
+import { CarsComponent } from './cars.component';
 import { LayoutComponent } from '@app/shared/components/layout/layout.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] }
+  { path: '', component: CarsComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule { }
+export class CarsRoutingModule { }

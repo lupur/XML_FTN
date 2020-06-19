@@ -1,17 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertComponent } from './shared/alert/alert.component';
 import { AuthInterceptor } from './modules/auth/auth.interceptor';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { LayoutComponent } from './shared/components/layout/layout.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent
+    AlertComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,

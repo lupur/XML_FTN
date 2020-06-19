@@ -6,9 +6,15 @@
 	</div>
 </nav>
 
-<div class="app-container">
+<div class="container-md">
 	<alert></alert>
-	<div class="col-md-6 offset-md-3 mt-5">
-		<router-outlet></router-outlet>
-	</div>
+	<router-outlet></router-outlet>
 </div>
+
+<footer class="footer" [ngClass]="{ 'bg-light': user }" *ngIf="user">
+	<div class="container text-center p-4">
+		<p>
+			<a class="text-muted" href="https://github.com/lupur/XML_FTN" target="_top">GitHub</a>
+		</p>
+	</div>
+</footer>
