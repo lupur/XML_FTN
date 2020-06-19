@@ -1,11 +1,14 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
 	<div class="navbar-nav">
 		<a class="nav-item nav-link" routerLink="/" routerLinkActive="active"
 			[routerLinkActiveOptions]="{exact: true}">Home</a>
-		<a class="nav-item nav-link">Logout</a>
+		<a class="nav-item nav-link" (click)="logout()">Logout</a>
 	</div>
 </nav>
 
 <div class="app-container">
-	<router-outlet></router-outlet>
+	<alert></alert>
+	<div class="col-md-6 offset-md-3 mt-5">
+		<router-outlet></router-outlet>
+	</div>
 </div>
