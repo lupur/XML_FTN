@@ -3,8 +3,12 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-// array in local storage for registered users
-let users = JSON.parse(localStorage.getItem('users')) || [];
+import { User, Role } from '@app/_models';
+
+const users: User[] = [
+    { id: 1, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
+    { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User }
+];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -22,20 +26,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             switch (true) {
                 case url.endsWith('/users/authenticate') && method === 'POST':
                     return authenticate();
-                case url.endsWith('/users/register') && method === 'POST':
-                    return register();
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
                 case url.match(/\/users\/\d+$/) && method === 'GET':
                     return getUserById();
-                case url.match(/\/users\/\d+$/) && method === 'PUT':
-                    return updateUser();
-                case url.match(/\/users\/\d+$/) && method === 'DELETE':
-                    return deleteUser();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
-            }    
+            }
+
         }
 
         // route functions
@@ -49,77 +48,53 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                token: 'fake-jwt-token'
-            })
-        }
-
-        function register() {
-            const user = body
-
-            if (users.find(x => x.username === user.username)) {
-                return error('Username "' + user.username + '" is already taken')
-            }
-
-            user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
-            return ok();
+                role: user.role,
+                token: `fake-jwt-token.${user.id}`
+            });
         }
 
         function getUsers() {
-            if (!isLoggedIn()) return unauthorized();
+            if (!isAdmin()) return unauthorized();
             return ok(users);
         }
 
         function getUserById() {
             if (!isLoggedIn()) return unauthorized();
 
+            // only admins can access other user records
+            if (!isAdmin() && currentUser().id !== idFromUrl()) return unauthorized();
+
             const user = users.find(x => x.id === idFromUrl());
             return ok(user);
         }
 
-        function updateUser() {
-            if (!isLoggedIn()) return unauthorized();
-
-            let params = body;
-            let user = users.find(x => x.id === idFromUrl());
-
-            // only update password if entered
-            if (!params.password) {
-                delete params.password;
-            }
-
-            // update and save user
-            Object.assign(user, params);
-            localStorage.setItem('users', JSON.stringify(users));
-
-            return ok();
-        }
-
-        function deleteUser() {
-            if (!isLoggedIn()) return unauthorized();
-
-            users = users.filter(x => x.id !== idFromUrl());
-            localStorage.setItem('users', JSON.stringify(users));
-            return ok();
-        }
-
         // helper functions
 
-        function ok(body?) {
-            return of(new HttpResponse({ status: 200, body }))
-        }
-
-        function error(message) {
-            return throwError({ error: { message } });
+        function ok(body) {
+            return of(new HttpResponse({ status: 200, body }));
         }
 
         function unauthorized() {
-            return throwError({ status: 401, error: { message: 'Unauthorised' } });
+            return throwError({ status: 401, error: { message: 'unauthorized' } });
+        }
+
+        function error(message) {
+            return throwError({ status: 400, error: { message } });
         }
 
         function isLoggedIn() {
-            return headers.get('Authorization') === 'Bearer fake-jwt-token';
+            const authHeader = headers.get('Authorization') || '';
+            return authHeader.startsWith('Bearer fake-jwt-token');
+        }
+
+        function isAdmin() {
+            return isLoggedIn() && currentUser().role === Role.Admin;
+        }
+
+        function currentUser() {
+            if (!isLoggedIn()) return;
+            const id = parseInt(headers.get('Authorization').split('.')[1]);
+            return users.find(x => x.id === id);
         }
 
         function idFromUrl() {

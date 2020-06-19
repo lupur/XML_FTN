@@ -2,15 +2,27 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home';
+import { AdminComponent } from './admin';
+import { LoginComponent } from './login';
 import { AuthGuard } from './_helpers';
-
-const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
-const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
+import { Role } from './_models';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'account', loadChildren: accountModule },
+    {
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
