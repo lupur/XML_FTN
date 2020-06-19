@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { AuthInterceptor } from './modules/auth/auth.interceptor';
-import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
