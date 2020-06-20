@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftnxml.vehiclemanagement.dto.BrandDto;
 import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
 import com.ftnxml.vehiclemanagement.dto.VehicleDto;
+import com.ftnxml.vehiclemanagement.model.Model;
 import com.ftnxml.vehiclemanagement.model.Vehicle;
+import com.ftnxml.vehiclemanagement.service.BrandService;
+import com.ftnxml.vehiclemanagement.service.ModelService;
 import com.ftnxml.vehiclemanagement.service.VehicleService;
 
 @RestController
@@ -33,11 +37,22 @@ public class VehicleController {
     @Autowired
     ModelMapper modelMapper;
 
+    @Autowired
+    BrandService brandService;
+
+    @Autowired
+    ModelService modelService;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getVehicles() {
         List<VehicleDto> vehicles = vehicleService.getAllVehicles().stream()
                 .map(vehicle -> modelMapper.map(vehicle, VehicleDto.class)).collect(Collectors.toList());
 
+        for (VehicleDto v : vehicles) {
+            Model model = modelService.getModel(v.getModel().getId());
+            BrandDto bDto = modelMapper.map(model.getBrand(), BrandDto.class);
+            v.setBrand(bDto);
+        }
         return ResponseEntity.ok(vehicles);
     }
 
