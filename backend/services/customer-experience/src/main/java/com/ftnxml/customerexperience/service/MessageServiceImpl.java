@@ -3,10 +3,12 @@ package com.ftnxml.customerexperience.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ftnxml.customerexperience.model.Message;
 import com.ftnxml.customerexperience.repository.MessageRepository;
 
+@Service
 public class MessageServiceImpl implements MessageService {
 	@Autowired
 	MessageRepository messageRepository;

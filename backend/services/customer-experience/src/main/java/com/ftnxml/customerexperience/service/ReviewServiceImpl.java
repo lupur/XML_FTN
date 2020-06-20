@@ -3,11 +3,13 @@ package com.ftnxml.customerexperience.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ftnxml.customerexperience.enums.ReviewStatus;
 import com.ftnxml.customerexperience.model.Review;
 import com.ftnxml.customerexperience.repository.ReviewRepository;
 
+@Service
 public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	ReviewRepository reviewRepository;
