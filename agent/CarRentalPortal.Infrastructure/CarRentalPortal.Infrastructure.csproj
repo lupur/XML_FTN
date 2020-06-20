@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Persistence\Migrations\Application\20200620172558_CreateApplicationSchema.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200620172558_CreateApplicationSchema.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200620172913_CreateInitialSchema.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200620172913_CreateInitialSchema.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>

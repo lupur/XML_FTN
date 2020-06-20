@@ -34,7 +34,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .HasColumnType("float");
 
                     b.Property<string>("CarBrandName")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)");
 
                     b.Property<int>("CarCategoryId")
                         .HasColumnType("int");
@@ -75,7 +75,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
             modelBuilder.Entity("CarRentalPortal.Core.Entities.CarBrand", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)")
+                        .HasMaxLength(32);
 
                     b.HasKey("Name");
 
@@ -127,12 +128,13 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
             modelBuilder.Entity("CarRentalPortal.Core.Entities.CarModel", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)")
+                        .HasMaxLength(32);
 
                     b.Property<string>("CarBrandName")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)");
 
-                    b.HasKey("Name");
+                    b.HasKey("Name", "CarBrandName");
 
                     b.HasIndex("CarBrandName");
 
@@ -247,7 +249,9 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 {
                     b.HasOne("CarRentalPortal.Core.Entities.CarBrand", "CarBrand")
                         .WithMany("CarModels")
-                        .HasForeignKey("CarBrandName");
+                        .HasForeignKey("CarBrandName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.Rental", b =>

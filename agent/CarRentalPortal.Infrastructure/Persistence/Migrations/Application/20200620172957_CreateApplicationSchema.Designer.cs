@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200620170637_CreateCarBrandAndCarModelEntities")]
-    partial class CreateCarBrandAndCarModelEntities
+    [Migration("20200620172957_CreateApplicationSchema")]
+    partial class CreateApplicationSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .HasColumnType("float");
 
                     b.Property<string>("CarBrandName")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)");
 
                     b.Property<int>("CarCategoryId")
                         .HasColumnType("int");
@@ -77,7 +77,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
             modelBuilder.Entity("CarRentalPortal.Core.Entities.CarBrand", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)")
+                        .HasMaxLength(32);
 
                     b.HasKey("Name");
 
@@ -129,12 +130,13 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
             modelBuilder.Entity("CarRentalPortal.Core.Entities.CarModel", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)")
+                        .HasMaxLength(32);
 
                     b.Property<string>("CarBrandName")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(32)");
 
-                    b.HasKey("Name");
+                    b.HasKey("Name", "CarBrandName");
 
                     b.HasIndex("CarBrandName");
 
@@ -249,7 +251,9 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 {
                     b.HasOne("CarRentalPortal.Core.Entities.CarBrand", "CarBrand")
                         .WithMany("CarModels")
-                        .HasForeignKey("CarBrandName");
+                        .HasForeignKey("CarBrandName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.Rental", b =>

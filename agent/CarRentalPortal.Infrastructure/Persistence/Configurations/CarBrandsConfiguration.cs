@@ -9,6 +9,10 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<CarBrand> builder)
         {
             builder.HasKey(cb => cb.Name);
+
+            builder
+                .Property(cm => cm.Name)
+                .HasMaxLength(32);
         }
     }
 }
