@@ -17,14 +17,14 @@
 	</div>
 	<div class="form-row">
 		<div class="form-group col">
-			<label for="brand">Brand</label>
-			<select formControlName="brand" class="form-control"
-				[ngClass]="{'is-invalid': submitted && f.brand.errors}">
+			<label for="carBrand">Brand</label>
+			<select formControlName="carBrand" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.carBrand.errors}">
 				<option value="">Choose car brand</option>
-				<option *ngFor="let brand of brands">{{brand}}</option>
+				<option *ngFor="let carBrand of carBrands">{{carBrand}}</option>
 			</select>
 			<div *ngIf="submitted && f.brand.errors" class="invalid-feedback">
-				<div *ngIf="f.brand.errors.required">Brand is required</div>
+				<div *ngIf="f.carBrand.errors.required">Car brand is required</div>
 			</div>
 		</div>
 	</div>

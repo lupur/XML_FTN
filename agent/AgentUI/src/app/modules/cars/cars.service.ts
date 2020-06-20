@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CarVm, Car } from '@app/models/car';
 import { environment } from '@env/environment.prod';
 import { CarCategoryVm } from '@app/models/car-category';
+import { CarBrandVm } from '@app/models/car-brand';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,15 @@ export class CarsService {
   }
 
   getById(id){
-    return this.http.get<Car>(`${environment.apiUrl}/cars/${id}`)
+    return this.http.get<Car>(`${environment.apiUrl}/cars/${id}`);
   }
 
   getCarCategories(){
-    return this.http.get<CarCategoryVm>(`${environment.apiUrl}/carCategories`)
+    return this.http.get<CarCategoryVm>(`${environment.apiUrl}/carCategories`);
+  }
+
+  getCarBrands(){
+    return this.http.get<CarBrandVm>(`${environment.apiUrl}/carBrands`);
   }
 
   create(car: Car) {

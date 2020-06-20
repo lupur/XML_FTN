@@ -5,6 +5,8 @@ import { AlertService } from '@app/shared/components/alert/alert.service';
 import { CarsService } from '../cars.service';
 import { first } from 'rxjs/operators';
 import { CarCategory } from '@app/models/car-category';
+import { CarModel } from '@app/models/car-model';
+import { CarBrand } from '@app/models/car-brand';
 
 @Component({
   selector: 'app-cars-add',
@@ -15,9 +17,10 @@ export class CarsAddComponent implements OnInit {
   form: FormGroup;
   loading = false;
   submitted = false;
-  brands = ['BMW', 'Mercedes', 'Audi'];
+
+  carBrands: CarBrand[];
+  carModels: CarModel[];
   carCategories: CarCategory[];
-  selectedCarCategory: CarCategory;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +33,7 @@ export class CarsAddComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       carCategory: ['', Validators.required],
-      brand: ['', Validators.required],
+      carBrand: ['', Validators.required],
       carModel: ['', Validators.required],
     })
 
@@ -38,6 +41,11 @@ export class CarsAddComponent implements OnInit {
       .pipe(first())
       .subscribe(carCategoryVm =>
         this.carCategories = carCategoryVm.carCategories);
+
+    this.carsService.getCarBrands()
+      .pipe(first())
+      .subscribe(carBrandVm =>
+        this.carBrands = carBrandVm.carBrands);
   }
 
   get f() { return this.form.controls; }
