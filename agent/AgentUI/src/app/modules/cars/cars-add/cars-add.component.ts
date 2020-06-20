@@ -29,8 +29,9 @@ export class CarsAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      carCategory: ['', Validators.required],
       brand: ['', Validators.required],
-      carCategory: ['', Validators.required]
+      carModel: ['', Validators.required],
     })
 
     this.carsService.getCarCategories()

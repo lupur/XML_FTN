@@ -17,6 +17,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Extensions
         public static ModelBuilder ApplyApplicationConfigurations(this ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CarsConfiguration());
+            builder.ApplyConfiguration(new CarBrandsConfiguration());
+            builder.ApplyConfiguration(new CarModelsConfiguration());
             builder.ApplyConfiguration(new CarCategoriesConfiguration());
             builder.ApplyConfiguration(new CarImagesConfiguration());
             builder.ApplyConfiguration(new RentalsConfiguration());

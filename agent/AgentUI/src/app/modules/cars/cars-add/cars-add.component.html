@@ -3,6 +3,20 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 	<div class="form-row">
 		<div class="form-group col">
+			<label for="carCategory">Car category</label>
+			<select formControlName="carCategory" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.carCategory.errors}">
+				<option value="">Choose car caregory</option>
+				<option [ngValue]="carCategory.id" *ngFor="let carCategory of carCategories">{{carCategory.name}}
+				</option>
+			</select>
+			<div *ngIf="submitted && f.carCategory.errors" class="invalid-feedback">
+				<div *ngIf="f.carCategory.errors.required">Car category is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col">
 			<label for="brand">Brand</label>
 			<select formControlName="brand" class="form-control"
 				[ngClass]="{'is-invalid': submitted && f.brand.errors}">
@@ -13,15 +27,17 @@
 				<div *ngIf="f.brand.errors.required">Brand is required</div>
 			</div>
 		</div>
+	</div>
+	<div class="form-row">
 		<div class="form-group col">
-			<label for="carCategory">Car category</label>
-			<select formControlName="carCategory" class="form-control" [ngClass]="{'is-invalid': submitted && f.carCategory.errors}">
-				<option value="">Choose car caregory</option>
-				<option [ngValue]="carCategory.id" *ngFor="let carCategory of carCategories">{{carCategory.name}}
-				</option>
+			<label for="carModel">Model</label>
+			<select formControlName="carModel" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.carModel.errors}">
+				<option value="">Choose car model</option>
+				<option *ngFor="let carModel of carModels">{{carModel}}</option>
 			</select>
-			<div *ngIf="submitted && f.carCategory.errors" class="invalid-feedback">
-				<div *ngIf="f.carCategory.errors.required">Car category is required</div>
+			<div *ngIf="submitted && f.carModel.errors" class="invalid-feedback">
+				<div *ngIf="f.carModel.errors.required">Car model is required</div>
 			</div>
 		</div>
 	</div>

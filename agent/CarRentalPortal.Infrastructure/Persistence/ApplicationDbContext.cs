@@ -15,6 +15,8 @@ namespace CarRentalPortal.Infrastructure.Persistence
         }
 
         public DbSet<Car> Cars { get; set; }
+        public DbSet<CarBrand> CarBrands { get; set; }
+        public DbSet<CarModel> CarModels { get; set; }
         public DbSet<CarCategory> CarCategories { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
         public DbSet<Rental> Rentals { get; set; }

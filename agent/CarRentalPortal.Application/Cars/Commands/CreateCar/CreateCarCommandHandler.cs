@@ -22,8 +22,6 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
                 AgentId = request.AgentId,
                 AgentContactInfo = request.AgentContactInfo,
                 CarCategoryId = request.CarCategoryId,
-                Brand = request.Brand,
-                CarModel = request.CarModel,
                 ProductionYear = request.ProductionYear,
                 FuelType = request.FuelType,
                 TransmissionType = request.TransmissionType,
