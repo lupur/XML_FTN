@@ -2,6 +2,16 @@ package com.ftnxml.vehiclemanagement.dto;
 
 public class VehicleDto {
     private Long id;
+    private BrandDto brand;
+
+    public BrandDto getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandDto brand) {
+        this.brand = brand;
+    }
+
     private ModelDto model;
     private PriceListDto pricelist;
     private CollisionDamageWaiverDto colDamageWaiver;
@@ -139,11 +149,11 @@ public class VehicleDto {
 
     @Override
     public String toString() {
-        return "VehicleDto [id=" + id + ", model=" + model + ", pricelist=" + pricelist + ", colDamageWaiver="
-                + colDamageWaiver + ", discount=" + discount + ", userId=" + userId + ", fuelType=" + fuelType
-                + ", transmissionType=" + transmissionType + ", classType=" + classType + ", mileage=" + mileage
-                + ", mileageConstraint=" + mileageConstraint + ", insurance=" + insurance + ", numberOfSeats="
-                + numberOfSeats + ", rating=" + rating + ", location=" + location + "]";
+        return "VehicleDto [id=" + id + ", brand=" + brand + ", model=" + model + ", pricelist=" + pricelist
+                + ", colDamageWaiver=" + colDamageWaiver + ", discount=" + discount + ", userId=" + userId
+                + ", fuelType=" + fuelType + ", transmissionType=" + transmissionType + ", classType=" + classType
+                + ", mileage=" + mileage + ", mileageConstraint=" + mileageConstraint + ", insurance=" + insurance
+                + ", numberOfSeats=" + numberOfSeats + ", rating=" + rating + ", location=" + location + "]";
     }
 
 }
