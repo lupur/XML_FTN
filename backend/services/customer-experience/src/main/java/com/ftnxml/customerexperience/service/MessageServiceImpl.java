@@ -20,12 +20,12 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public List<Message> getMessagesByAuthor(Long authorId){
-		return messageRepository.findByAuthor_Id(authorId);
+		return messageRepository.findByAuthorId(authorId);
 	}
     
 	@Override
 	public List<Message> getMessagesByOrderId(Long orderId){
-		return messageRepository.findAllByOrder_Request_Id(orderId);
+		return messageRepository.findByOrderRequestId(orderId);
 	}
     
 	@Override

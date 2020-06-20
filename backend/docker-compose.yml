@@ -46,6 +46,16 @@ services:
         - db
     networks:
      - static-network
+     
+  flyway4:
+    image: flyway/flyway
+    command: -url=jdbc:mysql://db -schemas=customer_experience_service -user=root -password=something -connectRetries=60 migrate
+    volumes:
+        - .:/flyway/cusomer_experience_service
+    depends_on:
+        - db
+    networks:
+     - static-network
         
   eureka-server:
     image: eureka-server
@@ -128,6 +138,21 @@ services:
     image: soap-service
     build:
       context: ./services/soap-service
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    links:
+      - eureka-server
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+      
+  customer-experience:
+    image: customer-experience
+    build:
+      context: ./services/customer-experience
       dockerfile: Dockerfile
     tty: true
     networks:

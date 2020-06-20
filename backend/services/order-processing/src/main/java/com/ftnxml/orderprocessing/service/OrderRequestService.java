@@ -14,6 +14,8 @@ public interface OrderRequestService {
 	boolean removeOrderRequest(Long id);
 
 	boolean addOrderRequest(OrderRequest newOrderRequest);
+	
+	boolean updateOrderRequest(OrderRequest orderRequest);
 
 	List<OrderRequest> getOrderRequestByVehicleId(Long vehicleId);
 

@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+/* className={"border border-dark bg-dark text-white"} */
+.App table {
+    color: white;
+}
+
+.App table td {
+    vertical-align: middle;
+}
+
+.App  {
+    vertical-align: middle;
+}
+
+Button {
+    width: 100px;
+    height: 40px;
+}
+
+.react-date-picker {
+    color: black;
+}
+
+.react-date-picker button {
+    width: auto;
+    height: 40px;
+}
+
+.react-date-picker div {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.App .form-group {
+    border-bottom-width: 0;
+    margin-bottom: 0;
+}
+
+.App input {
+    border-style: none;
+    height: 40px;
+}
+
+.App .tableLink {
+    color: white;
+    text-decoration: underline;
+    
+}
+
+.App .tableLink:hover{
+    color: gray;
+    text-decoration: underline;
+}
+
+.loginRow{
+    padding:5px;
+}
+
+.loginCard {
+    width: 75%;
+    display: inline-block;
+    padding: 10px;
+}

@@ -1,5 +1,5 @@
 package com.ftnxml.orderprocessing.enums;
 
 public enum OrderRequestStatus {
-	PENDING, RESREVED, PAID, CANCELED
+	PROCESSING, PENDING, RESREVED, PAID, CANCELED
 }

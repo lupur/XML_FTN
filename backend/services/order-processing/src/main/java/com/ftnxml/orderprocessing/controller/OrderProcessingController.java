@@ -127,27 +127,12 @@ public class OrderProcessingController {
             return ResponseEntity.notFound().build();
     }
 
-    @PutMapping(value = "/{requestId}/reserved", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity setOrderRequestReserved(@PathVariable Long requestId) {
-        if (orderRequestService.changeOrderRequestStatus(requestId, OrderRequestStatus.RESREVED))
-            return ResponseEntity.ok("Order request reserved.");
+    @PutMapping(value = "/{requestId}/status/{requestStatus}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity setOrderRequestReserved(@PathVariable("requestId") Long requestId, @PathVariable("requestStatus") OrderRequestStatus requestStatus) {
+        if (orderRequestService.changeOrderRequestStatus(requestId, requestStatus))
+            return ResponseEntity.ok().build();
         else
             return ResponseEntity.badRequest().body("No order request with given id");
     }
 
-    @PutMapping(value = "/{requestId}/paid", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity setOrderRequestPaid(@PathVariable Long requestId) {
-        if (orderRequestService.changeOrderRequestStatus(requestId, OrderRequestStatus.PAID))
-            return ResponseEntity.ok("Order request paid.");
-        else
-            return ResponseEntity.badRequest().body("No order request with given id");
-    }
-
-    @PutMapping(value = "/{requestId}/canceled", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity setOrderRequestCanceled(@PathVariable Long requestId) {
-        if (orderRequestService.changeOrderRequestStatus(requestId, OrderRequestStatus.CANCELED))
-            return ResponseEntity.ok("Order request canceled.");
-        else
-            return ResponseEntity.badRequest().body("No order request with given id");
-    }
 }

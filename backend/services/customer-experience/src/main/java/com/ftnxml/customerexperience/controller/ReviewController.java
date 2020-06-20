@@ -1,5 +1,6 @@
 package com.ftnxml.customerexperience.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ import com.ftnxml.customerexperience.enums.ReviewStatus;
 import com.ftnxml.customerexperience.model.Review;;
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("/review")
 public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
@@ -37,25 +38,32 @@ public class ReviewController {
 		return ResponseEntity.ok(reviews);
 	}
 	
-	@GetMapping(value = "/authors/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity getReviewsByAuthorId(@PathVariable Long id){
-		List<ReviewDto> reviews = reviewService.getReviewsByAuthor(id).stream()
+	@GetMapping(value = "/authors/{authorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity getReviewsByAuthorId(@PathVariable("authorId") Long authorId){
+		List<ReviewDto> reviews = reviewService.getReviewsByAuthor(authorId).stream()
 				.map(review -> modelMapper.map(review, ReviewDto.class)).collect(Collectors.toList());
 		return ResponseEntity.ok(reviews);
 	}
 	
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getReview(@PathVariable Long id) {
-        Review review = reviewService.getReview(id);
+	@GetMapping(value = "/vehicles/{vehicleId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity getReviewsByVehicleId(@PathVariable("vehicleId") Long vehicleId){
+		List<ReviewDto> reviews = reviewService.getReviewsByVehicle(vehicleId).stream()
+				.map(review -> modelMapper.map(review, ReviewDto.class)).collect(Collectors.toList());
+		return ResponseEntity.ok(reviews);
+	}
+	
+	@GetMapping(value = "/{reviewId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getReview(@PathVariable("reviewId") Long reviewId) {
+        Review review = reviewService.getReview(reviewId);
         if (review == null)
             ResponseEntity.notFound().build();
         ReviewDto md = modelMapper.map(review, ReviewDto.class);
         return ResponseEntity.ok(md);
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeReview(@PathVariable Long id) {
-        if (reviewService.removeReview(id))
+    @DeleteMapping(value = "/{reviewId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity removeReview(@PathVariable("reviewId") Long reviewId) {
+        if (reviewService.removeReview(reviewId))
             return ResponseEntity.ok().build();
         else
             return ResponseEntity.notFound().build();
@@ -69,10 +77,10 @@ public class ReviewController {
             return ResponseEntity.badRequest().body("No review with given id");
     }
 
-    @PutMapping(value = "/{id}/reject", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity rejectReview(@PathVariable Long id) {
-        if (reviewService.changeReviewStatus(id, ReviewStatus.REJECTED))
-            return ResponseEntity.ok("User blocked.");
+    @PutMapping(value = "/{reviewId}/status/{reviewStatus}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity rejectReview(@PathVariable("reviewId") Long reviewId, @PathVariable("reviewStatus") ReviewStatus reviewStatus) {
+        if (reviewService.changeReviewStatus(reviewId, reviewStatus))
+            return ResponseEntity.ok("Status has been changed.");
         else
             return ResponseEntity.badRequest().body("No review with given id");
     }
@@ -86,8 +94,9 @@ public class ReviewController {
         Review review = new Review();
         review.setAuthorId(newReview.getAuthorId());
         review.setAuthorName(newReview.getAuthorName());
+        review.setVehicleId(newReview.getVehicleId());
         review.setComment(newReview.getComment());
-        review.setCreationDate(newReview.getCreationDate());
+        review.setCreationDate(new Date());
         review.setVehicleOrderId(newReview.getVehicleOrderId());
         review.setRating(newReview.getRating());
         review.setStatus(ReviewStatus.PENDING);

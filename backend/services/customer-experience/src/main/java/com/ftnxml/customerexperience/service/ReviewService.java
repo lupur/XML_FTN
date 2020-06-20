@@ -10,6 +10,8 @@ public interface ReviewService {
 
     List<Review> getReviewsByAuthor(Long authorId);
     
+    List<Review> getReviewsByVehicle(Long vehicleId);
+    
     Review getReview(Long id);
 
     boolean removeReview(Long id);
