@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.ftnxml.customerexperience.enums.ReviewStatus;
 
 @Entity
-@Table(name = "user_reviews")
+@Table(name = "review")
 public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,8 @@ public class Review {
 	private Long id;
 	@Column(name = "author_id")
 	private Long authorId;
+	@Column(name= "vehicle_id")
+	private Long vehicleId;
 	@Column(name = "author_name")
 	private String authorName;
 	@Column(name = "vehicle_order_id")
@@ -37,11 +39,12 @@ public class Review {
 		super();
 	}
 
-	public Review(Long id, Long authorId, String authorName, Long vehicleOrderId, String comment, int rating,
+	public Review(Long id, Long authorId, Long vehicleId, String authorName, Long vehicleOrderId, String comment, int rating,
 	        Date creationDate, ReviewStatus status) {
 		super();
 		this.id = id;
 		this.authorId = authorId;
+		this.vehicleId = vehicleId;
 		this.authorName = authorName;
 		this.vehicleOrderId = vehicleOrderId;
 		this.comment = comment;
@@ -64,6 +67,14 @@ public class Review {
 
 	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
+	}
+
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(Long vehicleId) {
+		this.vehicleId = vehicleId;
 	}
 
 	public String getAuthorName() {

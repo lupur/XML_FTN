@@ -1,5 +1,6 @@
 package com.ftnxml.customerexperience.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ import com.ftnxml.customerexperience.dto.MessageDto;
 import com.ftnxml.customerexperience.model.Message;;
 
 @RestController
-@RequestMapping("/messages")
+@RequestMapping("/message")
 public class MessageController {
 	@Autowired
 	MessageService messageService;
@@ -35,32 +36,32 @@ public class MessageController {
 		return ResponseEntity.ok(messages);
 	}
 	
-	@GetMapping(value = "/authors/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getMessageByAuthorId(@PathVariable Long id) {
-		List<MessageDto> messages = messageService.getMessagesByAuthor(id).stream()
+	@GetMapping(value = "/authors/{authorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMessageByAuthorId(@PathVariable("authorId") Long authorId) {
+		List<MessageDto> messages = messageService.getMessagesByAuthor(authorId).stream()
 				.map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
         return ResponseEntity.ok(messages);
     }
 	
-	@GetMapping(value = "/orders/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getMessageByOrderId(@PathVariable Long id) {
-		List<MessageDto> messages = messageService.getMessagesByOrderId(id).stream()
+	@GetMapping(value = "/orders/{requestOrderId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMessageByOrderId(@PathVariable("requestOrderId") Long requestOrderId) {
+		List<MessageDto> messages = messageService.getMessagesByOrderId(requestOrderId).stream()
 				.map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
         return ResponseEntity.ok(messages);
     }
 	
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getMessage(@PathVariable Long id) {
-        Message message = messageService.getMessage(id);
+	@GetMapping(value = "/{messageId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMessage(@PathVariable("messageId") Long messageId) {
+        Message message = messageService.getMessage(messageId);
         if (message == null)
             ResponseEntity.notFound().build();
         MessageDto md = modelMapper.map(message, MessageDto.class);
         return ResponseEntity.ok(md);
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeMessage(@PathVariable Long id) {
-        if (messageService.removeMessage(id))
+    @DeleteMapping(value = "/{messageId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity removeMessage(@PathVariable("messageId") Long messageId) {
+        if (messageService.removeMessage(messageId))
             return ResponseEntity.ok().build();
         else
             return ResponseEntity.notFound().build();
@@ -76,7 +77,7 @@ public class MessageController {
         message.setAuthorId(newMessage.getAuthorId());
         message.setAuthorName(newMessage.getAuthorName());
         message.setContent(newMessage.getContent());
-        message.setCreationDate(newMessage.getCreationDate());
+        message.setCreationDate(new Date());
         message.setOrderRequestId(newMessage.getOrderRequestId());
 
         if (messageService.addMessage(message))

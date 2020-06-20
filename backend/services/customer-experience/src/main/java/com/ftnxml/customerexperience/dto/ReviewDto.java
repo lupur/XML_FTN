@@ -5,11 +5,16 @@ import java.util.Date;
 public class ReviewDto {
 	private Long id;
 	private Long authorId;
+	private Long vehicleId;
 	private String authorName;
 	private Long vehicleOrderId;
 	private String comment;
 	private int rating;
 	private Date creationDate;
+	
+	public ReviewDto() {
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -66,4 +71,13 @@ public class ReviewDto {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(Long vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+
 }

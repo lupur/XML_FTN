@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_messages")
+@Table(name = "message")
 public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
