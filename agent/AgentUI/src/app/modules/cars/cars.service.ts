@@ -15,6 +15,10 @@ export class CarsService {
     return this.http.get<CarVm>(`${environment.apiUrl}/cars`);
   }
 
+  getById(id){
+    return this.http.get<Car>(`${environment.apiUrl}/cars/${id}`)
+  }
+
   getCarCategories(){
     return this.http.get<CarCategoryVm>(`${environment.apiUrl}/carCategories`)
   }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CarsService } from './cars.service';
-import { CarVm, Car } from '@app/models/car';
+import { Car } from '@app/models/car';
 import { first } from 'rxjs/operators';
+import { CarsService } from '../cars.service';
 
 @Component({
-  selector: 'app-cars',
-  templateUrl: './cars.component.html',
-  styleUrls: ['./cars.component.css']
+  selector: 'app-cars-list',
+  templateUrl: './cars-list.component.html',
+  styleUrls: ['./cars-list.component.css']
 })
-export class CarsComponent implements OnInit {
+export class CarsListComponent implements OnInit {
   grid = true;
   cars: Car[];
 

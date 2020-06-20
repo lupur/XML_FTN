@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { CarsComponent } from './cars.component';
-import { LayoutComponent } from '@app/shared/components/layout/layout.component';
+import { RouterModule, Routes } from '@angular/router';
 import { CarsAddComponent } from './cars-add/cars-add.component';
+import { CarsListComponent } from './cars-list/cars-list.component';
+import { CarsDetailsComponent } from './cars-details/cars-details.component';
+
 
 const routes: Routes = [
-  { path: '', component: CarsComponent },
-  { path: 'add', component: CarsAddComponent }
+  { path: '', component: CarsListComponent },
+  { path: 'add', component: CarsAddComponent },
+  { path: 'details/:id', component: CarsDetailsComponent },
+  { path: 'edit/:id', component: CarsAddComponent },
 ];
 
 @NgModule({
