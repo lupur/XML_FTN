@@ -2,7 +2,7 @@ export interface Car {
 	id: number;
 	agentId: number;
 	agentContactInfo: string;
-	carCategoryName: string;
+	carCategoryId: number;
 	brand: string;
 	carModel: string;
 	productionYear: number;
@@ -18,6 +18,7 @@ export interface Car {
 }
 
 export interface CarImage {
+	id: number;
 	uri: string;
 }
 

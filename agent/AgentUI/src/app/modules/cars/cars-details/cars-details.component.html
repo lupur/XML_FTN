@@ -1,0 +1,21 @@
+<h1>Car Details</h1>
+<a [routerLink]="[ '/cars' ]" routerLinkActive="active">Browse Cars</a>
+
+<div class="mt-3" *ngIf="car">
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<td>Brand</td>
+				<td>{{car.brand}}</td>
+			</tr>
+			<tr>
+				<td>Model</td>
+				<td>{{car.carModel}}</td>
+			</tr>
+			<tr>
+				<td>Production Year</td>
+				<td>{{car.productionYear}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

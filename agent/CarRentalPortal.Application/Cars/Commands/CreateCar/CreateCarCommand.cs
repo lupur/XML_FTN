@@ -1,5 +1,6 @@
 ﻿using CarRentalPortal.Core.Enums;
 using MediatR;
+using System.Text.Json.Serialization;
 
 namespace CarRentalPortal.Application.Cars.Commands.CreateCar
 {
@@ -7,6 +8,7 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
     {
         public int AgentId { get; set; }
         public string AgentContactInfo { get; set; }
+        [JsonPropertyName("carCategory")]
         public int CarCategoryId { get; set; }
         public string Brand { get; set; }
         public string CarModel { get; set; }
