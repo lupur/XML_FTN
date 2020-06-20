@@ -18,28 +18,29 @@
 	<div class="form-row">
 		<div class="form-group col">
 			<label for="carBrand">Brand</label>
-			<select formControlName="carBrand" class="form-control"
+			<select formControlName="carBrand" class='form-control' (ngModelChange)="onSelectedCarBrand($event)"
 				[ngClass]="{'is-invalid': submitted && f.carBrand.errors}">
 				<option value="">Choose car brand</option>
-				<option *ngFor="let carBrand of carBrands">{{carBrand}}</option>
+				<option *ngFor='let carBrand of carBrands' [ngValue]="carBrand">{{carBrand.name}}</option>
 			</select>
-			<div *ngIf="submitted && f.brand.errors" class="invalid-feedback">
+			<div *ngIf="submitted && f.carBrand.errors" class="invalid-feedback">
 				<div *ngIf="f.carBrand.errors.required">Car brand is required</div>
 			</div>
 		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col">
+		<div class="form-group col" *ngIf="selectedCarBrand">
 			<label for="carModel">Model</label>
 			<select formControlName="carModel" class="form-control"
 				[ngClass]="{'is-invalid': submitted && f.carModel.errors}">
 				<option value="">Choose car model</option>
-				<option *ngFor="let carModel of carModels">{{carModel}}</option>
+				<option *ngFor="let carModel of selectedCarBrand.carModels">{{carModel.name}}</option>
 			</select>
 			<div *ngIf="submitted && f.carModel.errors" class="invalid-feedback">
 				<div *ngIf="f.carModel.errors.required">Car model is required</div>
 			</div>
 		</div>
+	</div>
+	<div class="form-row">
+
 	</div>
 	<div class="form-group">
 		<button [disabled]="loading" class="btn btn-primary">

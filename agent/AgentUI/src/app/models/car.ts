@@ -3,7 +3,7 @@ export interface Car {
 	agentId: number;
 	agentContactInfo: string;
 	carCategoryId: number;
-	brand: string;
+	carBrand: string;
 	carModel: string;
 	productionYear: number;
 	fuelType: string;

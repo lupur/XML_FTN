@@ -18,6 +18,7 @@ export class CarsAddComponent implements OnInit {
   loading = false;
   submitted = false;
 
+  selectedCarBrand: CarBrand;
   carBrands: CarBrand[];
   carModels: CarModel[];
   carCategories: CarCategory[];
@@ -44,8 +45,9 @@ export class CarsAddComponent implements OnInit {
 
     this.carsService.getCarBrands()
       .pipe(first())
-      .subscribe(carBrandVm =>
-        this.carBrands = carBrandVm.carBrands);
+      .subscribe(carBrandVm => {
+        this.carBrands = carBrandVm.carBrands
+      });
   }
 
   get f() { return this.form.controls; }
@@ -58,6 +60,8 @@ export class CarsAddComponent implements OnInit {
       return;
     }
 
+    this.form.value.carBrand = this.selectedCarBrand.name;
+
     this.loading = true;
     this.carsService.create(this.form.value)
       .pipe(first())
@@ -68,6 +72,11 @@ export class CarsAddComponent implements OnInit {
         this.alertService.error(error);
         this.loading = false;
       });
+  }
+
+  onSelectedCarBrand(carBrand: CarBrand) {
+    this.selectedCarBrand = carBrand;
+    this.carModels = this.selectedCarBrand.carModels;
   }
 
 }
