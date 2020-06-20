@@ -32,6 +32,12 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(new GetCarsQuery());
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CarDto>> Get(int id)
+        {
+            return await Mediator.Send(new GetCarByIdQuery { Id = id });
+        }
+
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreateCarCommand command)
         {

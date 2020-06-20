@@ -15,6 +15,7 @@ namespace CarRentalPortal.API.Controllers
         {
             return Ok(new
             {
+                Username = command.UsernameOrEmail,
                 Token = await Mediator.Send(command)
             });
         }
