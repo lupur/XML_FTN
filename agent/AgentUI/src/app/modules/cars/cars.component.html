@@ -24,26 +24,19 @@
 		</div>
 	</div>
 
-
 	<div class="row mt-3">
-		<div class="card-deck">
-			<div *ngFor="let car of cars" [ngClass]="grid ? 'col-6' : 'col-12'" class="p-1">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-							additional content. This content is a little bit longer.</p>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-						<p *ngFor="let image of car.images">
-							<img [src]="image.uri" alt="">
-							 {{image.uri}}
-						</p>
-					</div>
+		<div *ngFor="let car of cars" [ngClass]="grid ? 'grid-view' : 'list-view'">
+			<div class="card">
+				<div class="embed-responsive embed-responsive-16by9">
+					<img src="assets/Images/Cars/1/mazda6.png" class="card-img-top embed-responsive-item" alt="">
 				</div>
-
+				<div class="card-body">
+					<h3>{{car.id}}</h3>
+				</div>
 			</div>
-		</div>
 
+		</div>
 	</div>
+
 
 </div>

@@ -1,0 +1,15 @@
+.grid-view{
+	float: left;
+  	width: 25%;
+  	padding: 10px;
+}
+
+.list-view{
+	float: left;
+	width: 75%;
+	padding: 10px;
+}
+
+.embed-responsive .card-img-top {
+	object-fit: cover;
+}
