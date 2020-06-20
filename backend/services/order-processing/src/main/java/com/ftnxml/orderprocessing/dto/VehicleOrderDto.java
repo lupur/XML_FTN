@@ -8,7 +8,7 @@ public class VehicleOrderDto {
 	
 	private Long id;
 	private Long vehicleId;
-	private OrderRequest orderRequest;
+//	private OrderRequest orderRequest;
 	private Double totalPrice;
 	private Date pickupDate;
 	private Date returnDate;
@@ -22,7 +22,7 @@ public class VehicleOrderDto {
 			Date returnDate) {
 		this.id = id;
 		this.vehicleId = vehicleId;
-		this.orderRequest = orderRequest;
+//		this.orderRequest = orderRequest;
 		this.totalPrice = totalPrice;
 		this.pickupDate = pickupDate;
 		this.returnDate = returnDate;
@@ -44,13 +44,13 @@ public class VehicleOrderDto {
 		this.vehicleId = vehicleId;
 	}
 
-	public OrderRequest getOrderRequest() {
-		return orderRequest;
-	}
-
-	public void setOrderRequest(OrderRequest orderRequest) {
-		this.orderRequest = orderRequest;
-	}
+//	public OrderRequest getOrderRequest() {
+//		return orderRequest;
+//	}
+//
+//	public void setOrderRequest(OrderRequest orderRequest) {
+//		this.orderRequest = orderRequest;
+//	}
 
 	public Double getTotalPrice() {
 		return totalPrice;

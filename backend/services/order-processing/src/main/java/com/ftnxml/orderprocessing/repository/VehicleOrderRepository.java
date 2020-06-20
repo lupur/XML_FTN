@@ -9,5 +9,7 @@ import com.ftnxml.orderprocessing.model.VehicleOrder;
 public interface VehicleOrderRepository extends JpaRepository<VehicleOrder, Long> {
 	
 	List<VehicleOrder> findByOrderRequest_Id(Long requestId);
+	
+	List<VehicleOrder> findByVehicleId(Long vehicleId);
 
 }
