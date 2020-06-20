@@ -39,6 +39,9 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.Property<int>("CarCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CarModelName")
+                        .HasColumnType("varchar(32)");
+
                     b.Property<string>("Color")
                         .HasColumnType("text");
 
@@ -65,9 +68,9 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarBrandName");
-
                     b.HasIndex("CarCategoryId");
+
+                    b.HasIndex("CarBrandName", "CarModelName");
 
                     b.ToTable("Cars");
                 });
@@ -234,6 +237,10 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .HasForeignKey("CarCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CarRentalPortal.Core.Entities.CarModel", "CarModel")
+                        .WithMany("Cars")
+                        .HasForeignKey("CarBrandName", "CarModelName");
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.CarImage", b =>

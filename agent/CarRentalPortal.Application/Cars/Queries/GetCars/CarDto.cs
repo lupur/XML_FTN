@@ -11,7 +11,7 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
         public int AgentId { get; set; }
         public string AgentContactInfo { get; set; }
         public string CarCategoryName { get; set; }
-        public string Brand { get; set; }
+        public string CarBrand { get; set; }
         public string CarModel { get; set; }
         public short ProductionYear { get; set; }
         public string FuelType { get; set; }
@@ -27,7 +27,9 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Car, CarDto>()
-                .ForMember(d => d.CarCategoryName, opt => opt.MapFrom(s => s.CarCategory.Name));
+                .ForMember(d => d.CarCategoryName, opt => opt.MapFrom(s => s.CarCategory.Name))
+                .ForMember(d => d.CarBrand, opt => opt.MapFrom(s => s.CarBrandName))
+                .ForMember(d => d.CarModel, opt => opt.MapFrom(s => s.CarModelName));
         }
     }
 }

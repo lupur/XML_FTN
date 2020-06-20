@@ -8,6 +8,8 @@ namespace CarRentalPortal.Core.Entities
         public int Id { get; set; }
         public string CarBrandName { get; set; }
         public CarBrand CarBrand { get; set; }
+        public string CarModelName { get; set; }
+        public CarModel CarModel { get; set; }
         public int CarCategoryId { get; set; }
         public CarCategory CarCategory { get; set; }
         public int AgentId { get; set; }

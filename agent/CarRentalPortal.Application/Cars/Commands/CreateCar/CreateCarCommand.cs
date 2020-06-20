@@ -10,7 +10,7 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
         public string AgentContactInfo { get; set; }
         [JsonPropertyName("carCategory")]
         public int CarCategoryId { get; set; }
-        public string Brand { get; set; }
+        public string CarBrand { get; set; }
         public string CarModel { get; set; }
         public short ProductionYear { get; set; }
         public FuelType FuelType { get; set; }
