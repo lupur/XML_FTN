@@ -1,9 +1,11 @@
-<div class="container">
 	<h1>Cars</h1>
 
 	<div class="row justify-content-between">
 		<div class="col">
-			<a class="btn btn-success" [routerLink]="[ '/create' ]" routerLinkActive="active">Add Car</a>
+			<a class="btn btn-success" [routerLink]="[ '/cars/add' ]" routerLinkActive="active">Add Car</a>
+		</div>
+		<div class="col">
+			<span *ngIf="!cars" class="spinner-border spinner-border-lg align-self-center text-center"></span>
 		</div>
 
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -34,9 +36,5 @@
 					<h3>{{car.id}}</h3>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
-
-</div>
