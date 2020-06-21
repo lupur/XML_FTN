@@ -23,7 +23,7 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> Create(CreateCarBrandCommand command)
+        public async Task<ActionResult<object>> Create(CreateCarBrandCommand command)
         {
             return await Mediator.Send(command);
         }

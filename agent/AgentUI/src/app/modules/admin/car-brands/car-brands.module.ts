@@ -9,7 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [CarBrandsListComponent, CarBrandsDetailsComponent, CarBrandsAddComponent],
+  declarations: [
+    CarBrandsListComponent,
+    CarBrandsDetailsComponent,
+    CarBrandsAddComponent],
   imports: [
     CommonModule,
     FormsModule,

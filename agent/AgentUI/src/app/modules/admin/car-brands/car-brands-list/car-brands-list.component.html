@@ -13,7 +13,7 @@
 		<tr *ngFor="let carBrand of carBrands">
 			<td>{{carBrand.name}}</td>
 			<td>
-				<a routerLink="{{carBrand.name}}/carmodels">Browse Car Models</a>
+				<a routerLink="details/{{carBrand.name}}">Browse Car Models</a>
 			</td>
 		</tr>
 		<tr *ngIf="!carBrands">

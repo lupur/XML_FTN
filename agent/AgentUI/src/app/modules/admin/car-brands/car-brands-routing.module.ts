@@ -11,14 +11,13 @@ const routes: Routes = [
     component: CarBrandsListComponent,
   },
   {
-    path: ':carBrandName/carmodels',
-    component: CarBrandsDetailsComponent
-  },
-  {
     path: 'add',
     component: CarBrandsAddComponent
+  },
+  {
+    path: 'details/:carBrandName',
+    component: CarBrandsDetailsComponent
   }
-
 ];
 
 @NgModule({
