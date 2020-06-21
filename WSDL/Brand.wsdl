@@ -49,7 +49,7 @@
 </wsdl:binding>
 <wsdl:service name="BrandDetailsPortService">
 <wsdl:port binding="tns:BrandDetailsPortSoap11" name="BrandDetailsPortSoap11">
-<soap:address location="http://5bf639f05294:8083/service/brand-details"/>
+<soap:address location="http://localhost:8080/soap/service/brand-details"/>
 </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>
