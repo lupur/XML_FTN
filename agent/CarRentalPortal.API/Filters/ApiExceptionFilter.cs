@@ -20,6 +20,7 @@ namespace CarRentalPortal.API.Filters
                 { typeof(LoginException), HandleLoginException },
                 { typeof(ValidationException), HandleValidationException },
                 { typeof(NotFoundException), HandleNotFoundException },
+                { typeof(UnauthorizedAccessException), HandleAuthException }
             };
         }
 
@@ -66,12 +67,11 @@ namespace CarRentalPortal.API.Filters
             var details = new ValidationProblemDetails()
             {
                 Type = "https://tools.ietf.org/html/rfc7235#section-3.1",
-                Title = "Invalid authentication credentials.",
+                Title = "Authentication failed - invalid credentials.",
                 Detail = exception.Message
             };
 
             context.Result = new BadRequestObjectResult(details);
-
             context.ExceptionHandled = true;
         }
 
@@ -85,7 +85,6 @@ namespace CarRentalPortal.API.Filters
             };
 
             context.Result = new BadRequestObjectResult(details);
-
             context.ExceptionHandled = true;
         }
 
@@ -101,7 +100,21 @@ namespace CarRentalPortal.API.Filters
             };
 
             context.Result = new NotFoundObjectResult(details);
+            context.ExceptionHandled = true;
+        }
 
+        private void HandleAuthException(ExceptionContext context)
+        {
+            var exception = context.Exception as UnauthorizedAccessException;
+
+            var details = new ProblemDetails()
+            {
+                Type = "https://tools.ietf.org/html/rfc7235#section-3.1",
+                Title = "Unauthorized.",
+                Detail = exception.Message
+            };
+
+            context.Result = new UnauthorizedObjectResult(details);
             context.ExceptionHandled = true;
         }
     }

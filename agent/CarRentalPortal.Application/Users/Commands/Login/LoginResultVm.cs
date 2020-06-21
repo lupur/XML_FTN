@@ -1,11 +1,11 @@
-﻿using CarRentalPortal.Application._Common.Mappings;
-using CarRentalPortal.Application.UserRoles.Queries.GetRoles;
-using CarRentalPortal.Core.Entities;
+﻿using CarRentalPortal.Application.UserRoles.Queries.GetRoles;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace CarRentalPortal.Application.Users.Queries.GetUsers
+namespace CarRentalPortal.Application.Users.Commands.Login
 {
-    public class UserDto : IMapFrom<User>
+    public class LoginResultVm
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

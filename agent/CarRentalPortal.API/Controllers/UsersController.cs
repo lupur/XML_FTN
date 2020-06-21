@@ -1,4 +1,5 @@
 ﻿using CarRentalPortal.API.Constants;
+using CarRentalPortal.Application.UserRoles.Queries.GetRoles;
 using CarRentalPortal.Application.Users.Commands.CreateUser;
 using CarRentalPortal.Application.Users.Commands.Login;
 using CarRentalPortal.Application.Users.Queries.GetUsers;
@@ -11,13 +12,21 @@ namespace CarRentalPortal.API.Controllers
     public class UsersController : AbstractApiController
     {
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginCommand command)
+        public async Task<ActionResult<UserDto>> Login(LoginCommand command)
         {
-            return Ok(new
+            var loginResponse = await Mediator.Send(command);
+            var rolesResponse = await Mediator.Send(new GetUserRolesQuery { UserId = loginResponse.Id });
+
+            return new UserDto
             {
-                Username = command.UsernameOrEmail,
-                Token = await Mediator.Send(command)
-            });
+                Id = loginResponse.Id,
+                FirstName = loginResponse.FirstName,
+                LastName = loginResponse.LastName,
+                Username = loginResponse.Username,
+                Email = loginResponse.Email,
+                Token = loginResponse.Token,
+                Roles = rolesResponse.Roles
+            };
         }
 
         [HttpPost("register")]
