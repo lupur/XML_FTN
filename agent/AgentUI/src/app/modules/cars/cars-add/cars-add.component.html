@@ -2,7 +2,7 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 	<div class="form-row">
-		<div class="form-group col">
+		<div class="form-group col-sm-6">
 			<label for="carCategory">Car category</label>
 			<select formControlName="carCategory" class="form-control"
 				[ngClass]="{'is-invalid': submitted && f.carCategory.errors}">
@@ -16,7 +16,7 @@
 		</div>
 	</div>
 	<div class="form-row">
-		<div class="form-group col">
+		<div class="form-group col-sm-6">
 			<label for="carBrand">Brand</label>
 			<select formControlName="carBrand" class='form-control' (ngModelChange)="onSelectedCarBrand($event)"
 				[ngClass]="{'is-invalid': submitted && f.carBrand.errors}">
@@ -27,7 +27,9 @@
 				<div *ngIf="f.carBrand.errors.required">Car brand is required</div>
 			</div>
 		</div>
-		<div class="form-group col" *ngIf="selectedCarBrand">
+	</div>
+	<div class="form-row" *ngIf="selectedCarBrand">
+		<div class="form-group col-sm-6">
 			<label for="carModel">Model</label>
 			<select formControlName="carModel" class="form-control"
 				[ngClass]="{'is-invalid': submitted && f.carModel.errors}">
@@ -40,7 +42,29 @@
 		</div>
 	</div>
 	<div class="form-row">
-
+		<div class="form-group col-sm-6">
+			<label for="productionYear">Production Year</label>
+			<input type="number" formControlName="productionYear" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.productionYear.errors}">
+			<div *ngIf="submitted && f.productionYear.errors" class="invalid-feedback">
+				<div *ngIf="f.productionYear.errors.required">Production Year is required</div>
+				<div *ngIf="f.productionYear.errors.min">Production Year must be greater or equal to year 1900</div>
+				<div *ngIf="f.productionYear.errors.max">Production Year must be before or equal to current year</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="fuelType">Fuel Type</label>
+			<select formControlName="fuelType" class='form-control'
+				[ngClass]="{'is-invalid': submitted && f.fuelType.errors}">
+				<option value="">Choose car brand</option>
+				<option *ngFor='let fuelType of fuelTypes' [value]="fuelType">{{fuelType}}</option>
+			</select>
+			<div *ngIf="submitted && f.fuelType.errors" class="invalid-feedback">
+				<div *ngIf="f.fuelType.errors.required">Fuel Type is required</div>
+			</div>
+		</div>
 	</div>
 	<div class="form-group">
 		<button [disabled]="loading" class="btn btn-primary">

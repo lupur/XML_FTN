@@ -2,11 +2,11 @@ export interface Car {
 	id: number;
 	agentId: number;
 	agentContactInfo: string;
-	carCategoryId: number;
+	carCategory: number;
 	carBrand: string;
 	carModel: string;
 	productionYear: number;
-	fuelType: string;
+	fuelType: FuelType;
 	transmissionType: string;
 	color: string;
 	location: string;
@@ -24,4 +24,11 @@ export interface CarImage {
 
 export interface CarVm {
 	cars: Car[];
+}
+
+export enum FuelType{
+	Gasoline,
+	Diesel,
+	Hybrid,
+	Electric
 }

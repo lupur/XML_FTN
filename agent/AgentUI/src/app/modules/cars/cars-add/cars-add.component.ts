@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { CarCategory } from '@app/models/car-category';
 import { CarModel } from '@app/models/car-model';
 import { CarBrand } from '@app/models/car-brand';
+import { FuelType } from '@app/models/car';
 
 @Component({
   selector: 'app-cars-add',
@@ -19,9 +20,22 @@ export class CarsAddComponent implements OnInit {
   submitted = false;
 
   selectedCarBrand: CarBrand;
+  carCategories: CarCategory[];
   carBrands: CarBrand[];
   carModels: CarModel[];
-  carCategories: CarCategory[];
+  // fuelTypes: string[] = [
+  //   'Gasoline',
+  //   'Diesel',
+  //   'Hybrid',
+  //   'Electric'
+  // ];
+
+  fuelTypes: string[] = [
+    FuelType[FuelType.Gasoline],
+    FuelType[FuelType.Diesel],
+    FuelType[FuelType.Hybrid],
+    FuelType[FuelType.Electric]
+  ]
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,6 +50,8 @@ export class CarsAddComponent implements OnInit {
       carCategory: ['', Validators.required],
       carBrand: ['', Validators.required],
       carModel: ['', Validators.required],
+      productionYear: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
+      fuelType: ['', Validators.required]
     })
 
     this.carsService.getCarCategories()
