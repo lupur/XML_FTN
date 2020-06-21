@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Brand" type="{www.soapservice.ftnxml.com/model/}Brand"/>
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "brand"
+    "name"
 })
-@XmlRootElement(name = "BrandByIdResponse")
-public class BrandByIdResponse {
+@XmlRootElement(name = "AddBrandRequest")
+public class AddBrandRequest {
 
-    @XmlElement(name = "Brand", required = true)
-    protected Brand brand;
+    @XmlElement(required = true)
+    protected String name;
 
     /**
-     * Gets the value of the brand property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
-     *     {@link Brand }
+     *     {@link String }
      *     
      */
-    public Brand getBrand() {
-        return brand;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the brand property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Brand }
+     *     {@link String }
      *     
      */
-    public void setBrand(Brand value) {
-        this.brand = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Form, Button, Col, Table} from 'react-bootstrap'
+import {Card, Form, Button, Col} from 'react-bootstrap'
 import {authService} from '../services/authService'
 
 export default class Login extends Component {

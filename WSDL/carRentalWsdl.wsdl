@@ -8,6 +8,13 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
+<xs:element name="AddBrandRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
 <xs:element name="AllBrandsRequest">
 <xs:complexType>
 <xs:sequence>
@@ -26,6 +33,13 @@
 <xs:complexType>
 <xs:sequence>
 <xs:element maxOccurs="unbounded" minOccurs="0" name="Brands" type="tns:Brand"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="AddBrandResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="result" type="xs:string"/>
 </xs:sequence>
 </xs:complexType>
 </xs:element>
@@ -52,8 +66,14 @@
 <wsdl:message name="AllBrandsResponse">
 <wsdl:part element="tns:AllBrandsResponse" name="AllBrandsResponse"> </wsdl:part>
 </wsdl:message>
+<wsdl:message name="AddBrandResponse">
+<wsdl:part element="tns:AddBrandResponse" name="AddBrandResponse"> </wsdl:part>
+</wsdl:message>
 <wsdl:message name="BrandByIdRequest">
 <wsdl:part element="tns:BrandByIdRequest" name="BrandByIdRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="AddBrandRequest">
+<wsdl:part element="tns:AddBrandRequest" name="AddBrandRequest"> </wsdl:part>
 </wsdl:message>
 <wsdl:message name="AllBrandsRequest">
 <wsdl:part element="tns:AllBrandsRequest" name="AllBrandsRequest"> </wsdl:part>
@@ -66,6 +86,10 @@
 <wsdl:operation name="AllBrands">
 <wsdl:input message="tns:AllBrandsRequest" name="AllBrandsRequest"> </wsdl:input>
 <wsdl:output message="tns:AllBrandsResponse" name="AllBrandsResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="AddBrand">
+<wsdl:input message="tns:AddBrandRequest" name="AddBrandRequest"> </wsdl:input>
+<wsdl:output message="tns:AddBrandResponse" name="AddBrandResponse"> </wsdl:output>
 </wsdl:operation>
 </wsdl:portType>
 <wsdl:binding name="BrandDetailsPortSoap11" type="tns:BrandDetailsPort">
@@ -88,10 +112,19 @@
 <soap:body use="literal"/>
 </wsdl:output>
 </wsdl:operation>
+<wsdl:operation name="AddBrand">
+<soap:operation soapAction=""/>
+<wsdl:input name="AddBrandRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="AddBrandResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
 </wsdl:binding>
 <wsdl:service name="BrandDetailsPortService">
 <wsdl:port binding="tns:BrandDetailsPortSoap11" name="BrandDetailsPortSoap11">
-<soap:address location="http://4913f32470eb:8083/service/brand-details"/>
+<soap:address location="http://e8b55d152e36:8083/service/brand-details"/>
 </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>
