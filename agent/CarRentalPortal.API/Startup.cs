@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
 using System.IO;
+using System.Text.Json;
 
 namespace CarRentalPortal.API
 {
@@ -33,8 +35,11 @@ namespace CarRentalPortal.API
 
             services.AddConfigSections(Configuration);
 
-            services.AddControllers(options =>
-                options.Filters.Add(new ApiExceptionFilter()));
+            services
+                .AddControllers(options =>
+                    options.Filters.Add(new ApiExceptionFilter()))
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter()));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
