@@ -23,12 +23,6 @@ export class CarsAddComponent implements OnInit {
   carCategories: CarCategory[];
   carBrands: CarBrand[];
   carModels: CarModel[];
-  // fuelTypes: string[] = [
-  //   'Gasoline',
-  //   'Diesel',
-  //   'Hybrid',
-  //   'Electric'
-  // ];
 
   fuelTypes: string[] = [
     FuelType[FuelType.Gasoline],
