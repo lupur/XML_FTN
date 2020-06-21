@@ -1,2 +1,2 @@
-<h1>Hi {{user.username}}!</h1>
-<a [routerLink]="[ '/cars' ]" routerLinkActive="active">Browse Cars</a>
+<h1>Hi {{user.firstName}}!</h1>
+<a [routerLink]="[ '/cars' ]" routerLinkActive="active" *ngIf="isAdmin">Browse Cars</a>

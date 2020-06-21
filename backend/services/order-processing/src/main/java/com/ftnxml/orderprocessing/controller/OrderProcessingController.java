@@ -1,13 +1,16 @@
 package com.ftnxml.orderprocessing.controller;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftnxml.orderprocessing.dto.OrderRequestDto;
@@ -24,6 +28,7 @@ import com.ftnxml.orderprocessing.dto.OrderRequestMapper;
 import com.ftnxml.orderprocessing.enums.OrderRequestStatus;
 import com.ftnxml.orderprocessing.messaging.OrderRequestPublish;
 import com.ftnxml.orderprocessing.service.OrderRequestService;
+import com.ftnxml.orderprocessing.service.VehicleOrderService;
 
 @RestController
 @RequestMapping("/")
@@ -31,6 +36,9 @@ public class OrderProcessingController {
 
     @Autowired
     OrderRequestService orderRequestService;
+    
+    @Autowired
+    VehicleOrderService vehicleOrderService;
 
     @Autowired
     OrderRequestPublish orderRequestPublish;
@@ -98,6 +106,14 @@ public class OrderProcessingController {
         }
         return ResponseEntity.badRequest().build();
     }
+    
+    // GET AVAILABLE VEHICLES IN SELECTED RANGE
+    @GetMapping(value = "/available-vehicles", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAvailableVehicles(@RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, 
+    		@RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate, @RequestParam("vehicles") List<Long> vehicles) {
+        List<Long> availableVehicles = vehicleOrderService.findVehiclesAvailableInRange(startDate, endDate, vehicles);
+        return ResponseEntity.ok(availableVehicles);
+    }
 
     // CRETE NEW REQUEST
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -107,11 +123,14 @@ public class OrderProcessingController {
             return ResponseEntity.badRequest().build();
         }
         try {
-            if (orderRequestService
-                    .addOrderRequest(OrderRequestMapper.INSTANCE.INSTANCE.toOrderRequest(orderRequestDto)))
-                return ResponseEntity.ok().build();
-            else
-                return ResponseEntity.badRequest().build();
+        	if(!orderRequestDto.getUserId().equals(orderRequestDto.getOwnerId())) {
+        		return orderRequestService.addOrderRequest(OrderRequestMapper.INSTANCE.INSTANCE.toOrderRequest(orderRequestDto)) ? 
+        				ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+        	} else {
+        		return orderRequestService.createRequestByOwner(OrderRequestMapper.INSTANCE.INSTANCE.toOrderRequest(orderRequestDto)) ? 
+        				ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+        	}
+
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

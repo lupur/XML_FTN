@@ -2,6 +2,7 @@
 	<div class="navbar-nav">
 		<a class="nav-item nav-link" routerLink="/" routerLinkActive="active"
 			[routerLinkActiveOptions]="{exact: true}">Home</a>
+		<a class="nav-item nav-link" [routerLink]="[ '/admin/carBrands' ]" routerLinkActive="active" *ngIf="isAdmin">Car Brands (preview)</a>
 		<a class="nav-item nav-link" (click)="logout()">Logout</a>
 	</div>
 </nav>

@@ -85,6 +85,52 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 		orderRequestPublish.sendOrderRequest(vehicleServiceRequest);
 		return true;
 	}
+	
+	@Override
+	public boolean createRequestByOwner(OrderRequest newOrderRequest) {
+		if (getOrderRequest(newOrderRequest.getId()) != null) {
+			return false;
+		}
+		for (VehicleOrder newOrder : newOrderRequest.getVehicleOrders()) {
+			List<VehicleOrder> ordersOfSelectedVehicle = vehicleOrderRepository.findByVehicleId(newOrder.getVehicleId());
+			for(VehicleOrder orderOfSelectedVehicle : ordersOfSelectedVehicle) {
+				if(!orderOfSelectedVehicle.getOrderRequest().getStatus().equals(OrderRequestStatus.PROCESSING )
+						&& !orderOfSelectedVehicle.getOrderRequest().getStatus().equals(OrderRequestStatus.PENDING)
+						&& (newOrder.getPickupDate().compareTo(orderOfSelectedVehicle.getPickupDate()) <= 0
+							&& newOrder.getReturnDate().compareTo(orderOfSelectedVehicle.getPickupDate()) >= 0
+						||	newOrder.getPickupDate().compareTo(orderOfSelectedVehicle.getPickupDate()) >= 0
+								&& newOrder.getPickupDate().compareTo(orderOfSelectedVehicle.getReturnDate()) <= 0)) {
+					System.out.println("Request can not be processed because dates for selected vehicle are overlapping with other request(s)...");
+					return false;
+				} 
+			}
+			newOrder.setOrderRequest(newOrderRequest);
+		}
+		newOrderRequest.setStatus(OrderRequestStatus.RESREVED);
+		OrderRequest orderRequest = orderRequestRepository.save(newOrderRequest);
+		
+		List<VehicleOrder> ordersOfAcceptedRequest = vehicleOrderRepository.findByOrderRequest_Id(orderRequest.getId());
+		
+		for(VehicleOrder acceptedOrder : ordersOfAcceptedRequest) {
+			List<VehicleOrder> existingOrders = vehicleOrderRepository.findByVehicleId(acceptedOrder.getVehicleId());
+			for(VehicleOrder existingOrder : existingOrders) {
+				if(!existingOrder.getOrderRequest().getId().equals(acceptedOrder.getOrderRequest().getId())
+						&& (existingOrder.getOrderRequest().getStatus().equals(OrderRequestStatus.PENDING)
+								|| existingOrder.getOrderRequest().getStatus().equals(OrderRequestStatus.PROCESSING))
+						&& (existingOrder.getPickupDate().compareTo(acceptedOrder.getPickupDate()) <= 0
+							&& existingOrder.getReturnDate().compareTo(acceptedOrder.getPickupDate()) >= 0
+							||	existingOrder.getPickupDate().compareTo(acceptedOrder.getPickupDate()) >= 0
+									&& existingOrder.getPickupDate().compareTo(acceptedOrder.getReturnDate()) <= 0)) {
+					OrderRequest existingOrderRequest = getOrderRequest(existingOrder.getOrderRequest().getId());
+					existingOrderRequest.setStatus(OrderRequestStatus.CANCELED);
+					orderRequestRepository.save(existingOrderRequest);
+				}
+			}
+		}
+		
+		return true;
+		
+	}
 
 	@Override
 	public List<OrderRequest> getOrderRequestByVehicleId(Long vehicleId) {

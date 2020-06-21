@@ -12,8 +12,17 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const user = this.authService.userValue;
-    if (user) {
+    const currentUser = this.authService.userValue;
+    if (currentUser) {
+      if (route.data.roles && !currentUser.roles.some(r => route.data.roles.includes(r.name))) {
+        // unauthorized if route is protected with roles
+        // and the user does not have required roles
+
+        this.router.navigate(['/']);
+        return false;
+      }
+
+      // authorized.
       return true;
     }
 
