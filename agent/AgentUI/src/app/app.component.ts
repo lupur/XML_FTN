@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from './models';
 import { AuthService } from './modules/auth/auth.service';
+import { RoleType } from './models/role';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,10 @@ export class AppComponent {
 
   constructor(private authService: AuthService) {
     this.authService.user.subscribe(x => this.user = x);
+  }
+
+  get isAdmin() {
+    return this.user && this.user.roles.some(r => r.name === RoleType.Administrator);
   }
 
   logout() {

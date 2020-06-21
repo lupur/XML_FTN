@@ -21,6 +21,7 @@ import Vehicles from './components/Vehicles'
 import TransmissionTypes from './components/TransmissionTypes'
 import PriceLists from './components/PriceLists'
 import CollisionDamage from './components/CollisionDamage'
+import PendingReviews from './components/PendingReviews'
 import {authService} from './services/authService'
 import {Role} from './helpers/role'
 import {history} from './helpers/history'
@@ -67,6 +68,7 @@ class App extends React.Component {
                                 <PrivateRoute exact path="/FuelTypes" roles={[Role.ADMIN]} component={FuelTypes}/>
                                 <PrivateRoute exact path="/TransmissionTypes" roles={[Role.ADMIN]} component={TransmissionTypes}/>
                                 <PrivateRoute exact path="/PriceLists" roles={[Role.ADMIN]} component={PriceLists}/>
+                                <PrivateRoute exact path="/PendingReviews" roles={[Role.ADMIN]} component={PendingReviews}/>
                                 <PrivateRoute path="/Brands/:id" component={Brand} />
                                 <Route path="/login" component={Login}/>
                             </Switch>
