@@ -11,7 +11,6 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Converters;
 using System.IO;
-using System.Text.Json;
 
 namespace CarRentalPortal.API
 {

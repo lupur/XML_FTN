@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRentalService
+namespace CarRentalAPI
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="www.soapservice.ftnxml.com/model/", ConfigurationName="CarRentalService.BrandDetailsPort")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="www.soapservice.ftnxml.com/model/", ConfigurationName="CarRentalAPI.BrandDetailsPort")]
     public interface BrandDetailsPort
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<CarRentalService.BrandDetailsResponse1> BrandDetailsAsync(CarRentalService.BrandDetailsRequest1 request);
+        System.Threading.Tasks.Task<CarRentalAPI.BrandDetailsResponse1> BrandDetailsAsync(CarRentalAPI.BrandDetailsRequest1 request);
     }
     
     /// <remarks/>
@@ -117,13 +117,13 @@ namespace CarRentalService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
-        public CarRentalService.BrandDetailsRequest BrandDetailsRequest;
+        public CarRentalAPI.BrandDetailsRequest BrandDetailsRequest;
         
         public BrandDetailsRequest1()
         {
         }
         
-        public BrandDetailsRequest1(CarRentalService.BrandDetailsRequest BrandDetailsRequest)
+        public BrandDetailsRequest1(CarRentalAPI.BrandDetailsRequest BrandDetailsRequest)
         {
             this.BrandDetailsRequest = BrandDetailsRequest;
         }
@@ -137,26 +137,26 @@ namespace CarRentalService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
-        public CarRentalService.BrandDetailsResponse BrandDetailsResponse;
+        public CarRentalAPI.BrandDetailsResponse BrandDetailsResponse;
         
         public BrandDetailsResponse1()
         {
         }
         
-        public BrandDetailsResponse1(CarRentalService.BrandDetailsResponse BrandDetailsResponse)
+        public BrandDetailsResponse1(CarRentalAPI.BrandDetailsResponse BrandDetailsResponse)
         {
             this.BrandDetailsResponse = BrandDetailsResponse;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public interface BrandDetailsPortChannel : CarRentalService.BrandDetailsPort, System.ServiceModel.IClientChannel
+    public interface BrandDetailsPortChannel : CarRentalAPI.BrandDetailsPort, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public partial class BrandDetailsPortClient : System.ServiceModel.ClientBase<CarRentalService.BrandDetailsPort>, CarRentalService.BrandDetailsPort
+    public partial class BrandDetailsPortClient : System.ServiceModel.ClientBase<CarRentalAPI.BrandDetailsPort>, CarRentalAPI.BrandDetailsPort
     {
         
         /// <summary>
@@ -200,16 +200,16 @@ namespace CarRentalService
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CarRentalService.BrandDetailsResponse1> CarRentalService.BrandDetailsPort.BrandDetailsAsync(CarRentalService.BrandDetailsRequest1 request)
+        System.Threading.Tasks.Task<CarRentalAPI.BrandDetailsResponse1> CarRentalAPI.BrandDetailsPort.BrandDetailsAsync(CarRentalAPI.BrandDetailsRequest1 request)
         {
             return base.Channel.BrandDetailsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CarRentalService.BrandDetailsResponse1> BrandDetailsAsync(CarRentalService.BrandDetailsRequest BrandDetailsRequest)
+        public System.Threading.Tasks.Task<CarRentalAPI.BrandDetailsResponse1> BrandDetailsAsync(CarRentalAPI.BrandDetailsRequest BrandDetailsRequest)
         {
-            CarRentalService.BrandDetailsRequest1 inValue = new CarRentalService.BrandDetailsRequest1();
+            CarRentalAPI.BrandDetailsRequest1 inValue = new CarRentalAPI.BrandDetailsRequest1();
             inValue.BrandDetailsRequest = BrandDetailsRequest;
-            return ((CarRentalService.BrandDetailsPort)(this)).BrandDetailsAsync(inValue);
+            return ((CarRentalAPI.BrandDetailsPort)(this)).BrandDetailsAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
