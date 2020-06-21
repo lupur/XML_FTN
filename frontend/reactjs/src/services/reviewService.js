@@ -4,7 +4,7 @@ import { authHeader } from "../helpers/authHeader"
 export const reviewService = {
     getAll,
     getAllPendingReviews,
-    remove,
+    reject,
     approve
 }
 
@@ -30,8 +30,8 @@ function getAllPendingReviews() {
         });
 }
 
-function remove(id) {
-    return axios.delete("http://localhost:8084/review/" + id,
+function reject(id) {
+    return axios.put("http://localhost:8084/review/" + id + "/reject",
         {
             headers: authHeader()
         }).then(response => {

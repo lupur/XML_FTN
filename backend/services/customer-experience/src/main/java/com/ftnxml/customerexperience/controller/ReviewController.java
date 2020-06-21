@@ -96,6 +96,14 @@ public class ReviewController {
             return ResponseEntity.badRequest().body("No review with given id");
     }
 
+    @PutMapping(value = "/{id}/reject", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity rejectReview(@PathVariable Long id) {
+        if (reviewService.changeReviewStatus(id, ReviewStatus.REJECTED))
+            return ResponseEntity.ok("Review rejected.");
+        else
+            return ResponseEntity.badRequest().body("No review with given id");
+    }
+
     @PutMapping(value = "/{reviewId}/status/{reviewStatus}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity rejectReview(@PathVariable("reviewId") Long reviewId,
             @PathVariable("reviewStatus") ReviewStatus reviewStatus) {

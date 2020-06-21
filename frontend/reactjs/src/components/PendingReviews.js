@@ -16,7 +16,7 @@ export default class PendingReviews extends Component {
             isAdmin: false
         }
 
-        this.removeReview = this.removeReview.bind(this);
+        this.rejectReview = this.rejectReview.bind(this);
         this.approveReview = this.approveReview.bind(this);
     }
 
@@ -35,8 +35,8 @@ export default class PendingReviews extends Component {
         console.log(this.state.users);
     }
 
-    removeReview(event) {
-        reviewService.remove(event.target.id)
+    rejectReview(event) {
+        reviewService.reject(event.target.id)
             .then(response => {
                 this.componentDidMount();
             })
@@ -80,7 +80,7 @@ export default class PendingReviews extends Component {
                                         <td>{Review.rating}</td>
                                         <td>{Review.creationDate.substring(0, 10)}</td>
                                         <td><Button id={Review.id} onClick={this.approveReview} variant="success">Approve</Button></td>
-                                        <td><Button id={Review.id} onClick={this.removeReview} variant="danger">Remove</Button></td>
+                                        <td><Button id={Review.id} onClick={this.rejectReview} variant="danger">Reject</Button></td>
                                     </tr>
                                 )}
                             </tbody>
