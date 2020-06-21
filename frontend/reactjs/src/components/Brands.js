@@ -12,7 +12,6 @@ export default class Brands extends Component {
 
         this.state = {
             Brands: null,
-            users: null,
             currentUser: null,
             isAdmin: false,
 
@@ -36,7 +35,6 @@ export default class Brands extends Component {
             this.setState({Brands : response })
         });
 
-        console.log(this.state.users);
     }
 
     newBrandChange(event) {
