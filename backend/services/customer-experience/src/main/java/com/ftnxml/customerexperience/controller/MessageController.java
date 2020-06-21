@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,35 +23,36 @@ import com.ftnxml.customerexperience.model.Message;;
 
 @RestController
 @RequestMapping("/message")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MessageController {
-	@Autowired
-	MessageService messageService;
-	
-	@Autowired
-	ModelMapper modelMapper;
-	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity getMessages(){
-		List<MessageDto> messages = messageService.getAllMessages().stream()
-				.map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
-		return ResponseEntity.ok(messages);
-	}
-	
-	@GetMapping(value = "/authors/{authorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Autowired
+    MessageService messageService;
+
+    @Autowired
+    ModelMapper modelMapper;
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMessages() {
+        List<MessageDto> messages = messageService.getAllMessages().stream()
+                .map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok(messages);
+    }
+
+    @GetMapping(value = "/authors/{authorId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMessageByAuthorId(@PathVariable("authorId") Long authorId) {
-		List<MessageDto> messages = messageService.getMessagesByAuthor(authorId).stream()
-				.map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
+        List<MessageDto> messages = messageService.getMessagesByAuthor(authorId).stream()
+                .map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
         return ResponseEntity.ok(messages);
     }
-	
-	@GetMapping(value = "/orders/{requestOrderId}", produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @GetMapping(value = "/orders/{requestOrderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMessageByOrderId(@PathVariable("requestOrderId") Long requestOrderId) {
-		List<MessageDto> messages = messageService.getMessagesByOrderId(requestOrderId).stream()
-				.map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
+        List<MessageDto> messages = messageService.getMessagesByOrderId(requestOrderId).stream()
+                .map(message -> modelMapper.map(message, MessageDto.class)).collect(Collectors.toList());
         return ResponseEntity.ok(messages);
     }
-	
-	@GetMapping(value = "/{messageId}", produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @GetMapping(value = "/{messageId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMessage(@PathVariable("messageId") Long messageId) {
         Message message = messageService.getMessage(messageId);
         if (message == null)
