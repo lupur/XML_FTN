@@ -23,7 +23,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
             builder
                 .HasOne(c => c.CarModel)
                 .WithMany(cb => cb.Cars)
-                .HasForeignKey(c => new { c.CarBrandName, c.CarModelName });
+                .HasForeignKey(c => c.CarModelName);
         }
     }
 }

@@ -9,6 +9,8 @@
     <Compile Remove="Persistence\Migrations\Application\20200620172558_CreateApplicationSchema.Designer.cs" />
     <Compile Remove="Persistence\Migrations\Application\20200620172913_CreateInitialSchema.cs" />
     <Compile Remove="Persistence\Migrations\Application\20200620172913_CreateInitialSchema.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200621000028_UpdateCarModelEntity.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200621000028_UpdateCarModelEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

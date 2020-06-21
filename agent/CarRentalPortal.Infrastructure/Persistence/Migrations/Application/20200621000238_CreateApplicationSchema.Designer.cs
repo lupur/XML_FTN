@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200620230418_CreateApplicationSchema")]
+    [Migration("20200621000238_CreateApplicationSchema")]
     partial class CreateApplicationSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,9 +70,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CarBrandName");
+
                     b.HasIndex("CarCategoryId");
 
-                    b.HasIndex("CarBrandName", "CarModelName");
+                    b.HasIndex("CarModelName");
 
                     b.ToTable("Cars");
                 });
@@ -139,9 +141,12 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.Property<string>("CarBrandName")
                         .HasColumnType("varchar(32)");
 
-                    b.HasKey("Name", "CarBrandName");
+                    b.HasKey("Name");
 
                     b.HasIndex("CarBrandName");
+
+                    b.HasIndex("Name", "CarBrandName")
+                        .IsUnique();
 
                     b.ToTable("CarModels");
                 });
@@ -242,7 +247,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 
                     b.HasOne("CarRentalPortal.Core.Entities.CarModel", "CarModel")
                         .WithMany("Cars")
-                        .HasForeignKey("CarBrandName", "CarModelName");
+                        .HasForeignKey("CarModelName");
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.CarImage", b =>
@@ -258,9 +263,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 {
                     b.HasOne("CarRentalPortal.Core.Entities.CarBrand", "CarBrand")
                         .WithMany("CarModels")
-                        .HasForeignKey("CarBrandName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CarBrandName");
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.Rental", b =>

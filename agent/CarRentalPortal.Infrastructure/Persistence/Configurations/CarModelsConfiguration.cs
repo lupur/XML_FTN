@@ -9,11 +9,15 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<CarModel> builder)
         {
             builder
-                .HasKey(cm => new
+                .HasKey(cm => cm.Name);
+
+            builder
+                .HasIndex(cm => new
                 {
-                    Name = cm.Name,
-                    CarBrandName = cm.CarBrandName
-                });
+                    CarModel = cm.Name,
+                    CarBrand = cm.CarBrandName
+                })
+                .IsUnique(true);
 
             builder
                 .Property(cm => cm.Name)

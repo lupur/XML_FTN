@@ -56,19 +56,19 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 schema: "carrentalportal.application",
                 columns: table => new
                 {
-                    CarBrandName = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 32, nullable: false)
+                    Name = table.Column<string>(maxLength: 32, nullable: false),
+                    CarBrandName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarModels", x => new { x.Name, x.CarBrandName });
+                    table.PrimaryKey("PK_CarModels", x => x.Name);
                     table.ForeignKey(
                         name: "FK_CarModels_CarBrands_CarBrandName",
                         column: x => x.CarBrandName,
                         principalSchema: "carrentalportal.application",
                         principalTable: "CarBrands",
                         principalColumn: "Name",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,11 +111,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Cars_CarModels_CarBrandName_CarModelName",
-                        columns: x => new { x.CarBrandName, x.CarModelName },
+                        name: "FK_Cars_CarModels_CarModelName",
+                        column: x => x.CarModelName,
                         principalSchema: "carrentalportal.application",
                         principalTable: "CarModels",
-                        principalColumns: new[] { "Name", "CarBrandName" },
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -230,16 +230,29 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 column: "CarBrandName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CarModels_Name_CarBrandName",
+                schema: "carrentalportal.application",
+                table: "CarModels",
+                columns: new[] { "Name", "CarBrandName" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_CarBrandName",
+                schema: "carrentalportal.application",
+                table: "Cars",
+                column: "CarBrandName");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cars_CarCategoryId",
                 schema: "carrentalportal.application",
                 table: "Cars",
                 column: "CarCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_CarBrandName_CarModelName",
+                name: "IX_Cars_CarModelName",
                 schema: "carrentalportal.application",
                 table: "Cars",
-                columns: new[] { "CarBrandName", "CarModelName" });
+                column: "CarModelName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_CarId",
