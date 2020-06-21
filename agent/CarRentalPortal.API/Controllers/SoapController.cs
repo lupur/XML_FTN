@@ -94,9 +94,9 @@ namespace CarRentalPortal.API.Controllers
             }
         }
 
-        public class CreateCarBrandSoapRequest
-        {
-            public string Name { get; set; }
-        }
+    }
+    public class CreateCarBrandSoapRequest
+    {
+        public string Name { get; set; }
     }
 }
