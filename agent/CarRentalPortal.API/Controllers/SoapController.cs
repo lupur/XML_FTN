@@ -2,6 +2,7 @@
 using CarRentalPortal.Application._Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
@@ -16,7 +17,7 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpGet("brands")]
-        public async Task<ActionResult> GetCarBrands()
+        public async Task<ActionResult<IEnumerable<object>>> GetCarBrands()
         {
             Task<AllBrandsResponse> task;
             var request = new AllBrandsRequest1
@@ -33,7 +34,7 @@ namespace CarRentalPortal.API.Controllers
 
                 var result = await task;
 
-                return Ok(result);
+                return result.AllBrandsResponse1;
             }
             catch (Exception ex)
             {
@@ -43,7 +44,7 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpGet("brands/{id}")]
-        public async Task<ActionResult> GetCarBrand(long id)
+        public async Task<ActionResult<object>> GetCarBrand(long id)
         {
             Task<BrandByIdResponse1> task;
             var request = new BrandByIdRequest1
@@ -57,7 +58,7 @@ namespace CarRentalPortal.API.Controllers
 
                 var result = await task;
 
-                return Ok(result);
+                return result.BrandByIdResponse.Brand;
             }
             catch (Exception ex)
             {
