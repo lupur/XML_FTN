@@ -1,5 +1,6 @@
 package com.ftnxml.vehiclemanagement.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,172 +32,156 @@ import com.ftnxml.vehiclemanagement.service.VehicleService;
 @RequestMapping("/")
 public class VehicleController {
 
-    @Autowired
-    VehicleService vehicleService;
+	@Autowired
+	VehicleService vehicleService;
 
-    @Autowired
-    ModelMapper modelMapper;
+	@Autowired
+	ModelMapper modelMapper;
 
-    @Autowired
-    BrandService brandService;
+	@Autowired
+	BrandService brandService;
 
-    @Autowired
-    ModelService modelService;
+	@Autowired
+	ModelService modelService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicles() {
-        List<VehicleDto> vehicles = vehicleService.getAllVehicles().stream()
-                .map(vehicle -> modelMapper.map(vehicle, VehicleDto.class)).collect(Collectors.toList());
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity getVehicles() {
+		List<VehicleDto> vehicles = vehicleService.getAllVehicles().stream()
+		        .map(vehicle -> modelMapper.map(vehicle, VehicleDto.class)).collect(Collectors.toList());
 
-        for (VehicleDto v : vehicles) {
-            Model model = modelService.getModel(v.getModel().getId());
-            BrandDto bDto = modelMapper.map(model.getBrand(), BrandDto.class);
-            v.setBrand(bDto);
-        }
-        return ResponseEntity.ok(vehicles);
-    }
+		for (VehicleDto v : vehicles) {
+			Model model = modelService.getModel(v.getModel().getId());
+			BrandDto bDto = modelMapper.map(model.getBrand(), BrandDto.class);
+			v.setBrand(bDto);
+		}
+		return ResponseEntity.ok(vehicles);
+	}
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getVehicle(@PathVariable Long id) {
-        Vehicle v = vehicleService.getVehicle(id);
-        if (v == null)
-            return ResponseEntity.notFound().build();
-        VehicleDto vdto = modelMapper.map(v, VehicleDto.class);
-        return ResponseEntity.ok(vdto);
-    }
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity getVehicle(@PathVariable Long id) {
+		Vehicle v = vehicleService.getVehicle(id);
+		if (v == null)
+			return ResponseEntity.notFound().build();
+		VehicleDto vdto = modelMapper.map(v, VehicleDto.class);
+		return ResponseEntity.ok(vdto);
+	}
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeVehicle(@PathVariable Long id) {
-        if (vehicleService.removeVehicle(id))
-            return ResponseEntity.ok().build();
-        else
-            return ResponseEntity.notFound().build();
-    }
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity removeVehicle(@PathVariable Long id) {
+		if (vehicleService.removeVehicle(id))
+			return ResponseEntity.ok().build();
+		else
+			return ResponseEntity.notFound().build();
+	}
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addVehicle(@RequestBody NewVehicleDto newVehicle) {
-        System.out.println("Vehicle: " + newVehicle.toString());
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity addVehicle(@RequestBody NewVehicleDto newVehicle) {
+		System.out.println("Vehicle: " + newVehicle.toString());
 
-        if (newVehicle == null) {
-            System.out.println("Vehicle: is null");
-            return ResponseEntity.badRequest().build();
-        }
+		if (newVehicle == null) {
+			System.out.println("Vehicle: is null");
+			return ResponseEntity.badRequest().build();
+		}
 
-        if (vehicleService.addVehicle(newVehicle))
-            return ResponseEntity.ok().build();
-        else
-            return ResponseEntity.badRequest().build();
-    }
+		if (vehicleService.addVehicle(newVehicle))
+			return ResponseEntity.ok().build();
+		else
+			return ResponseEntity.badRequest().build();
+	}
 
-    @RequestMapping(method = RequestMethod.GET, value = "/custom")
-    public ResponseEntity getFilteredVehicles(@RequestParam Map<String, String> customQuery) {
+	@RequestMapping(method = RequestMethod.GET, value = "/filter")
+	public ResponseEntity getFilteredVehicles(@RequestParam Map<String, String> customQuery) {
 
-        if (!customQuery.containsKey("location")) {
-            return ResponseEntity.badRequest().build();
-        }
+		if (!customQuery.containsKey("location")) {
+			return ResponseEntity.badRequest().build();
+		}
 
-        /*
-         * How to get this from the order processing service? if
-         * (!customQuery.containsKey("pickupDate")){ return
-         * ResponseEntity.badRequest().build(); }
-         * 
-         * if (!customQuery.containsKey("returnDate")){ return
-         * ResponseEntity.badRequest().build(); }
-         */
+		/*
+		 * How to get this from the order processing service? if
+		 * (!customQuery.containsKey("pickupDate")){ return
+		 * ResponseEntity.badRequest().build(); }
+		 * 
+		 * if (!customQuery.containsKey("returnDate")){ return
+		 * ResponseEntity.badRequest().build(); }
+		 */
 
-        List<Vehicle> filteredVehicles = vehicleService.getVehiclesByLocation(customQuery.get("location"));
+		List<Vehicle> vehicles = vehicleService.getVehiclesByLocation(customQuery.get("location"));
+		List<Vehicle> filteredVehicles = new ArrayList<Vehicle>();
 
-        if (customQuery.containsKey("model")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getModel().getId() != Long.parseLong(customQuery.get("model"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+		for (Vehicle v : vehicles) {
 
-        if (customQuery.containsKey("pricelist")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getPriceList().getId() != Long.parseLong(customQuery.get("pricelist"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("model")) {
+				if (v.getModel().getId() != Long.parseLong(customQuery.get("model"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("collisiondamagewaiver")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getColDamageWaiver().getId() != Long.parseLong(customQuery.get("collisiondamagewaiver"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("pricelist")) {
+				if (v.getPriceList().getId() != Long.parseLong(customQuery.get("pricelist"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("discount")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getDiscount().getId() != Long.parseLong(customQuery.get("discount"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("collisiondamagewaiver")) {
+				if (v.getColDamageWaiver().getId() != Long.parseLong(customQuery.get("collisiondamagewaiver"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("fueltype")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getFuelType().getId() != Long.parseLong(customQuery.get("fueltype"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("discount")) {
+				if (v.getDiscount().getId() != Long.parseLong(customQuery.get("discount"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("transmissiontype")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getTransmissionType().getId() != Long.parseLong(customQuery.get("transmissiontype"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("fueltype")) {
+				if (v.getFuelType().getId() != Long.parseLong(customQuery.get("fueltype"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("classtype")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getClassType().getId() != Long.parseLong(customQuery.get("classtype"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("transmissiontype")) {
+				if (v.getTransmissionType().getId() != Long.parseLong(customQuery.get("transmissiontype"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("maxmileage")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getMileage() > Integer.parseInt(customQuery.get("maxmileage"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("classtype")) {
+				if (v.getClassType().getId() != Long.parseLong(customQuery.get("classtype"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("insurance")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.isInsurance() != Boolean.parseBoolean(customQuery.get("insurance"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("maxmileage")) {
+				if (v.getMileage() > Integer.parseInt(customQuery.get("maxmileage"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("numberofseats")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getNumberOfSeats() != Integer.parseInt(customQuery.get("numberofseats"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("insurance")) {
+				if (v.isInsurance() != Boolean.parseBoolean(customQuery.get("insurance"))) {
+					continue;
+				}
+			}
 
-        if (customQuery.containsKey("rating")) {
-            for (Vehicle v : filteredVehicles) {
-                if (v.getRating() < Float.parseFloat(customQuery.get("rating"))) {
-                    filteredVehicles.remove(v);
-                }
-            }
-        }
+			if (customQuery.containsKey("numberofseats")) {
+				if (v.getNumberOfSeats() != Integer.parseInt(customQuery.get("numberofseats"))) {
+					continue;
+				}
+			}
 
-        List<VehicleDto> vehicles = filteredVehicles.stream().map(vehicle -> modelMapper.map(vehicle, VehicleDto.class))
-                .collect(Collectors.toList());
+			if (customQuery.containsKey("rating")) {
+				if (v.getRating() < Float.parseFloat(customQuery.get("rating"))) {
+					continue;
+				}
+			}
 
-        return ResponseEntity.ok(vehicles);
-    }
+			filteredVehicles.add(v);
+		}
+
+		List<VehicleDto> vdto = filteredVehicles.stream().map(vehicle -> modelMapper.map(vehicle, VehicleDto.class))
+		        .collect(Collectors.toList());
+
+		return ResponseEntity.ok(vdto);
+	}
 }
