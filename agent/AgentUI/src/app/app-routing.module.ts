@@ -30,7 +30,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [RoleType.Administrator] }
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  {
+    // fallback route
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
