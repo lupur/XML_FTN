@@ -24,7 +24,7 @@ public class Config extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/service/*");
     }
 
-    @Bean(name = "brandDetailsWsdl")
+    @Bean(name = "carRentalWsdl")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema brandSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("BrandDetailsPort");
@@ -36,6 +36,6 @@ public class Config extends WsConfigurerAdapter {
 
     @Bean
     public XsdSchema brandSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("Brand.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("CarRentalAPI.xsd"));
     }
 }
