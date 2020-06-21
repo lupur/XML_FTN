@@ -20,6 +20,6 @@ export class DemoService {
   }
 
   create(name: any) {
-    return this.http.post(`${environment.apiUrl}/soap/brands`, { name: name });
+    return this.http.post(`${environment.apiUrl}/soap/brands`, name);
   }
 }
