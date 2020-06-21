@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService } from '@app/shared/components/alert/alert.service';
-import { CarsService } from '../cars.service';
-import { first } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FuelType } from '@app/models/car';
+import { CarBrand } from '@app/models/car-brand';
 import { CarCategory } from '@app/models/car-category';
 import { CarModel } from '@app/models/car-model';
-import { CarBrand } from '@app/models/car-brand';
-import { FuelType } from '@app/models/car';
+import { AlertService } from '@app/shared/components/alert/alert.service';
+import { first } from 'rxjs/operators';
+import { CarsService } from '../cars.service';
 
 @Component({
   selector: 'app-cars-add',
@@ -46,7 +46,7 @@ export class CarsAddComponent implements OnInit {
       carModel: ['', Validators.required],
       productionYear: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
       fuelType: ['', Validators.required]
-    })
+    });
 
     this.carsService.getCarCategories()
       .pipe(first())

@@ -1,6 +1,6 @@
 <h1>Car Brands</h1>
 
-<a class="btn btn-primary my-2" [routerLink]="[ '/carbrands/add' ]" routerLinkActive="active">Add Car Brand</a>
+<a class="btn btn-primary my-2" [routerLink]="['/admin/carbrands/add']" routerLinkActive="active">Add Car Brand</a>
 
 <table class="table table-striped">
 	<thead>
@@ -17,9 +17,9 @@
 			</td>
 		</tr>
 		<tr *ngIf="!carBrands">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
-        </tr>
+			<td colspan="4" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
 	</tbody>
 </table>

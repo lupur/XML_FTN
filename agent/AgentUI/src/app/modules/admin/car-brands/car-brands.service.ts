@@ -19,7 +19,7 @@ export class CarBrandsService {
   }
   
   create(carBrand: CarBrand){
-    this.http.post(`${environment.apiUrl}/carbrands`, carBrand);
+    return this.http.post(`${environment.apiUrl}/carbrands`, carBrand);
   }
   
 }
