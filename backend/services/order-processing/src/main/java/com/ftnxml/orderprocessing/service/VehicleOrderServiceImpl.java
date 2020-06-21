@@ -1,5 +1,6 @@
 package com.ftnxml.orderprocessing.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,16 @@ public class VehicleOrderServiceImpl implements VehicleOrderService {
 		} catch(Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	@Override
+	public List<Long> findVehiclesAvailableInRange(Date startDate, Date endDate, List<Long> vehicleIDs) {
+		try {
+			return vehicleOrderRepository.findVehiclesAvailableInRange(startDate, endDate, vehicleIDs);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

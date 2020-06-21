@@ -24,4 +24,6 @@ public interface OrderRequestService {
 	List<OrderRequest> getOrderRequestByOwnerId(Long ownerId);
 
 	boolean changeOrderRequestStatus(Long orderId, OrderRequestStatus newStatus);
+	
+	boolean createRequestByOwner(OrderRequest newOrderRequest);
 }
