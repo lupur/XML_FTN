@@ -1,0 +1,13 @@
+<h1>Car Models</h1>
+
+<a [routerLink]="[ '/admin/carbrands' ]" routerLinkActive="active">Browse Car Brands</a>
+
+<div class="row my-2" *ngFor="let carModel of carModels">
+	<div class="card">
+		<img src="https://www.stevensegallery.com/640/360" alt="...">
+		<div class="card-body">
+			<h3 class="card-title">{{carModel.carBrandName}}</h3>
+			<h3 class="card-subtitle">{{carModel.name}}</h3>
+		</div>
+	</div>
+</div>

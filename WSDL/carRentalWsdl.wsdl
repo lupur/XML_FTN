@@ -1,130 +1,130 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="www.soapservice.ftnxml.com/model/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="www.soapservice.ftnxml.com/model/" targetNamespace="www.soapservice.ftnxml.com/model/">
-<wsdl:types>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="www.soapservice.ftnxml.com/model/">
-<xs:element name="BrandByIdRequest">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="id" type="xs:long"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="AddBrandRequest">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="name" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="AllBrandsRequest">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="test" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="BrandByIdResponse">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="Brand" type="tns:Brand"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="AllBrandsResponse">
-<xs:complexType>
-<xs:sequence>
-<xs:element maxOccurs="unbounded" minOccurs="0" name="Brands" type="tns:Brand"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="AddBrandResponse">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="result" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:complexType name="Brand">
-<xs:sequence>
-<xs:element name="id" type="xs:long"/>
-<xs:element name="name" type="xs:string"/>
-<xs:sequence>
-<xs:element maxOccurs="unbounded" minOccurs="0" name="Model" type="tns:Model"/>
-</xs:sequence>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="Model">
-<xs:sequence>
-<xs:element name="id" type="xs:long"/>
-<xs:element name="name" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
-</xs:schema>
-</wsdl:types>
-<wsdl:message name="BrandByIdResponse">
-<wsdl:part element="tns:BrandByIdResponse" name="BrandByIdResponse"> </wsdl:part>
-</wsdl:message>
-<wsdl:message name="AllBrandsResponse">
-<wsdl:part element="tns:AllBrandsResponse" name="AllBrandsResponse"> </wsdl:part>
-</wsdl:message>
-<wsdl:message name="AddBrandResponse">
-<wsdl:part element="tns:AddBrandResponse" name="AddBrandResponse"> </wsdl:part>
-</wsdl:message>
-<wsdl:message name="BrandByIdRequest">
-<wsdl:part element="tns:BrandByIdRequest" name="BrandByIdRequest"> </wsdl:part>
-</wsdl:message>
-<wsdl:message name="AddBrandRequest">
-<wsdl:part element="tns:AddBrandRequest" name="AddBrandRequest"> </wsdl:part>
-</wsdl:message>
-<wsdl:message name="AllBrandsRequest">
-<wsdl:part element="tns:AllBrandsRequest" name="AllBrandsRequest"> </wsdl:part>
-</wsdl:message>
-<wsdl:portType name="BrandDetailsPort">
-<wsdl:operation name="BrandById">
-<wsdl:input message="tns:BrandByIdRequest" name="BrandByIdRequest"> </wsdl:input>
-<wsdl:output message="tns:BrandByIdResponse" name="BrandByIdResponse"> </wsdl:output>
-</wsdl:operation>
-<wsdl:operation name="AllBrands">
-<wsdl:input message="tns:AllBrandsRequest" name="AllBrandsRequest"> </wsdl:input>
-<wsdl:output message="tns:AllBrandsResponse" name="AllBrandsResponse"> </wsdl:output>
-</wsdl:operation>
-<wsdl:operation name="AddBrand">
-<wsdl:input message="tns:AddBrandRequest" name="AddBrandRequest"> </wsdl:input>
-<wsdl:output message="tns:AddBrandResponse" name="AddBrandResponse"> </wsdl:output>
-</wsdl:operation>
-</wsdl:portType>
-<wsdl:binding name="BrandDetailsPortSoap11" type="tns:BrandDetailsPort">
-<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-<wsdl:operation name="BrandById">
-<soap:operation soapAction=""/>
-<wsdl:input name="BrandByIdRequest">
-<soap:body use="literal"/>
-</wsdl:input>
-<wsdl:output name="BrandByIdResponse">
-<soap:body use="literal"/>
-</wsdl:output>
-</wsdl:operation>
-<wsdl:operation name="AllBrands">
-<soap:operation soapAction=""/>
-<wsdl:input name="AllBrandsRequest">
-<soap:body use="literal"/>
-</wsdl:input>
-<wsdl:output name="AllBrandsResponse">
-<soap:body use="literal"/>
-</wsdl:output>
-</wsdl:operation>
-<wsdl:operation name="AddBrand">
-<soap:operation soapAction=""/>
-<wsdl:input name="AddBrandRequest">
-<soap:body use="literal"/>
-</wsdl:input>
-<wsdl:output name="AddBrandResponse">
-<soap:body use="literal"/>
-</wsdl:output>
-</wsdl:operation>
-</wsdl:binding>
-<wsdl:service name="BrandDetailsPortService">
-<wsdl:port binding="tns:BrandDetailsPortSoap11" name="BrandDetailsPortSoap11">
-<soap:address location="http://e8b55d152e36:8083/service/brand-details"/>
-</wsdl:port>
-</wsdl:service>
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="www.soapservice.ftnxml.com/model/">
+			<xs:element name="BrandByIdRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AddBrandRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AllBrandsRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="test" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BrandByIdResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Brand" type="tns:Brand" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AllBrandsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="Brands" type="tns:Brand" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AddBrandResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="result" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="Brand">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element name="name" type="xs:string" />
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="Model" type="tns:Model" />
+					</xs:sequence>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Model">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="BrandByIdResponse">
+		<wsdl:part element="tns:BrandByIdResponse" name="BrandByIdResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AllBrandsResponse">
+		<wsdl:part element="tns:AllBrandsResponse" name="AllBrandsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AddBrandResponse">
+		<wsdl:part element="tns:AddBrandResponse" name="AddBrandResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="BrandByIdRequest">
+		<wsdl:part element="tns:BrandByIdRequest" name="BrandByIdRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AddBrandRequest">
+		<wsdl:part element="tns:AddBrandRequest" name="AddBrandRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AllBrandsRequest">
+		<wsdl:part element="tns:AllBrandsRequest" name="AllBrandsRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="BrandDetailsPort">
+		<wsdl:operation name="BrandById">
+			<wsdl:input message="tns:BrandByIdRequest" name="BrandByIdRequest"></wsdl:input>
+			<wsdl:output message="tns:BrandByIdResponse" name="BrandByIdResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AllBrands">
+			<wsdl:input message="tns:AllBrandsRequest" name="AllBrandsRequest"></wsdl:input>
+			<wsdl:output message="tns:AllBrandsResponse" name="AllBrandsResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AddBrand">
+			<wsdl:input message="tns:AddBrandRequest" name="AddBrandRequest"></wsdl:input>
+			<wsdl:output message="tns:AddBrandResponse" name="AddBrandResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BrandDetailsPortSoap11" type="tns:BrandDetailsPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="BrandById">
+			<soap:operation soapAction="" />
+			<wsdl:input name="BrandByIdRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="BrandByIdResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AllBrands">
+			<soap:operation soapAction="" />
+			<wsdl:input name="AllBrandsRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="AllBrandsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AddBrand">
+			<soap:operation soapAction="" />
+			<wsdl:input name="AddBrandRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="AddBrandResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BrandDetailsPortService">
+		<wsdl:port binding="tns:BrandDetailsPortSoap11" name="BrandDetailsPortSoap11">
+			<soap:address location="http://localhost:8080/soap/service/brand-details" />
+		</wsdl:port>
+	</wsdl:service>
 </wsdl:definitions>
