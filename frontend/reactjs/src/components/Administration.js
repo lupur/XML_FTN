@@ -42,6 +42,9 @@ export default class Administration extends Component {
                         <tr><td>
                             <Link className="tableLink" to={'/TransmissionTypes/'}>TransmissionTypes</Link>
                         </td></tr>
+                        <tr><td>
+                            <Link className="tableLink" to={'/PendingReviews/'}>Pending Reviews</Link>
+                        </td></tr>
                     </tbody>
                 </Table>
             </Card.Body>
