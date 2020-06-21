@@ -1,4 +1,5 @@
-﻿using CarRentalPortal.Application.CarBrands.Queries.GetCarBrands;
+﻿using CarRentalPortal.Application.CarBrands.Queries.GetCarBrandByName;
+using CarRentalPortal.Application.CarBrands.Queries.GetCarBrands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -12,6 +13,12 @@ namespace CarRentalPortal.API.Controllers
         public async Task<ActionResult<CarBrandVm>> Get()
         {
             return await Mediator.Send(new GetCarBrandsQuery());
+        }
+
+        [HttpGet("{carBrandName}")]
+        public async Task<ActionResult<CarBrandDto>> Get(string carBrandName)
+        {
+            return await Mediator.Send(new GetCarBrandByNameQuery { CarBrandName = carBrandName });
         }
     }
 }
