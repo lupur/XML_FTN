@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '@app/models';
+import { RoleType } from '@app/models/role';
 import { environment } from '@env/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,6 +25,10 @@ export class AuthService {
 
   public get userValue(): User {
     return this.userSubject.value;
+  }
+
+  public get isAdmin(): boolean {
+    return this.userValue && this.userValue.roles.some(r => r.name === RoleType.Administrator);
   }
 
   login(username, password) {

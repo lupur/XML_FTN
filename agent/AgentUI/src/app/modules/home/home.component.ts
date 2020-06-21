@@ -14,4 +14,8 @@ export class HomeComponent {
     this.user = this.authService.userValue;
   }
 
+  get isAdmin() {
+    return this.authService.isAdmin;
+  }
+
 }
