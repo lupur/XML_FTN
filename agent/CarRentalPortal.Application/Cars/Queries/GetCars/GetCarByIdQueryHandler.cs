@@ -21,6 +21,7 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
         public async Task<CarDto> Handle(GetCarByIdQuery request, CancellationToken cancellationToken)
         {
             return _mapper.Map<CarDto>(await _appContext.Cars
+                .Include(c => c.Reviews)
                 .Include(c => c.CarCategory)
                 .SingleOrDefaultAsync(c => c.Id == request.Id));
         }
