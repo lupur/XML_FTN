@@ -15,7 +15,7 @@
 					</tr>
 					<tr>
 						<td>Category</td>
-						<td>{{car.carCategoryName}}</td>
+						<td>{{car.carCategory}}</td>
 					</tr>
 					<tr>
 						<td>Production Year</td>
@@ -48,5 +48,29 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+</div>
+
+<div *ngIf="car">
+	<div class="card col-md-8 offset-md-2 mt-3">
+		<div class="d-flex flex-row bd-highlight">
+			<div class="p-2 mr-auto bd-highlight">
+				<h2>Reviews</h2>
+			</div>
+		</div>
+		<div class="d-flex flex-row bd-highlight mb-2">
+			<div class="p-2 mr-auto bd-highlight">
+				<h6 class="card-subtitle text-muted">Average Rating: {{car.averageRating | number: '.1-1'}}</h6>
+			</div>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item" *ngFor="let review of car.reviews">
+				<div class="d-flex bd-highlight mb-2">
+					<div class="p-2 mr-auto bd-highlight"><strong>{{review.authorDisplayName}}</strong></div>
+					<div class="p-2 bd-highlight">{{review.createdOn | date}}</div>
+				</div>
+				{{review.comment}}
+			</li>
+		</ul>
 	</div>
 </div>

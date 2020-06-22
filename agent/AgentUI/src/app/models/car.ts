@@ -14,7 +14,8 @@ export interface Car {
 	mileageConstraint?: number;
 	numberOfSeats: number;
 	averageRating: number;
-	images:CarImage[];
+	images: CarImage[];
+	reviews: Review[];
 }
 
 export interface CarImage {
@@ -22,18 +23,29 @@ export interface CarImage {
 	uri: string;
 }
 
+export interface Review {
+	id: number;
+	authorId: number;
+	carId: number;
+	authorDisplayName: string;
+	authorEmail: string;
+	rating: number;
+	comment: string;
+	createdOn: Date;
+}
+
 export interface CarVm {
 	cars: Car[];
 }
 
-export enum FuelType{
+export enum FuelType {
 	Gasoline,
 	Diesel,
 	Hybrid,
 	Electric
 }
 
-export enum TransmissionType{
+export enum TransmissionType {
 	Manual,
 	Automatic,
 	SemiAutomatic

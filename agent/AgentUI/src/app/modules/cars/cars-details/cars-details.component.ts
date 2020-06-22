@@ -12,7 +12,7 @@ import { first } from 'rxjs/operators';
 })
 export class CarsDetailsComponent implements OnInit {
   id: number;
-  car: any;
+  car: Car;
 
   constructor(
     private route: ActivatedRoute,
