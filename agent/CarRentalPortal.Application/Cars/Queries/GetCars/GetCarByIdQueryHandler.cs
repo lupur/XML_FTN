@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CarRentalPortal.Application._Common.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,7 +21,8 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
         public async Task<CarDto> Handle(GetCarByIdQuery request, CancellationToken cancellationToken)
         {
             return _mapper.Map<CarDto>(await _appContext.Cars
-                .FindAsync(request.Id));
+                .Include(c => c.CarCategory)
+                .SingleOrDefaultAsync(c => c.Id == request.Id));
         }
     }
 }

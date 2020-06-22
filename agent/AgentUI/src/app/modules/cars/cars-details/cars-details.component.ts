@@ -12,11 +12,10 @@ import { first } from 'rxjs/operators';
 })
 export class CarsDetailsComponent implements OnInit {
   id: number;
-  car: Car;
+  car: any;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private carsService: CarsService
   ) { }
 

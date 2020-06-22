@@ -32,3 +32,9 @@ export enum FuelType{
 	Hybrid,
 	Electric
 }
+
+export enum TransmissionType{
+	Manual,
+	Automatic,
+	SemiAutomatic
+}
