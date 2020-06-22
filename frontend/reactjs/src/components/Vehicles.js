@@ -3,6 +3,7 @@ import {vehicleService} from '../services/vehicleService'
 import {Card, Table, Button, Form } from 'react-bootstrap'
 import {authService} from '../services/authService'
 import {Role} from '../helpers/role'
+import {Link} from 'react-router-dom'
 
 export default class Vehicles extends Component {
 
@@ -54,7 +55,7 @@ export default class Vehicles extends Component {
                     <tbody>
                     {this.state.Vehicles && this.state.Vehicles.map((Vehicle, i) =>
                         <tr key={i}>
-                            <td>{Vehicle.id}</td>
+                            <td><Link to={{pathname: '/vehicles/'+ Vehicle.id, state: {vehicleDetails: Vehicle}}}>{Vehicle.id}</Link></td>
                             <td>{Vehicle.brand.name} {Vehicle.model.name}</td>
                             <td>{Vehicle.pricelist.dailyPrice} Eur  </td>
                             <td>{Vehicle.colDamageWaiver.price} Eur</td>
