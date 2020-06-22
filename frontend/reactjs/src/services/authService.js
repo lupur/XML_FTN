@@ -25,6 +25,7 @@ function login(username, password) {
             // let decodedJwtJsonData = window.atob(jwtData)
             let decodedJwtData = jwtDecode(jwtData)
             console.log("Decoded data : " + decodedJwtData.authorities[0].substring(5))
+            console.log(decodedJwtData)
 
 
             var curUser = {
