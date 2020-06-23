@@ -63,6 +63,9 @@
 				<h6 class="card-subtitle text-muted">Average Rating: {{car.averageRating | number: '.1-1'}}</h6>
 			</div>
 		</div>
+		<div class="card-body">
+			<app-review></app-review>
+		</div>
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item" *ngFor="let review of car.reviews">
 				<div class="d-flex bd-highlight mb-2">

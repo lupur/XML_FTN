@@ -24,14 +24,14 @@ export interface CarImage {
 }
 
 export interface Review {
-	id: number;
+	id?: number;
 	authorId: number;
 	carId: number;
 	authorDisplayName: string;
 	authorEmail: string;
 	rating: number;
 	comment: string;
-	createdOn: Date;
+	createdOn?: Date;
 }
 
 export interface CarVm {

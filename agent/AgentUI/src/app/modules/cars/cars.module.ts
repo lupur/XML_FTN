@@ -6,6 +6,7 @@ import { CarsListComponent } from './cars-list/cars-list.component';
 import { CarsAddComponent } from './cars-add/cars-add.component';
 import { CarsEditComponent } from './cars-edit/cars-edit.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
+import { ReviewModule } from '../review/review.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CarsDetailsComponent } from './cars-details/cars-details.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CarsRoutingModule
+    CarsRoutingModule,
+    ReviewModule
   ]
 })
 export class CarsModule { }
