@@ -21,6 +21,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Extensions
             builder.ApplyConfiguration(new CarModelsConfiguration());
             builder.ApplyConfiguration(new CarCategoriesConfiguration());
             builder.ApplyConfiguration(new CarImagesConfiguration());
+            builder.ApplyConfiguration(new ReviewsConfiguration());
             builder.ApplyConfiguration(new RentalsConfiguration());
             builder.ApplyConfiguration(new RentalBundlesConfiguration());
 

@@ -11,6 +11,10 @@
     <Compile Remove="Persistence\Migrations\Application\20200620172913_CreateInitialSchema.Designer.cs" />
     <Compile Remove="Persistence\Migrations\Application\20200621000028_UpdateCarModelEntity.cs" />
     <Compile Remove="Persistence\Migrations\Application\20200621000028_UpdateCarModelEntity.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200623182140_UpdateReviewsConfigurationCreatedOn.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200623182140_UpdateReviewsConfigurationCreatedOn.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200623185731_test.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200623185731_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
