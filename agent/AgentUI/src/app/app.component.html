@@ -1,12 +1,20 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-	<div class="navbar-nav">
-		<a class="nav-item nav-link" routerLink="/" routerLinkActive="active"
-			[routerLinkActiveOptions]="{exact: true}">Home</a>
-		<a class="nav-item nav-link" [routerLink]="[ '/admin/carbrands' ]" routerLinkActive="active" *ngIf="isAdmin">Car Brands (preview)</a>
-		<a class="nav-item nav-link" [routerLink]="[ '/cars' ]" routerLinkActive="active" *ngIf="isAdmin">Manage Cars</a>
-		<a class="nav-item nav-link" [routerLink]="[ '/demo' ]" routerLinkActive="active" *ngIf="isAdmin">Demo Car Brands</a>
-		<a class="nav-item nav-link" (click)="logout()">Logout</a>
+<nav class="navbar sticky-top navbar-expand text-light navbar-dark bg-dark" *ngIf="user">
+	<a class="nav-item nav-link navbar-brand" routerLink="/" routerLinkActive="active"
+		[routerLinkActiveOptions]="{exact: true}">CarRentalPortal</a>
+	<div class="navbar-nav mr-auto">
+		
+		<a class="nav-item nav-link" [routerLink]="[ '/cars' ]" routerLinkActive="active" *ngIf="isAdmin">Manage
+			Cars
+		</a>
+		<a class="nav-item nav-link" [routerLink]="[ '/admin/carbrands' ]" routerLinkActive="active" *ngIf="isAdmin">Car
+			Brands
+		</a>
+		<a class="nav-item nav-link" [routerLink]="[ '/demo' ]" routerLinkActive="active" *ngIf="isAdmin">Demo
+			Car
+			Brands
+		</a>
 	</div>
+	<a class="btn btn-outline-danger" (click)="logout()">Logout</a>
 </nav>
 
 <div class="container-md">
@@ -14,10 +22,8 @@
 	<router-outlet></router-outlet>
 </div>
 
-<footer class="footer p-1" [ngClass]="{ 'bg-light': user }" *ngIf="user">
+<footer class="footer bg-dark p-1" [ngClass]="{ 'bg-light': user }" *ngIf="user">
 	<div class="container p-2">
-		<p>
-			<a class="text-muted" href="https://github.com/lupur/XML_FTN" target="_blank">GitHub</a>
-		</p>
+		<a class="nav-item nav-link text-muted" href="https://github.com/lupur/XML_FTN" target="_blank">GitHub</a>
 	</div>
 </footer>

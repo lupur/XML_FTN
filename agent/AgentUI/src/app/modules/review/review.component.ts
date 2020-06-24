@@ -34,7 +34,7 @@ export class ReviewComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       comment: ['', [Validators.required]],
-      rating: ['', Validators.required]
+      rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]]
     });
   }
 

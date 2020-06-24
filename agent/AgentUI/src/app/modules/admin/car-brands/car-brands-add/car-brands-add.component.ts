@@ -12,7 +12,6 @@ import { CarBrandsService } from '../car-brands.service';
 })
 export class CarBrandsAddComponent implements OnInit {
   form: FormGroup;
-
   loading = false;
   submitted = false;
 
@@ -43,9 +42,9 @@ export class CarBrandsAddComponent implements OnInit {
     this.loading = true;
     this.carBrandsService.create(this.form.value)
       .pipe(first())
-      .subscribe(_ => {
+      .subscribe(data => {
         this.alertService.success('Car brand added successfully', { keepAfterRouteChange: true, autoClose: true });
-        this.router.navigate(['.', { relativeTo: this.route }]);
+        this.router.navigateByUrl('/');
       }, error => {
         this.alertService.error(error);
         this.loading = false;
