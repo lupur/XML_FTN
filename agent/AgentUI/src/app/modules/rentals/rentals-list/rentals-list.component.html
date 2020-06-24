@@ -1,0 +1,33 @@
+<h1>Rentals</h1>
+
+<table class="table table-striped my-2">
+	<thead>
+		<tr>
+			<th>Internal ID</th>
+			<th>Bundle ID</th>
+			<th>Car</th>
+			<th>User</th>
+			<th>Pickup Date</th>
+			<th>Return Date</th>
+			<th>Status</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let rentalRequest of rentalRequests">
+			<td>{{rentalRequest.id}}</td>
+			<td>{{rentalRequest.rentalBundleId}}</td>
+			<td>{{rentalRequest.carBrand}} {{rentalRequest.carModel}} {{rentalRequest.carYear}}</td>
+			<td>{{rentalRequest.userInfo}}</td>
+			<td>{{rentalRequest.pickupDate | date:'short'}}</td>
+			<td>{{rentalRequest.returnDate | date:'short'}}</td>
+			<td>{{rentalRequest.status}}</td>
+			<td></td>
+		</tr>
+		<tr *ngIf="!rentalRequests">
+			<td colspan="100%" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
+	</tbody>
+</table>

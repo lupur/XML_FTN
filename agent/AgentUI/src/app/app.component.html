@@ -3,6 +3,7 @@
 		<a class="nav-item nav-link" routerLink="/" routerLinkActive="active"
 			[routerLinkActiveOptions]="{exact: true}">Home</a>
 		<a class="nav-item nav-link" [routerLink]="[ '/admin/carbrands' ]" routerLinkActive="active" *ngIf="isAdmin">Car Brands (preview)</a>
+		<a class="nav-item nav-link" [routerLink]="[ '/cars' ]" routerLinkActive="active" *ngIf="isAdmin">Manage Cars</a>
 		<a class="nav-item nav-link" [routerLink]="[ '/demo' ]" routerLinkActive="active" *ngIf="isAdmin">Demo Car Brands</a>
 		<a class="nav-item nav-link" (click)="logout()">Logout</a>
 	</div>

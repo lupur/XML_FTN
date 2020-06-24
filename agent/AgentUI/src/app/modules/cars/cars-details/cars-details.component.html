@@ -70,9 +70,12 @@
 			<li class="list-group-item" *ngFor="let review of car.reviews">
 				<div class="d-flex bd-highlight mb-2">
 					<div class="p-2 mr-auto bd-highlight"><strong>{{review.authorDisplayName}}</strong></div>
-					<div class="p-2 bd-highlight">{{review.createdOn | date: 'medium'}}</div>
+					<div class="p-2 bd-highlight"><span class="text-muted">{{review.createdOn | date: 'medium'}}</span>
+					</div>
 				</div>
-				{{review.comment}}
+				<div class="d-flex bd-highlight mb-2">
+					<div class="p-2 mr-auto bd-highlight">{{review.comment}}</div>
+				</div>
 			</li>
 		</ul>
 	</div>

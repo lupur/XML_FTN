@@ -36,6 +36,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [RoleType.Administrator] }
   },
+  { path: 'rentals', loadChildren: () => import('./modules/rentals/rentals.module').then(m => m.RentalsModule) },
   {
     // fallback route
     path: '**',
