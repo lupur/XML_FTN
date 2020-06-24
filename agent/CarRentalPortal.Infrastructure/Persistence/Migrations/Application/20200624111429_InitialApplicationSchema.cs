@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 {
-    public partial class CreateApplicationSchema : Migration
+    public partial class InitialApplicationSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,9 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    NumberOfItems = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
@@ -153,8 +156,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     RentalBundleId = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    RequestedOn = table.Column<DateTime>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    RequestedOn = table.Column<DateTime>(nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Remarks = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -189,7 +191,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     AuthorEmail = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     Comment = table.Column<string>(nullable: true),
-                    CreatedOn = table.Column<DateTime>(nullable: false)
+                    CreatedOn = table.Column<DateTime>(nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
                 constraints: table =>
                 {

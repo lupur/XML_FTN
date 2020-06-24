@@ -1,6 +1,7 @@
 ﻿using CarRentalPortal.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MySql.Data.EntityFrameworkCore.Extensions;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Configurations
 {
@@ -17,6 +18,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
 
             builder
                 .Property(r => r.RequestedOn)
+                .ForMySQLHasDefaultValueSql("CURRENT_TIMESTAMP")
                 .ValueGeneratedOnAdd();
                 
             builder

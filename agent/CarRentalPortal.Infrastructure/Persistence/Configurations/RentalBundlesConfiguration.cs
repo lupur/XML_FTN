@@ -14,6 +14,15 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
             builder
                 .Property(rb => rb.Id)
                 .ValueGeneratedOnAdd();
+
+            builder
+                .Property(rb => rb.CreatedOn)
+                .ValueGeneratedOnAdd();
+
+            builder
+                .HasMany(rb => rb.Rentals)
+                .WithOne(r => r.RentalBundle)
+                .HasForeignKey(r => r.RentalBundleId);
         }
     }
 }

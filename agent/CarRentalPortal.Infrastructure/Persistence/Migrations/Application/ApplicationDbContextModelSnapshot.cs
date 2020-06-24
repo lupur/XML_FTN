@@ -169,7 +169,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 
                     b.Property<DateTime>("RequestedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime");
@@ -190,6 +191,13 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("NumberOfItems")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
