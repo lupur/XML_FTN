@@ -1,6 +1,8 @@
 ﻿using CarRentalPortal.Core.Entities;
+using CarRentalPortal.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MySql.Data.EntityFrameworkCore.Extensions;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Configurations
 {
@@ -17,6 +19,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
 
             builder
                 .Property(rb => rb.CreatedOn)
+                .ValueGeneratedOnAdd();
+
+            builder
+                .Property(rb => rb.Status)
+                .ForMySQLHasDefaultValue(RentalStatus.Pending)
                 .ValueGeneratedOnAdd();
 
             builder

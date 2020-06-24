@@ -2,7 +2,7 @@
 using CarRentalPortal.Core.Entities;
 using System;
 
-namespace CarRentalPortal.Application.Rentals.CreateRentalRequest
+namespace CarRentalPortal.Application.Rentals.Commands.CreateRentalRequest
 {
     public class RentalRequestDto : IMapFrom<Rental>
     {

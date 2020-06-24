@@ -5,7 +5,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalPortal.Application.Rentals.CreateRentalRequest
+namespace CarRentalPortal.Application.Rentals.Commands.CreateRentalRequest
 {
     public class CreateRentalRequestCommandHandler : IRequestHandler<CreateRentalRequestCommand, int>
     {
