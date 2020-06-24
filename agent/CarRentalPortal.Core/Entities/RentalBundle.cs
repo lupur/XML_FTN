@@ -5,6 +5,11 @@ namespace CarRentalPortal.Core.Entities
 {
     public class RentalBundle
     {
+        public RentalBundle()
+        {
+            Rentals = new List<Rental>();
+        }
+
         public int Id { get; set; }
         public int NumberOfItems { get; set; }
         public DateTime CreatedOn { get; set; }

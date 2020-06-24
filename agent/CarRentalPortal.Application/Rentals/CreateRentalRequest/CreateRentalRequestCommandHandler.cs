@@ -1,4 +1,5 @@
-﻿using CarRentalPortal.Application._Common.Interfaces;
+﻿using AutoMapper;
+using CarRentalPortal.Application._Common.Interfaces;
 using CarRentalPortal.Core.Entities;
 using MediatR;
 using System.Threading;
@@ -8,32 +9,35 @@ namespace CarRentalPortal.Application.Rentals.CreateRentalRequest
 {
     public class CreateRentalRequestCommandHandler : IRequestHandler<CreateRentalRequestCommand, int>
     {
+        private readonly IMapper _mapper;
         private readonly IApplicationDbContext _appContext;
 
-        public CreateRentalRequestCommandHandler(IApplicationDbContext appContext)
+        public CreateRentalRequestCommandHandler(IMapper mapper, IApplicationDbContext appContext)
         {
+            _mapper = mapper;
             _appContext = appContext;
         }
 
         public async Task<int> Handle(CreateRentalRequestCommand request, CancellationToken cancellationToken)
         {
-            var entity = new RentalBundle { NumberOfItems = request.Rentals.Count };
-
-            await _appContext.RentalBundles.AddAsync(entity);
-            await _appContext.SaveChangesAsync(cancellationToken);
-
-            foreach (var rentalRequest in request.Rentals)
+            var entity = new RentalBundle
             {
-                _appContext.Rentals.Add(new Rental
+                NumberOfItems = request.Rentals.Count
+            };
+
+            foreach (var rental in request.Rentals)
+            {
+                entity.Rentals.Add(new Rental
                 {
-                    RentalBundleId = entity.Id,
-                    UserId = rentalRequest.UserId,
-                    CarId = rentalRequest.CarId,
-                    StartDate = rentalRequest.StartDate,
-                    EndDate = rentalRequest.EndDate,
-                    Remarks = rentalRequest.Remarks
+                    CarId = rental.CarId,
+                    UserId = rental.UserId,
+                    StartDate = rental.StartDate,
+                    EndDate = rental.EndDate,
+                    Remarks = rental.Remarks
                 });
             }
+
+            await _appContext.RentalBundles.AddAsync(entity);
             await _appContext.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
