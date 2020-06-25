@@ -2,16 +2,15 @@
 	<a class="nav-item nav-link navbar-brand" routerLink="/" routerLinkActive="active"
 		[routerLinkActiveOptions]="{exact: true}">CarRentalPortal</a>
 	<div class="navbar-nav mr-auto">
-		
-		<a class="nav-item nav-link" [routerLink]="[ '/cars' ]" routerLinkActive="active" *ngIf="isAdmin">Manage
-			Cars
+
+		<a class="nav-item nav-link" [routerLink]="[ '/cars' ]" routerLinkActive="active" *ngIf="isAdmin">
+			Manage Cars
 		</a>
-		<a class="nav-item nav-link" [routerLink]="[ '/admin/carbrands' ]" routerLinkActive="active" *ngIf="isAdmin">Car
-			Brands
+		<a class="nav-item nav-link" [routerLink]="[ '/admin' ]" routerLinkActive="active" *ngIf="isAdmin">
+			Admin Dashboard
 		</a>
-		<a class="nav-item nav-link" [routerLink]="[ '/demo' ]" routerLinkActive="active" *ngIf="isAdmin">Demo
-			Car
-			Brands
+		<a class="nav-item nav-link" [routerLink]="[ '/demo' ]" routerLinkActive="active" *ngIf="isAdmin">
+			Demo Car Brands
 		</a>
 	</div>
 	<a class="btn btn-outline-danger" (click)="logout()">Logout</a>

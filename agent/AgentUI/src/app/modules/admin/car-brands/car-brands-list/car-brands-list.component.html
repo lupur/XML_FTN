@@ -1,6 +1,6 @@
 <h1>Car Brands</h1>
 
-<a class="btn btn-primary my-2" [routerLink]="['/admin/carbrands/add']" routerLinkActive="active">Add Car Brand</a>
+<a class="btn btn-primary my-2" routerLink="./add" routerLinkActive="active">Add Car Brand</a>
 
 <table class="table table-striped">
 	<thead>
@@ -12,9 +12,9 @@
 	<tbody>
 		<tr *ngFor="let carBrand of carBrands">
 			<td>{{carBrand.name}}</td>
-			<td>
-				<a routerLink="details/{{carBrand.name}}">Browse Car Models</a>
-			</td>
+			<!-- <td>
+				<a [routerLink]="['/details', carBrand.id]" routerLinkActive="active" >Browse Car Models</a>
+			</td> -->
 		</tr>
 		<tr *ngIf="!carBrands">
 			<td colspan="4" class="text-center">

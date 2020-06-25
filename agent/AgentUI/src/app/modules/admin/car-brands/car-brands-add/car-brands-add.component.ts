@@ -44,7 +44,7 @@ export class CarBrandsAddComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
         this.alertService.success('Car brand added successfully', { keepAfterRouteChange: true, autoClose: true });
-        this.router.navigateByUrl('/');
+        this.router.navigate([]);
       }, error => {
         this.alertService.error(error);
         this.loading = false;
