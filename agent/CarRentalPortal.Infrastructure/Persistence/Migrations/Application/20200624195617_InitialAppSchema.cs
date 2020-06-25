@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 {
-    public partial class InitialApplicationSchema : Migration
+    public partial class InitialAppSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     NumberOfItems = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false, defaultValue: 1),
                     CreatedOn = table.Column<DateTime>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn)
                 },
@@ -94,7 +95,7 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     Mileage = table.Column<long>(nullable: false),
                     MileageConstraint = table.Column<long>(nullable: true),
                     NumberOfSeats = table.Column<byte>(nullable: false),
-                    AverageRating = table.Column<float>(nullable: false)
+                    AverageRating = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {

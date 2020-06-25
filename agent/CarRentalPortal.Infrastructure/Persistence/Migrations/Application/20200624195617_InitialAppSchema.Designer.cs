@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200624111429_InitialApplicationSchema")]
-    partial class InitialApplicationSchema
+    [Migration("20200624195617_InitialAppSchema")]
+    partial class InitialAppSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,8 +32,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.Property<int>("AgentId")
                         .HasColumnType("int");
 
-                    b.Property<float>("AverageRating")
-                        .HasColumnType("float");
+                    b.Property<double?>("AverageRating")
+                        .HasColumnType("double");
 
                     b.Property<string>("CarBrandName")
                         .HasColumnType("varchar(32)");
@@ -201,6 +201,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 
                     b.Property<int>("NumberOfItems")
                         .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.HasKey("Id");
 

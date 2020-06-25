@@ -30,8 +30,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.Property<int>("AgentId")
                         .HasColumnType("int");
 
-                    b.Property<float>("AverageRating")
-                        .HasColumnType("float");
+                    b.Property<double?>("AverageRating")
+                        .HasColumnType("double");
 
                     b.Property<string>("CarBrandName")
                         .HasColumnType("varchar(32)");

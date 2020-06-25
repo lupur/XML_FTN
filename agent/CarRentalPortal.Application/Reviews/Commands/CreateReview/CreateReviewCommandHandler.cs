@@ -27,6 +27,11 @@ namespace CarRentalPortal.Application.Reviews.Commands.CreateReview
                 Comment = request.Comment
             };
 
+            var reviewedCar = await _appContext.Cars.FindAsync(request.CarId);
+            reviewedCar.AverageRating = (reviewedCar.AverageRating + request.Rating) / reviewedCar.Reviews.Count;
+            
+            _appContext.Cars.Update(reviewedCar);
+
             await _appContext.Reviews.AddAsync(entity);
             await _appContext.SaveChangesAsync(cancellationToken);
 

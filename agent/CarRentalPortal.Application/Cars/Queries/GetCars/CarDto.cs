@@ -34,8 +34,7 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
             profile.CreateMap<Car, CarDto>()
                 .ForMember(d => d.CarCategoryName, opt => opt.MapFrom(s => s.CarCategory.Name))
                 .ForMember(d => d.CarBrand, opt => opt.MapFrom(s => s.CarBrandName))
-                .ForMember(d => d.CarModel, opt => opt.MapFrom(s => s.CarModelName))
-                .ForMember(d => d.AverageRating, opt => opt.MapFrom(s => (double)s.Reviews.Sum(r => r.Rating) / s.Reviews.Count()));
+                .ForMember(d => d.CarModel, opt => opt.MapFrom(s => s.CarModelName));
         }
     }
 }
