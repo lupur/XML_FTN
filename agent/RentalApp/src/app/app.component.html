@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<!-- main content container -->
+<div class="container">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div>
+
+<footer class="footer mt-auto py-2" [ngClass]="{'bg-dark': currentUser}">
+    <div class="container">
+        <span>
+            <a href="https://github.com/lupur/XML_FTN" class="nav-link text-light" target="_blank">GitHub</a>
+        </span>
+    </div>
+</footer>
