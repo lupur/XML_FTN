@@ -1,5 +1,7 @@
+import { RoleType } from './auth/role';
+import { AuthGuard } from './auth/auth.guard';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 
 const routes: Routes = [
@@ -7,6 +9,14 @@ const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard],
+    data: {
+      roles: [RoleType.Admin]
+    }
   },
   {
     path: 'auth',
