@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminRootComponent } from './admin-root/admin-root.component';
+import { ManageBrandsComponent } from './manage-brands/manage-brands.component';
+import { ManageCategoriesComponent } from './manage-categories/manage-categories.component';
 
 
 @NgModule({
   declarations: [
-    AdminRootComponent],
+    AdminRootComponent,
+    ManageBrandsComponent,
+    ManageCategoriesComponent],
   imports: [
     CommonModule,
     AdminRoutingModule

@@ -1,3 +1,4 @@
+import { RoleType } from './role';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -25,6 +26,14 @@ export class AuthService {
 
   public get userValue() {
     return this.userSubject.value;
+  }
+
+  isAuthorized() {
+    return !!this.userValue;
+  }
+
+  hasRole(role: RoleType) {
+    return this.isAuthorized() && this.userValue.roles.some(r => r.name === role);
   }
 
   login(usernameOrEmail: string, password: string) {
