@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminRootComponent,
-    children: [
+    children:[
       {
         path: 'brands',
         component: ManageBrandsComponent

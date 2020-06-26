@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertService
   ) {
-    if (this.authService.userValue) {
+    if (this.authService.isAuthorized()) {
       this.router.navigate(['/']);
     }
   }

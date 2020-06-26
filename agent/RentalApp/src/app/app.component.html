@@ -1,14 +1,27 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" routerlink="/admin" *ngIf="isAdmin">Administration</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+            <a class="nav-link" [routerLink]="[ '/admin' ]" routerLinkActive="active">Administration</a>
+        </li>
+    </ul>
+
+    <span class="navbar-text mx-4">
+        <span class="badge badge-danger" *ngIf="isAdmin">Admin</span>
+    </span>
+
+    <div class="navbar-text">
+        <a class="btn btn-primary" (click)="logout()">Logout</a>
     </div>
 </nav>
 
 <!-- main content container -->
 <div class="container">
-    <alert></alert>
+    <div class="container mt-3">
+        <alert></alert>
+    </div>
     <router-outlet></router-outlet>
 </div>
 

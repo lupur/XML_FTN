@@ -26,7 +26,9 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertService
   ) {
-    if (this.authService.userValue) {
+    console.info('Checking if user is already signed in.');
+
+    if (this.authService.isAuthorized()) {
       this.router.navigate(['/home']);
     }
   }
