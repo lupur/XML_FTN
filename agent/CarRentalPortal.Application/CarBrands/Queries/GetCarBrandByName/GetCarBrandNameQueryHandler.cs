@@ -25,13 +25,13 @@ namespace CarRentalPortal.Application.CarBrands.Queries.GetCarBrandByName
         public async Task<CarBrandDto> Handle(GetCarBrandByNameQuery request, CancellationToken cancellationToken)
         {
             var entity = await _appContext.CarBrands
-                .Where(cb => cb.Name == request.CarBrandName)
+                .Where(cb => cb.Name == request.Name)
                 .Include(cb => cb.CarModels)
                 .SingleOrDefaultAsync(cancellationToken);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(CarBrand), request.CarBrandName);
+                throw new NotFoundException(nameof(CarBrand), request.Name);
             }
 
             return _mapper.Map<CarBrandDto>(entity);

@@ -1,4 +1,5 @@
 ﻿using CarRentalPortal.Application.CarBrands.Commands.CreateCarBrand;
+using CarRentalPortal.Application.CarBrands.Commands.DeleteCarBrand;
 using CarRentalPortal.Application.CarBrands.Queries.GetCarBrandByName;
 using CarRentalPortal.Application.CarBrands.Queries.GetCarBrands;
 using Microsoft.AspNetCore.Authorization;
@@ -16,16 +17,24 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(new GetCarBrandsQuery());
         }
 
-        [HttpGet("{carBrandName}")]
-        public async Task<ActionResult<CarBrandDto>> Get(string carBrandName)
+        [HttpGet("{name}")]
+        public async Task<ActionResult<CarBrandDto>> Get(string name)
         {
-            return await Mediator.Send(new GetCarBrandByNameQuery { CarBrandName = carBrandName });
+            return await Mediator.Send(new GetCarBrandByNameQuery { Name = name });
         }
 
         [HttpPost]
-        public async Task<ActionResult<object>> Create(CreateCarBrandCommand command)
+        public async Task<ActionResult<string>> Create(CreateCarBrandCommand command)
         {
             return await Mediator.Send(command);
+        }
+
+        [HttpDelete("{name}")]
+        public async Task<ActionResult> Delete(string name)
+        {
+            await Mediator.Send(new DeleteCarBrandCommand { Name = name });
+
+            return NoContent();
         }
     }
 }

@@ -5,6 +5,6 @@ namespace CarRentalPortal.Application.CarBrands.Queries.GetCarBrandByName
 {
     public class GetCarBrandByNameQuery : IRequest<CarBrandDto>
     {
-        public string CarBrandName { get; set; }
+        public string Name { get; set; }
     }
 }

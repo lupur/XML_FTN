@@ -1,6 +1,4 @@
-﻿using CarRentalPortal.Application.CarBrands.Queries.GetCarBrands;
-using MediatR;
-using System.Collections.Generic;
+﻿using MediatR;
 
 namespace CarRentalPortal.Application.CarBrands.Commands.CreateCarBrand
 {
