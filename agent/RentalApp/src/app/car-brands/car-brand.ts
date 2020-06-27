@@ -4,4 +4,9 @@ export interface CarBrandVm {
 
 export interface CarBrand {
 	name: string;
+	carModels: CarModel[];
+}
+
+export interface CarModel {
+	name: string;
 }

@@ -1,3 +1,6 @@
+import { ModelAddComponent } from './manage-models/model-add/model-add.component';
+import { ModelDetailComponent } from './manage-models/model-detail/model-detail.component';
+import { ModelListComponent } from './manage-models/model-list/model-list.component';
 import { CategoryListComponent } from './manage-categories/category-list/category-list.component';
 import { CategoryAddComponent } from './manage-categories/category-add/category-add.component';
 import { BrandDetailComponent } from './manage-brands/brand-detail/brand-detail.component';
@@ -8,6 +11,7 @@ import { ManageBrandsComponent } from './manage-brands/manage-brands.component';
 import { AdminRootComponent } from './admin-root/admin-root.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { componentFactoryName } from '@angular/compiler';
 
 
 const routes: Routes = [
@@ -25,7 +29,21 @@ const routes: Routes = [
           },
           {
             path: 'detail/:name',
-            component: BrandDetailComponent
+            component: BrandDetailComponent,
+            children: [
+              {
+                path: '',
+                component: ModelListComponent
+              },
+              {
+                path: 'add',
+                component: ModelAddComponent
+              },
+              {
+                path: ':name',
+                component: ModelDetailComponent
+              }
+            ]
           },
           {
             path: '',

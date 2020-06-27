@@ -1,3 +1,4 @@
+import { AlertService } from '@app/shared/alert/alert.service';
 import { CarBrandService } from './../../../car-brands/car-brand.service';
 import { CarBrand } from '@app/car-brands/car-brand';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,9 @@ export class BrandListComponent implements OnInit {
   carBrands: CarBrand[];
   deleting = false;
 
-  constructor(private carBrandService: CarBrandService) { }
+  constructor(
+    private carBrandService: CarBrandService,
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.carBrandService.getAll()
@@ -26,6 +29,9 @@ export class BrandListComponent implements OnInit {
       .pipe(first())
       .subscribe(() => {
         this.carBrands = this.carBrands.filter(x => x.name !== name);
+        this.alertService.success('Brand deleted successfully', {
+          autoClose: true
+        });
         this.deleting = false;
       });
   }

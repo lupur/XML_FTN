@@ -15,7 +15,7 @@ export class CarBrandService {
   }
 
   get(name: string) {
-    return this.http.get<any>(`${environment.apiUrl}/carbrands/${name}`)
+    return this.http.get<CarBrand>(`${environment.apiUrl}/carbrands/${name}`)
   }
 
   create(carBrand: CarBrand) {

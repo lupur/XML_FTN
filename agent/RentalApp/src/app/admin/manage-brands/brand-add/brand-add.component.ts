@@ -3,7 +3,7 @@ import { AlertService } from '@app/shared/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { first, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-brand-add',
@@ -42,17 +42,16 @@ export class BrandAddComponent implements OnInit {
 
     this.loading = true;
     this.carBrandService.create(this.form.value)
-      .subscribe(
-        data => {
-          this.alertService.success('Car brand added successfully', {
-            keepAfterRouteChange: true, autoClose: true
-          });
-          this.router.navigate(['../', { relativeTo: this.route }]);
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
+      .pipe(first())
+      .subscribe(data => {
+        this.alertService.success('Car brand added successfully', {
+          keepAfterRouteChange: true, autoClose: true
         });
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }, error => {
+        this.alertService.error(error);
+        this.loading = false;
+      });
   }
 
 }

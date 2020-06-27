@@ -1,3 +1,4 @@
+import { AlertService } from '@app/shared/alert/alert.service';
 import { first } from 'rxjs/operators';
 import { CarCategoryService } from './../../../car-categories/car-category.service';
 import { CarCategory } from './../../../car-categories/car-category';
@@ -13,7 +14,10 @@ export class CategoryListComponent implements OnInit {
 
   deleting = false;
 
-  constructor(private carCategoryService: CarCategoryService) { }
+  constructor(
+    private carCategoryService: CarCategoryService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
     this.carCategoryService.getAll()
@@ -27,6 +31,9 @@ export class CategoryListComponent implements OnInit {
       .pipe(first())
       .subscribe(() => {
         this.categories = this.categories.filter(x => x.id !== id);
+        this.alertService.success('Category deleted successfully', {
+          autoClose: true
+        });
         this.deleting = false;
       });
   }
