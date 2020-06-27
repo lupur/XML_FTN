@@ -1,3 +1,4 @@
+import { ManageModelsComponent } from './manage-models/manage-models.component';
 import { ModelAddComponent } from './manage-models/model-add/model-add.component';
 import { ModelDetailComponent } from './manage-models/model-detail/model-detail.component';
 import { ModelListComponent } from './manage-models/model-list/model-list.component';
@@ -29,25 +30,29 @@ const routes: Routes = [
           },
           {
             path: 'detail/:name',
-            component: BrandDetailComponent,
-            children: [
-              {
-                path: '',
-                component: ModelListComponent
-              },
-              {
-                path: 'add',
-                component: ModelAddComponent
-              },
-              {
-                path: ':name',
-                component: ModelDetailComponent
-              }
-            ]
+            component: BrandDetailComponent
           },
           {
             path: '',
             component: BrandListComponent
+          }
+        ]
+      },
+      {
+        path: 'models',
+        component: ManageModelsComponent,
+        children: [
+          {
+            path: 'add',
+            component: ModelAddComponent
+          },
+          {
+            path: 'detail/:name',
+            component: ModelDetailComponent
+          },
+          {
+            path: '',
+            component: ModelListComponent
           }
         ]
       },

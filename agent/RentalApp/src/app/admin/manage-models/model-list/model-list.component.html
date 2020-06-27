@@ -1,6 +1,6 @@
 <a class="btn btn-outline-primary p-2 mb-4" [routerLink]="[ './add' ]" routerLinkActive="active">Add Car Model</a>
 
-<table class="table table-hoverable table-responsive-sm" *ngIf="carModels">
+<table class="table table-hover table-responsive-sm" *ngIf="carModels">
 	<thead class="bg-light">
 		<tr>
 			<th>Model</th>
@@ -13,7 +13,7 @@
 				{{carModel.name}}
 			</td>
 			<td align="right">
-				<a [routerLink]="['./', carModel.name]" routerLinkActive="active"
+				<a [routerLink]="['./detail', carModel.name]" routerLinkActive="active"
 					class="btn btn-sm btn-outline-info mr-1">Details</a>
 				<button (click)="delete(carModel.name)" class="btn btn-sm btn-outline-danger" [disabled]="deleting">
 					<span *ngIf="deleting" class="spinner-border spinner-border-sm"></span>

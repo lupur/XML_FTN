@@ -1,3 +1,5 @@
+import { CarBrandService } from './../../../car-brands/car-brand.service';
+import { CarBrand } from '@app/car-brands/car-brand';
 import { first } from 'rxjs/operators';
 import { AlertService } from '@app/shared/alert/alert.service';
 import { CarModelService } from '@app/car-models/car-model.service';
@@ -12,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModelAddComponent implements OnInit {
   form: FormGroup;
-  selectedBrandName: string;
+  carBrands: CarBrand[];
 
   loading = false;
   submitted = false;
@@ -22,17 +24,18 @@ export class ModelAddComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private carModelService: CarModelService,
+    private carBrandService: CarBrandService,
     private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
-    this.route.parent.paramMap.subscribe(params =>
-      this.selectedBrandName = params.get('name')
-    );
+    this.carBrandService.getAll()
+      .pipe(first())
+      .subscribe(carBrandVm => this.carBrands = carBrandVm.carBrands);
 
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
-      brandName: [`${this.selectedBrandName}`]
+      brandName: ['', [Validators.required]]
     });
   }
 
@@ -50,7 +53,7 @@ export class ModelAddComponent implements OnInit {
     this.carModelService.create(this.form.value)
       .pipe(first())
       .subscribe(
-        _ => {
+        (success: string) => {
           this.alertService.success('Model added successfully', {
             keepAfterRouteChange: true, autoClose: true
           });
