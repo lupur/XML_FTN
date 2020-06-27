@@ -12,12 +12,6 @@ namespace CarRentalPortal.API.Controllers
     [Authorize(Roles = Roles.Administrator)]
     public class CarCategoriesController : AbstractApiController
     {
-        [HttpPost]
-        public async Task<ActionResult<int>> Create(CreateCarCategoryCommand command)
-        {
-            return await Mediator.Send(command);
-        }
-
         [HttpGet]
         public async Task<ActionResult<CarCategoryVm>> Get()
         {
@@ -30,11 +24,16 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(new GetCarCategoryQuery { Id = id });
         }
 
+        [HttpPost]
+        public async Task<ActionResult<int>> Create(CreateCarCategoryCommand command)
+        {
+            return await Mediator.Send(command);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteCarCategoryCommand { Id = id });
-
             return NoContent();
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CarRentalPortal.Application.Rentals.Queries.GetRentalRequests
+namespace CarRentalPortal.Application.Rentals.Queries
 {
     public class RentalVm
     {

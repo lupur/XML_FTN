@@ -3,7 +3,7 @@ using CarRentalPortal.Application._Common.Mappings;
 using CarRentalPortal.Core.Entities;
 using System;
 
-namespace CarRentalPortal.Application.Rentals.Queries.GetRentalRequests
+namespace CarRentalPortal.Application.Rentals.Queries
 {
     public class RentalDto : IMapFrom<Rental>
     {
