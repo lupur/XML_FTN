@@ -26,7 +26,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
             builder
                 .HasOne(cm => cm.CarBrand)
                 .WithMany(cb => cb.CarModels)
-                .HasForeignKey(cm => cm.CarBrandName);
+                .HasForeignKey(cm => cm.CarBrandName)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
