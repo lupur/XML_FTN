@@ -1,5 +1,5 @@
 import { environment } from '@env/environment';
-import { CarBrand } from './car-brand';
+import { CarBrand, CarBrandVm } from './car-brand';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -11,7 +11,7 @@ export class CarBrandService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<unknown[]>(`${environment.apiUrl}/carbrands`);
+    return this.http.get<CarBrandVm>(`${environment.apiUrl}/carbrands`);
   }
 
   get(name: string) {
@@ -19,6 +19,11 @@ export class CarBrandService {
   }
 
   create(carBrand: CarBrand) {
-    return this.http.post(`${environment.apiUrl}/carbrands`, carBrand);
+    var result = this.http.post(`${environment.apiUrl}/carbrands`, carBrand);
+    return result;
+  }
+
+  delete(name: string) {
+    return this.http.delete(`${environment.apiUrl}/carbrands/${name}`);
   }
 }

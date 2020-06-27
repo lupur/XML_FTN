@@ -33,7 +33,7 @@ export class ManageBrandsComponent implements OnInit {
     this.carBrandService.getAll()
       .pipe(first())
       .subscribe(data => {
-        this.carBrands = data;
+        this.carBrands = data.carBrands;
         this.loading = false;
       }, error => {
         this.alertService.error(error);

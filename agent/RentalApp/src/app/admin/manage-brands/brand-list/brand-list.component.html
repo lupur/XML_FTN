@@ -1,0 +1,30 @@
+<a class="btn btn-primary p-2 mb-4" [routerLink]="[ './add' ]" routerLinkActive="active">Add Car Brand</a>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th style="width: 80%;">Car Brand</th>
+			<th style="width: 20%;"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let carBrand of carBrands">
+			<td>
+				{{carBrand.name}}
+			</td>
+			<td>
+				<a [routerLink]="['./detail', carBrand.name]" routerLinkActive="active"
+					class="btn btn-sm btn-outline-info mr-1">Details</a>
+				<button (click)="delete(carBrand.name)" class="btn btn-sm btn-outline-danger" [disabled]="carBrand.isDeleting">
+					<span *ngIf="deleting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!deleting">Delete</span>
+				</button>
+			</td>
+		</tr>
+		<tr *ngIf="!carBrands">
+			<td colspan="100%" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
+	</tbody>
+</table>

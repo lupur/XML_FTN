@@ -1,3 +1,6 @@
+import { BrandDetailComponent } from './manage-brands/brand-detail/brand-detail.component';
+import { BrandListComponent } from './manage-brands/brand-list/brand-list.component';
+import { BrandAddComponent } from './manage-brands/brand-add/brand-add.component';
 import { ManageCategoriesComponent } from './manage-categories/manage-categories.component';
 import { ManageBrandsComponent } from './manage-brands/manage-brands.component';
 import { AdminRootComponent } from './admin-root/admin-root.component';
@@ -9,10 +12,24 @@ const routes: Routes = [
   {
     path: '',
     component: AdminRootComponent,
-    children:[
+    children: [
       {
         path: 'brands',
-        component: ManageBrandsComponent
+        component: ManageBrandsComponent,
+        children: [
+          {
+            path: 'add',
+            component: BrandAddComponent
+          },
+          {
+            path: 'detail/:name',
+            component: BrandDetailComponent
+          },
+          {
+            path: '',
+            component: BrandListComponent
+          }
+        ]
       },
       {
         path: 'categories',
