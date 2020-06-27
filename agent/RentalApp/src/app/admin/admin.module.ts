@@ -9,6 +9,9 @@ import { ManageCategoriesComponent } from './manage-categories/manage-categories
 import { BrandListComponent } from './manage-brands/brand-list/brand-list.component';
 import { BrandDetailComponent } from './manage-brands/brand-detail/brand-detail.component';
 import { BrandAddComponent } from './manage-brands/brand-add/brand-add.component';
+import { CategoryListComponent } from './manage-categories/category-list/category-list.component';
+import { CategoryAddComponent } from './manage-categories/category-add/category-add.component';
+import { CategoryDetailComponent } from './manage-categories/category-detail/category-detail.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { BrandAddComponent } from './manage-brands/brand-add/brand-add.component
     ManageCategoriesComponent,
     BrandListComponent,
     BrandDetailComponent,
-    BrandAddComponent],
+    BrandAddComponent,
+    CategoryListComponent,
+    CategoryAddComponent,
+    CategoryDetailComponent],
   imports: [
     CommonModule,
     FormsModule,

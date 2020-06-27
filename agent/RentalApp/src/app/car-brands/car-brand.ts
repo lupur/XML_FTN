@@ -3,6 +3,5 @@ export interface CarBrandVm {
 }
 
 export interface CarBrand {
-	id: number;
 	name: string;
 }

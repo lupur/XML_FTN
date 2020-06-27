@@ -17,12 +17,11 @@
     </div>
 </nav>
 
-<!-- main content container -->
-<div class="container">
-    <div class="container mt-3">
-        <alert></alert>
+<div class="container-fluid row">
+    <div class="col-md-8 offset-md-2 mt-4">
+        <router-outlet></router-outlet>
     </div>
-    <router-outlet></router-outlet>
+    <alert class="col-md-2"></alert>
 </div>
 
 <footer class="footer mt-auto py-2" [ngClass]="{'bg-dark': currentUser}">

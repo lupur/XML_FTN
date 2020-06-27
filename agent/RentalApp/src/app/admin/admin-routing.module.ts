@@ -1,3 +1,5 @@
+import { CategoryListComponent } from './manage-categories/category-list/category-list.component';
+import { CategoryAddComponent } from './manage-categories/category-add/category-add.component';
 import { BrandDetailComponent } from './manage-brands/brand-detail/brand-detail.component';
 import { BrandListComponent } from './manage-brands/brand-list/brand-list.component';
 import { BrandAddComponent } from './manage-brands/brand-add/brand-add.component';
@@ -33,7 +35,17 @@ const routes: Routes = [
       },
       {
         path: 'categories',
-        component: ManageCategoriesComponent
+        component: ManageCategoriesComponent,
+        children: [
+          {
+            path: 'add',
+            component: CategoryAddComponent
+          },
+          {
+            path: '',
+            component: CategoryListComponent
+          }
+        ]
       }
     ]
   }
