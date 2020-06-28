@@ -6,7 +6,8 @@
 			<th>Internal ID</th>
 			<th>Bundle ID</th>
 			<th>Car</th>
-			<th>User</th>
+			<th>Requestee</th>
+			<th>Contact Info</th>
 			<th>Pickup Date</th>
 			<th>Return Date</th>
 			<th>Status</th>
@@ -18,9 +19,10 @@
 			<td>{{rentalRequest.id}}</td>
 			<td>{{rentalRequest.rentalBundleId}}</td>
 			<td>{{rentalRequest.carBrand}} {{rentalRequest.carModel}} {{rentalRequest.carYear}}</td>
-			<td>{{rentalRequest.userInfo}}</td>
-			<td>{{rentalRequest.pickupDate | date:'short'}}</td>
-			<td>{{rentalRequest.returnDate | date:'short'}}</td>
+			<td>{{rentalRequest.customerFullName}}</td>
+			<td>{{rentalRequest.customerContactInfo}}</td>
+			<td>{{rentalRequest.pickupDate | date:'mediumDate'}}</td>
+			<td>{{rentalRequest.returnDate | date:'mediumDate'}}</td>
 			<td>{{rentalRequest.status}}</td>
 			<td></td>
 		</tr>

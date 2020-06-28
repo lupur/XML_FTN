@@ -9,7 +9,8 @@ export interface Rental {
 	carBrand: string;
 	carModel: string;
 	carYear: number;
-	userInfo: string;
+	customerFullName: string;
+	customerContactInfo:string;
 	pickupDate: Date;
 	returnDate: Date;
 	status: RentalStatus;
