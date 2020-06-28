@@ -26,9 +26,9 @@
 			<td align="right">
 				<a [routerLink]="['./detail', category.id]" routerLinkActive="active"
 					class="btn btn-sm btn-outline-info mr-1">Details</a>
-				<button (click)="delete(category.id)" class="btn btn-sm btn-outline-danger" [disabled]="deleting">
-					<span *ngIf="deleting" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!deleting">Delete</span>
+				<button (click)="delete(category.id)" class="btn btn-sm btn-outline-danger" [disabled]="category.isDeleting">
+					<span *ngIf="category.isDeleting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!category.isDeleting">Delete</span>
 				</button>
 			</td>
 		</tr>

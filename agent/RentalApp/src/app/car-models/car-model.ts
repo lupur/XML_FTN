@@ -5,4 +5,5 @@ export interface CarModelVm {
 export interface CarModel {
 	name: string;
 	carBrandName: string;
+	isDeleting: boolean;
 }

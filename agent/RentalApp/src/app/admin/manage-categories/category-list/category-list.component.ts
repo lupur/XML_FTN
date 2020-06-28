@@ -1,8 +1,8 @@
+import { Component, OnInit } from '@angular/core';
+import { CarCategory } from '@app/car-categories/car-category';
+import { CarCategoryService } from '@app/car-categories/car-category.service';
 import { AlertService } from '@app/shared/alert/alert.service';
 import { first } from 'rxjs/operators';
-import { CarCategoryService } from './../../../car-categories/car-category.service';
-import { CarCategory } from './../../../car-categories/car-category';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-category-list',
@@ -11,8 +11,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryListComponent implements OnInit {
   categories: CarCategory[];
-
-  deleting = false;
 
   constructor(
     private carCategoryService: CarCategoryService,
@@ -26,7 +24,9 @@ export class CategoryListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.deleting = true;
+    const category = this.categories.find(x => x.id == id);
+    category.isDeleting = true;
+
     this.carCategoryService.delete(id)
       .pipe(first())
       .subscribe(() => {
@@ -34,7 +34,6 @@ export class CategoryListComponent implements OnInit {
         this.alertService.success('Category deleted successfully', {
           autoClose: true
         });
-        this.deleting = false;
       });
   }
 }

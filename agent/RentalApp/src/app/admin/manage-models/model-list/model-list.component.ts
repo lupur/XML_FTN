@@ -14,8 +14,6 @@ export class ModelListComponent implements OnInit {
   carModels: CarModel[];
   selectedCarBrand: string;
 
-  deleting = false;
-
   constructor(
     private route: ActivatedRoute,
     private carModelService: CarModelService,
@@ -35,7 +33,9 @@ export class ModelListComponent implements OnInit {
   }
 
   delete(name: string) {
-    this.deleting = true;
+    const carModel = this.carModels.find(x => x.name == name);
+    carModel.isDeleting = true;
+
     this.carModelService.delete(name)
       .pipe(first())
       .subscribe(() => {
@@ -43,7 +43,6 @@ export class ModelListComponent implements OnInit {
         this.alertService.success('Model deleted successfully', {
           autoClose: true
         });
-        this.deleting = false;
       });
   }
 

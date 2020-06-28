@@ -1,8 +1,8 @@
-import { AlertService } from '@app/shared/alert/alert.service';
-import { CarBrandService } from './../../../car-brands/car-brand.service';
-import { CarBrand } from '@app/car-brands/car-brand';
 import { Component, OnInit } from '@angular/core';
+import { CarBrandService } from '@app/car-brands/car-brand.service';
+import { AlertService } from '@app/shared/alert/alert.service';
 import { first } from 'rxjs/operators';
+import { CarBrand } from '@app/car-brands/car-brand';
 
 @Component({
   selector: 'app-brand-list',
@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./brand-list.component.css']
 })
 export class BrandListComponent implements OnInit {
-  carBrands = null;
+  carBrands: CarBrand[];
 
   constructor(
     private carBrandService: CarBrandService,

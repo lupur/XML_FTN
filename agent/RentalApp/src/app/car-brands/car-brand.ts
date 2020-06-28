@@ -4,4 +4,5 @@ export interface CarBrandVm {
 
 export class CarBrand {
 	name: string;
+  isDeleting: boolean;
 }
