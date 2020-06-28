@@ -14,6 +14,7 @@ import { AdminRootComponent } from './admin-root/admin-root.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { componentFactoryName } from '@angular/compiler';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
     path: '',
     component: AdminRootComponent,
     children: [
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent
+      },
       {
         path: 'brands',
         component: ManageBrandsComponent,

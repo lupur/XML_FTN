@@ -16,6 +16,7 @@ import { ManageModelsComponent } from './manage-models/manage-models.component';
 import { ModelAddComponent } from './manage-models/model-add/model-add.component';
 import { ModelListComponent } from './manage-models/model-list/model-list.component';
 import { ModelDetailComponent } from './manage-models/model-detail/model-detail.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ModelDetailComponent } from './manage-models/model-detail/model-detail.
     ManageModelsComponent,
     ModelAddComponent,
     ModelListComponent,
-    ModelDetailComponent],
+    ModelDetailComponent,
+    AdminDashboardComponent],
   imports: [
     CommonModule,
     FormsModule,
