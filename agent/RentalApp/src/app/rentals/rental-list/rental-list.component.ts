@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Rental } from '../rental';
+import { RentalBundle } from '../rental';
 import { RentalService } from '../rental.service';
 import { first } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./rental-list.component.css']
 })
 export class RentalListComponent implements OnInit {
-  rentalRequests: Rental[];
+  rentalBundles: RentalBundle[];
 
   constructor(private rentalService: RentalService) { }
 
@@ -17,7 +17,7 @@ export class RentalListComponent implements OnInit {
     this.rentalService.getAll()
       .pipe(first())
       .subscribe(rentalVm => {
-        return this.rentalRequests = rentalVm.rentals;
+        return this.rentalBundles = rentalVm.rentalBundles;
       });
   }
 

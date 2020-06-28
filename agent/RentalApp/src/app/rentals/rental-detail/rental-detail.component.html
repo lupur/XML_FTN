@@ -1,0 +1,31 @@
+<div>
+	<button class="btn btn-link" (click)="gotoRentalBundles()">Back</button>
+</div>
+
+<div [(ngModel)]="selectedRentalBundle">
+	<button class="btn btn-success" (click)="accept(selectedRentalBundle.id)">Accept</button>
+	<button class="btn btn-warning" (click)="reject(selectedRentalBundle.id)">Reject</button>
+</div>
+
+<div class="container px-0">
+	<div class="row">
+		<div class="col-md-6 col-lg-4 col-xl-3 py-2" *ngFor="let rental of rentals">
+			<div class="card h-100">
+				<div class="card-body">
+					<a [routerLink]="[ './cars', rental.carId ]">Car Info</a>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">{{rental.carBrand}} {{rental.carModel}} {{rental.carYear}}</li>
+					<li class="list-group-item">{{rental.customerFullName}}</li>
+					<li class="list-group-item">{{rental.customerContactInfo}}</li>
+					<li class="list-group-item">{{rental.pickupDate}}</li>
+					<li class="list-group-item">{{rental.returnDate}}</li>
+				</ul>
+				<div class="card-footer">
+					{{rental.createdOn}}
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

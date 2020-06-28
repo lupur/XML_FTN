@@ -3,30 +3,26 @@
 <table class="table table-striped my-2">
 	<thead>
 		<tr>
-			<th>Internal ID</th>
-			<th>Bundle ID</th>
-			<th>Car</th>
-			<th>Requestee</th>
-			<th>Contact Info</th>
-			<th>Pickup Date</th>
-			<th>Return Date</th>
+			<th>ID</th>
+			<th>Nr. Items</th>
 			<th>Status</th>
+			<th>CreatedOn</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let rentalRequest of rentalRequests">
-			<td>{{rentalRequest.id}}</td>
-			<td>{{rentalRequest.rentalBundleId}}</td>
-			<td>{{rentalRequest.carBrand}} {{rentalRequest.carModel}} {{rentalRequest.carYear}}</td>
-			<td>{{rentalRequest.customerFullName}}</td>
-			<td>{{rentalRequest.customerContactInfo}}</td>
-			<td>{{rentalRequest.pickupDate | date:'mediumDate'}}</td>
-			<td>{{rentalRequest.returnDate | date:'mediumDate'}}</td>
-			<td>{{rentalRequest.status}}</td>
-			<td></td>
+		<tr *ngFor="let bundle of rentalBundles">
+			<td>{{bundle.id}}</td>
+			<td>{{bundle.numberOfItems}}</td>
+			<td>{{bundle.status}}</td>
+			<td>{{bundle.createdOn | date:'short'}}</td>
+			<td align="right">
+				<a [routerLink]="['./detail', bundle.id]" routerLinkActive="active"
+					class="btn btn-sm btn-outline-info mr-1">Details
+				</a>
+			</td>
 		</tr>
-		<tr *ngIf="!rentalRequests">
+		<tr *ngIf="!rentalBundles">
 			<td colspan="100%" class="text-center">
 				<span class="spinner-border spinner-border-lg align-center"></span>
 			</td>
