@@ -11,8 +11,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./rental-detail.component.css']
 })
 export class RentalDetailComponent implements OnInit {
-  rentals: Rental[];
-  selectedRentalBundle: Rental;
+  rentals = null;
+  currentId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,19 +22,21 @@ export class RentalDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap
-      .pipe(switchMap(params =>
-        this.rentalService.getRentalsForBundle(+params.get('id'))))
+      .pipe(switchMap(params => {
+        this.currentId = +params.get('id');
+        return this.rentalService.getRentalsForBundle(this.currentId);
+      }))
       .subscribe(rentalVm => {
         this.rentals = rentalVm.rentals;
       });
   }
 
-  accept(id:number){
-    console.log(`Accepting rental bundle ${id}`);
+  accept() {
+    console.log(`Accepting rental bundle ${this.currentId}`);
   }
 
-  reject(id:number){
-    console.log(`Rejecting rental bundle ${id}`);
+  reject() {
+    console.log(`Rejecting rental bundle ${this.currentId}`);
   }
 
   gotoRentalBundles() {
