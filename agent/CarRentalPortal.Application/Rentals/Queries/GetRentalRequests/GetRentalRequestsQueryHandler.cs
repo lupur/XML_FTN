@@ -29,8 +29,9 @@ namespace CarRentalPortal.Application.Rentals.Queries.GetRentalRequests
 
             foreach (var rental in rentals)
             {
-                var user = await _identityContext.Users.FindAsync(rental.UserId);
-                rental.UserInfo = user.Username;
+                var user = await _identityContext.Users.FindAsync(rental.CustomerId);
+                rental.CustomerFullName = $"{user.FirstName} {user.LastName}";
+                rental.CustomerContactInfo = user.Email;
             }
 
             return new RentalVm

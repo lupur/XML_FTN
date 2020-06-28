@@ -13,8 +13,9 @@ namespace CarRentalPortal.Application.Rentals.Queries
         public string CarBrand { get; set; }
         public string CarModel { get; set; }
         public string CarYear { get; set; }
-        public int UserId { get; set; }
-        public string UserInfo { get; set; }
+        public int CustomerId { get; set; }
+        public string CustomerFullName { get; set; }
+        public string CustomerContactInfo { get; set; }
         public DateTime PickupDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public string Status { get; set; }

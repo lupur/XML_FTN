@@ -4,6 +4,7 @@ using CarRentalPortal.Application.Rentals.Queries;
 using CarRentalPortal.Application.Rentals.Queries.GetRentalRequest;
 using CarRentalPortal.Application.Rentals.Queries.GetRentalRequests;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
@@ -23,7 +24,7 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create(CreateRentalRequestCommand command)
+        public async Task<IEnumerable<int>> Create(CreateRentalRequestCommand command)
         {
             return await Mediator.Send(command);
         }
