@@ -19,6 +19,7 @@ namespace CarRentalPortal.Application.Rentals.Queries
         public DateTime PickupDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public string Status { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -28,7 +29,8 @@ namespace CarRentalPortal.Application.Rentals.Queries
                 .ForMember(d => d.CarYear, opt => opt.MapFrom(s => s.Car.ProductionYear))
                 .ForMember(d => d.PickupDate, opt => opt.MapFrom(s => s.StartDate))
                 .ForMember(d => d.ReturnDate, opt => opt.MapFrom(s => s.EndDate))
-                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.RentalBundle.Status));
+                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.RentalBundle.Status))
+                .ForMember(d => d.CreatedOn, opt => opt.MapFrom(s => s.RentalBundle.CreatedOn));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CarRentalPortal.Application._Common.Exceptions;
 using CarRentalPortal.Application._Common.Interfaces;
 using CarRentalPortal.Core.Entities;
@@ -26,16 +27,11 @@ namespace CarRentalPortal.Application.Rentals.Queries.GetRentalsForBundle
 
         public async Task<RentalVm> Handle(GetRentalsForBundleQuery request, CancellationToken cancellationToken)
         {
-            var rentalBundle = await _appContext.RentalBundles
-                .Include(rb => rb.Rentals)
-                .FirstOrDefaultAsync(rb => rb.Id == request.Id);
-            if (rentalBundle == null)
-            {
-                throw new NotFoundException(nameof(RentalBundle), request.Id);
-            }
+            var rentals = await _appContext.Rentals
+                .Where(r => r.RentalBundleId == request.Id)
+                .ProjectTo<RentalDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
 
-            var rentals = _mapper.Map<IEnumerable<RentalDto>>(rentalBundle.Rentals)
-                .ToList();
             foreach (var rental in rentals)
             {
                 var user = await _identityContext.Users.FindAsync(rental.CustomerId);
