@@ -30,6 +30,8 @@ namespace CarRentalPortal.Application.Rentals.Commands.UpdateRentalRequest
 
             entity.Status = request.Status;
 
+            await _appContext.SaveChangesAsync(cancellationToken);
+
             return Unit.Value;
         }
     }

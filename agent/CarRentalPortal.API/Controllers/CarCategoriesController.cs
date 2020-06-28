@@ -1,6 +1,7 @@
 ﻿using CarRentalPortal.API.Constants;
 using CarRentalPortal.Application.CarCategories.Commands.CreateCarCategory;
 using CarRentalPortal.Application.CarCategories.Commands.DeleteCarCategory;
+using CarRentalPortal.Application.CarCategories.Commands.UpdateCarCategory;
 using CarRentalPortal.Application.CarCategories.Queries.GetCarCategories;
 using CarRentalPortal.Application.CarCategories.Queries.GetCarCategory;
 using Microsoft.AspNetCore.Authorization;
@@ -34,6 +35,18 @@ namespace CarRentalPortal.API.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteCarCategoryCommand { Id = id });
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, UpdateCarCategoryCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            await Mediator.Send(command);
             return NoContent();
         }
     }
