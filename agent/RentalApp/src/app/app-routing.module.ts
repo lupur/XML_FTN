@@ -30,6 +30,18 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
   },
   {
+    path: 'rentals',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        RoleType.Admin,
+        RoleType.Agent
+      ]
+    },
+    loadChildren: () => import('./rentals/rental.module').then(m => m.RentalModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

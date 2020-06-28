@@ -6,6 +6,9 @@
         <li class="nav-item" *ngIf="isAdmin">
             <a class="nav-link" [routerLink]="[ '/admin/dashboard' ]" routerLinkActive="active">Administration</a>
         </li>
+        <li class="nav-item" *ngIf="isAdmin || isAgent">
+            <a class="nav-link" [routerLink]="[ '/rentals' ]" routerLinkActive="active">Rentals</a>
+        </li>
     </ul>
 
     <span class="navbar-text mx-4">

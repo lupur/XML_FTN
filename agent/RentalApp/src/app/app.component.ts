@@ -24,6 +24,9 @@ export class AppComponent {
     return this.authService.hasRole(RoleType.Admin);
   }
 
+  get isAgent() {
+    return this.authService.hasRole(RoleType.Agent);
+  }
   logout() {
     this.authService.logout();
   }
