@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertService } from '@app/shared/alert/alert.service';
-import { first, switchMap } from 'rxjs/operators';
-import { CarModel } from '@app/car-brands/car-brand';
+import { CarModel } from '@app/car-models/car-model';
 import { CarModelService } from '@app/car-models/car-model.service';
+import { AlertService } from '@app/shared/alert/alert.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-model-list',

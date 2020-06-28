@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CarModel } from '@app/car-brands/car-brand';
 import { environment } from '@env/environment';
-import { CarModelVm } from './car-model';
+import { CarModel, CarModelVm } from './car-model';
 
 @Injectable({
   providedIn: 'root'

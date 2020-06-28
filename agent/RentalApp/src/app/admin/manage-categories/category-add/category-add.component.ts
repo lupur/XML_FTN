@@ -45,10 +45,12 @@ export class CategoryAddComponent implements OnInit {
     this.carCategoryService.create(this.form.value)
       .pipe(first())
       .subscribe(data => {
-        this.alertService.success('Car Category added successfully', {
-          keepAfterRouteChange: true, autoClose:true
+        this.alertService.success('New category added successfully!', {
+          keepAfterRouteChange: true, autoClose: true
         });
-        this.router.navigate(['../'], { relativeTo: this.route });
+        this.router.navigate(['../'], {
+          relativeTo: this.route
+        });
       }, error => {
         this.alertService.error(error);
         this.loading = false;

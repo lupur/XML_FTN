@@ -25,4 +25,8 @@ export class CarCategoryService {
   delete(id: number) {
     return this.http.delete(`${environment.apiUrl}/carcategories/${id}`);
   }
+
+  update(id: number, carCategory: CarCategory) {
+    return this.http.put(`${environment.apiUrl}/carcategories/${id}`, carCategory);
+  }
 }

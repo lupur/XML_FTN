@@ -10,8 +10,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./brand-list.component.css']
 })
 export class BrandListComponent implements OnInit {
-  carBrands: CarBrand[];
-  deleting = false;
+  carBrands = null;
 
   constructor(
     private carBrandService: CarBrandService,
@@ -24,7 +23,9 @@ export class BrandListComponent implements OnInit {
   }
 
   delete(name: string) {
-    this.deleting = true;
+    const carBrand = this.carBrands.find(x => x.name == name);
+    carBrand.isDeleting = true;
+
     this.carBrandService.delete(name)
       .pipe(first())
       .subscribe(() => {
@@ -32,7 +33,6 @@ export class BrandListComponent implements OnInit {
         this.alertService.success('Brand deleted successfully', {
           autoClose: true
         });
-        this.deleting = false;
       });
   }
 

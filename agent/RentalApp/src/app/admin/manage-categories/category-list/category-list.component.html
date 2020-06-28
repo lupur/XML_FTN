@@ -1,4 +1,7 @@
-<a class="btn btn-outline-primary p-2 mb-4" [routerLink]="[ './add' ]" routerLinkActive="active">Add Car Category</a>
+<div class="mb-4">
+	<a class="btn btn-outline-primary" [routerLink]="[ './add' ]" routerLinkActive="active">Add Car Category</a>
+	<a routerLink="../" class="btn btn-link">Back</a>
+</div>
 
 <table class="table table-hover table-responsive-sm">
 	<thead class="bg-light">
@@ -21,7 +24,7 @@
 				{{category.rentalValue}}
 			</td>
 			<td align="right">
-				<a [routerLink]="['./detail', category.name]" routerLinkActive="active"
+				<a [routerLink]="['./detail', category.id]" routerLinkActive="active"
 					class="btn btn-sm btn-outline-info mr-1">Details</a>
 				<button (click)="delete(category.id)" class="btn btn-sm btn-outline-danger" [disabled]="deleting">
 					<span *ngIf="deleting" class="spinner-border spinner-border-sm"></span>

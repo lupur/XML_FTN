@@ -1,7 +1,10 @@
-<a class="btn btn-outline-primary p-2 mb-4" [routerLink]="[ './add' ]" routerLinkActive="active">Add Car Brand</a>
+<div class="mb-4">
+	<a class="btn btn-outline-primary" [routerLink]="[ './add' ]" routerLinkActive="active">Add Car Brand</a>
+	<a routerLink="../" class="btn btn-link">Back</a>
+</div>
 
 <table class="table table-hover table-responsive-sm" *ngIf="carBrands">
-	<thead class="bg-light">
+	<thead>
 		<tr>
 			<th>Car Brand</th>
 			<th></th>
@@ -15,9 +18,10 @@
 			<td align="right">
 				<a [routerLink]="['./detail', carBrand.name]" routerLinkActive="active"
 					class="btn btn-sm btn-outline-info mr-1">Details</a>
-				<button (click)="delete(carBrand.name)" class="btn btn-sm btn-outline-danger" [disabled]="deleting">
-					<span *ngIf="deleting" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!deleting">Delete</span>
+				<button (click)="delete(carBrand.name)" class="btn btn-sm btn-outline-danger"
+					[disabled]="carBrand.isDeleting">
+					<span *ngIf="carBrand.isDeleting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!carBrand.isDeleting">Delete</span>
 				</button>
 			</td>
 		</tr>

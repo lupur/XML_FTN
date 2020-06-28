@@ -1,3 +1,4 @@
+import { CategoryDetailComponent } from './manage-categories/category-detail/category-detail.component';
 import { ManageModelsComponent } from './manage-models/manage-models.component';
 import { ModelAddComponent } from './manage-models/model-add/model-add.component';
 import { ModelDetailComponent } from './manage-models/model-detail/model-detail.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
           {
             path: 'add',
             component: CategoryAddComponent
+          },
+          {
+            path: 'detail/:id',
+            component: CategoryDetailComponent
           },
           {
             path: '',

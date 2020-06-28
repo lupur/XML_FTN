@@ -43,15 +43,19 @@ export class BrandAddComponent implements OnInit {
     this.loading = true;
     this.carBrandService.create(this.form.value)
       .pipe(first())
-      .subscribe(data => {
-        this.alertService.success('Car brand added successfully', {
-          keepAfterRouteChange: true, autoClose: true
+      .subscribe(
+        result => {
+          this.alertService.success(`New brand added successfully!`, {
+            keepAfterRouteChange: true, autoClose: true
+          });
+          this.router.navigate(['../'], {
+            relativeTo: this.route
+          });
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
         });
-        this.router.navigate(['../'], { relativeTo: this.route });
-      }, error => {
-        this.alertService.error(error);
-        this.loading = false;
-      });
   }
 
 }

@@ -2,11 +2,6 @@ export interface CarBrandVm {
 	carBrands: CarBrand[];
 }
 
-export interface CarBrand {
-	name: string;
-	carModels: CarModel[];
-}
-
-export interface CarModel {
+export class CarBrand {
 	name: string;
 }
