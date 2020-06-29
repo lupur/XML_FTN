@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RentalBundle } from '../rental';
-import { RentalService } from '../rental.service';
 import { first } from 'rxjs/operators';
+import { RentalBundle, RentalStatus } from '../rental';
+import { RentalService } from '../rental.service';
 
 @Component({
   selector: 'app-rental-list',
@@ -19,6 +19,17 @@ export class RentalListComponent implements OnInit {
       .subscribe(rentalVm => {
         return this.rentalBundles = rentalVm.rentalBundles;
       });
+  }
+
+  switchStatus(status: string) {
+    switch (status) {
+      case RentalStatus.ACCEPTED:
+        return 'badge-success';
+      case RentalStatus.PENDING:
+        return 'badge-warning';
+      case RentalStatus.REJECTED:
+        return 'badge-danger';
+    }
   }
 
 }
