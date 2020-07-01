@@ -1,14 +1,11 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AdminRootComponent, AdminDashboardComponent } from './admin-root';
-import { ManageBrandsComponent, BrandListComponent, BrandDetailComponent, BrandAddComponent } from './manage-brands';
-import { ManageCategoriesComponent, CategoryListComponent, CategoryAddComponent, CategoryDetailComponent } from './manage-categories';
-import { ManageModelsComponent, ModelAddComponent, ModelListComponent, ModelDetailComponent } from './manage-models';
-import { ManageCarsComponent } from './manage-cars';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminDashboardComponent, AdminRootComponent } from './admin-root';
 import { AdminRoutingModule } from './admin-routing.module';
-import { CarAddComponent } from './manage-cars/car-add/car-add.component';
+import { BrandAddComponent, BrandDetailComponent, BrandListComponent, ManageBrandsComponent } from './manage-brands';
+import { CategoryAddComponent, CategoryDetailComponent, CategoryListComponent, ManageCategoriesComponent } from './manage-categories';
+import { ManageModelsComponent, ModelAddComponent, ModelDetailComponent, ModelListComponent } from './manage-models';
 
 
 @NgModule({
@@ -26,9 +23,8 @@ import { CarAddComponent } from './manage-cars/car-add/car-add.component';
     ModelAddComponent,
     ModelListComponent,
     ModelDetailComponent,
-    AdminDashboardComponent,
-    ManageCarsComponent,
-    CarAddComponent],
+    AdminDashboardComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,

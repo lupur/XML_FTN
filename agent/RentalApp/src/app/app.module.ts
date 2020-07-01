@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ErrorInterceptor } from './shared/error/error.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { CarListComponent } from './cars/car-list/car-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CarListComponent
   ],
   imports: [
     BrowserModule,
