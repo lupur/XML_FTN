@@ -8,6 +8,7 @@ import { ManageCategoriesComponent, CategoryListComponent, CategoryAddComponent,
 import { ManageModelsComponent, ModelAddComponent, ModelListComponent, ModelDetailComponent } from './manage-models';
 import { ManageCarsComponent } from './manage-cars';
 import { AdminRoutingModule } from './admin-routing.module';
+import { CarAddComponent } from './manage-cars/car-add/car-add.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AdminRoutingModule } from './admin-routing.module';
     ModelListComponent,
     ModelDetailComponent,
     AdminDashboardComponent,
-    ManageCarsComponent],
+    ManageCarsComponent,
+    CarAddComponent],
   imports: [
     CommonModule,
     FormsModule,
