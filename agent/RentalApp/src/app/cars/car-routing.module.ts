@@ -7,7 +7,7 @@ import { CarAddComponent } from './car-add/car-add.component';
 
 const routes: Routes = [
   {
-    path: 'cars',
+    path: '',
     component: CarComponent,
     children: [
       {

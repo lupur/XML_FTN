@@ -12,8 +12,7 @@ import { CarListComponent } from './cars/car-list/car-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CarListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
