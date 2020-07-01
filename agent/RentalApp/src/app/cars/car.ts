@@ -13,7 +13,7 @@ export interface Car {
 	color: string;
 	location: string;
 	mileage: number;
-	mileageConstraing: number;
+	mileageConstraint: number;
 	numberOfSeats: number;
 	averageRating: number;
 }

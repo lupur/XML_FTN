@@ -21,20 +21,20 @@
 			<select formControlName="carBrand" class='form-control' (ngModelChange)="onSelectedCarBrand($event)"
 				[ngClass]="{'is-invalid': submitted && f.carBrand.errors}">
 				<option value="">Choose car brand</option>
-				<option *ngFor='let carBrand of carBrands' [ngValue]="carBrand">{{carBrand.name}}</option>
+				<option *ngFor='let carBrand of carBrands'>{{carBrand.name}}</option>
 			</select>
 			<div *ngIf="submitted && f.carBrand.errors" class="invalid-feedback">
 				<div *ngIf="f.carBrand.errors.required">Car brand is required</div>
 			</div>
 		</div>
 	</div>
-	<div class="form-row" *ngIf="selectedCarBrand">
+	<div class="form-row" *ngIf="carModels">
 		<div class="form-group col-sm-6">
 			<label for="carModel">Model</label>
 			<select formControlName="carModel" class="form-control"
 				[ngClass]="{'is-invalid': submitted && f.carModel.errors}">
 				<option value="">Choose car model</option>
-				<option *ngFor="let carModel of selectedCarBrand.carModels">{{carModel.name}}</option>
+				<option *ngFor="let carModel of carModels">{{carModel.name}}</option>
 			</select>
 			<div *ngIf="submitted && f.carModel.errors" class="invalid-feedback">
 				<div *ngIf="f.carModel.errors.required">Car model is required</div>
@@ -81,7 +81,7 @@
 	<div class="form-row">
 		<div class="form-group col-sm-3">
 			<label for="color">Color</label>
-			<input type="number" formControlName="color" class="form-control"
+			<input type="text" formControlName="color" class="form-control"
 				[ngClass]="{'is-invalid': submitted && f.color.errors}">
 			<div *ngIf="submitted && f.color.errors" class="invalid-feedback">
 				<div *ngIf="f.color.errors.required">'Color' field is required</div>
@@ -89,7 +89,7 @@
 		</div>
 		<div class="form-group col-sm-3">
 			<label for="location">Location</label>
-			<input type="number" formControlName="location" class="form-control"
+			<input type="text" formControlName="location" class="form-control"
 				[ngClass]="{'is-invalid': submitted && f.location.errors}">
 			<div *ngIf="submitted && f.location.errors" class="invalid-feedback">
 				<div *ngIf="f.location.errors.required">'Location' field is required</div>

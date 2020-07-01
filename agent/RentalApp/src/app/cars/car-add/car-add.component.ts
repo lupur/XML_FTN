@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CarBrand } from '@app/car-brands/car-brand';
 import { CarBrandService } from '@app/car-brands/car-brand.service';
 import { CarCategoryService } from '@app/car-categories/car-category.service';
+import { CarModelService } from '@app/car-models/car-model.service';
 import { FuelType, TransmissionType } from '@app/cars/car';
 import { CarService } from '@app/cars/car.service';
 import { AlertService } from '@app/shared/alert/alert.service';
@@ -17,7 +18,6 @@ import { first } from 'rxjs/operators';
 export class CarAddComponent implements OnInit {
   form: FormGroup;
 
-  selectedCarBrand = null;
   carCategories = null;
   carBrands = null;
   carModels = null;
@@ -43,6 +43,7 @@ export class CarAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private carCategoryService: CarCategoryService,
     private carBrandService: CarBrandService,
+    private carModelService: CarModelService,
     private carService: CarService,
     private alertService: AlertService
   ) { }
@@ -94,9 +95,8 @@ export class CarAddComponent implements OnInit {
         });
   }
 
-  onSelectedCarBrand(carBrand: CarBrand) {
-    this.selectedCarBrand = carBrand;
-    this.carModels = this.selectedCarBrand.carModels;
+  onSelectedCarBrand(carBrand: string) {
+    this.getCarModels(carBrand);
   }
 
   private getCarCategories() {
@@ -108,5 +108,10 @@ export class CarAddComponent implements OnInit {
     this.carBrandService.getAll()
       .pipe(first())
       .subscribe(result => this.carBrands = result.carBrands);
+  }
+  private getCarModels(brand: string) {
+    this.carModelService.getByBrand(brand)
+      .pipe(first())
+      .subscribe(result => this.carModels = result.carModels);
   }
 }
