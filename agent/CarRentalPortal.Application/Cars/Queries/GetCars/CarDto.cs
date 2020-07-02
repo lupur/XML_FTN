@@ -4,7 +4,6 @@ using CarRentalPortal.Application.Reviews.Queries.GetReviews;
 using CarRentalPortal.Core.Entities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CarRentalPortal.Application.Cars.Queries.GetCars
 {
