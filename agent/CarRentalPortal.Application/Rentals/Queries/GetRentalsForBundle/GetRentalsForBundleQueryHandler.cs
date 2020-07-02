@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using CarRentalPortal.Application._Common.Exceptions;
 using CarRentalPortal.Application._Common.Interfaces;
-using CarRentalPortal.Core.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
