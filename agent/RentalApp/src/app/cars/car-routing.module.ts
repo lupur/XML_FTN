@@ -22,13 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'detail/:id',
-        component: CarDetailComponent,
-        children: [
-          {
-            path: '',
-            component: CarReviewComponent
-          }
-        ]
+        component: CarDetailComponent
       }
     ]
   }

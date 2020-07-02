@@ -1,3 +1,5 @@
+import { Review } from '@app/reviews/review';
+
 export interface CarVm {
 	cars: Car[];
 }
@@ -16,6 +18,7 @@ export interface Car {
 	mileageConstraint: number;
 	numberOfSeats: number;
 	averageRating: number;
+	reviews: Review[];
 }
 
 export enum FuelType {
