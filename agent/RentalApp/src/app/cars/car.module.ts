@@ -5,6 +5,8 @@ import { CarListComponent } from './car-list/car-list.component';
 import { CarRoutingModule } from './car-routing.module';
 import { CarComponent } from './car/car.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CarDetailComponent } from './car-detail/car-detail.component';
+import { CarReviewComponent } from './car-review/car-review.component';
 
 
 @NgModule({
@@ -12,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CarAddComponent,
     CarListComponent,
     CarComponent,
+    CarDetailComponent,
+    CarReviewComponent,
   ],
   imports: [
     CommonModule,
