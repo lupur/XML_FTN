@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '@app/shared/shared.module';
+import { RentalDetailComponent } from './rental-detail/rental-detail.component';
+import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalRoutingModule } from './rental-routing.module';
 import { RentalComponent } from './rental/rental.component';
-import { RentalListComponent } from './rental-list/rental-list.component';
-import { RentalDetailComponent } from './rental-detail/rental-detail.component';
-import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     RentalRoutingModule
   ]
 })

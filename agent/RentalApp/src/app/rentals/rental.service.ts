@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { RentalBundleVm, RentalVm } from './rental';
+import { RentalBundle, RentalBundleVm, RentalVm } from './rental';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,15 @@ export class RentalService {
 
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get<RentalBundleVm>(`${environment.apiUrl}/rentals`);
+  getAllBundles() {
+    return this.http.get<RentalBundleVm>(`${environment.apiUrl}/bundles`);
   }
 
-  getRentalsForBundle(id: number) {
+  getBundleById(id: number) {
+    return this.http.get<RentalBundle>(`${environment.apiUrl}/bundles/${id}`);
+  }
+
+  getRentalsForBundleId(id: number) {
     return this.http.get<RentalVm>(`${environment.apiUrl}/rentals/bundle/${id}`);
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CarService } from '../car.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-car-list',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./car-list.component.css']
 })
 export class CarListComponent implements OnInit {
+  cars = null;
+  grid = true;
 
-  constructor() { }
+  constructor(private carService: CarService) { }
 
   ngOnInit(): void {
+    this.carService.getAll()
+      .pipe(first())
+      .subscribe(carVm => this.cars = carVm.cars);
   }
 
+  switchView(isGrid) {
+    this.grid = isGrid;
+  }
 }

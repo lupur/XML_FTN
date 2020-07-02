@@ -14,7 +14,7 @@ export class RentalListComponent implements OnInit {
   constructor(private rentalService: RentalService) { }
 
   ngOnInit(): void {
-    this.rentalService.getAll()
+    this.rentalService.getAllBundles()
       .pipe(first())
       .subscribe(rentalVm => {
         return this.rentalBundles = rentalVm.rentalBundles;

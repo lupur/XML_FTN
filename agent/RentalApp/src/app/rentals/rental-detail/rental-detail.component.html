@@ -1,13 +1,21 @@
 <div class="container">
-	<div class="row" *ngIf="!rentals">
+	<div class="row" *ngIf="!currentBundle">
 		<span class="spinner-border spinner-border-lg align-center"></span>
 	</div>
-	<div class="row" *ngIf="rentals">
-		<button class="btn btn-success mx-3" (click)="accept()">Accept</button>
-		<button class="btn btn-warning" (click)="reject()">Reject</button>
+	<div class="row">
+		<div *ngIf="isPending()">
+			<button class="btn btn-success mx-3" (click)="accept()">Accept</button>
+			<button class="btn btn-warning" (click)="reject()">Reject</button>
+		</div>
+		<div class="alert alert-success ml-3 col-3" role="alert" *ngIf="isAccepted()">
+			This rental request is ACCEPTED!
+		</div>
+		<div class="alert alert-warning ml-3 col-3" role="alert" *ngIf="isRejected()">
+			This rental request is REJECTED!
+		</div>
 		<button class="btn btn-link ml-auto mr-2" (click)="gotoRentalBundles()">Back</button>
 	</div>
-	<div class="row" *ngIf="rentals">
+	<div class="row" *ngIf="currentBundle">
 		<div class="col-6 my-4" *ngFor="let rental of rentals">
 			<div class="card">
 				<div class="card-body">
@@ -19,35 +27,34 @@
 							<label class="col-sm-4 col-form-label">Car Info</label>
 							<div class="col-sm-8">
 								<input type="text" readonly class="form-control"
-								value="{{rental.carBrand}} {{rental.carModel}} {{rental.carYear}}" />
+									value="{{rental.carBrand}} {{rental.carModel}} {{rental.carYear}}" />
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Customer Name</label>
 							<div class="col-sm-8">
-								<input type="text" readonly class="form-control"
-								value="{{rental.customerFullName}}" />
+								<input type="text" readonly class="form-control" value="{{rental.customerFullName}}" />
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Customer Contact</label>
 							<div class="col-sm-8">
 								<input type="text" readonly class="form-control"
-								value="{{rental.customerContactInfo}}" />
+									value="{{rental.customerContactInfo}}" />
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Pickup On</label>
 							<div class="col-sm-8">
 								<input type="text" readonly class="form-control"
-								value="{{rental.pickupDate | date: 'short'}}" />
+									value="{{rental.pickupDate | date: 'short'}}" />
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Return On</label>
 							<div class="col-sm-8">
 								<input type="text" readonly class="form-control"
-								value="{{rental.returnDate | date: 'short'}}" />
+									value="{{rental.returnDate | date: 'short'}}" />
 							</div>
 						</div>
 					</form>
