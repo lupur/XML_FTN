@@ -1,5 +1,6 @@
 ﻿using CarRentalPortal.Application.Reviews.Commands.CreateReview;
 using CarRentalPortal.Application.Reviews.Commands.UpdateReviewStatus;
+using CarRentalPortal.Application.Reviews.Queries.GetAllReviews;
 using CarRentalPortal.Application.Reviews.Queries.GetReviews;
 using CarRentalPortal.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
@@ -12,9 +13,15 @@ namespace CarRentalPortal.API.Controllers
     public class ReviewsController : AbstractApiController
     {
         [HttpGet]
-        public async Task<ActionResult<ReviewVm>> GetAll([FromQuery] int carId, [FromQuery] ReviewStatus status)
+        public async Task<ActionResult<ReviewVm>> GetAll()
         {
-            return await Mediator.Send(new GetReviewsQuery { CarId = carId, Status = status });
+            return await Mediator.Send(new GetAllReviewsQuery());
+        }
+
+        [HttpGet("car/{id}")]
+        public async Task<ActionResult<ReviewVm>> GetReviewsForCar(int id, [FromQuery] ReviewStatus status)
+        {
+            return await Mediator.Send(new GetReviewsQuery { CarId = id, Status = status });
         }
 
         [HttpPost]
