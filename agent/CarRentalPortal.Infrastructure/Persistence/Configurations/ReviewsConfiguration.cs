@@ -1,4 +1,5 @@
 ﻿using CarRentalPortal.Core.Entities;
+using CarRentalPortal.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MySql.Data.EntityFrameworkCore.Extensions;
@@ -14,6 +15,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
 
             builder
                 .Property(r => r.Id)
+                .ValueGeneratedOnAdd();
+
+            builder
+                .Property(r => r.Status)
+                .ForMySQLHasDefaultValue(ReviewStatus.Pending)
                 .ValueGeneratedOnAdd();
 
             builder

@@ -23,7 +23,6 @@ namespace CarRentalPortal.Core.Entities
         public long Mileage { get; set; }
         public long? MileageConstraint { get; set; }
         public byte NumberOfSeats { get; set; }
-        public double? AverageRating { get; set; }
         public ICollection<Rental> Rentals { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<CarImage> Images { get; set; }
