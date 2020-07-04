@@ -31,10 +31,7 @@ export class CarReviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      comment: ['', [Validators.required]],
-      rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]]
-    });
+    this.createForm();
 
     this.reviewService.getAll(this.carId, ReviewStatus.ACCEPTED)
       .pipe(first())
@@ -64,12 +61,20 @@ export class CarReviewComponent implements OnInit {
     this.reviewService.create(review)
       .pipe(first())
       .subscribe(_ => {
-        this.alertService.success('Comment added successfully!', {
-          keepAfterRouteChange: true, autoClose: true
-        });
+        this.alertService.success('Review sent successfully!');
+        this.form.reset();
+        this.submitted = false;
+        this.loading = false;
       }, error => {
         this.alertService.error(error);
         this.loading = false;
       })
+  }
+
+  private createForm() {
+    this.form = this.formBuilder.group({
+      comment: ['', [Validators.required]],
+      rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]]
+    });
   }
 }
