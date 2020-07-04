@@ -10,14 +10,21 @@ export class ReviewService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(carId: number, status: ReviewStatus) {
+  getAll() {
+    return this.http.get<ReviewVm>(`${environment.apiUrl}/reviews`);
+  }
+
+  getReviewsForCar(id: number, status: ReviewStatus) {
     let params = new HttpParams()
-      .set("carId", carId.toString())
       .set("status", status);
-    return this.http.get<ReviewVm>(`${environment.apiUrl}/reviews`, { params: params })
+    return this.http.get<ReviewVm>(`${environment.apiUrl}/reviews/car/${id}`, { params: params })
   }
 
   create(review: Review) {
     return this.http.post(`${environment.apiUrl}/reviews`, review);
+  }
+
+  update(id: number, status: ReviewStatus) {
+    return this.http.put(`${environment.apiUrl}/reviews/${id}`, { id, status })
   }
 }

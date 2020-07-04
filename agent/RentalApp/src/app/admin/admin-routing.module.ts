@@ -4,6 +4,8 @@ import { AdminDashboardComponent, AdminRootComponent } from './admin-root';
 import { BrandAddComponent, BrandDetailComponent, BrandListComponent, ManageBrandsComponent } from './manage-brands';
 import { CategoryAddComponent, CategoryDetailComponent, CategoryListComponent, ManageCategoriesComponent } from './manage-categories';
 import { ManageModelsComponent, ModelAddComponent, ModelDetailComponent, ModelListComponent } from './manage-models';
+import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
+import { ReviewListComponent } from './manage-reviews/review-list/review-list.component';
 
 
 const routes: Routes = [
@@ -66,6 +68,16 @@ const routes: Routes = [
           {
             path: '',
             component: CategoryListComponent
+          }
+        ]
+      },
+      {
+        path: 'reviews',
+        component: ManageReviewsComponent,
+        children: [
+          {
+            path: '',
+            component: ReviewListComponent
           }
         ]
       }

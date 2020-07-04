@@ -33,7 +33,7 @@ export class CarReviewComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
 
-    this.reviewService.getAll(this.carId, ReviewStatus.ACCEPTED)
+    this.reviewService.getReviewsForCar(this.carId, ReviewStatus.ACCEPTED)
       .pipe(first())
       .subscribe(reviewVm => this.reviews = reviewVm.reviews);
   }
