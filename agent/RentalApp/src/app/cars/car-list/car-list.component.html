@@ -1,10 +1,9 @@
-<div class="mb-4">
-	<a class="btn btn-outline-primary" [routerLink]="[ './add' ]" routerLinkActive="active">Create Car Ad</a>
-	<a routerLink="../" class="btn btn-link">Back</a>
-</div>
-
 <div class="row justify-content-between">
-	<div class="col">
+	<div>
+		<a class="btn btn-outline-primary" [routerLink]="[ './add' ]" routerLinkActive="active">Create Car Ad</a>
+		<a routerLink="../" class="btn btn-link">Back</a>
+	</div>
+	<div>
 		<span *ngIf="!cars" class="spinner-border spinner-border-lg align-self-center text-center"></span>
 	</div>
 	<div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -30,7 +29,7 @@
 			<div [ngClass]="{'row': !grid}">
 				<div [ngClass]="{'col-md-4': !grid}">
 					<div class="embed-responsive embed-responsive-16by9">
-						<img src="assets/Images/Cars/1/mazda6.png" class="card-img-top embed-responsive-item" alt="">
+						<img src="../../../assets/img-placeholder.jpg" class="card-img-top embed-responsive-item img-fluid img-thumbnail" alt="">
 					</div>
 				</div>
 				<div [ngClass]="{'col-md-8': !grid}">

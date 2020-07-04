@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@app/auth/auth.service';
 import { User } from '@app/auth/user';
-import { Review } from '@app/reviews/review';
+import { Review, ReviewStatus } from '@app/reviews/review';
 import { ReviewService } from '@app/reviews/review.service';
 import { AlertService } from '@app/shared/alert/alert.service';
 import { first } from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class CarReviewComponent implements OnInit {
   loading = false;
   submitted = false;
   currentUser: User;
+  reviews: Review[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,6 +35,10 @@ export class CarReviewComponent implements OnInit {
       comment: ['', [Validators.required]],
       rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]]
     });
+
+    this.reviewService.getAll(this.carId, ReviewStatus.ACCEPTED)
+      .pipe(first())
+      .subscribe(reviewVm => this.reviews = reviewVm.reviews);
   }
 
   get f() { return this.form.controls; }

@@ -1,3 +1,8 @@
+
+export interface ReviewVm {
+	reviews: Review[];
+}
+
 export interface Review {
 	id?: number;
 	authorId: number;
@@ -6,5 +11,12 @@ export interface Review {
 	authorEmail: string;
 	rating: number;
 	comment: string;
+	status?: ReviewStatus;
 	createdOn?: Date;
+}
+
+export enum ReviewStatus {
+	PENDING = 'Pending',
+	ACCEPTED = 'Accepted',
+	REJECTED = 'Rejected'
 }
