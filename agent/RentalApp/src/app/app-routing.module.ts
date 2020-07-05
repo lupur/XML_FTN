@@ -46,6 +46,10 @@ const routes: Routes = [
     loadChildren: () => import('./cars/car.module').then(m => m.CarModule)
   },
   {
+    path: 'shopping-cart',
+    loadChildren: () => import('./shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

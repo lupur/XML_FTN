@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../car.service';
 import { first } from 'rxjs/operators';
+import { Car } from '../car';
+import { ShoppingCartService } from '@app/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-car-list',
@@ -11,7 +13,9 @@ export class CarListComponent implements OnInit {
   cars = null;
   grid = true;
 
-  constructor(private carService: CarService) { }
+  constructor(
+    private carService: CarService,
+    private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.carService.getAll()
@@ -21,5 +25,9 @@ export class CarListComponent implements OnInit {
 
   switchView(isGrid) {
     this.grid = isGrid;
+  }
+
+  addToCart(car: Car) {
+    this.shoppingCartService.add(car);
   }
 }

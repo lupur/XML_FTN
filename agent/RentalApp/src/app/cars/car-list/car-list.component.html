@@ -29,7 +29,8 @@
 			<div [ngClass]="{'row': !grid}">
 				<div [ngClass]="{'col-md-4': !grid}">
 					<div class="embed-responsive embed-responsive-16by9">
-						<img src="../../../assets/img-placeholder.jpg" class="card-img-top embed-responsive-item img-fluid img-thumbnail" alt="">
+						<img src="../../../assets/img-placeholder.jpg"
+							class="card-img-top embed-responsive-item img-fluid img-thumbnail" alt="">
 					</div>
 				</div>
 				<div [ngClass]="{'col-md-8': !grid}">
@@ -45,6 +46,7 @@
 				</div>
 			</div>
 			<div class="card-footer">
+				<button (click)="addToCart(car)" class="btn btn-primary">Add to Cart</button>
 				<a routerLink="/cars/detail/{{car.id}}" class="card-link">Details</a>
 			</div>
 		</div>
