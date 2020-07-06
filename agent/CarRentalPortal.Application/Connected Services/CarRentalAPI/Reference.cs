@@ -18,14 +18,22 @@ namespace CarRentalAPI
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<CarRentalAPI.BrandDetailsResponse1> BrandDetailsAsync(CarRentalAPI.BrandDetailsRequest1 request);
+        System.Threading.Tasks.Task<CarRentalAPI.BrandByIdResponse1> BrandByIdAsync(CarRentalAPI.BrandByIdRequest1 request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<CarRentalAPI.AllBrandsResponse> AllBrandsAsync(CarRentalAPI.AllBrandsRequest1 request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<CarRentalAPI.AddBrandResponse1> AddBrandAsync(CarRentalAPI.AddBrandRequest1 request);
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
-    public partial class BrandDetailsRequest
+    public partial class BrandByIdRequest
     {
         
         private long idField;
@@ -49,7 +57,7 @@ namespace CarRentalAPI
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="www.soapservice.ftnxml.com/model/")]
-    public partial class Brand
+    public partial class Model
     {
         
         private long idField;
@@ -88,8 +96,64 @@ namespace CarRentalAPI
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class Brand
+    {
+        
+        private long idField;
+        
+        private string nameField;
+        
+        private Model[] modelField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public long id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Model", Order=2)]
+        public Model[] Model
+        {
+            get
+            {
+                return this.modelField;
+            }
+            set
+            {
+                this.modelField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
-    public partial class BrandDetailsResponse
+    public partial class BrandByIdResponse
     {
         
         private Brand brandField;
@@ -113,19 +177,19 @@ namespace CarRentalAPI
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class BrandDetailsRequest1
+    public partial class BrandByIdRequest1
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
-        public CarRentalAPI.BrandDetailsRequest BrandDetailsRequest;
+        public CarRentalAPI.BrandByIdRequest BrandByIdRequest;
         
-        public BrandDetailsRequest1()
+        public BrandByIdRequest1()
         {
         }
         
-        public BrandDetailsRequest1(CarRentalAPI.BrandDetailsRequest BrandDetailsRequest)
+        public BrandByIdRequest1(CarRentalAPI.BrandByIdRequest BrandByIdRequest)
         {
-            this.BrandDetailsRequest = BrandDetailsRequest;
+            this.BrandByIdRequest = BrandByIdRequest;
         }
     }
     
@@ -133,19 +197,172 @@ namespace CarRentalAPI
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class BrandDetailsResponse1
+    public partial class BrandByIdResponse1
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
-        public CarRentalAPI.BrandDetailsResponse BrandDetailsResponse;
+        public CarRentalAPI.BrandByIdResponse BrandByIdResponse;
         
-        public BrandDetailsResponse1()
+        public BrandByIdResponse1()
         {
         }
         
-        public BrandDetailsResponse1(CarRentalAPI.BrandDetailsResponse BrandDetailsResponse)
+        public BrandByIdResponse1(CarRentalAPI.BrandByIdResponse BrandByIdResponse)
         {
-            this.BrandDetailsResponse = BrandDetailsResponse;
+            this.BrandByIdResponse = BrandByIdResponse;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class AllBrandsRequest
+    {
+        
+        private string testField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string test
+        {
+            get
+            {
+                return this.testField;
+            }
+            set
+            {
+                this.testField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AllBrandsRequest1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        public CarRentalAPI.AllBrandsRequest AllBrandsRequest;
+        
+        public AllBrandsRequest1()
+        {
+        }
+        
+        public AllBrandsRequest1(CarRentalAPI.AllBrandsRequest AllBrandsRequest)
+        {
+            this.AllBrandsRequest = AllBrandsRequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AllBrandsResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AllBrandsResponse", Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Brands", IsNullable=false)]
+        public CarRentalAPI.Brand[] AllBrandsResponse1;
+        
+        public AllBrandsResponse()
+        {
+        }
+        
+        public AllBrandsResponse(CarRentalAPI.Brand[] AllBrandsResponse1)
+        {
+            this.AllBrandsResponse1 = AllBrandsResponse1;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class AddBrandRequest
+    {
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class AddBrandResponse
+    {
+        
+        private string resultField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string result
+        {
+            get
+            {
+                return this.resultField;
+            }
+            set
+            {
+                this.resultField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddBrandRequest1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        public CarRentalAPI.AddBrandRequest AddBrandRequest;
+        
+        public AddBrandRequest1()
+        {
+        }
+        
+        public AddBrandRequest1(CarRentalAPI.AddBrandRequest AddBrandRequest)
+        {
+            this.AddBrandRequest = AddBrandRequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddBrandResponse1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        public CarRentalAPI.AddBrandResponse AddBrandResponse;
+        
+        public AddBrandResponse1()
+        {
+        }
+        
+        public AddBrandResponse1(CarRentalAPI.AddBrandResponse AddBrandResponse)
+        {
+            this.AddBrandResponse = AddBrandResponse;
         }
     }
     
@@ -200,16 +417,42 @@ namespace CarRentalAPI
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CarRentalAPI.BrandDetailsResponse1> CarRentalAPI.BrandDetailsPort.BrandDetailsAsync(CarRentalAPI.BrandDetailsRequest1 request)
+        System.Threading.Tasks.Task<CarRentalAPI.BrandByIdResponse1> CarRentalAPI.BrandDetailsPort.BrandByIdAsync(CarRentalAPI.BrandByIdRequest1 request)
         {
-            return base.Channel.BrandDetailsAsync(request);
+            return base.Channel.BrandByIdAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CarRentalAPI.BrandDetailsResponse1> BrandDetailsAsync(CarRentalAPI.BrandDetailsRequest BrandDetailsRequest)
+        public System.Threading.Tasks.Task<CarRentalAPI.BrandByIdResponse1> BrandByIdAsync(CarRentalAPI.BrandByIdRequest BrandByIdRequest)
         {
-            CarRentalAPI.BrandDetailsRequest1 inValue = new CarRentalAPI.BrandDetailsRequest1();
-            inValue.BrandDetailsRequest = BrandDetailsRequest;
-            return ((CarRentalAPI.BrandDetailsPort)(this)).BrandDetailsAsync(inValue);
+            CarRentalAPI.BrandByIdRequest1 inValue = new CarRentalAPI.BrandByIdRequest1();
+            inValue.BrandByIdRequest = BrandByIdRequest;
+            return ((CarRentalAPI.BrandDetailsPort)(this)).BrandByIdAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CarRentalAPI.AllBrandsResponse> CarRentalAPI.BrandDetailsPort.AllBrandsAsync(CarRentalAPI.AllBrandsRequest1 request)
+        {
+            return base.Channel.AllBrandsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CarRentalAPI.AllBrandsResponse> AllBrandsAsync(CarRentalAPI.AllBrandsRequest AllBrandsRequest)
+        {
+            CarRentalAPI.AllBrandsRequest1 inValue = new CarRentalAPI.AllBrandsRequest1();
+            inValue.AllBrandsRequest = AllBrandsRequest;
+            return ((CarRentalAPI.BrandDetailsPort)(this)).AllBrandsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CarRentalAPI.AddBrandResponse1> CarRentalAPI.BrandDetailsPort.AddBrandAsync(CarRentalAPI.AddBrandRequest1 request)
+        {
+            return base.Channel.AddBrandAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CarRentalAPI.AddBrandResponse1> AddBrandAsync(CarRentalAPI.AddBrandRequest AddBrandRequest)
+        {
+            CarRentalAPI.AddBrandRequest1 inValue = new CarRentalAPI.AddBrandRequest1();
+            inValue.AddBrandRequest = AddBrandRequest;
+            return ((CarRentalAPI.BrandDetailsPort)(this)).AddBrandAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

@@ -9,6 +9,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.ftnxml.soapservice.client.VehicleClient;
+import com.ftnxml.soapservice.model.AddBrandRequest;
+import com.ftnxml.soapservice.model.AddBrandResponse;
 import com.ftnxml.soapservice.model.AllBrandsRequest;
 import com.ftnxml.soapservice.model.AllBrandsResponse;
 import com.ftnxml.soapservice.model.Brand;
@@ -43,6 +45,16 @@ public class BrandEndpoint {
             System.out.println("*********************");
             System.out.println("Size :  " + brand.getModel().size());
         }
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "AddBrandRequest")
+    @ResponsePayload
+    public AddBrandResponse getBrand(@RequestPayload AddBrandRequest request) {
+
+        AddBrandResponse response = new AddBrandResponse();
+        response.setResult(vehicleClient.addBrand(request.getName()));
+
         return response;
     }
 }

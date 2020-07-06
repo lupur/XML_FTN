@@ -2,6 +2,7 @@
 using CarRentalPortal.Application._Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
@@ -15,21 +16,25 @@ namespace CarRentalPortal.API.Controllers
             _client = factory.CreateChannel();
         }
 
-        [HttpGet("brands/{id}")]
-        public async Task<ActionResult> GetCarBrand(int id)
+        [HttpGet("brands")]
+        public async Task<ActionResult<IEnumerable<object>>> GetCarBrands()
         {
-            Task<BrandDetailsResponse1> task;
-            var request = new BrandDetailsRequest1
+            Task<AllBrandsResponse> task;
+            var request = new AllBrandsRequest1
             {
-                BrandDetailsRequest = new BrandDetailsRequest { id = 1 }
+                AllBrandsRequest = new AllBrandsRequest
+                {
+                    test = "OK"
+                }
             };
+
             try
             {
-                task = _client.BrandDetailsAsync(request);
+                task = _client.AllBrandsAsync(request);
 
                 var result = await task;
 
-                return Ok(result);
+                return result.AllBrandsResponse1;
             }
             catch (Exception ex)
             {
@@ -37,5 +42,61 @@ namespace CarRentalPortal.API.Controllers
                 return new StatusCodeResult(500);
             }
         }
+
+        [HttpGet("brands/{id}")]
+        public async Task<ActionResult<object>> GetCarBrand(long id)
+        {
+            Task<BrandByIdResponse1> task;
+            var request = new BrandByIdRequest1
+            {
+                BrandByIdRequest = new BrandByIdRequest { id = id }
+            };
+
+            try
+            {
+                task = _client.BrandByIdAsync(request);
+
+                var result = await task;
+
+                return result.BrandByIdResponse.Brand;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpPost("brands")]
+        public async Task<ActionResult> CreateCarBrand(CreateCarBrandSoapRequest soapRequest)
+        {
+            Task<AddBrandResponse1> task;
+            var request = new AddBrandRequest1
+            {
+                AddBrandRequest = new AddBrandRequest
+                {
+                    name = soapRequest.Name
+                }
+            };
+
+            try
+            {
+                task = _client.AddBrandAsync(request);
+
+                var result = await task;
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return new StatusCodeResult(500);
+            }
+        }
+
+    }
+    public class CreateCarBrandSoapRequest
+    {
+        public string Name { get; set; }
     }
 }

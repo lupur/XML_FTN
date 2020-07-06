@@ -1,0 +1,22 @@
+<h1>Car Models</h1>
+<a class="btn btn-primary my-2" [routerLink]="[ '/admin/carbrands' ]" routerLinkActive="active">Browse Car Brands</a>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Car Brand</th>
+			<th>Car Model</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let carModel of carModels">
+			<td>{{carModel.carBrandName}}</td>
+			<td>{{carModel.name}}</td>
+		</tr>
+		<tr *ngIf="!carModels">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+	</tbody>
+</table>

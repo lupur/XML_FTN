@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Form, Button, Col, Table} from 'react-bootstrap'
+import {Card, Form, Button, Col} from 'react-bootstrap'
 import {authService} from '../services/authService'
 
 export default class Login extends Component {
@@ -46,7 +46,8 @@ export default class Login extends Component {
         }
         authService.register(this.state.registerUsername,
                             this.state.registerPassword,
-                            this.state.registerPassConf)
+                            this.state.registerPassConf,
+                            this.state.registerUsername)
             .then(
                 user => {
                     const { from } = this.props.location.state || { from: { pathname: "/" } };

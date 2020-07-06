@@ -25,6 +25,7 @@ function login(username, password) {
             // let decodedJwtJsonData = window.atob(jwtData)
             let decodedJwtData = jwtDecode(jwtData)
             console.log("Decoded data : " + decodedJwtData.authorities[0].substring(5))
+            console.log(decodedJwtData)
 
 
             var curUser = {
@@ -44,9 +45,9 @@ function login(username, password) {
         })
 }
 
-function register(username, password, passwordConfirm) {
-    return axios.post("http://localhost:8080/user/registration", 
-        JSON.stringify({ username, password, passwordConfirm }),
+function register(username, password, passwordConfirm, email) {
+    return axios.post("http://localhost:8080/user/register", 
+        JSON.stringify({ username, password, passwordConfirm, email }),
             {
                 headers: { 'Content-Type': 'application/json' }
             }
