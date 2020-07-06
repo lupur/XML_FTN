@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
-import { first } from 'rxjs/operators';
-import { AlertService } from '@app/shared/alert/alert.service';
 import { AccountStatus } from '@app/auth/user';
+import { AlertService } from '@app/shared/alert/alert.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-detail',
@@ -41,7 +41,7 @@ export class UserDetailComponent implements OnInit {
     this.authService.activate(id)
       .pipe(first())
       .subscribe(_ => {
-        this.router.navigate(['admin/users']);
+        this.gotoUsers();
         this.alertService.success('User activated successfully!', {
           keepAfterRouteChange: true, autoClose: true
         });
@@ -57,7 +57,7 @@ export class UserDetailComponent implements OnInit {
     this.authService.block(id)
       .pipe(first())
       .subscribe(_ => {
-        this.user.isBlocking = false;
+        this.gotoUsers();
         this.alertService.success('User blocked successfully!', {
           keepAfterRouteChange: true, autoClose: true
         });
@@ -67,4 +67,7 @@ export class UserDetailComponent implements OnInit {
       });
   }
 
+  gotoUsers() {
+    this.router.navigate(['admin/users']);
+  }
 }

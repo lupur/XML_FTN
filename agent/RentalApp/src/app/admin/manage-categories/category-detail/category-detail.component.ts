@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarCategoryService } from '@app/car-categories/car-category.service';
 import { AlertService } from '@app/shared/alert/alert.service';
 import { first, switchMap } from 'rxjs/operators';
@@ -18,8 +18,8 @@ export class CategoryDetailComponent implements OnInit {
   submitted = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
     private formBuilder: FormBuilder,
     private carCategoryService: CarCategoryService,
     private alertService: AlertService
@@ -57,14 +57,18 @@ export class CategoryDetailComponent implements OnInit {
     this.carCategoryService.update(this.id, this.form.value)
       .pipe(first())
       .subscribe(data => {
+        this.gotoCategories();
         this.alertService.success('Update successful!', {
           keepAfterRouteChange: true, autoClose: true
         });
-        this.location.back();
       },
         error => {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  gotoCategories() {
+    this.router.navigate(['admin/categories']);
   }
 }

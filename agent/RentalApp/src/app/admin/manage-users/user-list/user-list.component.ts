@@ -29,17 +29,13 @@ export class UserListComponent implements OnInit {
 
     this.authService.delete(id)
       .pipe(first())
-      .subscribe(_ => {
+      .subscribe(() => {
+        this.users = this.users.filter(x => x.id !== id);
         this.alertService.success('User successfully removed!', {
           keepAfterRouteChange: true, autoClose: true
         });
-      }, error => {
-        this.alertService.error(error);
-        user.isDeleting = false;
       });
   }
-
-  
 
   switchStatus(status: string) {
     switch (status) {
