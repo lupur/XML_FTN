@@ -6,6 +6,8 @@ import { CategoryAddComponent, CategoryDetailComponent, CategoryListComponent, M
 import { ManageModelsComponent, ModelAddComponent, ModelDetailComponent, ModelListComponent } from './manage-models';
 import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
 import { ReviewListComponent } from './manage-reviews/review-list/review-list.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { UserListComponent } from './manage-users/user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -78,6 +80,16 @@ const routes: Routes = [
           {
             path: '',
             component: ReviewListComponent
+          }
+        ]
+      },
+      {
+        path: 'users',
+        component: ManageUsersComponent,
+        children: [
+          {
+            path: '',
+            component: UserListComponent
           }
         ]
       }

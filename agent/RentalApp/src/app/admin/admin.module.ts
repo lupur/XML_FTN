@@ -8,6 +8,10 @@ import { CategoryAddComponent, CategoryDetailComponent, CategoryListComponent, M
 import { ManageModelsComponent, ModelAddComponent, ModelDetailComponent, ModelListComponent } from './manage-models';
 import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
 import { ReviewListComponent } from './manage-reviews/review-list/review-list.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { UserListComponent } from './manage-users/user-list/user-list.component';
+import { UserAddComponent } from './manage-users/user-add/user-add.component';
+import { UserDetailComponent } from './manage-users/user-detail/user-detail.component';
 
 
 @NgModule({
@@ -27,7 +31,11 @@ import { ReviewListComponent } from './manage-reviews/review-list/review-list.co
     ModelDetailComponent,
     AdminDashboardComponent,
     ManageReviewsComponent,
-    ReviewListComponent
+    ReviewListComponent,
+    ManageUsersComponent,
+    UserListComponent,
+    UserAddComponent,
+    UserDetailComponent
   ],
   imports: [
     CommonModule,
