@@ -2,6 +2,8 @@
 using CarRentalPortal.Application.UserRoles.Queries.GetRoles;
 using CarRentalPortal.Application.Users.Commands.CreateUser;
 using CarRentalPortal.Application.Users.Commands.Login;
+using CarRentalPortal.Application.Users.Commands.UpdateUserStatus;
+using CarRentalPortal.Application.Users.Queries.GetUserById;
 using CarRentalPortal.Application.Users.Queries.GetUsers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,9 +38,33 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpGet, Authorize(Roles = Roles.Administrator)]
-        public async Task<ActionResult<UserVm>> Get()
+        public async Task<ActionResult<UserVm>> GetAll()
         {
             return await Mediator.Send(new GetUsersQuery());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDto>> Get(int id)
+        {
+            return await Mediator.Send(new GetUserByIdQuery { Id = id });
+        }
+
+        [HttpPut("{id}/activate")]
+        public async Task<ActionResult> Activate(int id, UpdateUserStatusCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest();
+            await Mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpPut("{id}/block")]
+        public async Task<ActionResult> Block(int id, UpdateUserStatusCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest();
+            await Mediator.Send(command);
+            return NoContent();
         }
     }
 }
