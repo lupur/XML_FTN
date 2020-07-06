@@ -2,6 +2,7 @@
 using CarRentalPortal.Application.UserRoles.Queries.GetRoles;
 using CarRentalPortal.Application.Users.Commands.CreateUser;
 using CarRentalPortal.Application.Users.Commands.Login;
+using CarRentalPortal.Application.Users.Commands.RemoveUser;
 using CarRentalPortal.Application.Users.Commands.UpdateUserStatus;
 using CarRentalPortal.Application.Users.Queries.GetUserById;
 using CarRentalPortal.Application.Users.Queries.GetUsers;
@@ -64,6 +65,13 @@ namespace CarRentalPortal.API.Controllers
             if (id != command.Id)
                 return BadRequest();
             await Mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Remove(int id)
+        {
+            await Mediator.Send(new RemoveUserCommand { Id = id });
             return NoContent();
         }
     }
