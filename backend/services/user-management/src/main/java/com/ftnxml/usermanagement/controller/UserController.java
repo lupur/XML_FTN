@@ -1,6 +1,7 @@
 package com.ftnxml.usermanagement.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,9 @@ import com.ftnxml.usermanagement.dto.UserDto;
 import com.ftnxml.usermanagement.enums.AccountStatus;
 import com.ftnxml.usermanagement.model.User;
 import com.ftnxml.usermanagement.service.UserService;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 
 @RestController
 @RequestMapping("/user")
@@ -35,6 +40,33 @@ public class UserController {
     @GetMapping("/")
     public String home() {
         return "Hello from User-Management Service";
+    }
+
+    private final String secret = "JwtSecretKey";
+
+    @GetMapping("/info")
+    public ResponseEntity getUserDetails(@RequestHeader("Authorization") String token) {
+        System.out.println("Into User Details Controller");
+        token = token.replace("Bearer", "");
+
+        Claims claims = Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
+
+        String username = claims.getSubject();
+        if (username != null) {
+            @SuppressWarnings("unchecked")
+            List<String> authorities = (List<String>) claims.get("authorities");
+
+            System.out.println("Username: " + username);
+            System.out.println("Authorities: " + authorities.get(0).toString());
+            System.out.println("----------------------------------------------");
+
+            User user = userService.getUser(username);
+            UserDto userDto = new UserDto(user);
+            return ResponseEntity.ok().body(userDto);
+
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

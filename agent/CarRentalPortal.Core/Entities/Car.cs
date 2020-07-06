@@ -12,8 +12,9 @@ namespace CarRentalPortal.Core.Entities
         public CarModel CarModel { get; set; }
         public int CarCategoryId { get; set; }
         public CarCategory CarCategory { get; set; }
-        public int AgentId { get; set; }
-        public string AgentContactInfo { get; set; }
+        public int OwnerId { get; set; }
+        public string OwnerFullName { get; set; }
+        public string OwnerContactInfo { get; set; }
         public short ProductionYear { get; set; }
         public FuelType FuelType { get; set; }
         public TransmissionType TransmissionType { get; set; }
@@ -22,7 +23,7 @@ namespace CarRentalPortal.Core.Entities
         public long Mileage { get; set; }
         public long? MileageConstraint { get; set; }
         public byte NumberOfSeats { get; set; }
-        public float AverageRating { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<CarImage> Images { get; set; }
     }

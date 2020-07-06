@@ -1,0 +1,33 @@
+<h1>Rentals</h1>
+
+<table class="table table-striped my-2">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nr. Items</th>
+			<th>Status</th>
+			<th>CreatedOn</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let bundle of rentalBundles">
+			<td>{{bundle.id}}</td>
+			<td>{{bundle.numberOfItems}}</td>
+			<td>
+				<span class="badge rental-status-badge" [ngClass]="switchStatus(bundle.status)">{{bundle.status}}</span>
+			</td>
+			<td>{{bundle.createdOn | date:'short'}}</td>
+			<td align="right">
+				<a [routerLink]="['./detail', bundle.id]" routerLinkActive="active"
+					class="btn btn-sm btn-outline-info mr-1">Details
+				</a>
+			</td>
+		</tr>
+		<tr *ngIf="!rentalBundles">
+			<td colspan="100%" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
+	</tbody>
+</table>

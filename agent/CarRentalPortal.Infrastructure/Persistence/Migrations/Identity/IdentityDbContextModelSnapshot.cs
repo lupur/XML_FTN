@@ -55,6 +55,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Identity
                     b.Property<string>("Salt")
                         .HasColumnType("text");
 
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
                     b.Property<string>("Username")
                         .HasColumnType("varchar(767)");
 

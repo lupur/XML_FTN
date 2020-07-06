@@ -7,6 +7,8 @@ import { AuthInterceptor } from './modules/auth/auth.interceptor';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReviewModule } from './modules/review/review.module';
 
 
 @NgModule({

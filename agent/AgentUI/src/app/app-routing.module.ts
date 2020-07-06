@@ -30,7 +30,19 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [RoleType.Administrator] }
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  {
+    path: 'demo',
+    loadChildren: () => import('./modules/demo/demo.module').then(m => m.DemoModule),
+    canActivate: [AuthGuard],
+    data: { roles: [RoleType.Administrator] }
+  },
+  { path: 'rentals', loadChildren: () => import('./modules/rentals/rentals.module').then(m => m.RentalsModule) },
+  {
+    // fallback route
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

@@ -19,6 +19,8 @@ public interface VehicleService {
     boolean addVehicle(NewVehicleDto newVehicle);
 
     List<Vehicle> getVehiclesOfModel(Long modelId);
-    
+
     CreateRequestDto proceedOrderRequest(CreateRequestDto request);
+
+    List<Vehicle> getUsersVehicles(Long userId);
 }

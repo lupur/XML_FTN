@@ -3,6 +3,7 @@ using CarRentalPortal.Application._Common.Constants;
 using CarRentalPortal.Application._Common.Exceptions;
 using CarRentalPortal.Application._Common.Interfaces;
 using CarRentalPortal.Core.Entities;
+using CarRentalPortal.Core.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -44,15 +45,20 @@ namespace CarRentalPortal.Application.Users.Commands.Login
                 throw new NotFoundException(nameof(User), request.UsernameOrEmail);
             }
 
+            if (entity.Status == AccountStatus.Pending)
+            {
+                throw new LoginException("Your registration has not been approved yet!");
+            }
+            if (entity.Status == AccountStatus.Blocked)
+            {
+                throw new LoginException("Account blocked! Please contact site administrator.");
+            }
+
+
             if (!_dataProtection.ValidatePassword(request.Password, entity.Password, entity.Salt))
             {
                 throw new LoginException();
             }
-
-            //var userRoles = await _context.UserRoles
-            //    .Where(ur => ur.UserId == entity.Id)
-            //    .Select(r => r.Role)
-            //    .ToListAsync(cancellationToken);
 
             return new LoginResultVm
             {

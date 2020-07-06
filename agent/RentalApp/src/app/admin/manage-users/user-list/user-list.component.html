@@ -1,0 +1,53 @@
+<div class="mb-4">
+	<a class="btn btn-outline-primary" [routerLink]="[ './add' ]" routerLinkActive="active">Register User</a>
+</div>
+
+<table class="table table-hover table-responsive-sm" *ngIf="users">
+	<thead>
+		<tr>
+			<th>Internal ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Status</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let user of users">
+			<td>
+				{{user.id}}
+			</td>
+			<td>
+				{{user.firstName}}
+			</td>
+			<td>
+				{{user.lastName}}
+			</td>
+			<td>
+				{{user.username}}
+			</td>
+			<td>
+				{{user.email}}
+			</td>
+			<td>
+				<span class="badge" [ngClass]="switchStatus(user.status)">{{user.status}}</span>
+			</td>
+			<td align="right">
+				<a [routerLink]="['./detail', user.id]" routerLinkActive="active"
+					class="btn btn-sm btn-outline-info mr-1">Details</a>
+				<button (click)="delete(user.id)" class="btn btn-sm btn-outline-danger"
+					[disabled]="user.isDeleting">
+					<span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!user.isDeleting">Delete</span>
+				</button>
+			</td>
+		</tr>
+		<tr *ngIf="!users">
+			<td colspan="100%" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
+	</tbody>
+</table>

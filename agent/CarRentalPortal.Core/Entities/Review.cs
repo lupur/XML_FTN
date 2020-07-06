@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRentalPortal.Core.Enums;
+using System;
 
 namespace CarRentalPortal.Core.Entities
 {
@@ -12,6 +13,7 @@ namespace CarRentalPortal.Core.Entities
         public string AuthorEmail { get; set; }
         public int Rating { get; set; }
         public string Comment { get; set; }
+        public ReviewStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }
     }
 }

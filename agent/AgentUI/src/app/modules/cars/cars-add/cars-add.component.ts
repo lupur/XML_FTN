@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService } from '@app/shared/components/alert/alert.service';
-import { CarsService } from '../cars.service';
-import { first } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FuelType, TransmissionType } from '@app/models/car';
+import { CarBrand } from '@app/models/car-brand';
 import { CarCategory } from '@app/models/car-category';
 import { CarModel } from '@app/models/car-model';
-import { CarBrand } from '@app/models/car-brand';
-import { FuelType } from '@app/models/car';
+import { AlertService } from '@app/shared/components/alert/alert.service';
+import { first } from 'rxjs/operators';
+import { CarsService } from '../cars.service';
 
 @Component({
   selector: 'app-cars-add',
@@ -23,12 +23,6 @@ export class CarsAddComponent implements OnInit {
   carCategories: CarCategory[];
   carBrands: CarBrand[];
   carModels: CarModel[];
-  // fuelTypes: string[] = [
-  //   'Gasoline',
-  //   'Diesel',
-  //   'Hybrid',
-  //   'Electric'
-  // ];
 
   fuelTypes: string[] = [
     FuelType[FuelType.Gasoline],
@@ -36,6 +30,12 @@ export class CarsAddComponent implements OnInit {
     FuelType[FuelType.Hybrid],
     FuelType[FuelType.Electric]
   ]
+
+  transmissionTypes: string[] = [
+    TransmissionType[TransmissionType.Manual],
+    TransmissionType[TransmissionType.Automatic],
+    TransmissionType[TransmissionType.SemiAutomatic]
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,8 +51,12 @@ export class CarsAddComponent implements OnInit {
       carBrand: ['', Validators.required],
       carModel: ['', Validators.required],
       productionYear: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
-      fuelType: ['', Validators.required]
-    })
+      fuelType: ['', Validators.required],
+      transmissionType: ['', Validators.required],
+      mileage: ['', [Validators.required, Validators.min(0)]],
+      mileageConstraint: ['', Validators.max(10000)],
+      numberOfSeats: ['', [Validators.required, Validators.min(2), Validators.max(7)]]
+    });
 
     this.carsService.getCarCategories()
       .pipe(first())

@@ -24,15 +24,6 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AgentContactInfo")
-                        .HasColumnType("text");
-
-                    b.Property<int>("AgentId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("AverageRating")
-                        .HasColumnType("float");
-
                     b.Property<string>("CarBrandName")
                         .HasColumnType("varchar(32)");
 
@@ -59,6 +50,15 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 
                     b.Property<byte>("NumberOfSeats")
                         .HasColumnType("tinyint");
+
+                    b.Property<string>("OwnerContactInfo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("OwnerFullName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
 
                     b.Property<short>("ProductionYear")
                         .HasColumnType("smallint");
@@ -158,6 +158,9 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime");
 
@@ -169,13 +172,11 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
 
                     b.Property<DateTime>("RequestedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -191,6 +192,18 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("NumberOfItems")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.HasKey("Id");
 
@@ -219,10 +232,17 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.HasKey("Id");
 
@@ -261,13 +281,14 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                 {
                     b.HasOne("CarRentalPortal.Core.Entities.CarBrand", "CarBrand")
                         .WithMany("CarModels")
-                        .HasForeignKey("CarBrandName");
+                        .HasForeignKey("CarBrandName")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CarRentalPortal.Core.Entities.Rental", b =>
                 {
                     b.HasOne("CarRentalPortal.Core.Entities.Car", "Car")
-                        .WithMany()
+                        .WithMany("Rentals")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

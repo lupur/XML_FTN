@@ -19,8 +19,8 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
         {
             var entity = new Car
             {
-                AgentId = request.AgentId,
-                AgentContactInfo = request.AgentContactInfo,
+                OwnerId = request.AgentId,
+                OwnerFullName = request.AgentContactInfo,
                 CarBrandName = request.CarBrand,
                 CarModelName = request.CarModel,
                 CarCategoryId = request.CarCategoryId,

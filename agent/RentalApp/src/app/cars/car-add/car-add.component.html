@@ -1,0 +1,137 @@
+<h1>New Car Ad</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="carCategory">Car category</label>
+			<select formControlName="carCategory" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.carCategory.errors}">
+				<option value="">Choose car caregory</option>
+				<option [ngValue]="carCategory.id" *ngFor="let carCategory of carCategories">{{carCategory.name}}
+				</option>
+			</select>
+			<div *ngIf="submitted && f.carCategory.errors" class="invalid-feedback">
+				<div *ngIf="f.carCategory.errors.required">Car category is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="carBrand">Brand</label>
+			<select formControlName="carBrand" class='form-control' (ngModelChange)="onSelectedCarBrand($event)"
+				[ngClass]="{'is-invalid': submitted && f.carBrand.errors}">
+				<option value="">Choose car brand</option>
+				<option *ngFor='let carBrand of carBrands'>{{carBrand.name}}</option>
+			</select>
+			<div *ngIf="submitted && f.carBrand.errors" class="invalid-feedback">
+				<div *ngIf="f.carBrand.errors.required">Car brand is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row" *ngIf="carModels">
+		<div class="form-group col-sm-6">
+			<label for="carModel">Model</label>
+			<select formControlName="carModel" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.carModel.errors}">
+				<option value="">Choose car model</option>
+				<option *ngFor="let carModel of carModels">{{carModel.name}}</option>
+			</select>
+			<div *ngIf="submitted && f.carModel.errors" class="invalid-feedback">
+				<div *ngIf="f.carModel.errors.required">Car model is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="productionYear">Production Year</label>
+			<input type="number" formControlName="productionYear" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.productionYear.errors}">
+			<div *ngIf="submitted && f.productionYear.errors" class="invalid-feedback">
+				<div *ngIf="f.productionYear.errors.required">Production Year is required</div>
+				<div *ngIf="f.productionYear.errors.min">Production Year must be greater or equal to year 1900</div>
+				<div *ngIf="f.productionYear.errors.max">Production Year must be before or equal to current year</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-3">
+			<label for="fuelType">Fuel Type</label>
+			<select formControlName="fuelType" class='form-control'
+				[ngClass]="{'is-invalid': submitted && f.fuelType.errors}">
+				<option value="">Choose car brand</option>
+				<option *ngFor='let fuelType of fuelTypes' [value]="fuelType">{{fuelType}}</option>
+			</select>
+			<div *ngIf="submitted && f.fuelType.errors" class="invalid-feedback">
+				<div *ngIf="f.fuelType.errors.required">Fuel Type is required</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="transmissionType">Transmission Type</label>
+			<select formControlName="transmissionType" class='form-control'
+				[ngClass]="{'is-invalid': submitted && f.transmissionType.errors}">
+				<option value="">Choose car brand</option>
+				<option *ngFor='let transmissionType of transmissionTypes' [value]="transmissionType">
+					{{transmissionType}}</option>
+			</select>
+			<div *ngIf="submitted && f.transmissionType.errors" class="invalid-feedback">
+				<div *ngIf="f.transmissionType.errors.required">Fuel Type is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-3">
+			<label for="color">Color</label>
+			<input type="text" formControlName="color" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.color.errors}">
+			<div *ngIf="submitted && f.color.errors" class="invalid-feedback">
+				<div *ngIf="f.color.errors.required">'Color' field is required</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="location">Location</label>
+			<input type="text" formControlName="location" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.location.errors}">
+			<div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+				<div *ngIf="f.location.errors.required">'Location' field is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-3">
+			<label for="mileage">Mileage</label>
+			<input type="number" formControlName="mileage" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.mileage.errors}">
+			<div *ngIf="submitted && f.mileage.errors" class="invalid-feedback">
+				<div *ngIf="f.mileage.errors.required">Mileage is required</div>
+				<div *ngIf="f.mileage.errors.min">Mileage cannot be lower than 0</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="mileageConstraint">Mileage Constraint</label>
+			<input type="number" formControlName="mileageConstraint" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.mileageConstraint.errors}">
+			<div *ngIf="submitted && f.mileageConstraint.errors" class="invalid-feedback">
+				<div *ngIf="f.mileageConstraint.errors.max">Maximum mileage constraint is 10000 kilometers</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="numberOfSeats">Number of Seats</label>
+			<input type="number" formControlName="numberOfSeats" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.numberOfSeats.errors}">
+			<div *ngIf="submitted && f.numberOfSeats.errors" class="invalid-feedback">
+				<div *ngIf="f.numberOfSeats.errors.required">Number of Seats is required</div>
+				<div *ngIf="f.mileage.errors.min">Minimum number of seats is 2</div>
+				<div *ngIf="f.mileage.errors.max">Maximum number of seats is 7</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<button [disabled]="loading" class="btn btn-primary">
+			<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+			Save
+		</button>
+		<a routerLink="/cars" class="btn btn-link">Cancel</a>
+	</div>
+</form>

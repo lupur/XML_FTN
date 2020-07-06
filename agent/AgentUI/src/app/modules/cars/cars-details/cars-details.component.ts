@@ -16,7 +16,6 @@ export class CarsDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private carsService: CarsService
   ) { }
 

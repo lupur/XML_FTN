@@ -1,0 +1,36 @@
+<table class="table table-hover table-responsive-sm" *ngIf="reviews">
+	<thead>
+		<tr>
+			<th>Internal ID</th>
+			<th>Reviewer</th>
+			<th>Status</th>
+			<th>Created On</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let review of reviews">
+			<td>
+				{{review.id}}
+			</td>
+			<td>
+				{{review.authorDisplayName}}
+			</td>
+			<td>
+				<span class="badge" [ngClass]="switchStatus(review.status)">{{review.status}}</span>
+			</td>
+			<td>
+				{{review.createdOn | date: 'short'}}
+			</td>
+			<td align="right">
+				<button (click)="accept(review.id)" class="btn btn-sm btn-outline-primary mr-1">Accept</button>
+				<button (click)="reject(review.id)" class="btn btn-sm btn-secondary">Reject</button>
+			</td>
+		</tr>
+		<tr *ngIf="!reviews">
+			<td colspan="100%" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
+	</tbody>
+</table>

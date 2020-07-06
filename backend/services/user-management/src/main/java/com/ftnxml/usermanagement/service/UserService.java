@@ -13,6 +13,8 @@ public interface UserService {
 
     User getUser(Long id);
 
+    User getUser(String username);
+
     List<User> getAllUsers();
 
     boolean removeUser(Long userId);

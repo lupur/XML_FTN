@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CarRentalPortal.Core.Enums;
+using System.Collections.Generic;
 
 namespace CarRentalPortal.Core.Entities
 {
@@ -11,6 +12,7 @@ namespace CarRentalPortal.Core.Entities
         public string Password { get; set; }
         public string Email { get; set; }
         public string Salt { get; set; }
+        public AccountStatus Status { get; set; }
         public ICollection<UserRole> Roles { get; set; }
     }
 }

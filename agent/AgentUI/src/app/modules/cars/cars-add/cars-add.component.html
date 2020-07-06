@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	<div class="form-row">
-		<div class="form-group col-sm-6">
+		<div class="form-group col-sm-3">
 			<label for="fuelType">Fuel Type</label>
 			<select formControlName="fuelType" class='form-control'
 				[ngClass]="{'is-invalid': submitted && f.fuelType.errors}">
@@ -63,6 +63,49 @@
 			</select>
 			<div *ngIf="submitted && f.fuelType.errors" class="invalid-feedback">
 				<div *ngIf="f.fuelType.errors.required">Fuel Type is required</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="transmissionType">Transmission Type</label>
+			<select formControlName="transmissionType" class='form-control'
+				[ngClass]="{'is-invalid': submitted && f.transmissionType.errors}">
+				<option value="">Choose car brand</option>
+				<option *ngFor='let transmissionType of transmissionTypes' [value]="transmissionType">
+					{{transmissionType}}</option>
+			</select>
+			<div *ngIf="submitted && f.transmissionType.errors" class="invalid-feedback">
+				<div *ngIf="f.transmissionType.errors.required">Fuel Type is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-3">
+			<label for="mileage">Mileage</label>
+			<input type="number" formControlName="mileage" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.mileage.errors}">
+			<div *ngIf="submitted && f.mileage.errors" class="invalid-feedback">
+				<div *ngIf="f.mileage.errors.required">Mileage is required</div>
+				<div *ngIf="f.mileage.errors.min">Mileage cannot be lower than 0</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="mileageConstraint">Mileage Constraint</label>
+			<input type="number" formControlName="mileageConstraint" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.mileageConstraint.errors}">
+			<div *ngIf="submitted && f.mileageConstraint.errors" class="invalid-feedback">
+				<div *ngIf="f.mileageConstraint.errors.max">Maximum mileage constraint is 10000 kilometers</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="numberOfSeats">Number of Seats</label>
+			<input type="number" formControlName="numberOfSeats" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.numberOfSeats.errors}">
+			<div *ngIf="submitted && f.numberOfSeats.errors" class="invalid-feedback">
+				<div *ngIf="f.numberOfSeats.errors.required">Number of Seats is required</div>
+				<div *ngIf="f.mileage.errors.min">Minimum number of seats is 2</div>
+				<div *ngIf="f.mileage.errors.max">Maximum number of seats is 7</div>
 			</div>
 		</div>
 	</div>
