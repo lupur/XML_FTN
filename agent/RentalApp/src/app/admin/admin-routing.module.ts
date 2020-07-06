@@ -8,6 +8,8 @@ import { ManageReviewsComponent } from './manage-reviews/manage-reviews.componen
 import { ReviewListComponent } from './manage-reviews/review-list/review-list.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { UserListComponent } from './manage-users/user-list/user-list.component';
+import { UserDetailComponent } from './manage-users/user-detail/user-detail.component';
+import { UserAddComponent } from './manage-users/user-add/user-add.component';
 
 
 const routes: Routes = [
@@ -87,6 +89,14 @@ const routes: Routes = [
         path: 'users',
         component: ManageUsersComponent,
         children: [
+          {
+            path: 'add',
+            component: UserAddComponent
+          },
+          {
+            path: 'detail/:id',
+            component: UserDetailComponent
+          },
           {
             path: '',
             component: UserListComponent

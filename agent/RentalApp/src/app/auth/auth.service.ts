@@ -5,7 +5,7 @@ import { environment } from '@env/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RoleType } from './role';
-import { User, UserVm } from './user';
+import { AccountStatus, User, UserVm } from './user';
 
 
 
@@ -65,11 +65,11 @@ export class AuthService {
   }
 
   activate(id: number) {
-    return this.http.put(`${environment.apiUrl}/users/${id}/activate`, { id });
+    return this.http.put(`${environment.apiUrl}/users/${id}/activate`, { id, status: AccountStatus.ACTIVE });
   }
 
   block(id: number) {
-    return this.http.put(`${environment.apiUrl}/users/${id}/block`, { id });
+    return this.http.put(`${environment.apiUrl}/users/${id}/block`, { id, status: AccountStatus.BLOCKED });
   }
 
   delete(id: number) {

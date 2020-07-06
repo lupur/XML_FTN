@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
 import { first } from 'rxjs/operators';
 import { AlertService } from '@app/shared/alert/alert.service';
@@ -15,6 +15,7 @@ export class UserDetailComponent implements OnInit {
   user = null;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private alertService: AlertService
@@ -40,7 +41,7 @@ export class UserDetailComponent implements OnInit {
     this.authService.activate(id)
       .pipe(first())
       .subscribe(_ => {
-        this.user.isActivating = false;
+        this.router.navigate(['admin/users']);
         this.alertService.success('User activated successfully!', {
           keepAfterRouteChange: true, autoClose: true
         });

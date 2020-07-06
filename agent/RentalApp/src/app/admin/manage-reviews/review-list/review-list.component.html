@@ -23,8 +23,8 @@
 				{{review.createdOn | date: 'short'}}
 			</td>
 			<td align="right">
-				<button (click)="accept(review.id)" class="btn btn-outline-primary mr-1">Accept</button>
-				<button (click)="reject(review.id)" class="btn btn-outline-warning">Reject</button>
+				<button (click)="accept(review.id)" class="btn btn-sm btn-outline-primary mr-1">Accept</button>
+				<button (click)="reject(review.id)" class="btn btn-sm btn-secondary">Reject</button>
 			</td>
 		</tr>
 		<tr *ngIf="!reviews">

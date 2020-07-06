@@ -35,8 +35,6 @@ export class BrandDetailComponent implements OnInit {
         this.getAllBrands();
         this.getModelsByBrand();
       });
-
-
   }
 
   gotoBrands() {
