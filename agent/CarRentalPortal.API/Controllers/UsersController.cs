@@ -1,6 +1,7 @@
 ﻿using CarRentalPortal.API.Constants;
-using CarRentalPortal.Application.UserRoles.Queries.GetRoles;
+using CarRentalPortal.Application.UserRoles.Queries.GetUserRoles;
 using CarRentalPortal.Application.Users.Commands.CreateUser;
+using CarRentalPortal.Application.Users.Commands.InviteUser;
 using CarRentalPortal.Application.Users.Commands.Login;
 using CarRentalPortal.Application.Users.Commands.RemoveUser;
 using CarRentalPortal.Application.Users.Commands.UpdateUserStatus;
@@ -36,6 +37,13 @@ namespace CarRentalPortal.API.Controllers
         public async Task<ActionResult<int>> Register(CreateUserCommand command)
         {
             return await Mediator.Send(command);
+        }
+
+        [HttpPost("invite")]
+        public async Task<ActionResult<int>> Invite(InviteUserCommand command)
+        {
+            var userId = await Mediator.Send(command);
+            return userId;
         }
 
         [HttpGet, Authorize(Roles = Roles.Administrator)]
