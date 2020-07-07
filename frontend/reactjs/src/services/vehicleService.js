@@ -5,7 +5,8 @@ export const vehicleService = {
     getAll,
     getImagesNames,
     getImage,
-    add
+    add,
+    getAvailableVehicles
 }
 
 function getAll() {
@@ -60,6 +61,25 @@ function add(newVehicle) {
         numberOfSeats: newVehicle.numberOfSeats,
         mileageConstraint: newVehicle.mileageConstraint
     },
+    {
+        headers: authHeader()
+    }).then( response => {
+        return response.data;
+    }).catch(error => {
+        return Promise.reject(error);
+    });
+}
+
+function getAvailableVehicles(startDate, endDate, listOfVehicles) {
+    let vehiclesIdStr = ""
+    for(var i = 0; i < listOfVehicles.length; i++)
+    {
+        vehiclesIdStr+=listOfVehicles[i]+','
+    }
+    vehiclesIdStr = vehiclesIdStr.substring(0, vehiclesIdStr.length - 1);
+    let url = "http://localhost:8080/order/available-vehicles?startDate="+startDate+"&endDate="+endDate+"&vehicles="+vehiclesIdStr
+    console.log(url)
+    return axios.get( url,
     {
         headers: authHeader()
     }).then( response => {

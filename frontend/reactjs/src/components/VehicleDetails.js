@@ -43,6 +43,7 @@ export default class VehicleDetails extends Component {
                       );
                       this.imageSources.push("data:;base64," + base64);
                       this.setState({ imageSources: this.imageSources});
+                      console.log("Image sources: " + this.imageSources)
                 });
             }
         });
@@ -54,38 +55,57 @@ export default class VehicleDetails extends Component {
                 <Card className ={"border border-dark bg-dark text-white"}>
                 <Card.Header><h3>Vehicle Details</h3></Card.Header>
                 <Card.Body>
-                     <Table bordered>
-                     <thead>
-                         <tr>
-                             <th>ID</th>
-                             <th>Brand</th>
-                             <th>Model</th>
-                             <th>Daily price</th>
-                             <th>Collision Damage Price</th>
-                             <th>Fuel Type</th>
-                             <th>Class</th>
-                             <th>Mileage</th>
-                             <th>Insurance</th>
-                             <th>No of Seats</th>
-                             <th>Location</th>
-                         </tr>
-                     </thead>
+                    <Table bordered>
                      <tbody>
                          <tr>
+                             <th>ID</th>
                              <td>{this.state.Vehicle.id}</td>
+                         </tr>
+                         <tr>
+                             <th>Brand</th>
                              <td>{this.state.Vehicle.brand.name}</td>
+                         </tr>
+                         <tr>
+                             <th>Model</th>
                              <td>{this.state.Vehicle.model.name}</td>
-                             <td>{this.state.Vehicle.pricelist.dailyPrice} Eur  </td>
-                             <td>{this.state.Vehicle.colDamageWaiver.price}</td>
+                         </tr>
+                         <tr>
+                             <th>Daily price</th>
+                             <td>{this.state.Vehicle.pricelist.dailyPrice} Eur</td>
+                         </tr>
+                         <tr>
+                             <th>Collision Damage Price</th>
+                             <td>{this.state.Vehicle.colDamageWaiver.price} Eur</td>
+                         </tr>
+                         <tr>
+                             <th>Fuel Type</th>
                              <td>{this.state.Vehicle.fuelType.name}</td>
+                         </tr>
+                         <tr>
+                             <th>Class</th>
                              <td>{this.state.Vehicle.classType.name}</td>
+                         </tr>
+                         <tr>
+                             <th>Mileage</th>
                              <td>{this.state.Vehicle.mileage}</td>
+                         </tr>
+                         <tr>
+                             <th>Insurance</th>
                              <td>{this.state.Vehicle.insurance == "true" ? "Yes" : "No"}</td>
+                         </tr>
+                         <tr>
+                             <th>No of Seats</th>
                              <td>{this.state.Vehicle.numberOfSeats}</td>
+                         </tr>
+                         <tr>
+                             <th>Location</th>
                              <td>{this.state.Vehicle.location}</td>
                          </tr>
+
                      </tbody>
+
                      </Table>
+
                 </Card.Body>
                 </Card>
                 <Card className ={"border border-dark bg-dark text-white"}>
