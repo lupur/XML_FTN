@@ -58,7 +58,7 @@
 			<label for="fuelType">Fuel Type</label>
 			<select formControlName="fuelType" class='form-control'
 				[ngClass]="{'is-invalid': submitted && f.fuelType.errors}">
-				<option value="">Choose car brand</option>
+				<option value="">Choose fuel type</option>
 				<option *ngFor='let fuelType of fuelTypes' [value]="fuelType">{{fuelType}}</option>
 			</select>
 			<div *ngIf="submitted && f.fuelType.errors" class="invalid-feedback">
@@ -69,7 +69,7 @@
 			<label for="transmissionType">Transmission Type</label>
 			<select formControlName="transmissionType" class='form-control'
 				[ngClass]="{'is-invalid': submitted && f.transmissionType.errors}">
-				<option value="">Choose car brand</option>
+				<option value="">Choose transmission type</option>
 				<option *ngFor='let transmissionType of transmissionTypes' [value]="transmissionType">
 					{{transmissionType}}</option>
 			</select>

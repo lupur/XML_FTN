@@ -1,4 +1,4 @@
-import { RoleType } from './auth/role';
+import { RoleType } from './roles/role';
 import { AuthGuard } from './auth/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';

@@ -1,3 +1,7 @@
+export interface RoleVm {
+	roles: Role[];
+}
+
 export interface Role {
 	id: number;
 	name: RoleType;

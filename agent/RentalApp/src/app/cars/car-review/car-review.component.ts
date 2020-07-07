@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@app/auth/auth.service';
-import { User } from '@app/auth/user';
+import { User } from '@app/users/user';
 import { Review, ReviewStatus } from '@app/reviews/review';
 import { ReviewService } from '@app/reviews/review.service';
 import { AlertService } from '@app/shared/alert/alert.service';

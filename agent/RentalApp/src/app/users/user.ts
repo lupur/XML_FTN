@@ -1,11 +1,11 @@
-import { Role } from './role';
+import { Role } from '@app/roles/role';
 
 export interface UserVm {
 	users: User[];
 }
 
 export interface User {
-	id: number;
+	id?: number;
 	firstName: string;
 	lastName: string;
 	username: string;
