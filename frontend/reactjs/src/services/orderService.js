@@ -4,11 +4,23 @@ import {authHeader} from "../helpers/authHeader"
 export const orderService = {
     sendRentRequest,
     getByOwner,
+    getMine,
     changeStatus
 }
 
 function getByOwner() {
     return axios.get("http://localhost:8080/order/requests",
+    {
+        headers: authHeader()
+    }).then( response => {
+        return response.data;
+    }).catch(error => {
+        return Promise.reject(error);
+    });
+}
+
+function getMine() {
+    return axios.get("http://localhost:8080/order/users/",
     {
         headers: authHeader()
     }).then( response => {
@@ -56,3 +68,4 @@ function sendRentRequest(ownerId, createdOn, vehicleOrders) {
         return Promise.reject(error);
     });
 }
+

@@ -66,16 +66,11 @@ export default class Vehicles extends Component {
                     vehicleOrders.push(veh)
                 }
             }
-            // console.log("Owner ID: " + ownerId)
-            // console.log("Created on: " + createdOn)
-            // console.log("Vehicle Orders: ")
-            console.log(vehicleOrders[0])
             await orderService.sendRentRequest(ownerId, createdOn, vehicleOrders)
                 .then(response => {
                     console.log(response)
                 })
         }
-
     }
 
     async componentDidMount() {

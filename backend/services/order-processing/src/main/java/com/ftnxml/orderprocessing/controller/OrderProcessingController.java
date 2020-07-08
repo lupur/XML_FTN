@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.PathParam;
-
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -70,7 +68,7 @@ public class OrderProcessingController {
 
     // GET BY REQUEST
     @GetMapping(value = "/{requestId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRequestsByRequestId(@PathParam("requestId") Long requestId) {
+    public ResponseEntity getRequestsByRequestId(@PathVariable("requestId") Long requestId) {
         OrderRequestDto orderRequest = OrderRequestMapper.INSTANCE
                 .toOrderRequestDTO(orderRequestService.getOrderRequest(requestId));
         if (orderRequest != null) {
@@ -81,7 +79,7 @@ public class OrderProcessingController {
 
     // GET BY VEHICLE
     @GetMapping(value = "/vehicles/{vehicleId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRequestsByVehicleId(@PathParam("vehicleId") Long vehicleId) {
+    public ResponseEntity getRequestsByVehicleId(@PathVariable("vehicleId") Long vehicleId) {
         List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE
                 .toOrderRequestDTOs(orderRequestService.getOrderRequestByVehicleId(vehicleId));
         if (orderRequests != null) {
@@ -91,10 +89,14 @@ public class OrderProcessingController {
     }
 
     // GET BY USER
-    @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRequestsByUserId(Long vehicleId) {
+    @GetMapping(value = "/users/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getRequestsByUserId(@RequestHeader("Authorization") String token) {
+
+        UserDto owner = userDetailsClient.getUserInfo(token);
+        Long userId = owner.getId();
         List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE
-                .toOrderRequestDTOs(orderRequestService.getOrderRequestByUserId(vehicleId));
+                .toOrderRequestDTOs(orderRequestService.getOrderRequestByUserId(userId));
+
         if (orderRequests != null) {
             return ResponseEntity.ok(orderRequests);
         }
@@ -103,11 +105,12 @@ public class OrderProcessingController {
 
     // GET BY OWNER
     @GetMapping(value = "/requests", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRequestsByOwnerId(@RequestHeader("Authorization") String token, @RequestParam(value="ownerId", required = false) Long ownerId) {
-    	if(ownerId == null) {
-    		UserDto owner = userDetailsClient.getUserInfo(token);
-    		ownerId = owner.getId();
-    	}
+    public ResponseEntity getRequestsByOwnerId(@RequestHeader("Authorization") String token,
+            @RequestParam(value = "ownerId", required = false) Long ownerId) {
+        if (ownerId == null) {
+            UserDto owner = userDetailsClient.getUserInfo(token);
+            ownerId = owner.getId();
+        }
         List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE
                 .toOrderRequestDTOs(orderRequestService.getOrderRequestByOwnerId(ownerId));
         if (orderRequests != null) {
