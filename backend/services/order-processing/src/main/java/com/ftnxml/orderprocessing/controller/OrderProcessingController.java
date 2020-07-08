@@ -102,10 +102,14 @@ public class OrderProcessingController {
     }
 
     // GET BY OWNER
-    @GetMapping(value = "/owners/{ownerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRequestsByOwnerId(@PathParam("ownerId") Long vehicleId) {
+    @GetMapping(value = "/requests", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getRequestsByOwnerId(@RequestHeader("Authorization") String token, @RequestParam(value="ownerId", required = false) Long ownerId) {
+    	if(ownerId == null) {
+    		UserDto owner = userDetailsClient.getUserInfo(token);
+    		ownerId = owner.getId();
+    	}
         List<OrderRequestDto> orderRequests = OrderRequestMapper.INSTANCE
-                .toOrderRequestDTOs(orderRequestService.getOrderRequestByOwnerId(vehicleId));
+                .toOrderRequestDTOs(orderRequestService.getOrderRequestByOwnerId(ownerId));
         if (orderRequests != null) {
             return ResponseEntity.ok(orderRequests);
         }

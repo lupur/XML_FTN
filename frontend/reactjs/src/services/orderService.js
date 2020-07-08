@@ -2,7 +2,32 @@ import axios from "axios"
 import {authHeader} from "../helpers/authHeader"
 
 export const orderService = {
-    sendRentRequest
+    sendRentRequest,
+    getByOwner,
+    changeStatus
+}
+
+function getByOwner() {
+    return axios.get("http://localhost:8080/order/requests",
+    {
+        headers: authHeader()
+    }).then( response => {
+        return response.data;
+    }).catch(error => {
+        return Promise.reject(error);
+    });
+}
+
+function changeStatus(requestId, status) {
+    return axios.put("http://localhost:8080/order/" + requestId + "/status/" + status,
+    {},
+    {
+        headers: authHeader()
+    }).then( response => {
+        return response.data;
+    }).catch(error => {
+        return Promise.reject(error);
+    });
 }
 
 function sendRentRequest(ownerId, createdOn, vehicleOrders) {
