@@ -14,6 +14,10 @@ namespace CarRentalPortal.Infrastructure.Persistence.Configurations
             builder
                 .Property(sc => sc.Id)
                 .ValueGeneratedOnAdd();
+
+            builder
+                .HasIndex(sc => sc.UserId)
+                .IsUnique(true);
         }
     }
 }

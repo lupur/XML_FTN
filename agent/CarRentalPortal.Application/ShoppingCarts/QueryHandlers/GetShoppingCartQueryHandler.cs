@@ -1,0 +1,43 @@
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using CarRentalPortal.Application._Common.Exceptions;
+using CarRentalPortal.Application._Common.Interfaces;
+using CarRentalPortal.Application.ShoppingCarts.Models;
+using CarRentalPortal.Application.ShoppingCarts.Queries;
+using CarRentalPortal.Core.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CarRentalPortal.Application.ShoppingCarts.QueryHandlers
+{
+    public class GetShoppingCartQueryHandler : IRequestHandler<GetShoppingCartQuery, ShoppingCartModel>
+    {
+        private readonly IApplicationDbContext _context;
+        private readonly IConfigurationProvider _provider;
+
+        public GetShoppingCartQueryHandler(IApplicationDbContext context, IMapper mapper)
+        {
+            _context = context;
+            _provider = mapper.ConfigurationProvider;
+        }
+
+        public async Task<ShoppingCartModel> Handle(GetShoppingCartQuery request, CancellationToken cancellationToken)
+        {
+            var shoppingCart = await _context.ShoppingCarts
+                .ProjectTo<ShoppingCartModel>(_provider).FirstOrDefaultAsync(sc => sc.UserId == request.UserId);
+
+            if (shoppingCart == null)
+            {
+                throw new NotFoundException(nameof(ShoppingCart), request.UserId);
+            }
+
+            shoppingCart.Items = await _context.ShoppingCartItems
+                .Where(sci => sci.ShoppingCartId == shoppingCart.Id).ProjectTo<ShoppingCartItemModel>(_provider).ToListAsync(cancellationToken);
+
+            return shoppingCart;
+        }
+    }
+}
