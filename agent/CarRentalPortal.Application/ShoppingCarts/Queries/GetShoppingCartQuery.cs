@@ -1,5 +1,4 @@
-﻿using CarRentalPortal.Application.ShoppingCart.Models;
-using CarRentalPortal.Application.ShoppingCarts.Models;
+﻿using CarRentalPortal.Application.ShoppingCarts.Models;
 using MediatR;
 
 namespace CarRentalPortal.Application.ShoppingCarts.Queries

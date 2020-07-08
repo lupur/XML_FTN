@@ -24,6 +24,8 @@ namespace CarRentalPortal.Infrastructure.Persistence.Extensions
             builder.ApplyConfiguration(new ReviewsConfiguration());
             builder.ApplyConfiguration(new RentalsConfiguration());
             builder.ApplyConfiguration(new RentalBundlesConfiguration());
+            builder.ApplyConfiguration(new ShoppingCartsConfiguration());
+            builder.ApplyConfiguration(new ShoppingCartItemsConfiguration());
 
             return builder;
         }
