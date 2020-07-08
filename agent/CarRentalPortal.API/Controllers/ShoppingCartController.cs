@@ -15,9 +15,17 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateIfNotExists([FromQuery] int userId, CreateShoppingCartCommand command)
+        public async Task<ActionResult<int>> Create([FromQuery] int userId, CreateShoppingCartCommand command)
         {
             if (userId != command.UserId)
+                return BadRequest();
+            return await Mediator.Send(command);
+        }
+
+        [HttpPost("{id}/add-item")]
+        public async Task<ActionResult<int>> AddShoppingCartItem(int id, AddShoppingCartItemCommand command)
+        {
+            if (id != command.ShoppingCartId)
                 return BadRequest();
             return await Mediator.Send(command);
         }
