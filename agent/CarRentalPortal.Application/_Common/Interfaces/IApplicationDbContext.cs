@@ -15,6 +15,8 @@ namespace CarRentalPortal.Application._Common.Interfaces
         DbSet<Rental> Rentals { get; set; }
         DbSet<RentalBundle> RentalBundles { get; set; }
         DbSet<Review> Reviews { get; set; }
+        DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
