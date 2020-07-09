@@ -29,7 +29,6 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.authService.userValue.id;
     this.getUserShoppingCart();
-
   }
 
   getUserShoppingCart() {
