@@ -1,7 +1,4 @@
-package com.ftnxml.usermanagement.dto;
-
-import com.ftnxml.usermanagement.model.Role;
-import com.ftnxml.usermanagement.model.User;
+package com.ftnxml.orderprocessing.dto;
 
 public class UserDto {
 
@@ -11,16 +8,6 @@ public class UserDto {
     private String email;
     private Long id;
     private String role;
-
-    public UserDto(User user) {
-        this.username = user.getUsername();
-        this.email = user.getEmail();
-        this.id = user.getId();
-        for (Role r : user.getRoles()) {
-            this.role = r.getName();
-            break;
-        }
-    }
 
     public UserDto() {
         super();

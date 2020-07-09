@@ -8,6 +8,8 @@ import com.ftnxml.vehiclemanagement.model.Vehicle;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     List<Vehicle> findByModel_Id(Long modelId);
-    
+
     List<Vehicle> findByLocation(String location);
+
+    List<Vehicle> findByUserId(Long userId);
 }
