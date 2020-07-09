@@ -15,11 +15,13 @@ namespace CarRentalPortal.Application.ShoppingCarts.QueryHandlers
 {
     public class GetShoppingCartQueryHandler : IRequestHandler<GetShoppingCartQuery, ShoppingCartModel>
     {
+        private readonly IIdentityDbContext _identity;
         private readonly IApplicationDbContext _context;
         private readonly IConfigurationProvider _provider;
 
-        public GetShoppingCartQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetShoppingCartQueryHandler(IIdentityDbContext identity, IApplicationDbContext context, IMapper mapper)
         {
+            _identity = identity;
             _context = context;
             _provider = mapper.ConfigurationProvider;
         }
@@ -28,12 +30,14 @@ namespace CarRentalPortal.Application.ShoppingCarts.QueryHandlers
         {
             var shoppingCart = await _context.ShoppingCarts
                 .ProjectTo<ShoppingCartModel>(_provider).FirstOrDefaultAsync(sc => sc.UserId == request.UserId);
-
             if (shoppingCart == null)
-            {
                 throw new NotFoundException(nameof(ShoppingCart), request.UserId);
-            }
 
+            var user = await _identity.Users.FindAsync(request.UserId);
+            if (user == null)
+                throw new NotFoundException(nameof(User), request.UserId);
+
+            shoppingCart.UserFirstName = user.FirstName;
             shoppingCart.Items = await _context.ShoppingCartItems
                 .Where(sci => sci.ShoppingCartId == shoppingCart.Id).ProjectTo<ShoppingCartItemModel>(_provider).ToListAsync(cancellationToken);
 

@@ -13,6 +13,7 @@ namespace CarRentalPortal.Application.ShoppingCarts.Models
 
         public int Id { get; set; }
         public int UserId { get; set; }
+        public string UserFirstName { get; set; }
         public int NumberOfItems { get; set; }
         public ICollection<ShoppingCartItemModel> Items { get; set; }
     }

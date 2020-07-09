@@ -9,13 +9,13 @@ namespace CarRentalPortal.API.Controllers
     public class ShoppingCartController : AbstractApiController
     {
         [HttpGet]
-        public async Task<ActionResult<ShoppingCartModel>> GetShoppingCart([FromQuery] int userId)
+        public async Task<ActionResult<ShoppingCartModel>> GetUserShoppingCart([FromQuery] int userId)
         {
             return await Mediator.Send(new GetShoppingCartQuery { UserId = userId });
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromQuery] int userId, CreateShoppingCartCommand command)
+        public async Task<ActionResult<int>> CreateUserShoppingCart([FromQuery] int userId, CreateShoppingCartCommand command)
         {
             if (userId != command.UserId)
                 return BadRequest();
