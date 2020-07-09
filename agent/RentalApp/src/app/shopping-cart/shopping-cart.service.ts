@@ -1,24 +1,25 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Car } from '@app/cars/car';
-import { Subject } from 'rxjs';
+import { environment } from '@env/environment';
+import { ShoppingCart, ShoppingCartItem } from './shopping-cart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  private shoppingCart: Car[] = [];
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
-
-  getAll() {
-    return this.shoppingCart;
+  getUserShoppingCart(userId: number) {
+    let params = new HttpParams()
+      .set('userId', userId.toString());
+    return this.http.get<ShoppingCart>(`${environment.apiUrl}/shopping-cart`, { params: params });
   }
 
-  add(car: Car) {
-    this.shoppingCart.push(car);
+  createUserShoppingCart(shoppingCart: ShoppingCart) {
+    return this.http.post(`${environment.apiUrl}/shopping-cart`, shoppingCart);
   }
 
-  remove(id: number) {
-    this.shoppingCart.filter(c => c.id !== id);
+  addItemToMyShoppingCart(item: ShoppingCartItem) {
+    return this.http.post(`${environment.apiUrl}/shopping-cart/items/add`, item);
   }
 }

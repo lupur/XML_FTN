@@ -11,6 +11,7 @@ export interface User {
 	username: string;
 	password: string;
 	email: string;
+	shoppingCartId?: number;
 	token?: string;
 	status: AccountStatus;
 	roles: Role[];
