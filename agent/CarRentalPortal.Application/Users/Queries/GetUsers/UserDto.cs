@@ -14,6 +14,7 @@ namespace CarRentalPortal.Application.Users.Queries.GetUsers
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public int ShoppingCartId { get; set; }
         public string Token { get; set; }
         public AccountStatus Status { get; set; }
         public ICollection<RoleDto> Roles { get; set; }

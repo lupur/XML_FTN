@@ -10,21 +10,20 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalPortal.Application.Users.Commands.Login
+namespace CarRentalPortal.Application.Users.Queries.Login
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResultVm>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginResultVm>
     {
         private readonly IMapper _mapper;
         private readonly IIdentityDbContext _context;
         private readonly IDataProtectionService _dataProtection;
 
-        public LoginCommandHandler(
+        public LoginQueryHandler(
             IMapper mapper,
             IIdentityDbContext context,
             IDataProtectionService dataProtection)
@@ -34,7 +33,7 @@ namespace CarRentalPortal.Application.Users.Commands.Login
             _dataProtection = dataProtection;
         }
 
-        public async Task<LoginResultVm> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoginResultVm> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Users
                 .Include(u => u.Roles)

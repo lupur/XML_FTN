@@ -5,6 +5,7 @@ using CarRentalPortal.Application._Common.Interfaces;
 using CarRentalPortal.Application.ShoppingCarts.Models;
 using CarRentalPortal.Application.ShoppingCarts.Queries;
 using CarRentalPortal.Core.Entities;
+using CarRentalPortal.Core.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -39,7 +40,10 @@ namespace CarRentalPortal.Application.ShoppingCarts.QueryHandlers
 
             shoppingCart.UserFirstName = user.FirstName;
             shoppingCart.Items = await _context.ShoppingCartItems
-                .Where(sci => sci.ShoppingCartId == shoppingCart.Id).ProjectTo<ShoppingCartItemModel>(_provider).ToListAsync(cancellationToken);
+                .Where(sci => sci.ShoppingCartId == shoppingCart.Id)
+                .Where(sci => sci.Status == OrderStatus.Pending)
+                .ProjectTo<ShoppingCartItemModel>(_provider).ToListAsync(cancellationToken);
+            shoppingCart.NumberOfItems = shoppingCart.Items.Count();
 
             return shoppingCart;
         }

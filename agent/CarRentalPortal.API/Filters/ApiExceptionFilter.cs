@@ -67,7 +67,7 @@ namespace CarRentalPortal.API.Filters
             var details = new ValidationProblemDetails()
             {
                 Type = "https://tools.ietf.org/html/rfc7235#section-3.1",
-                Title = "Authentication failed - invalid credentials.",
+                Title = "Authentication failed.",
                 Detail = exception.Message
             };
 

@@ -26,13 +26,11 @@ namespace CarRentalPortal.Application.ShoppingCarts.CommandHandlers
             var item = new ShoppingCartItem
             {
                 CarId = request.CarId,
-                ShoppingCartId = request.ShoppingCartId
+                ShoppingCartId = shoppingCart.Id
             };
 
             await _context.ShoppingCartItems.AddAsync(item);
-            shoppingCart.NumberOfItems++;
             await _context.SaveChangesAsync(cancellationToken);
-
             return item.Id;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using CarRentalPortal.Application.UserRoles.Queries.GetUserRoles;
 using System.Collections.Generic;
 
-namespace CarRentalPortal.Application.Users.Commands.Login
+namespace CarRentalPortal.Application.Users.Queries.Login
 {
     public class LoginResultVm
     {
