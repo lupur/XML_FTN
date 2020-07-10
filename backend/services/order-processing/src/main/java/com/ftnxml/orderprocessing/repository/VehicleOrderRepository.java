@@ -20,9 +20,9 @@ public interface VehicleOrderRepository extends JpaRepository<VehicleOrder, Long
 					"INNER JOIN order_service.order_request AS r USING (request_id) \r\n" + 
 					"WHERE vo.vehicle_id IN :vehicleIDs \r\n" + 
 					"AND r.request_status IN (2,3) \r\n" + 
-					"AND vo.pickup_date NOT BETWEEN :startDate AND :endDate \r\n" + 
-					"AND vo.return_date NOT BETWEEN :startDate AND :endDate",
+					"AND vo.pickup_date BETWEEN :startDate AND :endDate \r\n" + 
+					"OR vo.return_date BETWEEN :startDate AND :endDate",
 			nativeQuery = true)
-	List<Long> findVehiclesAvailableInRange(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("vehicleIDs") List<Long> vehicleIDs);
+	List<Long> findVehiclesUnavailableInRange(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("vehicleIDs") List<Long> vehicleIDs);
 
 }
