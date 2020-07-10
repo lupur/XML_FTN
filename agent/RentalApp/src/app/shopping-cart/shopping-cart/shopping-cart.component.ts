@@ -45,7 +45,7 @@ export class ShoppingCartComponent implements OnInit {
       });
   }
 
-  placeOrder() {
+  checkout() {
   }
 
   removeFromCart(id: number) {
