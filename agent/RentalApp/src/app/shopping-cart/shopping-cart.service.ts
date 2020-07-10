@@ -19,7 +19,15 @@ export class ShoppingCartService {
     return this.http.post(`${environment.apiUrl}/shopping-cart`, shoppingCart);
   }
 
+  emptyShoppingCart(id: number) {
+    return this.http.delete(`${environment.apiUrl}/shopping-cart/${id}`);
+  }
+
   addItemToMyShoppingCart(item: ShoppingCartItem) {
-    return this.http.post(`${environment.apiUrl}/shopping-cart/items/add`, item);
+    return this.http.post(`${environment.apiUrl}/shopping-cart/items`, item);
+  }
+
+  removeItemFromShoppingCart(id: number) {
+    return this.http.delete(`${environment.apiUrl}/shopping-cart/items/${id}`);
   }
 }
