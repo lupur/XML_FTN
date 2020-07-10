@@ -1,6 +1,3 @@
-<div class="d-flex justify-content-center">
-	<span *ngIf="!shoppingCartItems" class="spinner-border spinner-border-lg align-self-center text-center"></span>
-</div>
 <div *ngIf="isCartEmpty">
 	<h2>Your cart is empty!</h2>
 	<span class="text-muted">Come back when you've chosen a car that you would like to rent.</span>
@@ -8,6 +5,25 @@
 <div *ngIf="!isCartEmpty">
 	<h2>Your Shopping Cart</h2>
 </div>
-<ul *ngFor="let item of shoppingCartItems">
-	<li>{{item.id}}</li>
-</ul>
+<div class="d-flex justify-content-center">
+	<span *ngIf="!shoppingCartItems" class="spinner-border spinner-border-lg align-self-center text-center"></span>
+</div>
+<hr>
+<div class="row mt-3">
+	<div *ngFor="let item of shoppingCartItems" class="col-sm-3">
+		<div class="card">
+			<div class="embed-responsive embed-responsive-16by9">
+				<img src="../../../assets/img-placeholder.jpg"
+					class="card-img-top embed-responsive-item img-fluid img-thumbnail" alt="">
+			</div>
+			<div class="card-footer">
+				<button (click)="removeFromCart(item.id)" class="btn btn-sm btn-outline-primary mr-2"
+					[disabled]="item.isRemoving">
+					<span *ngIf="item.isRemoving" class="spinner-border spinner-border-sm mr-1"></span>
+					<span *ngIf="!item.isRemoving">Remove</span>
+				</button>
+				<a routerLink="/cars/detail/{{item.carId}}" class="btn btn-sm btn-primary">Details</a>
+			</div>
+		</div>
+	</div>
+</div>

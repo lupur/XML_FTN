@@ -4,8 +4,7 @@ import { AuthService } from '@app/auth/auth.service';
 import { RentalService } from '@app/rentals/rental.service';
 import { AlertService } from '@app/shared/alert/alert.service';
 import { first } from 'rxjs/operators';
-import { ShoppingCartItem } from './shopping-cart';
-import { ShoppingCartService } from './shopping-cart.service';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,7 +13,7 @@ import { ShoppingCartService } from './shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   userId: number;
-  shoppingCartItems: ShoppingCartItem[];
+  shoppingCartItems = null;
   isCartEmpty = false;
 
   constructor(
@@ -41,5 +40,20 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   placeOrder() {
+  }
+
+  removeFromCart(id: number) {
+    const item = this.shoppingCartItems.filter(x => x.id !== id);
+    item.isRemoving = true;
+
+    this.shoppingCartService.removeItemFromShoppingCart(id)
+      .pipe(first())
+      .subscribe(() => {
+        this.shoppingCartItems = this.shoppingCartItems.filter(x => x.id !== id);
+        this.isCartEmpty = !this.shoppingCartItems || this.shoppingCartItems.length == 0;
+        this.alertService.success('Item removed.', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+      });
   }
 }
