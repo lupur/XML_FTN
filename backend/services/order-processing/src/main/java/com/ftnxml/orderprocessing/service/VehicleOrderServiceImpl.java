@@ -1,5 +1,6 @@
 package com.ftnxml.orderprocessing.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,12 +65,13 @@ public class VehicleOrderServiceImpl implements VehicleOrderService {
 	@Override
 	public List<Long> findVehiclesAvailableInRange(Date startDate, Date endDate, List<Long> vehicleIDs) {
 		try {
-			List<Long> vehicleIDsResponse =  vehicleOrderRepository.findVehiclesAvailableInRange(startDate, endDate, vehicleIDs);
+			List<Long> avalilableVehicles = new ArrayList<>();
+			List<Long> vehicleIDsResponse =  vehicleOrderRepository.findVehiclesUnavailableInRange(startDate, endDate, vehicleIDs);
+			if(vehicleIDsResponse == null || vehicleIDsResponse.isEmpty()) return vehicleIDs;
 			for(Long vehicleID : vehicleIDs) {
-				List<OrderRequest> oReqs = orderRequestRepository.findByVehicleId(vehicleID);
-				if(oReqs == null || oReqs.isEmpty()) vehicleIDsResponse.add(vehicleID);
+				if(!vehicleIDsResponse.stream().anyMatch(id -> id.equals(vehicleID))) avalilableVehicles.add(vehicleID);
 			}
-			return vehicleIDsResponse;
+			return avalilableVehicles;
 		} catch(Exception e) {
 			e.printStackTrace();
 			return null;
