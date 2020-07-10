@@ -24,11 +24,9 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> EmptyShoppingCart(int id, EmptyShoppingCartCommand command)
+        public async Task<ActionResult> EmptyShoppingCart(int id)
         {
-            if (id != command.Id)
-                return BadRequest();
-            await Mediator.Send(command);
+            await Mediator.Send(new EmptyShoppingCartCommand { Id = id });
             return NoContent();
         }
 
@@ -39,11 +37,9 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpDelete("items/{id}")]
-        public async Task<ActionResult> RemoveItemFromShoppingCart(int id, RemoveShoppingCartItemCommand command)
+        public async Task<ActionResult> RemoveItemFromShoppingCart(int id)
         {
-            if (id != command.Id)
-                return BadRequest();
-            await Mediator.Send(command);
+            await Mediator.Send(new RemoveShoppingCartItemCommand { Id = id });
             return NoContent();
         }
     }
