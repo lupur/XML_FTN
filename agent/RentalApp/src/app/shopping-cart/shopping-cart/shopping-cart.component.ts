@@ -13,8 +13,11 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   userId: number;
+  shoppingCartId: number;
   shoppingCartItems = null;
-  isCartEmpty = false;
+
+  isCartEmpty = true;
+  loading = false;
 
   constructor(
     private router: Router,
@@ -31,11 +34,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getUserShoppingCart() {
+    this.loading = true;
     this.shoppingCartService.getUserShoppingCart(this.userId)
       .pipe(first())
       .subscribe(shoppingCart => {
         this.shoppingCartItems = shoppingCart.items
-        this.isCartEmpty = !this.shoppingCartItems || this.shoppingCartItems.length == 0;
+        this.shoppingCartId = shoppingCart.id;
+        this.checkIsEmpty();
+        this.loading = false;
       });
   }
 
@@ -50,10 +56,26 @@ export class ShoppingCartComponent implements OnInit {
       .pipe(first())
       .subscribe(() => {
         this.shoppingCartItems = this.shoppingCartItems.filter(x => x.id !== id);
-        this.isCartEmpty = !this.shoppingCartItems || this.shoppingCartItems.length == 0;
+        this.checkIsEmpty();
         this.alertService.success('Item removed.', {
           keepAfterRouteChange: true, autoClose: true
         });
       });
+  }
+
+  emptyShoppingCart() {
+    this.shoppingCartService.emptyShoppingCart(this.shoppingCartId)
+      .pipe(first())
+      .subscribe(() => {
+        this.shoppingCartItems = null;
+        this.checkIsEmpty();
+        this.alertService.success('Shopping cart emptied!', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+      });
+  }
+
+  private checkIsEmpty() {
+    this.isCartEmpty = !this.shoppingCartItems || this.shoppingCartItems.length == 0;
   }
 }
