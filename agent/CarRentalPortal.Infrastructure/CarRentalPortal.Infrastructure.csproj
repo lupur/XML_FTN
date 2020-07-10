@@ -17,6 +17,12 @@
     <Compile Remove="Persistence\Migrations\Application\20200623185731_test.Designer.cs" />
     <Compile Remove="Persistence\Migrations\Application\20200624105713_UpdateRentalBundle.cs" />
     <Compile Remove="Persistence\Migrations\Application\20200624105713_UpdateRentalBundle.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200708174405_AddShoppingCartEntities.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200708174405_AddShoppingCartEntities.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200708183851_UpdateShoppingCarts.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200708183851_UpdateShoppingCarts.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200708184030_UpdateShoppingCarts.cs" />
+    <Compile Remove="Persistence\Migrations\Application\20200708184030_UpdateShoppingCarts.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

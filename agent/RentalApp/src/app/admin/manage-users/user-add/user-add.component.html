@@ -1,1 +1,102 @@
-<p>user-add works!</p>
+<h1>Invite User</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="firstName">First Name</label>
+			<input type="text" formControlName="firstName" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.firstName.errors}">
+			<div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+				<div *ngIf="f.firstName.errors.required">'First Name' field is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="lastName">Last Name</label>
+			<input type="text" formControlName="lastName" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.lastName.errors}">
+			<div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+				<div *ngIf="f.lastName.errors.required">'Last Name' field is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="username">Username</label>
+			<input type="text" formControlName="username" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.username.errors}">
+			<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+				<div *ngIf="f.username.errors.required">'Username' field is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="email">Email</label>
+			<input type="text" formControlName="email" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.email.errors}">
+			<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+				<div *ngIf="f.email.errors.required">'Email' field is required</div>
+				<div *ngIf="f.email.errors.email">Incorrect 'Email' format</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="password">Password</label>
+			<input type="password" formControlName="password" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.password.errors}">
+			<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+				<div *ngIf="f.password.errors.required">'Password' field is required</div>
+				<div *ngIf="f.password.errors.minlength">'Password' field must contain at least 7 alphanumeric
+					characters</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="confirmPassword">Confirm Password</label>
+			<input type="password" formControlName="confirmPassword" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.confirmPassword.errors}">
+			<div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+				<div *ngIf="f.confirmPassword.errors.required">'Confirm Password' field is required</div>
+				<div *ngIf="f.confirmPassword.errors.minlength">'Confirm Password' field must contain at least 7 alphanumeric characters</div>
+			</div>
+		</div>
+	</div> -->
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="status">Status</label>
+			<select formControlName="status" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.status.errors}">
+				<option value="">Choose status</option>
+				<option *ngFor="let status of accountStatuses" [value]="status">{{status}}</option>
+			</select>
+			<div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+				<div *ngIf="f.status.errors.required">'Status' field is required</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-sm-6">
+			<label for="roles">Roles</label>
+			<select multiple formControlName="roles" class="form-control"
+				[ngClass]="{'is-invalid': submitted && f.roles.errors}">
+				<option value="">Choose roles</option>
+				<option *ngFor="let role of roles" [value]="role">{{role.name}}</option>
+			</select>
+			<div *ngIf="submitted && f.roles.errors" class="invalid-feedback">
+				<div *ngIf="f.roles.errors.required">'Role' field is required</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<button [disabled]="loading" class="btn btn-primary">
+			<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+			Save
+		</button>
+		<button (click)="gotoUsers()" class="btn btn-link">Cancel</button>
+	</div>
+</form>

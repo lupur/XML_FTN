@@ -27,12 +27,14 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<CarVm>> Get()
         {
             return await Mediator.Send(new GetCarsQuery());
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CarDto>> Get(int id)
         {
             return await Mediator.Send(new GetCarByIdQuery { Id = id });

@@ -1,7 +1,6 @@
 <div class="row justify-content-between">
 	<div>
 		<a class="btn btn-outline-primary" [routerLink]="[ './add' ]" routerLinkActive="active">Create Car Ad</a>
-		<a routerLink="../" class="btn btn-link">Back</a>
 	</div>
 	<div>
 		<span *ngIf="!cars" class="spinner-border spinner-border-lg align-self-center text-center"></span>
@@ -46,7 +45,7 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<button (click)="addToCart(car)" class="btn btn-primary">Add to Cart</button>
+				<button (click)="addToCart(car.id)" class="btn btn-sm btn-outline-primary mr-2">Add to Cart</button>
 				<a routerLink="/cars/detail/{{car.id}}" class="card-link">Details</a>
 			</div>
 		</div>

@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoleType } from '@app/roles/role';
+import { User } from '@app/users/user';
 import { environment } from '@env/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RoleType } from './role';
-import { AccountStatus, User, UserVm } from './user';
-
 
 
 @Injectable({
@@ -54,25 +53,5 @@ export class AuthService {
 
   register(user: User) {
     return this.http.post(`${environment.apiUrl}/users/register`, user);
-  }
-
-  getAll() {
-    return this.http.get<UserVm>(`${environment.apiUrl}/users`);
-  }
-
-  getById(id: number) {
-    return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
-  }
-
-  activate(id: number) {
-    return this.http.put(`${environment.apiUrl}/users/${id}/activate`, { id, status: AccountStatus.ACTIVE });
-  }
-
-  block(id: number) {
-    return this.http.put(`${environment.apiUrl}/users/${id}/block`, { id, status: AccountStatus.BLOCKED });
-  }
-
-  delete(id: number) {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`);
   }
 }

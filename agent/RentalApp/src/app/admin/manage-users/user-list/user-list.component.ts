@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@app/auth/auth.service';
-import { AccountStatus } from '@app/auth/user';
 import { AlertService } from '@app/shared/alert/alert.service';
+import { UserService } from '@app/users/user.service';
 import { first } from 'rxjs/operators';
+import { AccountStatus } from '@app/users/user';
 
 @Component({
   selector: 'app-user-list',
@@ -13,12 +13,12 @@ export class UserListComponent implements OnInit {
   users = null;
 
   constructor(
-    private authService: AuthService,
+    private userService: UserService,
     private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
-    this.authService.getAll()
+    this.userService.getAll()
       .pipe(first())
       .subscribe(userVm => this.users = userVm.users);
   }
@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit {
     const user = this.users.find(x => x.id == id);
     user.isDeleting = true;
 
-    this.authService.delete(id)
+    this.userService.delete(id)
       .pipe(first())
       .subscribe(() => {
         this.users = this.users.filter(x => x.id !== id);

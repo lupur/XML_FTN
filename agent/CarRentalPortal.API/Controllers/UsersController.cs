@@ -1,11 +1,14 @@
 ﻿using CarRentalPortal.API.Constants;
-using CarRentalPortal.Application.UserRoles.Queries.GetRoles;
+using CarRentalPortal.Application.ShoppingCarts.Commands;
+using CarRentalPortal.Application.UserRoles.Queries.GetUserRoles;
 using CarRentalPortal.Application.Users.Commands.CreateUser;
-using CarRentalPortal.Application.Users.Commands.Login;
+using CarRentalPortal.Application.Users.Commands.InviteUser;
 using CarRentalPortal.Application.Users.Commands.RemoveUser;
 using CarRentalPortal.Application.Users.Commands.UpdateUserStatus;
 using CarRentalPortal.Application.Users.Queries.GetUserById;
 using CarRentalPortal.Application.Users.Queries.GetUsers;
+using CarRentalPortal.Application.Users.Queries.GetUserShoppingCartId;
+using CarRentalPortal.Application.Users.Queries.Login;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -15,10 +18,11 @@ namespace CarRentalPortal.API.Controllers
     public class UsersController : AbstractApiController
     {
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginCommand command)
+        public async Task<ActionResult<UserDto>> Login(LoginQuery query)
         {
-            var loginResponse = await Mediator.Send(command);
+            var loginResponse = await Mediator.Send(query);
             var rolesResponse = await Mediator.Send(new GetUserRolesQuery { UserId = loginResponse.Id });
+            var shoppingCartId = await Mediator.Send(new GetUserShoppingCartIdQuery { UserId = loginResponse.Id });
 
             return new UserDto
             {
@@ -27,6 +31,7 @@ namespace CarRentalPortal.API.Controllers
                 LastName = loginResponse.LastName,
                 Username = loginResponse.Username,
                 Email = loginResponse.Email,
+                ShoppingCartId = shoppingCartId,
                 Token = loginResponse.Token,
                 Roles = rolesResponse.Roles
             };
@@ -35,7 +40,17 @@ namespace CarRentalPortal.API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<int>> Register(CreateUserCommand command)
         {
-            return await Mediator.Send(command);
+            var userId = await Mediator.Send(command);
+            await Mediator.Send(new CreateShoppingCartCommand { UserId = userId });
+
+            return userId;
+        }
+
+        [HttpPost("invite")]
+        public async Task<ActionResult<int>> Invite(InviteUserCommand command)
+        {
+            var userId = await Mediator.Send(command);
+            return userId;
         }
 
         [HttpGet, Authorize(Roles = Roles.Administrator)]

@@ -1,7 +1,7 @@
-import { User } from './auth/user';
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { RoleType } from './auth/role';
+import { RoleType } from './roles/role';
+import { User } from './users/user';
 
 @Component({
   selector: 'app-root',

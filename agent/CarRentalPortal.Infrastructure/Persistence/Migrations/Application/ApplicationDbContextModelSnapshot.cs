@@ -251,6 +251,50 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.ToTable("Reviews");
                 });
 
+            modelBuilder.Entity("CarRentalPortal.Core.Entities.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfItems")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingCarts");
+                });
+
+            modelBuilder.Entity("CarRentalPortal.Core.Entities.ShoppingCartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("ShoppingCartItems");
+                });
+
             modelBuilder.Entity("CarRentalPortal.Core.Entities.Car", b =>
                 {
                     b.HasOne("CarRentalPortal.Core.Entities.CarBrand", "CarBrand")
@@ -305,6 +349,15 @@ namespace CarRentalPortal.Infrastructure.Persistence.Migrations.Application
                     b.HasOne("CarRentalPortal.Core.Entities.Car", "Car")
                         .WithMany("Reviews")
                         .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CarRentalPortal.Core.Entities.ShoppingCartItem", b =>
+                {
+                    b.HasOne("CarRentalPortal.Core.Entities.ShoppingCart", "ShoppingCart")
+                        .WithMany("Items")
+                        .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

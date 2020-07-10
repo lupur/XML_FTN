@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@app/auth/auth.service';
-import { AccountStatus } from '@app/auth/user';
 import { AlertService } from '@app/shared/alert/alert.service';
+import { AccountStatus } from '@app/users/user';
+import { UserService } from '@app/users/user.service';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -17,13 +17,13 @@ export class UserDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private userService: UserService,
     private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params['id'];
-    this.authService.getById(this.userId)
+    this.userService.getById(this.userId)
       .pipe(first())
       .subscribe(user => this.user = user);
   }
@@ -38,7 +38,7 @@ export class UserDetailComponent implements OnInit {
   activate(id: number) {
     this.user.isActivating = true;
 
-    this.authService.activate(id)
+    this.userService.activate(id)
       .pipe(first())
       .subscribe(_ => {
         this.gotoUsers();
@@ -54,7 +54,7 @@ export class UserDetailComponent implements OnInit {
   block(id: number) {
     this.user.isBlocking = true;
 
-    this.authService.block(id)
+    this.userService.block(id)
       .pipe(first())
       .subscribe(_ => {
         this.gotoUsers();
