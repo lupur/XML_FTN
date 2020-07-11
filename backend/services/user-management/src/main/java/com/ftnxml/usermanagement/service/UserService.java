@@ -9,6 +9,8 @@ import com.ftnxml.usermanagement.model.User;
 
 public interface UserService {
 
+    Long registerNewAgent(User newAgent);
+
     boolean registerNewUser(User newUser);
 
     User getUser(Long id);

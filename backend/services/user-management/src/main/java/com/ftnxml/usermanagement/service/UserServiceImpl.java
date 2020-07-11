@@ -30,6 +30,21 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder encoder;
 
     @Override
+    public Long registerNewAgent(User newAgent) {
+        if (userRepository.findByUsername(newAgent.getUsername()) != null) {
+            return -1l;
+        }
+        Role role = roleRepository.findByName(AGENT_ROLE_NAME);
+        if (role == null)
+            return -1l;
+        newAgent.addRole(role);
+        newAgent.setPassword(encoder.encode(newAgent.getPassword()));
+
+        User u = userRepository.save(newAgent);
+        return u.getId();
+    }
+
+    @Override
     public boolean registerNewUser(User newUser) {
         if (userRepository.findByUsername(newUser.getUsername()) != null) {
             return false;

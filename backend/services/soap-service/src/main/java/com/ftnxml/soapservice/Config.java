@@ -28,7 +28,7 @@ public class Config extends WsConfigurerAdapter {
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema brandSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("BrandDetailsPort");
-        wsdl11Definition.setLocationUri("/service/brand-details");
+        wsdl11Definition.setLocationUri("/service");
         wsdl11Definition.setTargetNamespace("www.soapservice.ftnxml.com/model/");
         wsdl11Definition.setSchema(brandSchema);
         return wsdl11Definition;
