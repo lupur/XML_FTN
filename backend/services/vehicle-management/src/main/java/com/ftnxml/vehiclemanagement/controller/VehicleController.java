@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftnxml.vehiclemanagement.client.UserDetailsClient;
 import com.ftnxml.vehiclemanagement.dto.BrandDto;
 import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
+import com.ftnxml.vehiclemanagement.dto.SimpleVehicleDto;
 import com.ftnxml.vehiclemanagement.dto.UserDto;
 import com.ftnxml.vehiclemanagement.dto.VehicleDto;
 import com.ftnxml.vehiclemanagement.model.Model;
@@ -69,6 +70,15 @@ public class VehicleController {
         if (v == null)
             return ResponseEntity.notFound().build();
         VehicleDto vdto = modelMapper.map(v, VehicleDto.class);
+        return ResponseEntity.ok(vdto);
+    }
+
+    @GetMapping(value = "/simple/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getSimpleVehicle(@PathVariable Long id) {
+        Vehicle v = vehicleService.getVehicle(id);
+        if (v == null)
+            return ResponseEntity.notFound().build();
+        SimpleVehicleDto vdto = new SimpleVehicleDto(v);
         return ResponseEntity.ok(vdto);
     }
 

@@ -100,6 +100,10 @@ export default class Vehicles extends Component {
 
     async filterVehicles() {
         var vehiclesId = []
+        if(this.state.Vehicles == null )
+        {
+            return;
+        }
         for(var i = 0; i < this.state.Vehicles.length; i++)
         {
             vehiclesId.push(this.state.Vehicles[i].id)

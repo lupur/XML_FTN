@@ -2,10 +2,22 @@ import axios from "axios"
 import {authHeader} from "../helpers/authHeader"
 
 export const orderService = {
+    getOrder,
     sendRentRequest,
     getByOwner,
     getMine,
     changeStatus
+}
+
+function getOrder(orderId) {
+    return axios.get("http://localhost:8080/order/"+orderId,
+    {
+        headers: authHeader()
+    }).then( response => {
+        return response.data;
+    }).catch(error => {
+        return Promise.reject(error);
+    });
 }
 
 function getByOwner() {

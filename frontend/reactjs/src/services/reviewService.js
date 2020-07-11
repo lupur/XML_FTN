@@ -5,7 +5,8 @@ export const reviewService = {
     getAll,
     getAllPendingReviews,
     reject,
-    approve
+    approve,
+    add
 }
 
 function getAll() {
@@ -50,4 +51,23 @@ function approve(id) {
         }).catch(error => {
             return Promise.reject(error);
         });
+}
+
+function add(newReview) {
+    return axios.post("http://localhost:8080/review",
+    { 
+        authorId: newReview.authorId,
+        authorName: newReview.authorName,
+        vehicleId: newReview.vehicleId,
+        vehicleOrderId: newReview.vehicleOrderId,
+        comment: newReview.comment,
+        rating: newReview.rating
+    },
+    {
+        headers: authHeader()
+    }).then( response => {
+        return response.data;
+    }).catch(error => {
+        return Promise.reject(error);
+    });
 }

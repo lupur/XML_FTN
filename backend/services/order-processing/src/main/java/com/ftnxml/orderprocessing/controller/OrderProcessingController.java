@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftnxml.orderprocessing.client.UserDetailsClient;
+import com.ftnxml.orderprocessing.client.VehicleClient;
 import com.ftnxml.orderprocessing.dto.OrderRequestDto;
 import com.ftnxml.orderprocessing.dto.OrderRequestMapper;
+import com.ftnxml.orderprocessing.dto.SimpleVehicleDto;
 import com.ftnxml.orderprocessing.dto.UserDto;
+import com.ftnxml.orderprocessing.dto.VehicleOrderDto;
 import com.ftnxml.orderprocessing.enums.OrderRequestStatus;
 import com.ftnxml.orderprocessing.messaging.OrderRequestPublish;
 import com.ftnxml.orderprocessing.service.OrderRequestService;
@@ -45,6 +48,9 @@ public class OrderProcessingController {
 
     @Autowired
     UserDetailsClient userDetailsClient;
+
+    @Autowired
+    VehicleClient vehicleClient;
 
     @PostMapping(value = "/publish")
     public ResponseEntity publish() {
@@ -71,10 +77,20 @@ public class OrderProcessingController {
     public ResponseEntity getRequestsByRequestId(@PathVariable("requestId") Long requestId) {
         OrderRequestDto orderRequest = OrderRequestMapper.INSTANCE
                 .toOrderRequestDTO(orderRequestService.getOrderRequest(requestId));
-        if (orderRequest != null) {
-            return ResponseEntity.ok(orderRequest);
+        if (orderRequest == null) {
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.badRequest().build();
+
+        for (VehicleOrderDto v : orderRequest.getVehicleOrders()) {
+            SimpleVehicleDto simple = vehicleClient.getVehicle(v.getVehicleId());
+            if (simple != null) {
+                v.setBrand(simple.getBrand());
+                v.setLocation(simple.getLocation());
+                v.setModel(simple.getModel());
+                v.setRating(simple.getRating());
+            }
+        }
+        return ResponseEntity.ok(orderRequest);
     }
 
     // GET BY VEHICLE

@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftnxml.customerexperience.service.ReviewService;
 import com.ftnxml.customerexperience.dto.ReviewDto;
 import com.ftnxml.customerexperience.enums.ReviewStatus;
-import com.ftnxml.customerexperience.model.Review;;
+import com.ftnxml.customerexperience.model.Review;
+import com.ftnxml.customerexperience.service.ReviewService;;
 
 @RestController
 @RequestMapping("/review")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ReviewController {
     @Autowired
     ReviewService reviewService;
@@ -115,7 +113,11 @@ public class ReviewController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addReview(@RequestBody ReviewDto newReview) {
-        if (newReview == null || newReview.getAuthorName().isEmpty() || newReview.getComment().isEmpty()) {
+        if (newReview == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (newReview.getAuthorName().isEmpty() || newReview.getComment().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
