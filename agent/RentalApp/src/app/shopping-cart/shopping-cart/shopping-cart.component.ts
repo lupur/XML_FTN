@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
+import { BundleRequest, RentalRequest } from '@app/rentals/rental';
 import { RentalService } from '@app/rentals/rental.service';
 import { AlertService } from '@app/shared/alert/alert.service';
 import { first } from 'rxjs/operators';
+import { ShoppingCartItem } from '../shopping-cart';
 import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
@@ -18,6 +20,7 @@ export class ShoppingCartComponent implements OnInit {
 
   isCartEmpty = true;
   loading = false;
+  submitted = false;
 
   constructor(
     private router: Router,
@@ -46,6 +49,32 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   checkout() {
+    this.submitted = true;
+
+    let request: BundleRequest = {
+      rentals: []
+    };
+    this.shoppingCartItems.forEach((sci: ShoppingCartItem) => {
+      request.rentals.push({
+        carId: sci.carId,
+        ownerId: sci.ownerId,
+        customerId: this.userId,
+        isBundle: sci.isBundle
+      })
+    });
+
+    this.rentalService.createRentalRequest(request)
+      .pipe(first())
+      .subscribe(_ => {
+        this.alertService.success('Order request sent.', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+        // update shopping cart items status to ORDERED
+        this.gotoCars();
+      }, error => {
+        this.alertService.error(error);
+        this.submitted = false;
+      });
   }
 
   removeFromCart(id: number) {
@@ -57,7 +86,7 @@ export class ShoppingCartComponent implements OnInit {
       .subscribe(() => {
         this.shoppingCartItems = this.shoppingCartItems.filter(x => x.id !== id);
         this.checkIsEmpty();
-        this.alertService.success('Item removed.', {
+        this.alertService.info('Item removed.', {
           keepAfterRouteChange: true, autoClose: true
         });
       });
@@ -69,10 +98,14 @@ export class ShoppingCartComponent implements OnInit {
       .subscribe(() => {
         this.shoppingCartItems = null;
         this.checkIsEmpty();
-        this.alertService.success('Shopping cart emptied!', {
+        this.alertService.info('Shopping cart emptied!', {
           keepAfterRouteChange: true, autoClose: true
         });
       });
+  }
+
+  gotoCars() {
+    this.router.navigate(['cars']);
   }
 
   private checkIsEmpty() {

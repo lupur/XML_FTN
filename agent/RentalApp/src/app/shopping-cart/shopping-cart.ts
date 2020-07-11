@@ -9,8 +9,10 @@ export interface ShoppingCart {
 export interface ShoppingCartItem {
 	id?: number;
 	carId: number;
+	ownerId: number;
 	shoppingCartId: number;
 	status?: OrderStatus;
+	isBundle?: boolean;
 }
 
 export enum OrderStatus {

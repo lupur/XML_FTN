@@ -6,6 +6,9 @@ export interface CarVm {
 
 export interface Car {
 	id: number;
+	ownerId: number;
+	ownerFullName: string;
+	ownerContactInfo: string;
 	carCategory: string;
 	carBrand: string;
 	carModel: string;

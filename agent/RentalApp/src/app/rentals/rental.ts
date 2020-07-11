@@ -28,6 +28,25 @@ export interface Rental {
 	status: RentalStatus;
 }
 
+export interface BundleRequest {
+	rentals: RentalRequest[];
+}
+
+export interface RentalRequest {
+	ownerId: number;
+	customerId: number;
+	carId: number;
+	startDate?: Date;
+	endDate?: Date;
+	remarks?: string;
+	isBundle: boolean;
+}
+
+export interface RentalResponse {
+	bundleId: number;
+	status: RentalStatus;
+}
+
 export enum RentalStatus {
 	PENDING = 'Pending',
 	ACCEPTED = 'Accepted',
