@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <a class="navbar-brand" [routerLink]="[ '/' ]" routerLinkActive="active">Rental Portal</a>
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/">Home</a>
-        </li>
         <li class="nav-item" *ngIf="isAdmin">
             <a class="nav-link" [routerLink]="[ '/admin/dashboard' ]" routerLinkActive="active">Administration</a>
         </li>
@@ -25,7 +23,11 @@
     </div>
 
     <span class="navbar-text mx-4">
-        <span class="badge badge-danger" *ngIf="isAdmin">Admin</span>
+        <span class="badge badge-danger status-badge" *ngIf="isAdmin">Admin</span>
+    </span>
+
+    <span class="navbar-text mx-4">
+        <span class="badge badge-warning status-badge" *ngIf="isAgent">Agent</span>
     </span>
 
     <div class="navbar-text">
