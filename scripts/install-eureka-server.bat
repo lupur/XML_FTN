@@ -1,0 +1,1 @@
+mvn clean install -DskipTests -f ..\backend\eureka-server\pom.xml

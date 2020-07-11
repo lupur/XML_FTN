@@ -1,0 +1,1 @@
+mvn clean install -DskipTests -f ..\backend\services\eureka-zuul\pom.xml

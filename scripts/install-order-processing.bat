@@ -1,0 +1,1 @@
+mvn clean install -DskipTests -f ..\backend\services\order-processing\pom.xml

@@ -1,0 +1,1 @@
+mvn clean install -DskipTests -f ..\backend\services\user-management\pom.xml
