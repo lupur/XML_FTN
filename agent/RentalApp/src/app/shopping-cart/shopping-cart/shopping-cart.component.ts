@@ -4,13 +4,9 @@ import { AuthService } from '@app/auth/auth.service';
 import { BundleRequest } from '@app/rentals/rental';
 import { RentalService } from '@app/rentals/rental.service';
 import { AlertService } from '@app/shared/alert/alert.service';
-import { User } from '@app/users/user';
-import { UserService } from '@app/users/user.service';
 import { first } from 'rxjs/operators';
 import { ShoppingCartItem } from '../shopping-cart';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { CarService } from '@app/cars/car.service';
-import { Car } from '@app/cars/car';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -28,7 +24,6 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private shoppingCartService: ShoppingCartService,
     private authService: AuthService,
     private rentalService: RentalService,
