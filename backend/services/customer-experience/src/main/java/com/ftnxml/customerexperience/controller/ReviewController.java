@@ -115,7 +115,11 @@ public class ReviewController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addReview(@RequestBody ReviewDto newReview) {
-        if (newReview == null || newReview.getAuthorName().isEmpty() || newReview.getComment().isEmpty()) {
+        if (newReview == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (newReview.getAuthorName().isEmpty() || newReview.getComment().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
