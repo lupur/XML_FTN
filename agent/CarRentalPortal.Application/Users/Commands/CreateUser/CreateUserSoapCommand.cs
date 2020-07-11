@@ -2,7 +2,7 @@
 
 namespace CarRentalPortal.Application.Users.Commands.CreateUser
 {
-    public class CreateUserSoapCommand : IRequest<int>
+    public class CreateUserSoapCommand : IRequest<long>
     {
         public string Username { get; set; }
         public string Email { get; set; }

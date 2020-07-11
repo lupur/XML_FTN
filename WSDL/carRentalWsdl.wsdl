@@ -163,7 +163,7 @@
 </wsdl:binding>
 <wsdl:service name="CarRentalApiClientService">
 <wsdl:port binding="tns:CarRentalApiClientSoap11" name="CarRentalApiClientSoap11">
-<soap:address location="http://151a3c9eca76:8083/service"/>
+<soap:address location="http://localhost:8080/soap/service"/>
 </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>

@@ -5,9 +5,9 @@ namespace CarRentalPortal.Infrastructure.Services
 {
     public class CarRentalApiClientFactory : ICarRentalApiClientFactory
     {
-        public BrandDetailsPort CreateChannel()
+        public CarRentalApiClient CreateChannel()
         {
-            return new BrandDetailsPortClient();
+            return new CarRentalApiClientClient();
         }
     }
 }
