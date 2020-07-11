@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
   }
 
   delete(id: number) {
-    const user = this.users.find(x => x.id == id);
+    const user = this.users.find(x => x.id === id);
     user.isDeleting = true;
 
     this.userService.delete(id)

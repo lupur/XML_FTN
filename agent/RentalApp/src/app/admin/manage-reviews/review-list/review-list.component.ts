@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./review-list.component.css']
 })
 export class ReviewListComponent implements OnInit {
-  reviews: Review[];
+  reviews = null;
 
   loading = false;
 
@@ -33,7 +33,7 @@ export class ReviewListComponent implements OnInit {
     this.reviewService.update(id, ReviewStatus.ACCEPTED)
       .pipe(first())
       .subscribe(_ => {
-        this.reviews = this.reviews.filter(x => x.id !== id);
+        this.getAll();
         this.alertService.success('Review request accepted!', {
           keepAfterRouteChange: true, autoClose: true
         });

@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { Rental, RentalBundle, RentalStatus } from '../rental';
-import { RentalService } from '../rental.service';
 import { AlertService } from '@app/shared/alert/alert.service';
+import { first } from 'rxjs/operators';
+import { Rental, RentalBundle, RentalResponse, RentalStatus } from '../rental';
+import { RentalService } from '../rental.service';
 
 @Component({
   selector: 'app-rental-detail',
@@ -16,10 +16,14 @@ export class RentalDetailComponent implements OnInit {
   currentBundle: RentalBundle;
   currentBundleId: number;
 
+  accepting = false;
+  rejecting = false;
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private rentalService: RentalService
+    private rentalService: RentalService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -44,11 +48,41 @@ export class RentalDetailComponent implements OnInit {
   }
 
   accept() {
-    console.log(`Accepting rental bundle ${this.currentBundleId}`);
+    this.accepting = true;
+    let response: RentalResponse = {
+      bundleId: this.currentBundleId,
+      status: RentalStatus.ACCEPTED
+    }
+    this.rentalService.updateRentalRequest(this.currentBundleId, response)
+      .pipe(first())
+      .subscribe(_ => {
+        this.alertService.success('Rental request accepted!', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+        this.gotoRentalBundles();
+      }, error => {
+        this.alertService.error(error);
+        this.accepting = false;
+      });
   }
 
   reject() {
-    console.log(`Rejecting rental bundle ${this.currentBundleId}`);
+    this.rejecting = true;
+    let response: RentalResponse = {
+      bundleId: this.currentBundleId,
+      status: RentalStatus.REJECTED
+    }
+    this.rentalService.updateRentalRequest(this.currentBundleId, response)
+      .pipe(first())
+      .subscribe(_ => {
+        this.alertService.warn('Rental request rejected!', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+        this.gotoRentalBundles();
+      }, error => {
+        this.alertService.error(error);
+        this.rejecting = false;
+      });
   }
 
   isAccepted() {
