@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CarBrand } from '@app/car-brands/car-brand';
+import { AuthService } from '@app/auth/auth.service';
 import { CarBrandService } from '@app/car-brands/car-brand.service';
 import { CarCategoryService } from '@app/car-categories/car-category.service';
 import { CarModelService } from '@app/car-models/car-model.service';
 import { FuelType, TransmissionType } from '@app/cars/car';
 import { CarService } from '@app/cars/car.service';
 import { AlertService } from '@app/shared/alert/alert.service';
+import { User } from '@app/users/user';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -17,6 +18,8 @@ import { first } from 'rxjs/operators';
 })
 export class CarAddComponent implements OnInit {
   form: FormGroup;
+
+  currentUser: User;
 
   carCategories = null;
   carBrands = null;
@@ -45,10 +48,12 @@ export class CarAddComponent implements OnInit {
     private carBrandService: CarBrandService,
     private carModelService: CarModelService,
     private carService: CarService,
+    private authService: AuthService,
     private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
+    this.currentUser = this.authService.userValue;
     this.form = this.formBuilder.group({
       carCategory: ['', Validators.required],
       carBrand: ['', Validators.required],
@@ -60,7 +65,10 @@ export class CarAddComponent implements OnInit {
       location: ['', Validators.required],
       mileage: ['', [Validators.required, Validators.min(0)]],
       mileageConstraint: ['', Validators.max(10000)],
-      numberOfSeats: ['', [Validators.required, Validators.min(2), Validators.max(7)]]
+      numberOfSeats: ['', [Validators.required, Validators.min(2), Validators.max(7)]],
+      ownerId: [this.currentUser.id],
+      ownerFullName: [`${this.currentUser.firstName} ${this.currentUser.lastName}`],
+      ownerContactInfo: [this.currentUser.email]
     });
 
     this.getCarCategories();

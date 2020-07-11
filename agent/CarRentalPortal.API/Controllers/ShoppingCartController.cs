@@ -23,10 +23,33 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpPost("items/add")]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> EmptyShoppingCart(int id)
+        {
+            await Mediator.Send(new EmptyShoppingCartCommand { Id = id });
+            return NoContent();
+        }
+
+        [HttpPost("items")]
         public async Task<ActionResult<int>> AddItemToShoppingCart(AddShoppingCartItemCommand command)
         {
             return await Mediator.Send(command);
+        }
+
+        [HttpDelete("items/{id}")]
+        public async Task<ActionResult> RemoveItemFromShoppingCart(int id)
+        {
+            await Mediator.Send(new RemoveShoppingCartItemCommand { Id = id });
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateShoppingCart(int id, UpdateShoppingCartCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest();
+            await Mediator.Send(command);
+            return NoContent();
         }
     }
 }

@@ -16,8 +16,8 @@
 			</td>
 			<td align="right">
 				<a [routerLink]="['./detail', carBrand.name]" routerLinkActive="active"
-					class="btn btn-sm btn-outline-info mr-1">Details</a>
-				<button (click)="delete(carBrand.name)" class="btn btn-sm btn-outline-danger"
+					class="btn btn-sm btn-info mr-1">Details</a>
+				<button (click)="delete(carBrand.name)" class="btn btn-sm btn-outline-secondary"
 					[disabled]="carBrand.isDeleting">
 					<span *ngIf="carBrand.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!carBrand.isDeleting">Delete</span>

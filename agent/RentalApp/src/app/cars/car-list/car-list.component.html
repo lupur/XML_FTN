@@ -22,6 +22,7 @@
 		</button>
 	</div>
 </div>
+<hr>
 <div class="row mt-3">
 	<div *ngFor="let car of cars" [ngClass]="grid ? 'grid-view' : 'list-view'">
 		<div class="card">
@@ -45,7 +46,7 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<button (click)="addToCart(car.id)" class="btn btn-sm btn-outline-primary mr-2">Add to Cart</button>
+				<button (click)="addToCart(car)" class="btn btn-sm btn-outline-primary mr-2">Add to Cart</button>
 				<a routerLink="/cars/detail/{{car.id}}" class="card-link">Details</a>
 			</div>
 		</div>

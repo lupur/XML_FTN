@@ -15,7 +15,7 @@
 			<td>{{bundle.id}}</td>
 			<td>{{bundle.numberOfItems}}</td>
 			<td>
-				<span class="badge rental-status-badge" [ngClass]="switchStatus(bundle.status)">{{bundle.status}}</span>
+				<span class="badge status-badge" [ngClass]="switchStatus(bundle.status)">{{bundle.status}}</span>
 			</td>
 			<td>{{bundle.createdOn | date:'short'}}</td>
 			<td align="right">

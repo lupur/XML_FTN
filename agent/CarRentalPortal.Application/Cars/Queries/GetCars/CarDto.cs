@@ -10,8 +10,6 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
     public class CarDto : IMapFrom<Car>
     {
         public int Id { get; set; }
-        public int AgentId { get; set; }
-        public string AgentContactInfo { get; set; }
         [JsonProperty("carCategory")]
         public string CarCategoryName { get; set; }
         public string CarBrand { get; set; }
@@ -25,6 +23,9 @@ namespace CarRentalPortal.Application.Cars.Queries.GetCars
         public long? MileageConstraint { get; set; }
         public byte NumberOfSeats { get; set; }
         public double AverageRating { get; set; }
+        public int OwnerId { get; set; }
+        public string OwnerFullName { get; set; }
+        public string OwnerContactInfo { get; set; }
         public ICollection<ReviewDto> Reviews { get; set; }
         public ICollection<CarImageDto> Images { get; set; }
 
