@@ -104,7 +104,7 @@
 <wsdl:message name="RegisterAgentRequest">
 <wsdl:part element="tns:RegisterAgentRequest" name="RegisterAgentRequest"> </wsdl:part>
 </wsdl:message>
-<wsdl:portType name="BrandDetailsPort">
+<wsdl:portType name="CarRentalApiClient">
 <wsdl:operation name="BrandById">
 <wsdl:input message="tns:BrandByIdRequest" name="BrandByIdRequest"> </wsdl:input>
 <wsdl:output message="tns:BrandByIdResponse" name="BrandByIdResponse"> </wsdl:output>
@@ -122,7 +122,7 @@
 <wsdl:output message="tns:RegisterAgentResponse" name="RegisterAgentResponse"> </wsdl:output>
 </wsdl:operation>
 </wsdl:portType>
-<wsdl:binding name="BrandDetailsPortSoap11" type="tns:BrandDetailsPort">
+<wsdl:binding name="CarRentalApiClientSoap11" type="tns:CarRentalApiClient">
 <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 <wsdl:operation name="BrandById">
 <soap:operation soapAction=""/>
@@ -161,9 +161,9 @@
 </wsdl:output>
 </wsdl:operation>
 </wsdl:binding>
-<wsdl:service name="BrandDetailsPortService">
-<wsdl:port binding="tns:BrandDetailsPortSoap11" name="BrandDetailsPortSoap11">
-<soap:address location="http://d4d5a5dd4ad8:8083/service"/>
+<wsdl:service name="CarRentalApiClientService">
+<wsdl:port binding="tns:CarRentalApiClientSoap11" name="CarRentalApiClientSoap11">
+<soap:address location="http://151a3c9eca76:8083/service"/>
 </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>
