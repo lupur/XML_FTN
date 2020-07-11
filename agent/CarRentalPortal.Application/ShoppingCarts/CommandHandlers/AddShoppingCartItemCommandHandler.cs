@@ -26,6 +26,7 @@ namespace CarRentalPortal.Application.ShoppingCarts.CommandHandlers
             var item = new ShoppingCartItem
             {
                 CarId = request.CarId,
+                OwnerId = request.OwnerId,
                 ShoppingCartId = shoppingCart.Id
             };
 

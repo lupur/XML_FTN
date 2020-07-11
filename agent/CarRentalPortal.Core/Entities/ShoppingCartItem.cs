@@ -6,6 +6,7 @@ namespace CarRentalPortal.Core.Entities
     {
         public int Id { get; set; }
         public int CarId { get; set; }
+        public int OwnerId { get; set; }
         public OrderStatus Status { get; set; }
         public int ShoppingCartId { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
