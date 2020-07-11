@@ -36,10 +36,7 @@ namespace CarRentalPortal.API.Controllers
         public async Task<ActionResult> Update(int bundleId, UpdateRentalRequestCommand command)
         {
             if (bundleId != command.BundleId)
-            {
                 return BadRequest();
-            }
-
             await Mediator.Send(command);
             return NoContent();
         }

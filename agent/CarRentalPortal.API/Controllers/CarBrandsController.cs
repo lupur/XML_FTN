@@ -34,7 +34,6 @@ namespace CarRentalPortal.API.Controllers
         public async Task<ActionResult> Delete(string name)
         {
             await Mediator.Send(new DeleteCarBrandCommand { Name = name });
-
             return NoContent();
         }
     }
