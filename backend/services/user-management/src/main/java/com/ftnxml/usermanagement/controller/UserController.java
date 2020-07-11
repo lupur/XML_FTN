@@ -69,9 +69,44 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/registerAgent", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity registerAgent(@RequestBody UserDto newUser) {
+
+        System.out.println("Into register agent");
+        if (newUser == null || newUser.getUsername() == null || newUser.getEmail() == null
+                || newUser.getPassword() == null || newUser.getConfirmPassword() == null
+                || newUser.getUsername().isEmpty() || newUser.getEmail().isEmpty() || newUser.getPassword().isEmpty()
+                || newUser.getConfirmPassword().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
+            return ResponseEntity.badRequest().body("Password confirmation invalid.");
+        }
+        User user = new User();
+        user.setAccountStatus(AccountStatus.ACTIVE);
+        user.setEmail(newUser.getEmail());
+        user.setPassword(newUser.getPassword());
+        user.setRegisterDate(new Date());
+        user.setUsername(newUser.getUsername());
+
+        Long id = userService.registerNewAgent(user);
+        if (id == -1) {
+            return ResponseEntity.badRequest().body(id);
+        }
+
+        newUser.setId(id);
+        return ResponseEntity.ok().body(newUser);
+    }
+
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity registerUser(@RequestBody UserDto newUser) {
 
+        if (newUser == null || newUser.getUsername() == null || newUser.getEmail() == null
+                || newUser.getPassword() == null || newUser.getConfirmPassword() == null
+                || newUser.getUsername().isEmpty() || newUser.getEmail().isEmpty() || newUser.getPassword().isEmpty()
+                || newUser.getConfirmPassword().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
         if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
             return ResponseEntity.badRequest().body("Password confirmation invalid.");
         }
