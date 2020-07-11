@@ -8,28 +8,32 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftnxml.customerexperience.service.MessageService;
+import com.ftnxml.customerexperience.client.UserDetailsClient;
 import com.ftnxml.customerexperience.dto.MessageDto;
-import com.ftnxml.customerexperience.model.Message;;
+import com.ftnxml.customerexperience.dto.UserDto;
+import com.ftnxml.customerexperience.model.Message;
+import com.ftnxml.customerexperience.service.MessageService;;
 
 @RestController
 @RequestMapping("/message")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MessageController {
     @Autowired
     MessageService messageService;
 
     @Autowired
     ModelMapper modelMapper;
+
+    @Autowired
+    UserDetailsClient userDetailsClient;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMessages() {
@@ -70,14 +74,15 @@ public class MessageController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addMessage(@RequestBody MessageDto newMessage) {
-        if (newMessage == null || newMessage.getAuthorName().isEmpty() || newMessage.getContent().isEmpty()) {
+    public ResponseEntity addMessage(@RequestHeader("Authorization") String token, @RequestBody MessageDto newMessage) {
+        if (newMessage == null || newMessage.getContent().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
+        UserDto usr = userDetailsClient.getUserInfo(token);
         Message message = new Message();
-        message.setAuthorId(newMessage.getAuthorId());
-        message.setAuthorName(newMessage.getAuthorName());
+        message.setAuthorId(usr.getId());
+        message.setAuthorName(usr.getUsername());
         message.setContent(newMessage.getContent());
         message.setCreationDate(new Date());
         message.setOrderRequestId(newMessage.getOrderRequestId());

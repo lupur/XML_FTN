@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {vehicleService} from '../services/vehicleService'
-import {Card, Table, Button, Form } from 'react-bootstrap'
+import {Card, Table } from 'react-bootstrap'
 import {authService} from '../services/authService'
 import {orderService} from '../services/orderService'
 import {Role} from '../helpers/role'
 import {Link} from 'react-router-dom'
-import DatePicker from "react-datepicker";
-import Checkbox from '@material-ui/core/Checkbox';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -85,7 +83,7 @@ export default class MyOrders extends Component {
                 <tbody>
                 {this.state.requests && this.state.requests.map((request, i) =>
                     <tr key={i}>
-                        <td>{request.id}</td>
+                        <td><Link to={{pathname: '/orders/'+ request.id}}>{request.id}</Link></td>
                         <td>{request.vehicles && request.vehicles.map((vehicle) =><div>{vehicle}<br/></div>)}</td>
                         <td>{this.parseDate(request.vehicleOrders[0].pickupDate)}</td>
                         <td>{this.parseDate(request.vehicleOrders[0].returnDate)}</td>
