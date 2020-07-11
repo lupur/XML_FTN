@@ -27,6 +27,10 @@ namespace CarRentalAPI
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<CarRentalAPI.AddBrandResponse1> AddBrandAsync(CarRentalAPI.AddBrandRequest1 request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<CarRentalAPI.RegisterAgentResponse1> RegisterAgentAsync(CarRentalAPI.RegisterAgentRequest1 request);
     }
     
     /// <remarks/>
@@ -366,6 +370,158 @@ namespace CarRentalAPI
         }
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class RegisterAgentRequest
+    {
+        
+        private string usernameField;
+        
+        private string emailField;
+        
+        private string passwordField;
+        
+        private string confirmPasswordField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string username
+        {
+            get
+            {
+                return this.usernameField;
+            }
+            set
+            {
+                this.usernameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string email
+        {
+            get
+            {
+                return this.emailField;
+            }
+            set
+            {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string password
+        {
+            get
+            {
+                return this.passwordField;
+            }
+            set
+            {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string confirmPassword
+        {
+            get
+            {
+                return this.confirmPasswordField;
+            }
+            set
+            {
+                this.confirmPasswordField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class RegisterAgentResponse
+    {
+        
+        private long idField;
+        
+        private long statusField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public long id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public long status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RegisterAgentRequest1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        public CarRentalAPI.RegisterAgentRequest RegisterAgentRequest;
+        
+        public RegisterAgentRequest1()
+        {
+        }
+        
+        public RegisterAgentRequest1(CarRentalAPI.RegisterAgentRequest RegisterAgentRequest)
+        {
+            this.RegisterAgentRequest = RegisterAgentRequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RegisterAgentResponse1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        public CarRentalAPI.RegisterAgentResponse RegisterAgentResponse;
+        
+        public RegisterAgentResponse1()
+        {
+        }
+        
+        public RegisterAgentResponse1(CarRentalAPI.RegisterAgentResponse RegisterAgentResponse)
+        {
+            this.RegisterAgentResponse = RegisterAgentResponse;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public interface BrandDetailsPortChannel : CarRentalAPI.BrandDetailsPort, System.ServiceModel.IClientChannel
     {
@@ -455,6 +611,19 @@ namespace CarRentalAPI
             return ((CarRentalAPI.BrandDetailsPort)(this)).AddBrandAsync(inValue);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CarRentalAPI.RegisterAgentResponse1> CarRentalAPI.BrandDetailsPort.RegisterAgentAsync(CarRentalAPI.RegisterAgentRequest1 request)
+        {
+            return base.Channel.RegisterAgentAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CarRentalAPI.RegisterAgentResponse1> RegisterAgentAsync(CarRentalAPI.RegisterAgentRequest RegisterAgentRequest)
+        {
+            CarRentalAPI.RegisterAgentRequest1 inValue = new CarRentalAPI.RegisterAgentRequest1();
+            inValue.RegisterAgentRequest = RegisterAgentRequest;
+            return ((CarRentalAPI.BrandDetailsPort)(this)).RegisterAgentAsync(inValue);
+        }
+        
         public virtual System.Threading.Tasks.Task OpenAsync()
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
@@ -483,7 +652,7 @@ namespace CarRentalAPI
         {
             if ((endpointConfiguration == EndpointConfiguration.BrandDetailsPortSoap11))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:8080/soap/service/brand-details");
+                return new System.ServiceModel.EndpointAddress("http://d4d5a5dd4ad8:8083/service");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
