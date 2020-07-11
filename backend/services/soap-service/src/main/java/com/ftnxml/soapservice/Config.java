@@ -27,7 +27,7 @@ public class Config extends WsConfigurerAdapter {
     @Bean(name = "carRentalWsdl")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema brandSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("BrandDetailsPort");
+        wsdl11Definition.setPortTypeName("CarRentalApiClient");
         wsdl11Definition.setLocationUri("/service");
         wsdl11Definition.setTargetNamespace("www.soapservice.ftnxml.com/model/");
         wsdl11Definition.setSchema(brandSchema);
