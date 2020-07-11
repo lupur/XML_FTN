@@ -42,7 +42,8 @@ namespace CarRentalPortal.Application.ShoppingCarts.QueryHandlers
             shoppingCart.Items = await _context.ShoppingCartItems
                 .Where(sci => sci.ShoppingCartId == shoppingCart.Id)
                 .Where(sci => sci.Status == OrderStatus.Pending)
-                .ProjectTo<ShoppingCartItemModel>(_provider).ToListAsync(cancellationToken);
+                .ProjectTo<ShoppingCartItemModel>(_provider)
+                .ToListAsync(cancellationToken);
             shoppingCart.NumberOfItems = shoppingCart.Items.Count();
 
             return shoppingCart;

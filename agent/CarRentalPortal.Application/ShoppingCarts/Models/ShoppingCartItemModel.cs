@@ -8,6 +8,7 @@ namespace CarRentalPortal.Application.ShoppingCarts.Models
     {
         public int Id { get; set; }
         public int CarId { get; set; }
+        public int OwnerId { get; set; }
         public OrderStatus Status { get; set; }
     }
 }

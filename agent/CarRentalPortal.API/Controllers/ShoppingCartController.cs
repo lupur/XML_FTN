@@ -42,5 +42,14 @@ namespace CarRentalPortal.API.Controllers
             await Mediator.Send(new RemoveShoppingCartItemCommand { Id = id });
             return NoContent();
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateShoppingCart(int id, UpdateShoppingCartCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest();
+            await Mediator.Send(command);
+            return NoContent();
+        }
     }
 }

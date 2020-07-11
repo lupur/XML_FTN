@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent, AdminRootComponent } from './admin-root';
 import { BrandAddComponent, BrandDetailComponent, BrandListComponent, ManageBrandsComponent } from './manage-brands';
 import { CategoryAddComponent, CategoryDetailComponent, CategoryListComponent, ManageCategoriesComponent } from './manage-categories';
-import { ManageModelsComponent, ModelAddComponent, ModelDetailComponent, ModelListComponent } from './manage-models';
+import { ManageModelsComponent, ModelAddComponent, ModelListComponent } from './manage-models';
 import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
 import { ReviewListComponent } from './manage-reviews/review-list/review-list.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
-import { UserListComponent } from './manage-users/user-list/user-list.component';
-import { UserDetailComponent } from './manage-users/user-detail/user-detail.component';
 import { UserAddComponent } from './manage-users/user-add/user-add.component';
+import { UserDetailComponent } from './manage-users/user-detail/user-detail.component';
+import { UserListComponent } from './manage-users/user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -46,10 +46,6 @@ const routes: Routes = [
           {
             path: 'add',
             component: ModelAddComponent
-          },
-          {
-            path: 'detail/:name',
-            component: ModelDetailComponent
           },
           {
             path: '',

@@ -17,14 +17,14 @@
 				{{review.authorDisplayName}}
 			</td>
 			<td>
-				<span class="badge" [ngClass]="switchStatus(review.status)">{{review.status}}</span>
+				<span class="badge status-badge" [ngClass]="switchStatus(review.status)">{{review.status}}</span>
 			</td>
 			<td>
 				{{review.createdOn | date: 'short'}}
 			</td>
 			<td align="right">
-				<button (click)="accept(review.id)" class="btn btn-sm btn-outline-primary mr-1">Accept</button>
-				<button (click)="reject(review.id)" class="btn btn-sm btn-secondary">Reject</button>
+				<button (click)="accept(review.id)" class="btn btn-sm btn-primary mr-1">Accept</button>
+				<button (click)="reject(review.id)" class="btn btn-sm btn-outline-secondary">Reject</button>
 			</td>
 		</tr>
 		<tr *ngIf="!reviews">

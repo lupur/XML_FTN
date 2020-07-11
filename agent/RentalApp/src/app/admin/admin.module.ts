@@ -5,7 +5,7 @@ import { AdminDashboardComponent, AdminRootComponent } from './admin-root';
 import { AdminRoutingModule } from './admin-routing.module';
 import { BrandAddComponent, BrandDetailComponent, BrandListComponent, ManageBrandsComponent } from './manage-brands';
 import { CategoryAddComponent, CategoryDetailComponent, CategoryListComponent, ManageCategoriesComponent } from './manage-categories';
-import { ManageModelsComponent, ModelAddComponent, ModelDetailComponent, ModelListComponent } from './manage-models';
+import { ManageModelsComponent, ModelAddComponent, ModelListComponent } from './manage-models';
 import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
 import { ReviewListComponent } from './manage-reviews/review-list/review-list.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
@@ -28,7 +28,6 @@ import { UserDetailComponent } from './manage-users/user-detail/user-detail.comp
     ManageModelsComponent,
     ModelAddComponent,
     ModelListComponent,
-    ModelDetailComponent,
     AdminDashboardComponent,
     ManageReviewsComponent,
     ReviewListComponent,

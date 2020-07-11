@@ -16,9 +16,7 @@
 				{{carModel.name}}
 			</td>
 			<td align="right">
-				<a [routerLink]="['./detail', carModel.name]" routerLinkActive="active"
-					class="btn btn-sm btn-outline-info mr-1">Details</a>
-				<button (click)="delete(carModel.name)" class="btn btn-sm btn-outline-danger" [disabled]="carModel.isDeleting">
+				<button (click)="delete(carModel.name)" class="btn btn-sm btn-outline-secondary" [disabled]="carModel.isDeleting">
 					<span *ngIf="carModel.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!carModel.isDeleting">Delete</span>
 				</button>

@@ -9,11 +9,17 @@ export interface ShoppingCart {
 export interface ShoppingCartItem {
 	id?: number;
 	carId: number;
+	ownerId: number;
 	shoppingCartId: number;
 	status?: OrderStatus;
+	isBundle?: boolean;
+}
+
+export interface UpdateShoppingCart {
+	id: number;
 }
 
 export enum OrderStatus {
 	PENDING = 'Pending',
-	ACTIVE = 'Ordered'
+	ORDERED = 'Ordered'
 }

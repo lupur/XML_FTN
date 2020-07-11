@@ -5,6 +5,7 @@ import { ShoppingCartItem } from '@app/shopping-cart/shopping-cart';
 import { ShoppingCartService } from '@app/shopping-cart/shopping-cart.service';
 import { User } from '@app/users/user';
 import { first } from 'rxjs/operators';
+import { Car } from '../car';
 import { CarService } from '../car.service';
 
 @Component({
@@ -37,11 +38,12 @@ export class CarListComponent implements OnInit {
     this.grid = isGrid;
   }
 
-  addToCart(carId: number) {
+  addToCart(car: Car) {
     let item: ShoppingCartItem = {
-      carId: carId,
+      carId: car.id,
+      ownerId: car.ownerId,
       shoppingCartId: this.currentUser.shoppingCartId
-    }
+    };
 
     this.loading = true;
     this.shoppingCartService.addItemToMyShoppingCart(item)

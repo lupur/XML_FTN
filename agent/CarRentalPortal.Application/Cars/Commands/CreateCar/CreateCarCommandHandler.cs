@@ -19,8 +19,6 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
         {
             var entity = new Car
             {
-                OwnerId = request.AgentId,
-                OwnerFullName = request.AgentContactInfo,
                 CarBrandName = request.CarBrand,
                 CarModelName = request.CarModel,
                 CarCategoryId = request.CarCategoryId,
@@ -31,7 +29,10 @@ namespace CarRentalPortal.Application.Cars.Commands.CreateCar
                 Color = request.Color,
                 Mileage = request.Mileage,
                 MileageConstraint = request.MileageConstraint,
-                NumberOfSeats = request.NumberOfSeats
+                NumberOfSeats = request.NumberOfSeats,
+                OwnerId = request.OwnerId,
+                OwnerFullName = request.OwnerFullName,
+                OwnerContactInfo = request.OwnerContactInfo
             };
 
             _appContext.Cars.Add(entity);
