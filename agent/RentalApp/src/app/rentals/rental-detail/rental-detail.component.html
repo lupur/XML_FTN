@@ -4,8 +4,8 @@
 	</div>
 	<div class="row">
 		<div *ngIf="isPending()">
-			<button class="btn btn-success mx-3" (click)="accept()">Accept</button>
-			<button class="btn btn-warning" (click)="reject()">Reject</button>
+			<button class="btn btn-primary ml-3 mr-1" (click)="accept()">Accept</button>
+			<button class="btn btn-outline-secondary" (click)="reject()">Reject</button>
 		</div>
 		<div class="alert alert-success ml-3 col-3" role="alert" *ngIf="isAccepted()">
 			This rental request is ACCEPTED!

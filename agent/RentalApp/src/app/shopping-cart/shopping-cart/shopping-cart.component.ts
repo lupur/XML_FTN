@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
-import { BundleRequest, RentalRequest } from '@app/rentals/rental';
+import { BundleRequest } from '@app/rentals/rental';
 import { RentalService } from '@app/rentals/rental.service';
 import { AlertService } from '@app/shared/alert/alert.service';
 import { first } from 'rxjs/operators';
@@ -66,11 +66,7 @@ export class ShoppingCartComponent implements OnInit {
     this.rentalService.createRentalRequest(request)
       .pipe(first())
       .subscribe(_ => {
-        this.alertService.success('Order request sent.', {
-          keepAfterRouteChange: true, autoClose: true
-        });
-        // update shopping cart items status to ORDERED
-        this.gotoCars();
+        this.updateShoppingCart();
       }, error => {
         this.alertService.error(error);
         this.submitted = false;
@@ -106,6 +102,17 @@ export class ShoppingCartComponent implements OnInit {
 
   gotoCars() {
     this.router.navigate(['cars']);
+  }
+
+  private updateShoppingCart() {
+    this.shoppingCartService.updateShoppingCart(this.shoppingCartId, { id: this.shoppingCartId })
+      .pipe(first())
+      .subscribe(() => {
+        this.alertService.success('Order request sent.', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+        this.gotoCars();
+      })
   }
 
   private checkIsEmpty() {

@@ -32,12 +32,12 @@
 				{{user.email}}
 			</td>
 			<td>
-				<span class="badge" [ngClass]="switchStatus(user.status)">{{user.status}}</span>
+				<span class="badge status-badge" [ngClass]="switchStatus(user.status)">{{user.status}}</span>
 			</td>
 			<td align="right">
 				<a [routerLink]="['./detail', user.id]" routerLinkActive="active"
-					class="btn btn-sm btn-outline-info mr-1">Details</a>
-				<button (click)="delete(user.id)" class="btn btn-sm btn-outline-danger"
+					class="btn btn-sm btn-info mr-1">Details</a>
+				<button (click)="delete(user.id)" class="btn btn-sm btn-outline-secondary"
 					[disabled]="user.isDeleting">
 					<span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!user.isDeleting">Delete</span>

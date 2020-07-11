@@ -15,7 +15,11 @@ export interface ShoppingCartItem {
 	isBundle?: boolean;
 }
 
+export interface UpdateShoppingCart {
+	id: number;
+}
+
 export enum OrderStatus {
 	PENDING = 'Pending',
-	ACTIVE = 'Ordered'
+	ORDERED = 'Ordered'
 }
