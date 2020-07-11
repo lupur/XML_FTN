@@ -3,7 +3,7 @@
 </div>
 
 <table class="table table-hover table-responsive-sm">
-	<thead class="bg-light">
+	<thead>
 		<tr>
 			<th>ID</th>
 			<th>Name</th>
@@ -24,8 +24,8 @@
 			</td>
 			<td align="right">
 				<a [routerLink]="['./detail', category.id]" routerLinkActive="active"
-					class="btn btn-sm btn-outline-info mr-1">Details</a>
-				<button (click)="delete(category.id)" class="btn btn-sm btn-outline-danger" [disabled]="category.isDeleting">
+					class="btn btn-sm btn-info mr-1">Details</a>
+				<button (click)="delete(category.id)" class="btn btn-sm btn-outline-secondary" [disabled]="category.isDeleting">
 					<span *ngIf="category.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!category.isDeleting">Delete</span>
 				</button>
