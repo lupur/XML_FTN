@@ -42,10 +42,9 @@ namespace CarRentalPortal.Application.Rentals.Commands.CreateRentalRequest
 
             foreach (var bundledRental in bundledRentalRequests)
             {
-                var entity = new RentalBundle();
+                var entity = new RentalBundle { NumberOfItems = bundledRental.Rentals.Count };
                 foreach (var rental in bundledRental.Rentals)
                 {
-                    entity.NumberOfItems = bundledRental.Rentals.Count;
                     entity.Rentals.Add(new Rental
                     {
                         CustomerId = rental.CustomerId,

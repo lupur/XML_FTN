@@ -50,6 +50,7 @@ namespace CarRentalPortal.API.Controllers
         public async Task<ActionResult<int>> Invite(InviteUserCommand command)
         {
             var userId = await Mediator.Send(command);
+            await Mediator.Send(new CreateShoppingCartCommand { UserId = userId });
             return userId;
         }
 

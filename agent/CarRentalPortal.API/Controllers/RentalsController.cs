@@ -1,14 +1,17 @@
-﻿using CarRentalPortal.Application.Rentals.Commands.CreateRentalRequest;
+﻿using CarRentalPortal.API.Constants;
+using CarRentalPortal.Application.Rentals.Commands.CreateRentalRequest;
 using CarRentalPortal.Application.Rentals.Commands.UpdateRentalRequest;
 using CarRentalPortal.Application.Rentals.Queries;
 using CarRentalPortal.Application.Rentals.Queries.GetRentalRequest;
 using CarRentalPortal.Application.Rentals.Queries.GetRentalsForBundle;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
 {
+    [Authorize]
     public class RentalsController : AbstractApiController
     {
         [HttpGet("{id}")]
@@ -29,7 +32,7 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpPut("{bundleId}")]
+        [HttpPut("{bundleId}"), Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult> Update(int bundleId, UpdateRentalRequestCommand command)
         {
             if (bundleId != command.BundleId)

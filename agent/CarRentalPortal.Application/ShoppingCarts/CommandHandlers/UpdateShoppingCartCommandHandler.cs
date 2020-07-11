@@ -5,6 +5,7 @@ using CarRentalPortal.Core.Entities;
 using CarRentalPortal.Core.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace CarRentalPortal.Application.ShoppingCarts.CommandHandlers
 
         private void UpdateShoppingCartItems(ShoppingCart shoppingCart)
         {
-            foreach (var item in shoppingCart.Items)
+            foreach (var item in shoppingCart.Items.Where(sci => sci.Status == OrderStatus.Pending))
             {
                 item.Status = OrderStatus.Ordered;
             }

@@ -1,4 +1,5 @@
-﻿using CarRentalPortal.Application.Reviews.Commands.CreateReview;
+﻿using CarRentalPortal.API.Constants;
+using CarRentalPortal.Application.Reviews.Commands.CreateReview;
 using CarRentalPortal.Application.Reviews.Commands.UpdateReviewStatus;
 using CarRentalPortal.Application.Reviews.Queries.GetAllReviews;
 using CarRentalPortal.Application.Reviews.Queries.GetReviews;
@@ -30,14 +31,11 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult> Update(int id, UpdateReviewStatusCommand command)
         {
             if (id != command.Id)
-            {
                 return BadRequest();
-            }
-
             await Mediator.Send(command);
             return NoContent();
         }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
 {
-    [Authorize(Roles = Roles.Administrator)]
+    [Authorize]
     public class CarCategoriesController : AbstractApiController
     {
         [HttpGet]
@@ -25,20 +25,20 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(new GetCarCategoryQuery { Id = id });
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult<int>> Create(CreateCarCategoryCommand command)
         {
             return await Mediator.Send(command);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteCarCategoryCommand { Id = id });
             return NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult> Update(int id, UpdateCarCategoryCommand command)
         {
             if (id != command.Id)

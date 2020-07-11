@@ -1,5 +1,4 @@
 ﻿using CarRentalPortal.API.Configurations;
-using CarRentalPortal.API.Constants;
 using CarRentalPortal.Application.CarImages.Commands.DeleteCarImages;
 using CarRentalPortal.Application.CarImages.Commands.UploadCarImage;
 using CarRentalPortal.Application.Cars.Commands.CreateCar;
@@ -16,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
 {
-    [Authorize(Roles = Roles.Administrator + "," + Roles.Agent)]
+    [Authorize]
     public class CarsController : AbstractApiController
     {
         private IOptions<ResourcesConfigSection> _configuration;
@@ -27,14 +26,12 @@ namespace CarRentalPortal.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<CarVm>> Get()
         {
             return await Mediator.Send(new GetCarsQuery());
         }
 
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public async Task<ActionResult<CarDto>> Get(int id)
         {
             return await Mediator.Send(new GetCarByIdQuery { Id = id });

@@ -1,14 +1,17 @@
-﻿using CarRentalPortal.Application.CarModels.Commands.CreateCarModel;
+﻿using CarRentalPortal.API.Constants;
+using CarRentalPortal.Application.CarModels.Commands.CreateCarModel;
 using CarRentalPortal.Application.CarModels.Commands.DeleteCarModel;
 using CarRentalPortal.Application.CarModels.Queries;
 using CarRentalPortal.Application.CarModels.Queries.GetCarModel;
 using CarRentalPortal.Application.CarModels.Queries.GetCarModels;
 using CarRentalPortal.Application.CarModels.Queries.GetCarModelsByBrand;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
 {
+    [Authorize]
     public class CarModelsController : AbstractApiController
     {
         [HttpGet]
@@ -29,13 +32,13 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(new GetCarModelsByBrandQuery { BrandName = name });
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult<object>> Create(CreateCarModelCommand command)
         {
             return new { _ = await Mediator.Send(command) };
         }
 
-        [HttpDelete("{name}")]
+        [HttpDelete("{name}"), Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult> Delete(string name)
         {
             await Mediator.Send(new DeleteCarModelCommand { Name = name });

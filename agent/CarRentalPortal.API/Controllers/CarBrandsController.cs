@@ -1,4 +1,5 @@
-﻿using CarRentalPortal.Application.CarBrands.Commands.CreateCarBrand;
+﻿using CarRentalPortal.API.Constants;
+using CarRentalPortal.Application.CarBrands.Commands.CreateCarBrand;
 using CarRentalPortal.Application.CarBrands.Commands.DeleteCarBrand;
 using CarRentalPortal.Application.CarBrands.Queries.GetCarBrandByName;
 using CarRentalPortal.Application.CarBrands.Queries.GetCarBrands;
@@ -23,13 +24,13 @@ namespace CarRentalPortal.API.Controllers
             return await Mediator.Send(new GetCarBrandByNameQuery { Name = name });
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult<object>> Create(CreateCarBrandCommand command)
         {
             return new { _ = await Mediator.Send(command) };
         }
 
-        [HttpDelete("{name}")]
+        [HttpDelete("{name}"), Authorize(Roles = Roles.Administrator)]
         public async Task<ActionResult> Delete(string name)
         {
             await Mediator.Send(new DeleteCarBrandCommand { Name = name });

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
 {
+    [Authorize]
     public class RolesController : AbstractApiController
     {
         [HttpGet]
