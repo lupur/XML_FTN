@@ -42,6 +42,13 @@ namespace CarRentalPortal.API.Controllers
         {
             var userId = await Mediator.Send(command);
             await Mediator.Send(new CreateShoppingCartCommand { UserId = userId });
+            await Mediator.Send(new CreateUserSoapCommand
+            {
+                Username = command.Username,
+                Email = command.Email,
+                Password = command.Password,
+                ConfirmPassword = command.Password
+            });
 
             return userId;
         }

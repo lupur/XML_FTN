@@ -94,6 +94,12 @@ namespace CarRentalPortal.API.Controllers
             }
         }
 
+        //[HttpPost("users/register")]
+        //public async Task<ActionResult<int>> Register(CreateUserSoapCommand command)
+        //{
+        //    return await Mediator.Send(command);
+        //}
+
     }
     public class CreateCarBrandSoapRequest
     {
