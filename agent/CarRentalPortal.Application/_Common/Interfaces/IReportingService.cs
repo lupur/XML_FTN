@@ -8,5 +8,6 @@ namespace CarRentalPortal.Application._Common.Interfaces
     {
         Task<byte[]> GenerateMileageReport(ICollection<MileageReportModel> model);
         Task<byte[]> GenerateRatingReport(RatingAggregateReportModel model);
+        Task<byte[]> GenerateCommentReport(CommentAggregateReportModel model);
     }
 }
