@@ -12,7 +12,23 @@
 				</div>
 				<div class="card-footer">
 					<button class="btn btn-sm btn-danger" (click)="getMileageReport()" [disabled]="loading"><span
-							*ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Get Report</button>
+							*ngIf="loading && workingOnMileageReport" class="spinner-border spinner-border-sm mr-1"></span>Get Report</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<div class="embed-responsive embed-responsive-16by9">
+					<img src="../../../assets/mileage.png"
+						class="card-img-top embed-responsive-item img-fluid img-thumbnail" alt="">
+				</div>
+				<div class="card-body">
+					<h4 class="card-title">Rating Report</h4>
+					<p>This is some text;</p>
+				</div>
+				<div class="card-footer">
+					<button class="btn btn-sm btn-danger" (click)="getRatingReport()" [disabled]="loading"><span
+							*ngIf="loading && workingOnRatingReport" class="spinner-border spinner-border-sm mr-1"></span>Get Report</button>
 				</div>
 			</div>
 		</div>

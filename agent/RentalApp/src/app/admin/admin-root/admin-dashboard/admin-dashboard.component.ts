@@ -12,6 +12,9 @@ import { first } from 'rxjs/operators';
 export class AdminDashboardComponent implements OnInit {
 
   loading = false;
+  workingOnRatingReport = false;
+  workingOnMileageReport = false;
+  workingOnReviewsReport = false;
 
   constructor(
     private dashboardService: DashboardService,
@@ -22,6 +25,7 @@ export class AdminDashboardComponent implements OnInit {
 
   getMileageReport() {
     this.loading = true;
+    this.workingOnMileageReport = true;
     this.dashboardService.getMileageReport()
       .pipe(first())
       .subscribe(blob => {
@@ -30,9 +34,30 @@ export class AdminDashboardComponent implements OnInit {
           keepAfterRouteChange: true, autoClose: true
         });
         this.loading = false;
+        this.workingOnMileageReport = false;
       }, error => {
         this.alertService.error(error);
         this.loading = false;
+        this.workingOnMileageReport = false;
+      })
+  }
+
+  getRatingReport() {
+    this.loading = true;
+    this.workingOnRatingReport = true;
+    this.dashboardService.getRatingReport()
+      .pipe(first())
+      .subscribe(blob => {
+        saveAs(blob, 'CarRatingReport.pdf');
+        this.alertService.success('Rating report created!', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+        this.loading = false;
+        this.workingOnRatingReport = false;
+      }, error => {
+        this.alertService.error(error);
+        this.loading = false;
+        this.workingOnRatingReport = false;
       })
   }
 

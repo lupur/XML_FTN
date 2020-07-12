@@ -11,8 +11,7 @@ namespace CarRentalPortal.Application.Dashboard.Models
         public string CarModelName { get; set; }
         public string OwnerFullName { get; set; }
         public string Reviewer { get; set; }
-        public double Rating { get; set; }
-        
+        public int Rating { get; set; }
 
         public void Mapping(Profile profile)
         {

@@ -6,6 +6,7 @@ import { environment } from '@env/environment';
   providedIn: 'root'
 })
 export class DashboardService {
+  
 
   constructor(private http: HttpClient) { }
 
@@ -13,5 +14,11 @@ export class DashboardService {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
     return this.http.get<Blob>(`${environment.apiUrl}/dashboard/mileage-report`, { headers: headers, responseType: 'blob' as 'json' });
+  }
+
+  getRatingReport() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get<Blob>(`${environment.apiUrl}/dashboard/rating-report`, { headers: headers, responseType: 'blob' as 'json' })
   }
 }

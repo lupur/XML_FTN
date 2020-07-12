@@ -51,10 +51,14 @@ namespace CarRentalPortal.Infrastructure.Services
                     "<h2 class='text-muted'>Criteria: Rating</h2>" +
                     "<hr>" +
                     "<h3>Aggregate results</h3>" +
-                    $"<ul><li>{model.HighestRating}</li><li>{model.LowestRating}</li><li>{model.AverageRating}</li></ul>" +
+                    $"<ul>" +
+                        $"<li>Highest: {model.HighestRating}</li>" +
+                        $"<li>Lowest: {model.LowestRating}</li>" +
+                        $"<li>Average: {model.AverageRating}</li>" +
+                        $"<li>Count: {model.RatingCount}</li></ul>" +
                     "<hr>" +
                     "<table>" +
-                    "<thead><tr><th>Car ID</th><th>Brand</th><th>Model</th><th>Owner</th><th>Reviewer</th><th>Rating</th></tr></thead>");
+                    "<thead><tr><th>Car ID</th><th>Brand</th><th>Model</th><th>Car Owner</th><th>Reviewer</th><th>Rating</th></tr></thead>");
                 foreach (var rating in model.Ratings)
                 {
                     sb.AppendLine(

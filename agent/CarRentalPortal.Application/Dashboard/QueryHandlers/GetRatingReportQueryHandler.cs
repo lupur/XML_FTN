@@ -34,6 +34,7 @@ namespace CarRentalPortal.Application.Dashboard.QueryHandlers
                 HighestRating = ratings.Max(r => r.Rating),
                 LowestRating = ratings.Min(r => r.Rating),
                 AverageRating = ratings.Average(r => r.Rating),
+                RatingCount = ratings.Count,
                 Ratings = ratings
             };
 
