@@ -14,6 +14,9 @@ export default class Vehicles extends Component {
 
     constructor(props) {
         super(props);
+        
+        var myDate = new Date();
+        myDate.setTime( myDate.getTime() + 2 * 86400000 );
 
         this.state = {
             Vehicles: null,
@@ -21,8 +24,11 @@ export default class Vehicles extends Component {
             users: null,
             currentUser: null,
             isAdmin: false,
-            startDate: new Date(),
-            endDate: new Date()
+            startDate: myDate,
+            endDate: myDate,
+            location: "",
+            mileage: 0,
+            seats: ""
         }
 
         this.sendRequest = this.sendRequest.bind(this);
@@ -97,6 +103,24 @@ export default class Vehicles extends Component {
             endDate: date
         });
     };
+    
+    locationChange(event) {
+        this.setState({
+            location: event.target.value
+        });
+    };
+    
+    mileageChange(event) {
+        this.setState({
+            mileage: event.target.value
+        });
+    };
+    
+    seatsChange(event) {
+        this.setState({
+            seats: event.target.value
+        });
+    };
 
     async filterVehicles() {
         var vehiclesId = []
@@ -127,6 +151,36 @@ export default class Vehicles extends Component {
                             }
                         }
                     }
+                    if( this.state.location.trim() !== "" ){
+                        var locationFilteredVehicles = [];
+                        for(var i = 0; i < this.state.availableVehicles.length; i++){
+                            if( this.state.availableVehicles[i].location === this.state.location ){
+                                locationFilteredVehicles.push(this.state.availableVehicles[i]);
+                            }
+                        }
+                        this.state.availableVehicles = locationFilteredVehicles;
+                    }
+                    
+                    if( this.state.mileage > 0 ){
+                        var mileageFilteredVehicles = [];
+                        for(var i = 0; i < this.state.availableVehicles.length; i++){
+                            if( this.state.availableVehicles[i].mileage < this.state.mileage ){
+                                mileageFilteredVehicles.push(this.state.availableVehicles[i]);
+                            }
+                        }
+                        this.state.availableVehicles = mileageFilteredVehicles;
+                    }
+                    
+                    if( this.state.seats !== "" ){
+                        var seatsFilteredVehicles = [];
+                        for(var i = 0; i < this.state.availableVehicles.length; i++){
+                            if( this.state.availableVehicles[i].numberOfSeats >= this.state.seats ){
+                                seatsFilteredVehicles.push(this.state.availableVehicles[i]);
+                            }
+                        }
+                        this.state.availableVehicles = seatsFilteredVehicles;
+                    }
+                    
                     this.componentDidMount();
                 }
             )
@@ -162,12 +216,40 @@ export default class Vehicles extends Component {
                     <DatePicker
                         selected={this.state.startDate}
                         onChange={this.startDateChange}
+                        minDate={this.state.startDate}
                     />
                     </td>
                     <td>
                     <DatePicker
                         selected={this.state.endDate}
                         onChange={this.endDateChange}
+                        minDate={this.state.startDate}
+                    />
+                    </td>
+                    <td>
+                    <input
+                        type="text"
+                        placeholder="Location"
+                        value={this.state.location}
+                        onChange={event => this.locationChange(event)}
+                    />
+                    </td>
+                    <td>
+                    <input
+                        type="number"
+                        min="0"
+                        placeholder="Mileage"
+                        value={this.state.milage}
+                        onChange={event => this.mileageChange(event)}
+                    />
+                    </td>
+                    <td>
+                    <input
+                        type="number"
+                        min="1"
+                        placeholder="Number of seats"
+                        value={this.state.seats}
+                        onChange={event => this.seatsChange(event)}
                     />
                     </td>
                     <td>
