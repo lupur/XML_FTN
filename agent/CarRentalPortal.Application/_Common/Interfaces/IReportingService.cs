@@ -7,5 +7,6 @@ namespace CarRentalPortal.Application._Common.Interfaces
     public interface IReportingService
     {
         Task<byte[]> GenerateMileageReport(ICollection<MileageReportModel> model);
+        Task<byte[]> GenerateRatingReport(RatingAggregateReportModel model);
     }
 }
