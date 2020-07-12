@@ -7,6 +7,7 @@ import { ManageModelsComponent, ModelAddComponent, ModelListComponent } from './
 import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
 import { ReviewListComponent } from './manage-reviews/review-list/review-list.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { UserAddExternalComponent } from './manage-users/user-add-external/user-add-external.component';
 import { UserAddComponent } from './manage-users/user-add/user-add.component';
 import { UserDetailComponent } from './manage-users/user-detail/user-detail.component';
 import { UserListComponent } from './manage-users/user-list/user-list.component';
@@ -91,7 +92,13 @@ const routes: Routes = [
           },
           {
             path: 'detail/:id',
-            component: UserDetailComponent
+            component: UserDetailComponent,
+            children: [
+              {
+                path: 'rcc',
+                component: UserAddExternalComponent
+              }
+            ]
           },
           {
             path: '',

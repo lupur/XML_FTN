@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleType } from '@app/roles/role';
 import { AlertService } from '@app/shared/alert/alert.service';
-import { AccountStatus } from '@app/users/user';
+import { AccountStatus, User } from '@app/users/user';
 import { UserService } from '@app/users/user.service';
 import { first } from 'rxjs/operators';
 
