@@ -30,6 +30,10 @@ namespace CarRentalAPI
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<CarRentalAPI.AddNewVehicleResponse1> AddNewVehicleAsync(CarRentalAPI.AddNewVehicleRequest1 request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<CarRentalAPI.RegisterAgentResponse1> RegisterAgentAsync(CarRentalAPI.RegisterAgentRequest1 request);
     }
     
@@ -374,6 +378,222 @@ namespace CarRentalAPI
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class AddNewVehicleRequest
+    {
+        
+        private string modelNameField;
+        
+        private string brandNameField;
+        
+        private string fuelTypeNameField;
+        
+        private string transmissionTypeNameField;
+        
+        private string locationField;
+        
+        private double mileageField;
+        
+        private int noOfSeatsField;
+        
+        private long userIdField;
+        
+        private double dailyPriceField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string modelName
+        {
+            get
+            {
+                return this.modelNameField;
+            }
+            set
+            {
+                this.modelNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string brandName
+        {
+            get
+            {
+                return this.brandNameField;
+            }
+            set
+            {
+                this.brandNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string fuelTypeName
+        {
+            get
+            {
+                return this.fuelTypeNameField;
+            }
+            set
+            {
+                this.fuelTypeNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string transmissionTypeName
+        {
+            get
+            {
+                return this.transmissionTypeNameField;
+            }
+            set
+            {
+                this.transmissionTypeNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string location
+        {
+            get
+            {
+                return this.locationField;
+            }
+            set
+            {
+                this.locationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public double mileage
+        {
+            get
+            {
+                return this.mileageField;
+            }
+            set
+            {
+                this.mileageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public int noOfSeats
+        {
+            get
+            {
+                return this.noOfSeatsField;
+            }
+            set
+            {
+                this.noOfSeatsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public long userId
+        {
+            get
+            {
+                return this.userIdField;
+            }
+            set
+            {
+                this.userIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public double dailyPrice
+        {
+            get
+            {
+                return this.dailyPriceField;
+            }
+            set
+            {
+                this.dailyPriceField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
+    public partial class AddNewVehicleResponse
+    {
+        
+        private long vehicleIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public long vehicleId
+        {
+            get
+            {
+                return this.vehicleIdField;
+            }
+            set
+            {
+                this.vehicleIdField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddNewVehicleRequest1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        public CarRentalAPI.AddNewVehicleRequest AddNewVehicleRequest;
+        
+        public AddNewVehicleRequest1()
+        {
+        }
+        
+        public AddNewVehicleRequest1(CarRentalAPI.AddNewVehicleRequest AddNewVehicleRequest)
+        {
+            this.AddNewVehicleRequest = AddNewVehicleRequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddNewVehicleResponse1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="www.soapservice.ftnxml.com/model/", Order=0)]
+        public CarRentalAPI.AddNewVehicleResponse AddNewVehicleResponse;
+        
+        public AddNewVehicleResponse1()
+        {
+        }
+        
+        public AddNewVehicleResponse1(CarRentalAPI.AddNewVehicleResponse AddNewVehicleResponse)
+        {
+            this.AddNewVehicleResponse = AddNewVehicleResponse;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="www.soapservice.ftnxml.com/model/")]
     public partial class RegisterAgentRequest
     {
         
@@ -609,6 +829,19 @@ namespace CarRentalAPI
             CarRentalAPI.AddBrandRequest1 inValue = new CarRentalAPI.AddBrandRequest1();
             inValue.AddBrandRequest = AddBrandRequest;
             return ((CarRentalAPI.CarRentalApiClient)(this)).AddBrandAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CarRentalAPI.AddNewVehicleResponse1> CarRentalAPI.CarRentalApiClient.AddNewVehicleAsync(CarRentalAPI.AddNewVehicleRequest1 request)
+        {
+            return base.Channel.AddNewVehicleAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CarRentalAPI.AddNewVehicleResponse1> AddNewVehicleAsync(CarRentalAPI.AddNewVehicleRequest AddNewVehicleRequest)
+        {
+            CarRentalAPI.AddNewVehicleRequest1 inValue = new CarRentalAPI.AddNewVehicleRequest1();
+            inValue.AddNewVehicleRequest = AddNewVehicleRequest;
+            return ((CarRentalAPI.CarRentalApiClient)(this)).AddNewVehicleAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
