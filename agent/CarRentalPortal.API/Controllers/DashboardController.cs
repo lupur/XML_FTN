@@ -1,10 +1,12 @@
-﻿using CarRentalPortal.Application.Dashboard.Queries;
+﻿using CarRentalPortal.API.Constants;
+using CarRentalPortal.Application.Dashboard.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace CarRentalPortal.API.Controllers
 {
-    //[Authorize(Roles = Roles.Administrator + "," + Roles.Agent)]
+    [Authorize(Roles = Roles.Administrator + "," + Roles.Agent)]
     public class DashboardController : AbstractApiController
     {
         [HttpGet("mileage-report")]
@@ -14,10 +16,11 @@ namespace CarRentalPortal.API.Controllers
             return File(report.Content, report.ContentType, report.FileName);
         }
 
-        [HttpGet("review-report")]
-        public async Task<IActionResult> GetReviewReport()
+        [HttpGet("comment-report")]
+        public async Task<IActionResult> GetCommentReport()
         {
-            return null;
+            var report = await Mediator.Send(new GetCommentReportQuery());
+            return File(report.Content, report.ContentType, report.FileName);
         }
 
         [HttpGet("rating-report")]

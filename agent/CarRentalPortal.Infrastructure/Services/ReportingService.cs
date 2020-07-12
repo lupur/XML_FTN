@@ -87,7 +87,7 @@ namespace CarRentalPortal.Infrastructure.Services
             using var page = await browser.NewPageAsync();
             {
                 var sb = new StringBuilder("<h1>Top Rated Cars</h1>" +
-                    "<h2 class='text-muted'>Criteria: Rating</h2>" +
+                    "<h2 class='text-muted'>Criteria: Comments</h2>" +
                     "<hr>" +
                     "<h3>Aggregate results</h3>" +
                     $"<ul>" +

@@ -14,7 +14,7 @@ export class AdminDashboardComponent implements OnInit {
   loading = false;
   workingOnRatingReport = false;
   workingOnMileageReport = false;
-  workingOnReviewsReport = false;
+  workingOnCommentReport = false;
 
   constructor(
     private dashboardService: DashboardService,
@@ -58,6 +58,25 @@ export class AdminDashboardComponent implements OnInit {
         this.alertService.error(error);
         this.loading = false;
         this.workingOnRatingReport = false;
+      })
+  }
+
+  getCommentReport() {
+    this.loading = true;
+    this.workingOnCommentReport = true;
+    this.dashboardService.getCommentReport()
+      .pipe(first())
+      .subscribe(blob => {
+        saveAs(blob, 'CarCommentReport.pdf');
+        this.alertService.success('Comment report created!', {
+          keepAfterRouteChange: true, autoClose: true
+        });
+        this.loading = false;
+        this.workingOnCommentReport = false;
+      }, error => {
+        this.alertService.error(error);
+        this.loading = false;
+        this.workingOnCommentReport = false;
       })
   }
 

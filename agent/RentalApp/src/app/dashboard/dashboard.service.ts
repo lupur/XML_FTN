@@ -21,4 +21,10 @@ export class DashboardService {
     headers = headers.set('Accept', 'application/pdf');
     return this.http.get<Blob>(`${environment.apiUrl}/dashboard/rating-report`, { headers: headers, responseType: 'blob' as 'json' })
   }
+
+  getCommentReport() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get<Blob>(`${environment.apiUrl}/dashboard/comment-report`, { headers: headers, responseType: 'blob' as 'json' })
+  }
 }
