@@ -33,14 +33,26 @@
 							<input type="text" readonly class="form-control" value="{{user.status}}" />
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Roles</label>
+						<div class="row ml-3">
+							<div *ngFor="let role of user.roles">
+								<span class="badge mr-1" [ngClass]="switchClass(role.name)">{{role.name}}</span>
+							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 			<div class="card-body">
-				<button (click)="activate(user.id)" class="btn btn-sm btn-outline-primary mr-1" [disabled]="isActive"><span
+				<button (click)="activate(user.id)" class="btn btn-sm btn-primary mr-1" [disabled]="isActive"><span
 						*ngIf="user.isActivating" class="spinner-border spinner-border-sm mr-1"></span>Activate</button>
-				<button (click)="block(user.id)" class="btn btn-sm btn-secondary" [disabled]="isBlocked"><span
+				<button (click)="block(user.id)" class="btn btn-sm btn-outline-secondary" [disabled]="isBlocked"><span
 						*ngIf="user.isBlocking" class="spinner-border spinner-border-sm mr-1"></span>Block</button>
 			</div>
 		</div>
+	</div>
+	<br>
+	<div class="col-md-6" *ngIf="user">
+		<app-role-list [user]="user" (addedRole)="onAddedRole($event)"></app-role-list>
 	</div>
 </div>

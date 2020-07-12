@@ -1,0 +1,21 @@
+<div class="card">
+	<div class="card-body">
+		<form [formGroup]="form">
+			<div class="form-group row">
+				<label for="role" class="col-sm-4 col-form-label">Roles</label>
+				<select formControlName="role" class="form-control col-sm-8" style="overflow: hidden;"
+					[ngClass]="{'is-invalid': submitted && f.role.errors}">
+					<option value="">Choose a role</option>
+					<option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+				</select>
+				<div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+					<div *ngIf="f.role.errors.required">'Role' field is required</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="card-body">
+		<button class="btn btn-sm btn-primary mr-1" (click)="save()">Save</button>
+		<button class="btn btn-sm btn-outline-secondary" (click)="gotoUsers()">Cancel</button>
+	</div>
+</div>
