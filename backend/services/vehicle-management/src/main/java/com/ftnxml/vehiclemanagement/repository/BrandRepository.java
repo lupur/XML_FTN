@@ -6,4 +6,5 @@ import com.ftnxml.vehiclemanagement.model.Brand;
 
 public interface BrandRepository extends JpaRepository<Brand, Long> {
 
+    Brand findByName(String name);
 }

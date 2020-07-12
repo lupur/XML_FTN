@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ftnxml.vehiclemanagement.model.TransmissionType;
 
 public interface TransmissionTypeRepository extends JpaRepository<TransmissionType, Long> {
-
+    TransmissionType findByName(String name);
 }

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftnxml.vehiclemanagement.client.UserDetailsClient;
 import com.ftnxml.vehiclemanagement.dto.BrandDto;
 import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
+import com.ftnxml.vehiclemanagement.dto.NewVehicleSoapDto;
 import com.ftnxml.vehiclemanagement.dto.SimpleVehicleDto;
 import com.ftnxml.vehiclemanagement.dto.UserDto;
 import com.ftnxml.vehiclemanagement.dto.VehicleDto;
@@ -117,6 +118,23 @@ public class VehicleController {
             return ResponseEntity.ok().build();
         else
             return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping(value = "/soap", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addVehicleSOAP(@RequestBody NewVehicleSoapDto newVehicle) {
+
+        if (newVehicle == null) {
+            System.out.println("Vehicle: is null");
+            return ResponseEntity.badRequest().build();
+        }
+
+        Vehicle v = vehicleService.addVehicle(newVehicle);
+        if (v != null) {
+            System.out.println("Added vechicle from soap");
+            newVehicle.setId(v.getId());
+            return ResponseEntity.ok().body(newVehicle);
+        } else
+            return ResponseEntity.badRequest().body(new NewVehicleSoapDto());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/filter")

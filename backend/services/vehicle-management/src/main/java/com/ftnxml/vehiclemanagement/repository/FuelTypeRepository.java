@@ -6,4 +6,5 @@ import com.ftnxml.vehiclemanagement.model.FuelType;
 
 public interface FuelTypeRepository extends JpaRepository<FuelType, Long> {
 
+    FuelType findByName(String name);
 }

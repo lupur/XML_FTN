@@ -24,6 +24,31 @@
     
     <!--  ################################################# -->
     
+    <!--  ##############Vehicle RELATED REQUESTS################### -->
+    
+        <xs:element name="AddNewVehicleRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="modelName" type="xs:string"/>
+                <xs:element name="brandName" type="xs:string"/>
+                <xs:element name="fuelTypeName" type="xs:string"/>
+                <xs:element name="transmissionTypeName" type="xs:string"/>
+                <xs:element name="location" type="xs:string"/>
+                <xs:element name="mileage" type="xs:double"/>
+                <xs:element name="noOfSeats" type="xs:int"/>
+                <xs:element name="userId" type="xs:long"/>
+                <xs:element name="dailyPrice" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="AddNewVehicleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="vehicleId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="BrandByIdRequest">
         <xs:complexType>

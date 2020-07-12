@@ -10,6 +10,8 @@ import com.ftnxml.vehiclemanagement.dto.CreateRequestDto;
 import com.ftnxml.vehiclemanagement.dto.CreateRequestDto.CreateRequestVehicleDto;
 import com.ftnxml.vehiclemanagement.dto.CreateRequestDto.CreateRequestVehicleDto.CreateRequestDiscountDto;
 import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
+import com.ftnxml.vehiclemanagement.dto.NewVehicleSoapDto;
+import com.ftnxml.vehiclemanagement.model.Brand;
 import com.ftnxml.vehiclemanagement.model.ClassType;
 import com.ftnxml.vehiclemanagement.model.CollisionDamageWaiver;
 import com.ftnxml.vehiclemanagement.model.Discount;
@@ -18,6 +20,7 @@ import com.ftnxml.vehiclemanagement.model.Model;
 import com.ftnxml.vehiclemanagement.model.PriceList;
 import com.ftnxml.vehiclemanagement.model.TransmissionType;
 import com.ftnxml.vehiclemanagement.model.Vehicle;
+import com.ftnxml.vehiclemanagement.repository.BrandRepository;
 import com.ftnxml.vehiclemanagement.repository.ClassTypeRepository;
 import com.ftnxml.vehiclemanagement.repository.CollisionDamageWaiverRepository;
 import com.ftnxml.vehiclemanagement.repository.DiscountRepository;
@@ -29,6 +32,9 @@ import com.ftnxml.vehiclemanagement.repository.VehicleRepository;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
+
+    @Autowired
+    BrandRepository brandRepository;
 
     @Autowired
     VehicleRepository vehicleRepository;
@@ -179,6 +185,74 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> getUsersVehicles(Long userId) {
         List<Vehicle> vehicles = vehicleRepository.findByUserId(userId);
         return vehicles;
+    }
+
+    @Override
+    public Vehicle addVehicle(NewVehicleSoapDto newVehicle) {
+        if (newVehicle == null || !newVehicle.isValid()) {
+            return null;
+        }
+
+        Brand b = brandRepository.findByName(newVehicle.getBrandName());
+        if (b == null) {
+            Brand newB = new Brand();
+            newB.setName(newVehicle.getBrandName());
+            b = brandRepository.save(newB);
+        }
+
+        Model m = modelRepostiory.findByName(newVehicle.getModelName());
+        if (m == null) {
+            Model newM = new Model();
+            newM.setName(newVehicle.getModelName());
+            newM.setBrand(b);
+            m = modelRepostiory.save(newM);
+        }
+
+        FuelType f = fuelTypeRepository.findByName(newVehicle.getFuelTypeName());
+        if (f == null) {
+            FuelType newF = new FuelType();
+            newF.setName(newVehicle.getFuelTypeName());
+            f = fuelTypeRepository.save(newF);
+        }
+
+        TransmissionType t = transmissionTypeRepository.findByName(newVehicle.getTransmissionTypeName());
+        if (t == null) {
+            TransmissionType newT = new TransmissionType();
+            newT.setName(newVehicle.getTransmissionTypeName());
+            t = transmissionTypeRepository.save(newT);
+        }
+
+        PriceList p = priceListRepository.findByDailyPrice(newVehicle.getDailyPrice());
+        if (p == null) {
+            PriceList newP = new PriceList();
+            newP.setDailyPrice(newVehicle.getDailyPrice());
+            newP.setMileagePenaltyPrice(0d);
+            p = priceListRepository.save(newP);
+        }
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setModel(m);
+        vehicle.setPriceList(p);
+//        vehicle.setColDamageWaiver(colDamageWaiver);
+//        vehicle.setDiscount(discount);
+        vehicle.setFuelType(f);
+        vehicle.setTransmissionType(t);
+//        vehicle.setClassType(classType);
+        vehicle.setUserId(newVehicle.getUserId());
+        vehicle.setMileage(newVehicle.getMileage());
+//        vehicle.setMileageConstraint(newVehicle.getMileageConstraint());
+        vehicle.setInsurance(false);
+        vehicle.setNumberOfSeats(newVehicle.getNoOfSeats());
+//        vehicle.setRating(newVehicle.getRating()); // Or set to 1?
+        vehicle.setLocation(newVehicle.getLocation());
+
+        CollisionDamageWaiver colDamageWaiver = colDamageWaiverRepository.findById(1l).get();
+        vehicle.setColDamageWaiver(colDamageWaiver);
+
+        ClassType classType = classTypeRepository.findById(1l).get();
+        vehicle.setClassType(classType);
+
+        return vehicleRepository.save(vehicle);
     }
 
 }

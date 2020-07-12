@@ -14,12 +14,34 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ftnxml.soapservice.dto.NewBrandDto;
+import com.ftnxml.soapservice.dto.NewVehicleSoapDto;
 import com.ftnxml.soapservice.model.Brand;
 
 @Service
 public class VehicleClient {
 
     private final String BASE_URL = "http://vehicle-management:8082/";
+
+    public NewVehicleSoapDto addVehicle(NewVehicleSoapDto newVehicle) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ObjectMapper mapper = new ObjectMapper();
+
+            String json = mapper.writeValueAsString(newVehicle);
+
+            RequestEntity<String> requestEntity = RequestEntity.post(new URL(BASE_URL + "soap").toURI())
+                    .contentType(MediaType.APPLICATION_JSON).body(json);
+            ResponseEntity<NewVehicleSoapDto> response = restTemplate.exchange(requestEntity, NewVehicleSoapDto.class);
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return response.getBody();
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public Brand getBrand(Long id) {
         RestTemplate restTemplate = new RestTemplate();

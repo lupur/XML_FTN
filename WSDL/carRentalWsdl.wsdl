@@ -21,6 +21,29 @@
 </xs:complexType>
 </xs:element>
 <!--   #################################################  -->
+<!--   ##############Vehicle RELATED REQUESTS###################  -->
+<xs:element name="AddNewVehicleRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="modelName" type="xs:string"/>
+<xs:element name="brandName" type="xs:string"/>
+<xs:element name="fuelTypeName" type="xs:string"/>
+<xs:element name="transmissionTypeName" type="xs:string"/>
+<xs:element name="location" type="xs:string"/>
+<xs:element name="mileage" type="xs:double"/>
+<xs:element name="noOfSeats" type="xs:int"/>
+<xs:element name="userId" type="xs:long"/>
+<xs:element name="dailyPrice" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="AddNewVehicleResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="vehicleId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
 <xs:element name="BrandByIdRequest">
 <xs:complexType>
 <xs:sequence>
@@ -95,8 +118,14 @@
 <wsdl:message name="AddBrandRequest">
 <wsdl:part element="tns:AddBrandRequest" name="AddBrandRequest"> </wsdl:part>
 </wsdl:message>
+<wsdl:message name="AddNewVehicleRequest">
+<wsdl:part element="tns:AddNewVehicleRequest" name="AddNewVehicleRequest"> </wsdl:part>
+</wsdl:message>
 <wsdl:message name="AllBrandsRequest">
 <wsdl:part element="tns:AllBrandsRequest" name="AllBrandsRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="AddNewVehicleResponse">
+<wsdl:part element="tns:AddNewVehicleResponse" name="AddNewVehicleResponse"> </wsdl:part>
 </wsdl:message>
 <wsdl:message name="RegisterAgentResponse">
 <wsdl:part element="tns:RegisterAgentResponse" name="RegisterAgentResponse"> </wsdl:part>
@@ -116,6 +145,10 @@
 <wsdl:operation name="AddBrand">
 <wsdl:input message="tns:AddBrandRequest" name="AddBrandRequest"> </wsdl:input>
 <wsdl:output message="tns:AddBrandResponse" name="AddBrandResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="AddNewVehicle">
+<wsdl:input message="tns:AddNewVehicleRequest" name="AddNewVehicleRequest"> </wsdl:input>
+<wsdl:output message="tns:AddNewVehicleResponse" name="AddNewVehicleResponse"> </wsdl:output>
 </wsdl:operation>
 <wsdl:operation name="RegisterAgent">
 <wsdl:input message="tns:RegisterAgentRequest" name="RegisterAgentRequest"> </wsdl:input>
@@ -151,6 +184,15 @@
 <soap:body use="literal"/>
 </wsdl:output>
 </wsdl:operation>
+<wsdl:operation name="AddNewVehicle">
+<soap:operation soapAction=""/>
+<wsdl:input name="AddNewVehicleRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="AddNewVehicleResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
 <wsdl:operation name="RegisterAgent">
 <soap:operation soapAction=""/>
 <wsdl:input name="RegisterAgentRequest">
@@ -163,7 +205,7 @@
 </wsdl:binding>
 <wsdl:service name="CarRentalApiClientService">
 <wsdl:port binding="tns:CarRentalApiClientSoap11" name="CarRentalApiClientSoap11">
-<soap:address location="http://151a3c9eca76:8083/service"/>
+<soap:address location="http://localhost:8080/soap/service"/>
 </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>

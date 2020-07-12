@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ftnxml.vehiclemanagement.dto.CreateRequestDto;
 import com.ftnxml.vehiclemanagement.dto.NewVehicleDto;
+import com.ftnxml.vehiclemanagement.dto.NewVehicleSoapDto;
 import com.ftnxml.vehiclemanagement.model.Vehicle;
 
 public interface VehicleService {
@@ -17,6 +18,8 @@ public interface VehicleService {
     boolean removeVehicle(Long id);
 
     boolean addVehicle(NewVehicleDto newVehicle);
+
+    Vehicle addVehicle(NewVehicleSoapDto newVehicle);
 
     List<Vehicle> getVehiclesOfModel(Long modelId);
 
