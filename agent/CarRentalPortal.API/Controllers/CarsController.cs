@@ -1,4 +1,5 @@
-﻿using CarRentalPortal.API.Configurations;
+﻿using AutoMapper;
+using CarRentalPortal.API.Configurations;
 using CarRentalPortal.Application.CarImages.Commands.DeleteCarImages;
 using CarRentalPortal.Application.CarImages.Commands.UploadCarImage;
 using CarRentalPortal.Application.Cars.Commands.CreateCar;
@@ -18,10 +19,12 @@ namespace CarRentalPortal.API.Controllers
     [Authorize]
     public class CarsController : AbstractApiController
     {
+        private IMapper _mapper;
         private IOptions<ResourcesConfigSection> _configuration;
 
-        public CarsController(IOptions<ResourcesConfigSection> configuration)
+        public CarsController(IMapper mapper, IOptions<ResourcesConfigSection> configuration)
         {
+            _mapper = mapper;
             _configuration = configuration;
         }
 
@@ -40,7 +43,10 @@ namespace CarRentalPortal.API.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreateCarCommand command)
         {
-            return await Mediator.Send(command);
+            var result = await Mediator.Send(command);
+            await Mediator.Send(_mapper.Map<CreateCarSoapCommand>(command));
+
+            return result;
         }
 
         [HttpDelete("{carId}")]
