@@ -23,6 +23,7 @@ namespace CarRentalPortal.Infrastructure
                     opt => opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
+            services.AddTransient<IReportingService, ReportingService>();
             services.AddTransient<IDataProtectionService, DataProtectionService>();
             services.AddTransient<ICarRentalApiClientFactory, CarRentalApiClientFactory>();
 
