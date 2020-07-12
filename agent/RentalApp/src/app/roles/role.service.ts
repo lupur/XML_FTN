@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Role, RoleVm } from '@app/roles/role';
+import { Role, RoleVm, UserRole } from '@app/roles/role';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -16,5 +16,9 @@ export class RoleService {
 
   getById(id: number) {
     return this.http.get<Role>(`${environment.apiUrl}/roles/${id}`);
+  }
+
+  addUserRole(userRole: UserRole) {
+    return this.http.post(`${environment.apiUrl}/userroles`, userRole);
   }
 }

@@ -7,6 +7,11 @@ export interface Role {
 	name: RoleType;
 }
 
+export interface UserRole {
+	userId: number;
+	roleId: number;
+}
+
 export enum RoleType {
 	Admin = 'administrator',
 	Agent = 'agent',

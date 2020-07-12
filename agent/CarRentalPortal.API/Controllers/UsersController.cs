@@ -53,6 +53,12 @@ namespace CarRentalPortal.API.Controllers
             return userId;
         }
 
+        [HttpPost("register-external")]
+        public async Task<ActionResult<long>> RegisterExternal(CreateUserSoapCommand command)
+        {
+            return await Mediator.Send(command);
+        }
+
         [HttpPost("invite")]
         public async Task<ActionResult<int>> Invite(InviteUserCommand command)
         {

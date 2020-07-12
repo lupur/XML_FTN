@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { AccountStatus, User, UserVm } from './user';
+import { AccountStatus, ExternalUser, User, UserVm } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,10 @@ export class UserService {
 
   invite(user: User) {
     return this.http.post(`${environment.apiUrl}/users/invite`, user);
+  }
+
+  registerExternal(user: ExternalUser) {
+    return this.http.post(`${environment.apiUrl}/users/register-external`, user);
   }
 
   delete(id: number) {

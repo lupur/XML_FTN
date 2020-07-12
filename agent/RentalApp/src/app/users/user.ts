@@ -17,6 +17,13 @@ export interface User {
 	roles: Role[];
 }
 
+export interface ExternalUser {
+	username: string;
+	password: string;
+	confirmPassword: string;
+	email: string;
+}
+
 export enum AccountStatus {
 	PENDING = 'Pending',
 	ACTIVE = 'Active',

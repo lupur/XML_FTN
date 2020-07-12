@@ -12,8 +12,8 @@ namespace CarRentalAPI
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="www.soapservice.ftnxml.com/model/", ConfigurationName="CarRentalAPI.BrandDetailsPort")]
-    public interface BrandDetailsPort
+    [System.ServiceModel.ServiceContractAttribute(Namespace="www.soapservice.ftnxml.com/model/", ConfigurationName="CarRentalAPI.CarRentalApiClient")]
+    public interface CarRentalApiClient
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
@@ -523,13 +523,13 @@ namespace CarRentalAPI
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public interface BrandDetailsPortChannel : CarRentalAPI.BrandDetailsPort, System.ServiceModel.IClientChannel
+    public interface CarRentalApiClientChannel : CarRentalAPI.CarRentalApiClient, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public partial class BrandDetailsPortClient : System.ServiceModel.ClientBase<CarRentalAPI.BrandDetailsPort>, CarRentalAPI.BrandDetailsPort
+    public partial class CarRentalApiClientClient : System.ServiceModel.ClientBase<CarRentalAPI.CarRentalApiClient>, CarRentalAPI.CarRentalApiClient
     {
         
         /// <summary>
@@ -539,41 +539,41 @@ namespace CarRentalAPI
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public BrandDetailsPortClient() : 
-                base(BrandDetailsPortClient.GetDefaultBinding(), BrandDetailsPortClient.GetDefaultEndpointAddress())
+        public CarRentalApiClientClient() : 
+                base(CarRentalApiClientClient.GetDefaultBinding(), CarRentalApiClientClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.BrandDetailsPortSoap11.ToString();
+            this.Endpoint.Name = EndpointConfiguration.CarRentalApiClientSoap11.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public BrandDetailsPortClient(EndpointConfiguration endpointConfiguration) : 
-                base(BrandDetailsPortClient.GetBindingForEndpoint(endpointConfiguration), BrandDetailsPortClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public BrandDetailsPortClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(BrandDetailsPortClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public CarRentalApiClientClient(EndpointConfiguration endpointConfiguration) : 
+                base(CarRentalApiClientClient.GetBindingForEndpoint(endpointConfiguration), CarRentalApiClientClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public BrandDetailsPortClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(BrandDetailsPortClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public CarRentalApiClientClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(CarRentalApiClientClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public BrandDetailsPortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public CarRentalApiClientClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(CarRentalApiClientClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public CarRentalApiClientClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CarRentalAPI.BrandByIdResponse1> CarRentalAPI.BrandDetailsPort.BrandByIdAsync(CarRentalAPI.BrandByIdRequest1 request)
+        System.Threading.Tasks.Task<CarRentalAPI.BrandByIdResponse1> CarRentalAPI.CarRentalApiClient.BrandByIdAsync(CarRentalAPI.BrandByIdRequest1 request)
         {
             return base.Channel.BrandByIdAsync(request);
         }
@@ -582,11 +582,11 @@ namespace CarRentalAPI
         {
             CarRentalAPI.BrandByIdRequest1 inValue = new CarRentalAPI.BrandByIdRequest1();
             inValue.BrandByIdRequest = BrandByIdRequest;
-            return ((CarRentalAPI.BrandDetailsPort)(this)).BrandByIdAsync(inValue);
+            return ((CarRentalAPI.CarRentalApiClient)(this)).BrandByIdAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CarRentalAPI.AllBrandsResponse> CarRentalAPI.BrandDetailsPort.AllBrandsAsync(CarRentalAPI.AllBrandsRequest1 request)
+        System.Threading.Tasks.Task<CarRentalAPI.AllBrandsResponse> CarRentalAPI.CarRentalApiClient.AllBrandsAsync(CarRentalAPI.AllBrandsRequest1 request)
         {
             return base.Channel.AllBrandsAsync(request);
         }
@@ -595,11 +595,11 @@ namespace CarRentalAPI
         {
             CarRentalAPI.AllBrandsRequest1 inValue = new CarRentalAPI.AllBrandsRequest1();
             inValue.AllBrandsRequest = AllBrandsRequest;
-            return ((CarRentalAPI.BrandDetailsPort)(this)).AllBrandsAsync(inValue);
+            return ((CarRentalAPI.CarRentalApiClient)(this)).AllBrandsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CarRentalAPI.AddBrandResponse1> CarRentalAPI.BrandDetailsPort.AddBrandAsync(CarRentalAPI.AddBrandRequest1 request)
+        System.Threading.Tasks.Task<CarRentalAPI.AddBrandResponse1> CarRentalAPI.CarRentalApiClient.AddBrandAsync(CarRentalAPI.AddBrandRequest1 request)
         {
             return base.Channel.AddBrandAsync(request);
         }
@@ -608,11 +608,11 @@ namespace CarRentalAPI
         {
             CarRentalAPI.AddBrandRequest1 inValue = new CarRentalAPI.AddBrandRequest1();
             inValue.AddBrandRequest = AddBrandRequest;
-            return ((CarRentalAPI.BrandDetailsPort)(this)).AddBrandAsync(inValue);
+            return ((CarRentalAPI.CarRentalApiClient)(this)).AddBrandAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CarRentalAPI.RegisterAgentResponse1> CarRentalAPI.BrandDetailsPort.RegisterAgentAsync(CarRentalAPI.RegisterAgentRequest1 request)
+        System.Threading.Tasks.Task<CarRentalAPI.RegisterAgentResponse1> CarRentalAPI.CarRentalApiClient.RegisterAgentAsync(CarRentalAPI.RegisterAgentRequest1 request)
         {
             return base.Channel.RegisterAgentAsync(request);
         }
@@ -621,7 +621,7 @@ namespace CarRentalAPI
         {
             CarRentalAPI.RegisterAgentRequest1 inValue = new CarRentalAPI.RegisterAgentRequest1();
             inValue.RegisterAgentRequest = RegisterAgentRequest;
-            return ((CarRentalAPI.BrandDetailsPort)(this)).RegisterAgentAsync(inValue);
+            return ((CarRentalAPI.CarRentalApiClient)(this)).RegisterAgentAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -636,7 +636,7 @@ namespace CarRentalAPI
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BrandDetailsPortSoap11))
+            if ((endpointConfiguration == EndpointConfiguration.CarRentalApiClientSoap11))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -650,27 +650,27 @@ namespace CarRentalAPI
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BrandDetailsPortSoap11))
+            if ((endpointConfiguration == EndpointConfiguration.CarRentalApiClientSoap11))
             {
-                return new System.ServiceModel.EndpointAddress("http://d4d5a5dd4ad8:8083/service");
+                return new System.ServiceModel.EndpointAddress("http://localhost:8080/soap/service");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return BrandDetailsPortClient.GetBindingForEndpoint(EndpointConfiguration.BrandDetailsPortSoap11);
+            return CarRentalApiClientClient.GetBindingForEndpoint(EndpointConfiguration.CarRentalApiClientSoap11);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return BrandDetailsPortClient.GetEndpointAddress(EndpointConfiguration.BrandDetailsPortSoap11);
+            return CarRentalApiClientClient.GetEndpointAddress(EndpointConfiguration.CarRentalApiClientSoap11);
         }
         
         public enum EndpointConfiguration
         {
             
-            BrandDetailsPortSoap11,
+            CarRentalApiClientSoap11,
         }
     }
 }

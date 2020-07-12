@@ -12,6 +12,9 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { UserListComponent } from './manage-users/user-list/user-list.component';
 import { UserAddComponent } from './manage-users/user-add/user-add.component';
 import { UserDetailComponent } from './manage-users/user-detail/user-detail.component';
+import { ManageRolesComponent } from './manage-roles/manage-roles.component';
+import { RoleListComponent } from './manage-roles/role-list/role-list.component';
+import { UserAddExternalComponent } from './manage-users/user-add-external/user-add-external.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { UserDetailComponent } from './manage-users/user-detail/user-detail.comp
     ManageUsersComponent,
     UserListComponent,
     UserAddComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    ManageRolesComponent,
+    RoleListComponent,
+    UserAddExternalComponent
   ],
   imports: [
     CommonModule,

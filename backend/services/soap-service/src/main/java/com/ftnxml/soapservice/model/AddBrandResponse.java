@@ -5,7 +5,6 @@
 // Generated on: 2020.07.12 at 11:37:33 AM CEST 
 //
 
-
 package com.ftnxml.soapservice.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -35,9 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "result"
-})
+@XmlType(name = "", propOrder = { "result" })
 @XmlRootElement(name = "AddBrandResponse")
 public class AddBrandResponse {
 
@@ -47,10 +46,8 @@ public class AddBrandResponse {
     /**
      * Gets the value of the result property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getResult() {
         return result;
@@ -59,10 +56,8 @@ public class AddBrandResponse {
     /**
      * Sets the value of the result property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setResult(String value) {
         this.result = value;

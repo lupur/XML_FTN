@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RoleType } from '@app/roles/role';
 import { AlertService } from '@app/shared/alert/alert.service';
-import { AccountStatus } from '@app/users/user';
+import { AccountStatus, User } from '@app/users/user';
 import { UserService } from '@app/users/user.service';
 import { first } from 'rxjs/operators';
 
@@ -23,9 +24,7 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params['id'];
-    this.userService.getById(this.userId)
-      .pipe(first())
-      .subscribe(user => this.user = user);
+    this.getUser(this.userId);
   }
 
   get isActive() {
@@ -69,5 +68,23 @@ export class UserDetailComponent implements OnInit {
 
   gotoUsers() {
     this.router.navigate(['admin/users']);
+  }
+
+  switchClass(roleName: string) {
+    switch (roleName) {
+      case RoleType.Admin: return 'badge-danger';
+      case RoleType.Agent: return 'badge-warning';
+      case RoleType.Customer: return 'badge-primray';
+    }
+  }
+
+  onAddedRole(addedRole: boolean) {
+    this.getUser(this.userId);
+  }
+
+  private getUser(id: number) {
+    this.userService.getById(id)
+      .pipe(first())
+      .subscribe(user => this.user = user);
   }
 }

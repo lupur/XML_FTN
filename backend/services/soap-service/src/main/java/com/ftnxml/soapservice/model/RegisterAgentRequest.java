@@ -5,7 +5,6 @@
 // Generated on: 2020.07.12 at 11:37:33 AM CEST 
 //
 
-
 package com.ftnxml.soapservice.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -38,12 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "username",
-    "email",
-    "password",
-    "confirmPassword"
-})
+@XmlType(name = "", propOrder = { "username", "email", "password", "confirmPassword" })
 @XmlRootElement(name = "RegisterAgentRequest")
 public class RegisterAgentRequest {
 
@@ -59,10 +55,8 @@ public class RegisterAgentRequest {
     /**
      * Gets the value of the username property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getUsername() {
         return username;
@@ -71,10 +65,8 @@ public class RegisterAgentRequest {
     /**
      * Sets the value of the username property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setUsername(String value) {
         this.username = value;
@@ -83,10 +75,8 @@ public class RegisterAgentRequest {
     /**
      * Gets the value of the email property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getEmail() {
         return email;
@@ -95,10 +85,8 @@ public class RegisterAgentRequest {
     /**
      * Sets the value of the email property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setEmail(String value) {
         this.email = value;
@@ -107,10 +95,8 @@ public class RegisterAgentRequest {
     /**
      * Gets the value of the password property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getPassword() {
         return password;
@@ -119,10 +105,8 @@ public class RegisterAgentRequest {
     /**
      * Sets the value of the password property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setPassword(String value) {
         this.password = value;
@@ -131,10 +115,8 @@ public class RegisterAgentRequest {
     /**
      * Gets the value of the confirmPassword property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getConfirmPassword() {
         return confirmPassword;
@@ -143,10 +125,8 @@ public class RegisterAgentRequest {
     /**
      * Sets the value of the confirmPassword property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setConfirmPassword(String value) {
         this.confirmPassword = value;
